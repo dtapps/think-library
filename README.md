@@ -17,7 +17,7 @@
 
 ### 开发版
 ```text
-composer require liguangchun/think-library ^5.1-dev -vvv
+composer require liguangchun/think-library ^5.1.x-dev -vvv
 ```
 
 ### 稳定版
