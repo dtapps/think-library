@@ -30,11 +30,6 @@
     ],
     "psr-4": {
       "DtApp\\ThinkLibrary\\": "src"
-    },
-    "autoload-dev": {
-      "psr-4": {
-        "DtApp\\ThinkLibrary\\tests\\": "src/tests/"
-      }
     }
   },
   "extra": {
