@@ -1,8 +1,8 @@
 <img align="right" width="100" src="https://cdn.oss.liguangchun.cn/04/999e9f2f06d396968eacc10ce9bc8a.png" alt="dtApp Logo"/>
 
-<h1 align="left"><a href="https://www.dtapp.net/">ThinkPhP5.1扩展包</a></h1>
+<h1 align="left"><a href="https://www.dtapp.net/">ThinkPHP5.1扩展包</a></h1>
 
-📦 ThinkPhP5.1扩展包
+📦 ThinkPHP5.1扩展包
 
 [![Latest Stable Version](https://poser.pugx.org/liguangchun/think-library/v/stable)](https://packagist.org/packages/liguangchun/think-library) 
 [![Latest Unstable Version](https://poser.pugx.org/liguangchun/think-library/v/unstable)](https://packagist.org/packages/liguangchun/think-library) 
