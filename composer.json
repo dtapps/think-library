@@ -1,0 +1,53 @@
+{
+  "name": "liguangchun/think-library",
+  "description": "ThinkPhp扩展包",
+  "keywords": [
+    "liguangchun",
+    "think-library",
+    "think",
+    "thinkphp",
+    "library"
+  ],
+  "time": "2020-04-13",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Chaim",
+      "email": "gc@dtapp.net",
+      "homepage": "https://api.dtapp.net"
+    }
+  ],
+  "homepage": "https://www.dtapp.net",
+  "require": {
+    "php": ">=7.0",
+    "topthink/framework": "^6.0",
+    "liguangchun/ip": "^1.1"
+  },
+  "autoload": {
+    "files": [
+      "src/common.php"
+    ],
+    "psr-4": {
+      "DtApp\\ThinkLibrary\\": "src"
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "DtApp\\ThinkLibrary\\tests\\": "src/tests/"
+      }
+    }
+  },
+  "extra": {
+    "think": {
+      "services": [
+        "DtApp\\ThinkLibrary"
+      ]
+    }
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://mirrors.aliyun.com/composer/"
+    }
+  }
+}
