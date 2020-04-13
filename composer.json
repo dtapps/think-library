@@ -38,11 +38,5 @@
         "DtApp\\ThinkLibrary"
       ]
     }
-  },
-  "repositories": {
-    "packagist": {
-      "type": "composer",
-      "url": "https://mirrors.aliyun.com/composer/"
-    }
   }
 }
