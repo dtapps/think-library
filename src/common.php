@@ -18,6 +18,7 @@ use DtApp\Ip\IpException;
 use DtApp\Ip\QqWry;
 
 if (!function_exists('get_ip_info')) {
+
     /**
      * 获取请求IP信息
      * @param string $ip
@@ -41,6 +42,7 @@ if (!function_exists('get_ip_info')) {
 }
 
 if (!function_exists('get_ip')) {
+
     /**
      * 获取请求IP
      * @return string
@@ -56,5 +58,53 @@ if (!function_exists('get_ip')) {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
         return $ip;
+    }
+}
+
+if (!function_exists('auth')) {
+    /**
+     * 访问权限检查
+     * @param string $node
+     * @return boolean
+     */
+    function auth($node)
+    {
+        return $node;
+    }
+}
+
+if (!function_exists('sysconf')) {
+
+    /**
+     * 获取或配置系统参数
+     * @param string $name 参数名称
+     * @param string $value 参数内容
+     * @return mixed
+     */
+    function sysconf($name = '', $value = null)
+    {
+        if (is_null($value) && is_string($name)) {
+            return cache($name);
+        } else {
+            return cache($name, $value);
+        }
+    }
+}
+
+if (!function_exists('sysdata')) {
+
+    /**
+     * JSON 数据读取与存储
+     * @param string $name 数据名称
+     * @param mixed $value 数据内容
+     * @return mixed
+     */
+    function sysdata($name = '', $value = null)
+    {
+        if (is_null($value) && is_string($name)) {
+            return cache($name);
+        } else {
+            return cache($name, $value);
+        }
     }
 }
