@@ -25,7 +25,19 @@ use think\facade;
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Preg
  * @package DtApp\ThinkLibrary\facade
- * @method bool isIphone($mobile) static 验证手机号码
+ * @method \DtApp\ThinkLibrary\Preg isIphone($mobile) bool 验证手机号码
+ * @method \DtApp\ThinkLibrary\Preg isIphoneAll($mobile) bool 严谨验证手机号码
+ * @method \DtApp\ThinkLibrary\Preg isTel($tel) bool 验证电话号码
+ * @method \DtApp\ThinkLibrary\Preg isIdCard($mobile) bool 验证身份证号（15位或18位数字）
+ * @method \DtApp\ThinkLibrary\Preg isDigit($digit) bool 验证是否是数字(这里小数点会认为是字符)
+ * @method \DtApp\ThinkLibrary\Preg isNum($num) bool 验证是否是数字(可带小数点的数字)
+ * @method \DtApp\ThinkLibrary\Preg isStr($str) bool 验证由数字、26个英文字母或者下划线组成的字符串
+ * @method \DtApp\ThinkLibrary\Preg isPassword($str) bool 验证用户密码(以字母开头，长度在6-18之间，只能包含字符、数字和下划线)
+ * @method \DtApp\ThinkLibrary\Preg isChinese($str) bool 验证汉字
+ * @method \DtApp\ThinkLibrary\Preg isEmail($email) bool 验证Email地址
+ * @method \DtApp\ThinkLibrary\Preg isLink($url) bool 验证网址URL
+ * @method \DtApp\ThinkLibrary\Preg isQq($qq) bool 腾讯QQ号
+ * @method \DtApp\ThinkLibrary\Preg isIp($ip) bool 验证IP地址
  */
 class Preg extends Facade
 {
