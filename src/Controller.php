@@ -59,7 +59,7 @@ class Controller extends \stdClass
     {
         $this->app = $app;
         $this->request = $app->request;
-        $this->currentUrl = $this->request->url();
+        $this->currentUrl = $this->request->request('s');
         $this->meuns = [
             [
                 "id" => 2,
@@ -209,7 +209,89 @@ class Controller extends \stdClass
                         ]
                     ]
                 ]
-            ]
+            ],
+            [
+                "id" => 90,
+                "pid" => 0,
+                "title" => "系统管理",
+                "icon" => "layui-icon layui-icon-set",
+                "node" => "",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
+                "sort" => 1000,
+                "status" => 1,
+                "create_at" => "2018-09-06 02:04:52",
+                "sub" => [
+                    [
+                        "id" => 40,
+                        "pid" => 90,
+                        "title" => "系统配置1",
+                        "icon" => "",
+                        "node" => "",
+                        "url" => "#",
+                        "params" => "",
+                        "target" => "_self",
+                        "sort" => 20,
+                        "status" => 1,
+                        "create_at" => "2018-09-06 02:07:17",
+                        "sub" => [
+                            [
+                                "id" => 110,
+                                "pid" => 40,
+                                "title" => "系统参数配置1",
+                                "icon" => "layui-icon layui-icon-set",
+                                "node" => "",
+                                "url" => "/admin/config/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 4,
+                                "status" => 1,
+                                "create_at" => "2018-09-07 00:43:47",
+                            ],
+                            [
+                                "id" => 270,
+                                "pid" => 40,
+                                "title" => "系统任务管理1",
+                                "icon" => "layui-icon layui-icon-log",
+                                "node" => "",
+                                "url" => "/admin/queue/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 3,
+                                "status" => 1,
+                                "create_at" => "2018-11-29 19:13:34",
+                            ],
+                            [
+                                "id" => 490,
+                                "pid" => 40,
+                                "title" => "系统日志管理1",
+                                "icon" => "layui-icon layui-icon-form",
+                                "node" => "",
+                                "url" => "/admin/oplog/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 2,
+                                "status" => 1,
+                                "create_at" => "2019-02-18 20:56:56",
+                            ],
+                            [
+                                "id" => 30,
+                                "pid" => 40,
+                                "title" => "系统菜单管理1",
+                                "icon" => "layui-icon layui-icon-layouts",
+                                "node" => "",
+                                "url" => "/admin/menu/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 1,
+                                "status" => 1,
+                                "create_at" => "2018-09-06 02:05:26",
+                            ]
+                        ]
+                    ]
+                ]
+            ],
         ];
         $this->app->bind('DtApp\ThinkLibrary\Controller', $this);
         if (in_array($this->request->action(), get_class_methods(__CLASS__))) {
