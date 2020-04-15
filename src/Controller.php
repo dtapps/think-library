@@ -77,7 +77,7 @@ class Controller extends \stdClass
                     [
                         "id" => 4,
                         "pid" => 2,
-                        "title" => "系统配置",
+                        "title" => "系统配置1",
                         "icon" => "",
                         "node" => "",
                         "url" => "#",
@@ -90,7 +90,7 @@ class Controller extends \stdClass
                             [
                                 "id" => 11,
                                 "pid" => 4,
-                                "title" => "系统参数配置",
+                                "title" => "系统参数配置1",
                                 "icon" => "layui-icon layui-icon-set",
                                 "node" => "",
                                 "url" => "/admin/config/index.html",
@@ -103,7 +103,7 @@ class Controller extends \stdClass
                             [
                                 "id" => 27,
                                 "pid" => 4,
-                                "title" => "系统任务管理",
+                                "title" => "系统任务管理1",
                                 "icon" => "layui-icon layui-icon-log",
                                 "node" => "",
                                 "url" => "/admin/queue/index.html",
@@ -116,7 +116,7 @@ class Controller extends \stdClass
                             [
                                 "id" => 49,
                                 "pid" => 4,
-                                "title" => "系统日志管理",
+                                "title" => "系统日志管理1",
                                 "icon" => "layui-icon layui-icon-form",
                                 "node" => "",
                                 "url" => "/admin/oplog/index.html",
@@ -129,7 +129,7 @@ class Controller extends \stdClass
                             [
                                 "id" => 3,
                                 "pid" => 4,
-                                "title" => "系统菜单管理",
+                                "title" => "系统菜单管理1",
                                 "icon" => "layui-icon layui-icon-layouts",
                                 "node" => "",
                                 "url" => "/admin/menu/index.html",
@@ -144,7 +144,7 @@ class Controller extends \stdClass
                     [
                         "id" => 4,
                         "pid" => 2,
-                        "title" => "系统配置",
+                        "title" => "系统配置2",
                         "icon" => "",
                         "node" => "",
                         "url" => "#",
@@ -157,10 +157,10 @@ class Controller extends \stdClass
                             [
                                 "id" => 11,
                                 "pid" => 4,
-                                "title" => "系统参数配置",
+                                "title" => "系统参数配置2",
                                 "icon" => "layui-icon layui-icon-set",
                                 "node" => "",
-                                "url" => "/admin/config/index.html",
+                                "url" => "/admin/config/2index.html",
                                 "params" => "",
                                 "target" => "_self",
                                 "sort" => 4,
@@ -170,10 +170,10 @@ class Controller extends \stdClass
                             [
                                 "id" => 27,
                                 "pid" => 4,
-                                "title" => "系统任务管理",
+                                "title" => "系统任务管理2",
                                 "icon" => "layui-icon layui-icon-log",
                                 "node" => "",
-                                "url" => "/admin/queue/index.html",
+                                "url" => "/admin/queue/2index.html",
                                 "params" => "",
                                 "target" => "_self",
                                 "sort" => 3,
@@ -183,10 +183,10 @@ class Controller extends \stdClass
                             [
                                 "id" => 49,
                                 "pid" => 4,
-                                "title" => "系统日志管理",
+                                "title" => "系统日志管理2",
                                 "icon" => "layui-icon layui-icon-form",
                                 "node" => "",
-                                "url" => "/admin/oplog/index.html",
+                                "url" => "/admin/oplog/2index.html",
                                 "params" => "",
                                 "target" => "_self",
                                 "sort" => 2,
@@ -196,10 +196,10 @@ class Controller extends \stdClass
                             [
                                 "id" => 3,
                                 "pid" => 4,
-                                "title" => "系统菜单管理",
+                                "title" => "系统菜单管理2",
                                 "icon" => "layui-icon layui-icon-layouts",
                                 "node" => "",
-                                "url" => "/admin/menu/index.html",
+                                "url" => "/admin/menu/2index.html",
                                 "params" => "",
                                 "target" => "_self",
                                 "sort" => 1,
@@ -215,8 +215,6 @@ class Controller extends \stdClass
         if (in_array($this->request->action(), get_class_methods(__CLASS__))) {
             $this->error('Access without permission.');
         }
-        $this->assign('currentUrl', $this->currentUrl);
-        $this->assign('meuns', $this->meuns);
         $this->initialize();
     }
 
