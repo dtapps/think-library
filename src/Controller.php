@@ -40,6 +40,18 @@ class Controller extends \stdClass
     public $request;
 
     /**
+     * 当前URL
+     * @var
+     */
+    protected $currentUrl;
+
+    /**
+     * 菜单
+     * @var array
+     */
+    protected $meuns;
+
+    /**
      * Controller constructor.
      * @param App $app
      */
@@ -47,10 +59,164 @@ class Controller extends \stdClass
     {
         $this->app = $app;
         $this->request = $app->request;
+        $this->currentUrl = $this->request->url();
+        $this->meuns = [
+            [
+                "id" => 2,
+                "pid" => 0,
+                "title" => "系统管理",
+                "icon" => "layui-icon layui-icon-set",
+                "node" => "",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
+                "sort" => 1000,
+                "status" => 1,
+                "create_at" => "2018-09-06 02:04:52",
+                "sub" => [
+                    [
+                        "id" => 4,
+                        "pid" => 2,
+                        "title" => "系统配置",
+                        "icon" => "",
+                        "node" => "",
+                        "url" => "#",
+                        "params" => "",
+                        "target" => "_self",
+                        "sort" => 20,
+                        "status" => 1,
+                        "create_at" => "2018-09-06 02:07:17",
+                        "sub" => [
+                            [
+                                "id" => 11,
+                                "pid" => 4,
+                                "title" => "系统参数配置",
+                                "icon" => "layui-icon layui-icon-set",
+                                "node" => "",
+                                "url" => "/admin/config/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 4,
+                                "status" => 1,
+                                "create_at" => "2018-09-07 00:43:47",
+                            ],
+                            [
+                                "id" => 27,
+                                "pid" => 4,
+                                "title" => "系统任务管理",
+                                "icon" => "layui-icon layui-icon-log",
+                                "node" => "",
+                                "url" => "/admin/queue/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 3,
+                                "status" => 1,
+                                "create_at" => "2018-11-29 19:13:34",
+                            ],
+                            [
+                                "id" => 49,
+                                "pid" => 4,
+                                "title" => "系统日志管理",
+                                "icon" => "layui-icon layui-icon-form",
+                                "node" => "",
+                                "url" => "/admin/oplog/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 2,
+                                "status" => 1,
+                                "create_at" => "2019-02-18 20:56:56",
+                            ],
+                            [
+                                "id" => 3,
+                                "pid" => 4,
+                                "title" => "系统菜单管理",
+                                "icon" => "layui-icon layui-icon-layouts",
+                                "node" => "",
+                                "url" => "/admin/menu/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 1,
+                                "status" => 1,
+                                "create_at" => "2018-09-06 02:05:26",
+                            ]
+                        ]
+                    ],
+                    [
+                        "id" => 4,
+                        "pid" => 2,
+                        "title" => "系统配置",
+                        "icon" => "",
+                        "node" => "",
+                        "url" => "#",
+                        "params" => "",
+                        "target" => "_self",
+                        "sort" => 20,
+                        "status" => 1,
+                        "create_at" => "2018-09-06 02:07:17",
+                        "sub" => [
+                            [
+                                "id" => 11,
+                                "pid" => 4,
+                                "title" => "系统参数配置",
+                                "icon" => "layui-icon layui-icon-set",
+                                "node" => "",
+                                "url" => "/admin/config/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 4,
+                                "status" => 1,
+                                "create_at" => "2018-09-07 00:43:47",
+                            ],
+                            [
+                                "id" => 27,
+                                "pid" => 4,
+                                "title" => "系统任务管理",
+                                "icon" => "layui-icon layui-icon-log",
+                                "node" => "",
+                                "url" => "/admin/queue/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 3,
+                                "status" => 1,
+                                "create_at" => "2018-11-29 19:13:34",
+                            ],
+                            [
+                                "id" => 49,
+                                "pid" => 4,
+                                "title" => "系统日志管理",
+                                "icon" => "layui-icon layui-icon-form",
+                                "node" => "",
+                                "url" => "/admin/oplog/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 2,
+                                "status" => 1,
+                                "create_at" => "2019-02-18 20:56:56",
+                            ],
+                            [
+                                "id" => 3,
+                                "pid" => 4,
+                                "title" => "系统菜单管理",
+                                "icon" => "layui-icon layui-icon-layouts",
+                                "node" => "",
+                                "url" => "/admin/menu/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sort" => 1,
+                                "status" => 1,
+                                "create_at" => "2018-09-06 02:05:26",
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
         $this->app->bind('DtApp\ThinkLibrary\Controller', $this);
         if (in_array($this->request->action(), get_class_methods(__CLASS__))) {
             $this->error('Access without permission.');
         }
+        $this->assign('currentUrl', $this->currentUrl);
+        $this->assign('meuns', $this->meuns);
         $this->initialize();
     }
 
