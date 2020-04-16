@@ -437,7 +437,7 @@ class Controller extends \stdClass
             [
                 "title" => "后台管理",
                 "icon" => "mdi mdi-home",
-                "url" => "#",
+                "url" => "/admin/index.html",
                 "params" => "",
                 "target" => "_self",
                 "sub" => []
@@ -452,7 +452,7 @@ class Controller extends \stdClass
                     [
                         "title" => "按钮",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -460,7 +460,7 @@ class Controller extends \stdClass
                     [
                         "title" => "卡片",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -468,7 +468,7 @@ class Controller extends \stdClass
                     [
                         "title" => "格栅",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -476,7 +476,7 @@ class Controller extends \stdClass
                     [
                         "title" => "图标",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -484,7 +484,7 @@ class Controller extends \stdClass
                     [
                         "title" => "表格",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -492,7 +492,7 @@ class Controller extends \stdClass
                     [
                         "title" => "模态框",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -500,7 +500,7 @@ class Controller extends \stdClass
                     [
                         "title" => "提示 / 弹出框",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -508,7 +508,7 @@ class Controller extends \stdClass
                     [
                         "title" => "警告框",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -516,7 +516,7 @@ class Controller extends \stdClass
                     [
                         "title" => "分页",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -524,7 +524,7 @@ class Controller extends \stdClass
                     [
                         "title" => "进度条",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -532,7 +532,7 @@ class Controller extends \stdClass
                     [
                         "title" => "标签页",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -540,7 +540,7 @@ class Controller extends \stdClass
                     [
                         "title" => "排版",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -548,7 +548,7 @@ class Controller extends \stdClass
                     [
                         "title" => "步骤",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -556,7 +556,7 @@ class Controller extends \stdClass
                     [
                         "title" => "其他",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -573,7 +573,7 @@ class Controller extends \stdClass
                     [
                         "title" => "基本元素",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -581,7 +581,7 @@ class Controller extends \stdClass
                     [
                         "title" => "单选框",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -589,7 +589,7 @@ class Controller extends \stdClass
                     [
                         "title" => "复选框",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -597,7 +597,7 @@ class Controller extends \stdClass
                     [
                         "title" => "开关",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -614,7 +614,7 @@ class Controller extends \stdClass
                     [
                         "title" => "文档列表",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -622,7 +622,7 @@ class Controller extends \stdClass
                     [
                         "title" => "图库列表",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -630,7 +630,7 @@ class Controller extends \stdClass
                     [
                         "title" => "网址配置",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -638,7 +638,7 @@ class Controller extends \stdClass
                     [
                         "title" => "设置权限",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -646,7 +646,7 @@ class Controller extends \stdClass
                     [
                         "title" => "新增文档",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -654,7 +654,7 @@ class Controller extends \stdClass
                     [
                         "title" => "表单向导",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -662,7 +662,7 @@ class Controller extends \stdClass
                     [
                         "title" => "登录页面",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -670,7 +670,7 @@ class Controller extends \stdClass
                     [
                         "title" => "错误页面",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -687,7 +687,7 @@ class Controller extends \stdClass
                     [
                         "title" => "日期选择器",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -695,7 +695,7 @@ class Controller extends \stdClass
                     [
                         "title" => "滑块",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -703,7 +703,7 @@ class Controller extends \stdClass
                     [
                         "title" => "选色器",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -711,7 +711,7 @@ class Controller extends \stdClass
                     [
                         "title" => "Chart.js",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -719,7 +719,7 @@ class Controller extends \stdClass
                     [
                         "title" => "对话框",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -727,7 +727,7 @@ class Controller extends \stdClass
                     [
                         "title" => "标签插件",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -735,7 +735,7 @@ class Controller extends \stdClass
                     [
                         "title" => "通知消息",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -752,7 +752,7 @@ class Controller extends \stdClass
                     [
                         "title" => "一级菜单",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
@@ -760,14 +760,14 @@ class Controller extends \stdClass
                     [
                         "title" => "一级菜单",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "#",
                         "params" => "",
                         "target" => "_self",
                         "sub" => [
                             [
                                 "title" => "三级菜单",
                                 "icon" => "layui-icon layui-icon-set",
-                                "url" => "/admin/config/index.html",
+                                "url" => "/admin/index.html",
                                 "params" => "",
                                 "target" => "_self",
                                 "sub" => []
@@ -775,7 +775,7 @@ class Controller extends \stdClass
                             [
                                 "title" => "三级菜单",
                                 "icon" => "layui-icon layui-icon-set",
-                                "url" => "/admin/config/index.html",
+                                "url" => "/admin/index.html",
                                 "params" => "",
                                 "target" => "_self",
                                 "sub" => []
@@ -785,7 +785,7 @@ class Controller extends \stdClass
                     [
                         "title" => "一级菜单",
                         "icon" => "layui-icon layui-icon-set",
-                        "url" => "/admin/config/index.html",
+                        "url" => "/admin/index.html",
                         "params" => "",
                         "target" => "_self",
                         "sub" => []
