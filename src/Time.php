@@ -19,6 +19,7 @@ namespace DtApp\ThinkLibrary;
 /**
  * 时间管理类
  * Class Time
+ * @mixin Time
  * @package DtApp\ThinkLibrary
  */
 class Time

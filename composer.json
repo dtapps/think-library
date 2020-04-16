@@ -24,7 +24,10 @@
     "topthink/framework": "^6.0.0",
     "topthink/think-orm": "^2.0",
     "liguangchun/ip": "^1.1",
-    "ext-gd": "*"
+    "ext-gd": "*",
+    "ext-libxml": "*",
+    "ext-json": "*",
+    "ext-simplexml": "*"
   },
   "autoload": {
     "files": [
@@ -38,7 +41,10 @@
     "think": {
       "services": [
         "DtApp\\ThinkLibrary"
-      ]
+      ],
+      "config": {
+        "dtapp": "src/config.php"
+      }
     }
   }
 }

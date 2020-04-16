@@ -24,7 +24,7 @@ use think\Facade;
  * @see \DtApp\ThinkLibrary\Time
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Time
- * @package DtApp\ThinkLibrary\facade
+ *
  * @method \DtApp\ThinkLibrary\Time getData(string $format = "Y-m-d H:i:s") false|string 当前时间
  * @method \DtApp\ThinkLibrary\Time getTime() false|string 当前时间戳
  * @method \DtApp\ThinkLibrary\Time getUDate() false|string 当前时间戳
@@ -36,6 +36,11 @@ use think\Facade;
  */
 class Time extends Facade
 {
+    /**
+     * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
+     * @access protected
+     * @return string
+     */
     protected static function getFacadeClass()
     {
         return 'DtApp\ThinkLibrary\Time';

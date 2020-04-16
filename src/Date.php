@@ -19,6 +19,7 @@ namespace DtApp\ThinkLibrary;
 /**
  * 日期管理类
  * Class Date
+ * @mixin Date
  * @package DtApp\ThinkLibrary
  */
 class Date

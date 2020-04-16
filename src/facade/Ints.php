@@ -19,17 +19,16 @@ namespace DtApp\ThinkLibrary\facade;
 use think\Facade;
 
 /**
- * 唯一ID门面
+ * 数字门面
  * Class Preg
- * @see \DtApp\ThinkLibrary\UnIqId
+ * @see \DtApp\ThinkLibrary\Ints
  * @package think\facade
- * @mixin \DtApp\ThinkLibrary\UnIqId
+ * @mixin \DtApp\ThinkLibrary\Ints
  *
- * @method \DtApp\ThinkLibrary\UnIqId random($size = 10, $type = 1, $prefix = '') static 获取随机字符串编码
- * @method \DtApp\ThinkLibrary\UnIqId date($size = 16, $prefix = '') static 唯一日期编码
- * @method \DtApp\ThinkLibrary\UnIqId number($size = 12, $prefix = '') static 唯一数字编码
+ * @method \DtApp\ThinkLibrary\Ints isEvenNumbers(int $num) bool 判断一个数是不是偶数
+ * @method \DtApp\ThinkLibrary\Ints isOddNumbers(int $num) bool 判断一个数是不是奇数
  */
-class UnIqId extends Facade
+class Ints extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
@@ -38,6 +37,7 @@ class UnIqId extends Facade
      */
     protected static function getFacadeClass()
     {
-        return 'DtApp\ThinkLibrary\UnIqId';
+        return 'DtApp\ThinkLibrary\Ints';
     }
 }
+

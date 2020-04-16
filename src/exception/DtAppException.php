@@ -14,30 +14,19 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\facade;
+namespace DtApp\ThinkLibrary\exception;
 
-use think\Facade;
+use Exception;
 
 /**
- * 唯一ID门面
- * Class Preg
- * @see \DtApp\ThinkLibrary\UnIqId
- * @package think\facade
- * @mixin \DtApp\ThinkLibrary\UnIqId
- *
- * @method \DtApp\ThinkLibrary\UnIqId random($size = 10, $type = 1, $prefix = '') static 获取随机字符串编码
- * @method \DtApp\ThinkLibrary\UnIqId date($size = 16, $prefix = '') static 唯一日期编码
- * @method \DtApp\ThinkLibrary\UnIqId number($size = 12, $prefix = '') static 唯一数字编码
+ * 错误管理
+ * Class DtAppException
+ * @package DtApp\ThinkLibrary\exception
  */
-class UnIqId extends Facade
+class DtAppException extends Exception
 {
-    /**
-     * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
-     * @access protected
-     * @return string
-     */
-    protected static function getFacadeClass()
+    public function errorMessage()
     {
-        return 'DtApp\ThinkLibrary\UnIqId';
+        return $this->getMessage();
     }
 }

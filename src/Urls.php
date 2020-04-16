@@ -14,30 +14,48 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\facade;
-
-use think\Facade;
+namespace DtApp\ThinkLibrary;
 
 /**
- * 唯一ID门面
- * Class Preg
- * @see \DtApp\ThinkLibrary\UnIqId
- * @package think\facade
- * @mixin \DtApp\ThinkLibrary\UnIqId
- *
- * @method \DtApp\ThinkLibrary\UnIqId random($size = 10, $type = 1, $prefix = '') static 获取随机字符串编码
- * @method \DtApp\ThinkLibrary\UnIqId date($size = 16, $prefix = '') static 唯一日期编码
- * @method \DtApp\ThinkLibrary\UnIqId number($size = 12, $prefix = '') static 唯一数字编码
+ * 网址管理类
+ * Class Urls
+ * @mixin Urls
+ * @package DtApp\ThinkLibrary
  */
-class UnIqId extends Facade
+class Urls
 {
     /**
-     * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
-     * @access protected
+     * 编码
+     * @param string $url
      * @return string
      */
-    protected static function getFacadeClass()
+   public function lenCode(string $url)
     {
-        return 'DtApp\ThinkLibrary\UnIqId';
+        if (empty($url)) return false;
+        return urlencode($url);
+    }
+
+    /**
+     * 解码
+     * @param string $url
+     * @return string
+     */
+   public function deCode(string $url)
+    {
+        if (empty($url)) return false;
+        return urldecode($url);
+    }
+
+    /**
+     * 格式化参数格式化成url参数
+     * @param array $data
+     * @return string
+     */
+   public function toParams(array $data)
+    {
+        $buff = "";
+        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";
+        $buff = trim($buff, "&");
+        return $buff;
     }
 }

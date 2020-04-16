@@ -24,7 +24,7 @@ use think\facade;
  * @see \DtApp\ThinkLibrary\Preg
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Preg
- * @package DtApp\ThinkLibrary\facade
+ *
  * @method \DtApp\ThinkLibrary\Preg isIphone($mobile) bool 验证手机号码
  * @method \DtApp\ThinkLibrary\Preg isIphoneAll($mobile) bool 严谨验证手机号码
  * @method \DtApp\ThinkLibrary\Preg isTel($tel) bool 验证电话号码
@@ -41,6 +41,11 @@ use think\facade;
  */
 class Preg extends Facade
 {
+    /**
+     * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
+     * @access protected
+     * @return string
+     */
     protected static function getFacadeClass()
     {
         return 'DtApp\ThinkLibrary\Preg';

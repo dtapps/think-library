@@ -19,17 +19,17 @@ namespace DtApp\ThinkLibrary\facade;
 use think\Facade;
 
 /**
- * 唯一ID门面
+ * 网址门面
  * Class Preg
- * @see \DtApp\ThinkLibrary\UnIqId
+ * @see \DtApp\ThinkLibrary\Urls
  * @package think\facade
- * @mixin \DtApp\ThinkLibrary\UnIqId
+ * @mixin \DtApp\ThinkLibrary\Urls
  *
- * @method \DtApp\ThinkLibrary\UnIqId random($size = 10, $type = 1, $prefix = '') static 获取随机字符串编码
- * @method \DtApp\ThinkLibrary\UnIqId date($size = 16, $prefix = '') static 唯一日期编码
- * @method \DtApp\ThinkLibrary\UnIqId number($size = 12, $prefix = '') static 唯一数字编码
+ * @method \DtApp\ThinkLibrary\Urls lenCode(string $url) static 编码
+ * @method \DtApp\ThinkLibrary\Urls deCode(string $url) static 解码
+ * @method \DtApp\ThinkLibrary\Urls toParams(array $data) static 格式化参数格式化成url参数
  */
-class UnIqId extends Facade
+class Urls extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
@@ -38,6 +38,6 @@ class UnIqId extends Facade
      */
     protected static function getFacadeClass()
     {
-        return 'DtApp\ThinkLibrary\UnIqId';
+        return 'DtApp\ThinkLibrary\Urls';
     }
 }

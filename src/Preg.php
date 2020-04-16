@@ -19,6 +19,7 @@ namespace DtApp\ThinkLibrary;
 /**
  * 验证管理类
  * Class Preg
+ * @mixin Preg
  * @package DtApp\ThinkLibrary
  */
 class Preg
