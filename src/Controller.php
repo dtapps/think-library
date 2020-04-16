@@ -305,7 +305,7 @@ class Controller extends \stdClass
      */
     protected function initialize()
     {
-
+        $this->currentUrl = $this->request->request('s');
     }
 
     /**
