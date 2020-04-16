@@ -62,236 +62,363 @@ class Controller extends \stdClass
         $this->currentUrl = $this->request->request('s');
         $this->meuns = [
             [
-                "id" => 2,
-                "pid" => 0,
-                "title" => "系统管理",
-                "icon" => "layui-icon layui-icon-set",
-                "node" => "",
+                "title" => "后台管理",
+                "icon" => "mdi mdi-home",
                 "url" => "#",
                 "params" => "",
                 "target" => "_self",
-                "sort" => 1000,
-                "status" => 1,
-                "create_at" => "2018-09-06 02:04:52",
+                "sub" => []
+            ],
+            [
+                "title" => "UI元素",
+                "icon" => "mdi mdi-palette",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
                 "sub" => [
                     [
-                        "id" => 4,
-                        "pid" => 2,
-                        "title" => "系统配置1",
-                        "icon" => "",
-                        "node" => "",
-                        "url" => "#",
+                        "title" => "按钮",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
                         "params" => "",
                         "target" => "_self",
-                        "sort" => 20,
-                        "status" => 1,
-                        "create_at" => "2018-09-06 02:07:17",
-                        "sub" => [
-                            [
-                                "id" => 11,
-                                "pid" => 4,
-                                "title" => "系统参数配置1",
-                                "icon" => "layui-icon layui-icon-set",
-                                "node" => "",
-                                "url" => "/admin/config/index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 4,
-                                "status" => 1,
-                                "create_at" => "2018-09-07 00:43:47",
-                            ],
-                            [
-                                "id" => 27,
-                                "pid" => 4,
-                                "title" => "系统任务管理1",
-                                "icon" => "layui-icon layui-icon-log",
-                                "node" => "",
-                                "url" => "/admin/queue/index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 3,
-                                "status" => 1,
-                                "create_at" => "2018-11-29 19:13:34",
-                            ],
-                            [
-                                "id" => 49,
-                                "pid" => 4,
-                                "title" => "系统日志管理1",
-                                "icon" => "layui-icon layui-icon-form",
-                                "node" => "",
-                                "url" => "/admin/oplog/index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 2,
-                                "status" => 1,
-                                "create_at" => "2019-02-18 20:56:56",
-                            ],
-                            [
-                                "id" => 3,
-                                "pid" => 4,
-                                "title" => "系统菜单管理1",
-                                "icon" => "layui-icon layui-icon-layouts",
-                                "node" => "",
-                                "url" => "/admin/menu/index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 1,
-                                "status" => 1,
-                                "create_at" => "2018-09-06 02:05:26",
-                            ]
-                        ]
+                        "sub" => []
                     ],
                     [
-                        "id" => 4,
-                        "pid" => 2,
-                        "title" => "系统配置2",
-                        "icon" => "",
-                        "node" => "",
-                        "url" => "#",
+                        "title" => "卡片",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
                         "params" => "",
                         "target" => "_self",
-                        "sort" => 20,
-                        "status" => 1,
-                        "create_at" => "2018-09-06 02:07:17",
-                        "sub" => [
-                            [
-                                "id" => 11,
-                                "pid" => 4,
-                                "title" => "系统参数配置2",
-                                "icon" => "layui-icon layui-icon-set",
-                                "node" => "",
-                                "url" => "/admin/config/2index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 4,
-                                "status" => 1,
-                                "create_at" => "2018-09-07 00:43:47",
-                            ],
-                            [
-                                "id" => 27,
-                                "pid" => 4,
-                                "title" => "系统任务管理2",
-                                "icon" => "layui-icon layui-icon-log",
-                                "node" => "",
-                                "url" => "/admin/queue/2index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 3,
-                                "status" => 1,
-                                "create_at" => "2018-11-29 19:13:34",
-                            ],
-                            [
-                                "id" => 49,
-                                "pid" => 4,
-                                "title" => "系统日志管理2",
-                                "icon" => "layui-icon layui-icon-form",
-                                "node" => "",
-                                "url" => "/admin/oplog/2index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 2,
-                                "status" => 1,
-                                "create_at" => "2019-02-18 20:56:56",
-                            ],
-                            [
-                                "id" => 3,
-                                "pid" => 4,
-                                "title" => "系统菜单管理2",
-                                "icon" => "layui-icon layui-icon-layouts",
-                                "node" => "",
-                                "url" => "/admin/menu/2index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 1,
-                                "status" => 1,
-                                "create_at" => "2018-09-06 02:05:26",
-                            ]
-                        ]
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "格栅",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "图标",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "表格",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "模态框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "提示 / 弹出框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "警告框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "分页",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "进度条",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "标签页",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "排版",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "步骤",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "其他",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
                     ]
                 ]
             ],
             [
-                "id" => 90,
-                "pid" => 0,
-                "title" => "系统管理",
-                "icon" => "layui-icon layui-icon-set",
-                "node" => "",
+                "title" => "表单",
+                "icon" => "mdi mdi-format-align-justify",
                 "url" => "#",
                 "params" => "",
                 "target" => "_self",
-                "sort" => 1000,
-                "status" => 1,
-                "create_at" => "2018-09-06 02:04:52",
                 "sub" => [
                     [
-                        "id" => 40,
-                        "pid" => 90,
-                        "title" => "系统配置1",
-                        "icon" => "",
-                        "node" => "",
-                        "url" => "#",
+                        "title" => "基本元素",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
                         "params" => "",
                         "target" => "_self",
-                        "sort" => 20,
-                        "status" => 1,
-                        "create_at" => "2018-09-06 02:07:17",
-                        "sub" => [
-                            [
-                                "id" => 110,
-                                "pid" => 40,
-                                "title" => "系统参数配置1",
-                                "icon" => "layui-icon layui-icon-set",
-                                "node" => "",
-                                "url" => "/admin/config/index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 4,
-                                "status" => 1,
-                                "create_at" => "2018-09-07 00:43:47",
-                            ],
-                            [
-                                "id" => 270,
-                                "pid" => 40,
-                                "title" => "系统任务管理1",
-                                "icon" => "layui-icon layui-icon-log",
-                                "node" => "",
-                                "url" => "/admin/queue/index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 3,
-                                "status" => 1,
-                                "create_at" => "2018-11-29 19:13:34",
-                            ],
-                            [
-                                "id" => 490,
-                                "pid" => 40,
-                                "title" => "系统日志管理1",
-                                "icon" => "layui-icon layui-icon-form",
-                                "node" => "",
-                                "url" => "/admin/oplog/index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 2,
-                                "status" => 1,
-                                "create_at" => "2019-02-18 20:56:56",
-                            ],
-                            [
-                                "id" => 30,
-                                "pid" => 40,
-                                "title" => "系统菜单管理1",
-                                "icon" => "layui-icon layui-icon-layouts",
-                                "node" => "",
-                                "url" => "/admin/menu/index.html",
-                                "params" => "",
-                                "target" => "_self",
-                                "sort" => 1,
-                                "status" => 1,
-                                "create_at" => "2018-09-06 02:05:26",
-                            ]
-                        ]
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "单选框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "复选框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "开关",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
                     ]
                 ]
             ],
+            [
+                "title" => "示例页面",
+                "icon" => "mdi mdi-format-align-justify",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
+                "sub" => [
+                    [
+                        "title" => "文档列表",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "图库列表",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "网址配置",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "设置权限",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "新增文档",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "表单向导",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "登录页面",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "错误页面",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ]
+                ]
+            ],
+            [
+                "title" => "JS 插件",
+                "icon" => "mdi mdi-language-javascript",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
+                "sub" => [
+                    [
+                        "title" => "日期选择器",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "滑块",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "选色器",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "Chart.js",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "对话框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "标签插件",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "通知消息",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ]
+                ]
+            ],
+            [
+                "title" => "多级菜单",
+                "icon" => "mdi mdi-menu",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
+                "sub" => [
+                    [
+                        "title" => "一级菜单",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "一级菜单",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => [
+                            [
+                                "title" => "三级菜单",
+                                "icon" => "layui-icon layui-icon-set",
+                                "url" => "/admin/config/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sub" => []
+                            ],
+                            [
+                                "title" => "三级菜单",
+                                "icon" => "layui-icon layui-icon-set",
+                                "url" => "/admin/config/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sub" => []
+                            ]
+                        ]
+                    ],
+                    [
+                        "title" => "一级菜单",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ]
+                ]
+            ]
         ];
         $this->app->bind('DtApp\ThinkLibrary\Controller', $this);
         if (in_array($this->request->action(), get_class_methods(__CLASS__))) {
@@ -306,6 +433,366 @@ class Controller extends \stdClass
     protected function initialize()
     {
         $this->currentUrl = $this->request->request('s');
+        $this->meuns = [
+            [
+                "title" => "后台管理",
+                "icon" => "mdi mdi-home",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
+                "sub" => []
+            ],
+            [
+                "title" => "UI元素",
+                "icon" => "mdi mdi-palette",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
+                "sub" => [
+                    [
+                        "title" => "按钮",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "卡片",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "格栅",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "图标",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "表格",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "模态框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "提示 / 弹出框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "警告框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "分页",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "进度条",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "标签页",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "排版",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "步骤",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "其他",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ]
+                ]
+            ],
+            [
+                "title" => "表单",
+                "icon" => "mdi mdi-format-align-justify",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
+                "sub" => [
+                    [
+                        "title" => "基本元素",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "单选框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "复选框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "开关",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ]
+                ]
+            ],
+            [
+                "title" => "示例页面",
+                "icon" => "mdi mdi-format-align-justify",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
+                "sub" => [
+                    [
+                        "title" => "文档列表",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "图库列表",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "网址配置",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "设置权限",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "新增文档",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "表单向导",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "登录页面",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "错误页面",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ]
+                ]
+            ],
+            [
+                "title" => "JS 插件",
+                "icon" => "mdi mdi-language-javascript",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
+                "sub" => [
+                    [
+                        "title" => "日期选择器",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "滑块",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "选色器",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "Chart.js",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "对话框",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "标签插件",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "通知消息",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ]
+                ]
+            ],
+            [
+                "title" => "多级菜单",
+                "icon" => "mdi mdi-menu",
+                "url" => "#",
+                "params" => "",
+                "target" => "_self",
+                "sub" => [
+                    [
+                        "title" => "一级菜单",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ],
+                    [
+                        "title" => "一级菜单",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => [
+                            [
+                                "title" => "三级菜单",
+                                "icon" => "layui-icon layui-icon-set",
+                                "url" => "/admin/config/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sub" => []
+                            ],
+                            [
+                                "title" => "三级菜单",
+                                "icon" => "layui-icon layui-icon-set",
+                                "url" => "/admin/config/index.html",
+                                "params" => "",
+                                "target" => "_self",
+                                "sub" => []
+                            ]
+                        ]
+                    ],
+                    [
+                        "title" => "一级菜单",
+                        "icon" => "layui-icon layui-icon-set",
+                        "url" => "/admin/config/index.html",
+                        "params" => "",
+                        "target" => "_self",
+                        "sub" => []
+                    ]
+                ]
+            ]
+        ];
     }
 
     /**
