@@ -29,7 +29,7 @@ class Time
      * @param string $format 格式
      * @return false|string
      */
-    public function getData(string $format = "Y-m-d H:i:s")
+    public function getData($format = "Y-m-d H:i:s")
     {
         date_default_timezone_set('Asia/Shanghai');
         return date($format, time());
@@ -63,7 +63,7 @@ class Time
      * @param string $start_time 开始时间
      * @return false|int
      */
-    public function getTimeDifference(string $end_time, string $start_time)
+    public function getTimeDifference($end_time, $start_time)
     {
         date_default_timezone_set('Asia/Shanghai');
         $end_time = strtotime($end_time);
@@ -76,7 +76,7 @@ class Time
      * @param string $date
      * @return false|int
      */
-    public function dateToTimestamp(string $date)
+    public function dateToTimestamp($date)
     {
         date_default_timezone_set('Asia/Shanghai');
         return strtotime($date);
@@ -88,7 +88,7 @@ class Time
      * @param int $mun 多少分钟
      * @return false|string
      */
-    public function dateRear(string $format = "Y-m-d H:i:s", int $mun = 10)
+    public function dateRear($format = "Y-m-d H:i:s", $mun = 10)
     {
         date_default_timezone_set('Asia/Shanghai');
         return date($format, strtotime(self::getData()) + $mun);
@@ -100,7 +100,7 @@ class Time
      * @param int $mun 多少分钟
      * @return false|string
      */
-    public function dateBefore(string $format = "Y-m-d H:i:s", int $mun = 10)
+    public function dateBefore($format = "Y-m-d H:i:s", $mun = 10)
     {
         date_default_timezone_set('Asia/Shanghai');
         return date($format, strtotime(self::getData()) - $mun);
@@ -113,7 +113,7 @@ class Time
      * @param string $end 结束时间
      * @return bool true：在范围内，false:没在范围内
      */
-    public function checkIsBetweenTime(string $start, string $end)
+    public function checkIsBetweenTime($start, $end)
     {
         date_default_timezone_set('Asia/Shanghai');
         $date = date('H:i');

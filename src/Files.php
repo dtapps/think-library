@@ -33,7 +33,7 @@ class Files
      * @return bool
      * @throws DtAppException
      */
-    public function delete(string $name)
+    public function delete($name)
     {
         if (empty($name)) throw new DtAppException('请检查需要删除文件夹的名称');
         if (file_exists($name)) if (unlink($name)) return true;
@@ -46,7 +46,7 @@ class Files
      * @return bool
      * @throws DtAppException
      */
-    public function deletes(string $name)
+    public function deletes($name)
     {
         if (empty($name)) throw new DtAppException('请检查需要删除文件夹的名称');
         //先删除目录下的文件：
@@ -78,7 +78,7 @@ class Files
      * @return bool
      * @throws DtAppException
      */
-    public function folderZip(string $name, string $suffix_name = '.png', string $file_name = '*')
+    public function folderZip($name, $suffix_name = '.png', $file_name = '*')
     {
         if (empty($name)) throw new DtAppException('请检查需要打包的路径名称');
         try {
