@@ -20,7 +20,7 @@ use think\Facade;
 
 /**
  * 数字门面
- * Class Preg
+ * Class Ints
  * @see \DtApp\ThinkLibrary\Ints
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Ints

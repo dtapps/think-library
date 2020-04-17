@@ -20,7 +20,7 @@ use think\Facade;
 
 /**
  * 网址门面
- * Class Preg
+ * Class Urls
  * @see \DtApp\ThinkLibrary\Urls
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Urls

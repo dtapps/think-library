@@ -20,7 +20,7 @@ use think\facade;
 
 /**
  * 字符串门面
- * Class Preg
+ * Class Str
  * @see \DtApp\ThinkLibrary\Str
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Str

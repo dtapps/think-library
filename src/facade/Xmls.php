@@ -20,10 +20,11 @@ use think\Facade;
 
 /**
  * XML门面
- * Class Preg
+ * Class Xmls
  * @see \DtApp\ThinkLibrary\Xmls
+ * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Xmls
- * @package DtApp\ThinkLibrary\facade
+ *
  * @method \DtApp\ThinkLibrary\Xmls toXml(array $values) string 数组转换为xml
  * @method \DtApp\ThinkLibrary\Xmls toArray(string $xml) string 将XML转为array
  */

@@ -20,7 +20,7 @@ use think\Facade;
 
 /**
  * 时间门面
- * Class Preg
+ * Class Time
  * @see \DtApp\ThinkLibrary\Time
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Time

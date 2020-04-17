@@ -20,7 +20,7 @@ use think\facade;
 
 /**
  * 随机门面
- * Class Preg
+ * Class Random
  * @see \DtApp\ThinkLibrary\Random
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Random
