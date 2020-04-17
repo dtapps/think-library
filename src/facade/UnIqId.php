@@ -20,7 +20,7 @@ use think\Facade;
 
 /**
  * 唯一ID门面
- * Class Preg
+ * Class UnIqId
  * @see \DtApp\ThinkLibrary\UnIqId
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\UnIqId

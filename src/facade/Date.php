@@ -20,7 +20,7 @@ use think\Facade;
 
 /**
  * 日期门面
- * Class Preg
+ * Class Date
  * @see \DtApp\ThinkLibrary\Date
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Date

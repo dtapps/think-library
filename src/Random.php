@@ -18,8 +18,8 @@ namespace DtApp\ThinkLibrary;
 
 /**
  * 随机管理类
- * Class Ints
- * @mixin Ints
+ * Class Random
+ * @mixin Random
  * @package DtApp\ThinkLibrary
  */
 class Random

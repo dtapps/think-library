@@ -18,8 +18,8 @@ namespace DtApp\ThinkLibrary;
 
 /**
  * 字符串管理类
- * Class Ints
- * @mixin Ints
+ * Class Str
+ * @mixin Str
  * @package DtApp\ThinkLibrary
  */
 class Str

@@ -38,7 +38,7 @@ class Xmls
         $xml = "<xml>";
         foreach ($values as $key => $val) {
             if (is_array($val)) {
-                $xml .= "<" . $key . ">" . toXml($val) . "</" . $key . ">";
+                $xml .= "<" . $key . ">" . $this->toXml($val) . "</" . $key . ">";
             } else if (is_numeric($val)) {
                 $xml .= "<" . $key . ">" . $val . "</" . $key . ">";
             } else {

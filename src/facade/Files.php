@@ -20,7 +20,7 @@ use think\Facade;
 
 /**
  * 文件门面
- * Class Preg
+ * Class Files
  * @see \DtApp\ThinkLibrary\Files
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Files
