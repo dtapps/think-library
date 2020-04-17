@@ -1,7 +1,7 @@
 <?php
 
 // +----------------------------------------------------------------------
-// | ThinkLibrary 6.0 for ThinkPhP 6.0
+// | ThinkLibrary 5.1 for ThinkPhP 5.1
 // +----------------------------------------------------------------------
 // | 版权所有 2017~2020 [ https://www.dtapp.net ]
 // +----------------------------------------------------------------------
@@ -19,6 +19,7 @@ namespace DtApp\ThinkLibrary;
 /**
  * 验证管理类
  * Class Preg
+ * @mixin Preg
  * @package DtApp\ThinkLibrary
  */
 class Preg

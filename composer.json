@@ -21,6 +21,11 @@
   "homepage": "https://www.dtapp.net",
   "require": {
     "php": ">=5.6.0",
+    "ext-gd": "*",
+    "ext-libxml": "*",
+    "ext-json": "*",
+    "ext-simplexml": "*",
+    "ext-zip": "*",
     "topthink/framework": "5.1.*",
     "liguangchun/ip": "^1.1"
   },
@@ -36,7 +41,10 @@
     "think": {
       "services": [
         "DtApp\\ThinkLibrary"
-      ]
+      ],
+      "config": {
+        "dtapp": "src/config.php"
+      }
     }
   }
 }
