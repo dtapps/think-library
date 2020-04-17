@@ -27,7 +27,7 @@ use think\facade;
  *
  * @method \DtApp\ThinkLibrary\Random generate(int $length = 6, int $type = 1) false|string 生成随机
  */
-class Random
+class Random extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
