@@ -27,6 +27,7 @@ use think\Facade;
  *
  * @method \DtApp\ThinkLibrary\Files delete(string $name) bool 删除文件
  * @method \DtApp\ThinkLibrary\Files deletes(string $name) bool 删除文件夹
+ * @method \DtApp\ThinkLibrary\Files folderZip(string $name, string $suffix_name = '.png', string $file_name = '*') bool 把文件夹里面的文件打包成zip文件
  */
 class Files extends Facade
 {
