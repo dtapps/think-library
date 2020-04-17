@@ -26,12 +26,40 @@ class Files
 {
     /**
      * 删除文件
-     * @param string $name
+     * @param string $name 路径
      * @return bool
      */
     public function delete(string $name)
     {
         if (file_exists($name)) if (unlink($name)) return true;
         return false;
+    }
+
+    /**
+     * 删除文件夹
+     * @param string $name 路径
+     * @return bool
+     */
+    public function deletes(string $name)
+    {
+        //先删除目录下的文件：
+        $dh = opendir($name);
+        while ($file = readdir($dh)) {
+            if ($file != "." && $file != "..") {
+                $fullpath = $name . "/" . $file;
+                if (!is_dir($fullpath)) {
+                    unlink($fullpath);
+                } else {
+                    $this->deletes($fullpath);
+                }
+            }
+        }
+        closedir($dh);
+        //删除当前文件夹：
+        if (rmdir($name)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

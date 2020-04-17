@@ -25,7 +25,8 @@ use think\Facade;
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Files
  *
- * @method \DtApp\ThinkLibrary\Files delete(string $name) bool 编码
+ * @method \DtApp\ThinkLibrary\Files delete(string $name) bool 删除文件
+ * @method \DtApp\ThinkLibrary\Files deletes(string $name) bool 删除文件夹
  */
 class Files extends Facade
 {
