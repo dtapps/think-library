@@ -16,18 +16,21 @@
 
 namespace DtApp\ThinkLibrary\facade;
 
-use think\facade;
+use DtApp\ThinkLibrary\helper\UnIqIds as helper;
+use think\Facade;
 
 /**
- * 随机门面
- * Class Random
- * @see \DtApp\ThinkLibrary\Random
+ * 唯一ID门面
+ * Class UnIqIds
+ * @see \DtApp\ThinkLibrary\UnIqId
  * @package think\facade
- * @mixin \DtApp\ThinkLibrary\Random
+ * @mixin helper
  *
- * @method \DtApp\ThinkLibrary\Random generate(int $length = 6, int $type = 1) false|string 生成随机
+ * @method helper random($size = 10, $type = 1, $prefix = '') static 获取随机字符串编码
+ * @method helper date($size = 16, $prefix = '') static 唯一日期编码
+ * @method helper number($size = 12, $prefix = '') static 唯一数字编码
  */
-class Random extends Facade
+class UnIqIds extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
@@ -36,7 +39,6 @@ class Random extends Facade
      */
     protected static function getFacadeClass()
     {
-        return 'DtApp\ThinkLibrary\Random';
+        return helper::class;
     }
 }
-

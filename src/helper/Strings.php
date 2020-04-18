@@ -14,15 +14,15 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 字符串管理类
- * Class Str
- * @mixin Str
- * @package DtApp\ThinkLibrary
+ * Class Strings
+ * @mixin Strings
+ * @package DtApp\ThinkLibrary\helper
  */
-class Str
+class Strings
 {
     /**
      * 截取字符串前面n个字符

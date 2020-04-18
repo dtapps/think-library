@@ -16,25 +16,26 @@
 
 namespace DtApp\ThinkLibrary\facade;
 
+use DtApp\ThinkLibrary\helper\Times as helper;
 use think\Facade;
 
 /**
  * 时间门面
- * Class Time
- * @see \DtApp\ThinkLibrary\helper\Time
+ * Class Times
+ * @see \DtApp\ThinkLibrary\helper\Times
  * @package think\facade
- * @mixin \DtApp\ThinkLibrary\helper\Time
+ * @mixin helper
  *
- * @method \DtApp\ThinkLibrary\helper\Time getData(string $format = "Y-m-d H:i:s") false|string 当前时间
- * @method \DtApp\ThinkLibrary\helper\Time getTime() false|string 当前时间戳
- * @method \DtApp\ThinkLibrary\helper\Time getUDate() false|string 当前时间戳
- * @method \DtApp\ThinkLibrary\helper\Time getTimeDifference(string $end_time, string $start_time) false|string 计算两个时间差
- * @method \DtApp\ThinkLibrary\helper\Time dateToTimestamp(string $date) false|string 将指定日期转换为时间戳
- * @method \DtApp\ThinkLibrary\helper\Time dateRear(string $format = "Y-m-d H:i:s", int $mun = 10) false|string 获取某个时间之后的时间
- * @method \DtApp\ThinkLibrary\helper\Time dateBefore(string $format = "Y-m-d H:i:s", int $mun = 10) false|string 获取某个时间之前的时间
- * @method \DtApp\ThinkLibrary\helper\Time checkIsBetweenTime(string $start, string $end) bool 判断当前的时分是否在指定的时间段内
+ * @method helper getData(string $format = "Y-m-d H:i:s") false|string 当前时间
+ * @method helper getTime() false|string 当前时间戳
+ * @method helper getUDate() false|string 当前时间戳
+ * @method helper getTimeDifference(string $end_time, string $start_time) false|string 计算两个时间差
+ * @method helper dateToTimestamp(string $date) false|string 将指定日期转换为时间戳
+ * @method helper dateRear(string $format = "Y-m-d H:i:s", int $mun = 10) false|string 获取某个时间之后的时间
+ * @method helper dateBefore(string $format = "Y-m-d H:i:s", int $mun = 10) false|string 获取某个时间之前的时间
+ * @method helper checkIsBetweenTime(string $start, string $end) bool 判断当前的时分是否在指定的时间段内
  */
-class Time extends Facade
+class Times extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
@@ -43,6 +44,6 @@ class Time extends Facade
      */
     protected static function getFacadeClass()
     {
-        return \DtApp\ThinkLibrary\helper\Time::class;
+        return helper::class;
     }
 }

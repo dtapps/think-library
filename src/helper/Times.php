@@ -18,11 +18,11 @@ namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 时间管理类
- * Class Time
- * @mixin Time
+ * Class Times
+ * @mixin Times
  * @package DtApp\ThinkLibrary\helper
  */
-class Time
+class Times
 {
     /**
      * 当前时间

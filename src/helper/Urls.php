@@ -14,30 +14,48 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\facade;
-
-use DtApp\ThinkLibrary\helper\Xmls as helper;
-use think\Facade;
+namespace DtApp\ThinkLibrary\helper;
 
 /**
- * XML门面
- * Class Xmls
- * @see \DtApp\ThinkLibrary\helper\Xmls
- * @package think\facade
- * @mixin helper
- *
- * @method helper toXml(array $values) string 数组转换为xml
- * @method helper toArray(string $xml) string 将XML转为array
+ * 网址管理类
+ * Class Urls
+ * @mixin Urls
+ * @package DtApp\ThinkLibrary\helper
  */
-class Xmls extends Facade
+class Urls
 {
     /**
-     * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
-     * @access protected
+     * 编码
+     * @param string $url
      * @return string
      */
-    protected static function getFacadeClass()
+   public function lenCode(string $url)
     {
-        return helper::class;
+        if (empty($url)) return false;
+        return urlencode($url);
+    }
+
+    /**
+     * 解码
+     * @param string $url
+     * @return string
+     */
+   public function deCode(string $url)
+    {
+        if (empty($url)) return false;
+        return urldecode($url);
+    }
+
+    /**
+     * 格式化参数格式化成url参数
+     * @param array $data
+     * @return string
+     */
+   public function toParams(array $data)
+    {
+        $buff = "";
+        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";
+        $buff = trim($buff, "&");
+        return $buff;
     }
 }

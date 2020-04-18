@@ -14,8 +14,8 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-use DtApp\ThinkLibrary\facade\Preg;
-use DtApp\ThinkLibrary\facade\Time;
+use DtApp\ThinkLibrary\facade\Pregs;
+use DtApp\ThinkLibrary\facade\Times;
 use DtApp\ThinkLibrary\service\TestService;
 
 require '../vendor/autoload.php';
@@ -23,4 +23,4 @@ require '../vendor/autoload.php';
 
 //var_dump(TestService::instance()->index());
 
-var_dump(Time::getTime());
+var_dump(Times::getTime());

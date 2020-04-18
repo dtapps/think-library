@@ -14,48 +14,33 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\facade;
+
+use DtApp\ThinkLibrary\helper\Strings as helper;
+use think\facade;
 
 /**
- * 网址管理类
- * Class Urls
- * @mixin Urls
- * @package DtApp\ThinkLibrary
+ * 字符串门面
+ * Class Strings
+ * @see \DtApp\ThinkLibrary\Str
+ * @package think\facade
+ * @mixin helper
+ *
+ * @method helper extractBefore(string $str, int $start_num, int $end_num) bool|false|string 截取字符串前面n个字符
+ * @method helper extractRear(string $str, int $num) false|string 截取字符串最后n个字符
+ * @method helper filter(string $str) string 过滤字符串
+ * @method helper exitContain(string $str, $nee = 3, $del = ',') bool 判断字符串是否包含某个字符
+ * @method helper len(string $str) int 统计字符串长度
  */
-class Urls
+class Strings extends Facade
 {
     /**
-     * 编码
-     * @param string $url
+     * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
+     * @access protected
      * @return string
      */
-   public function lenCode(string $url)
+    protected static function getFacadeClass()
     {
-        if (empty($url)) return false;
-        return urlencode($url);
-    }
-
-    /**
-     * 解码
-     * @param string $url
-     * @return string
-     */
-   public function deCode(string $url)
-    {
-        if (empty($url)) return false;
-        return urldecode($url);
-    }
-
-    /**
-     * 格式化参数格式化成url参数
-     * @param array $data
-     * @return string
-     */
-   public function toParams(array $data)
-    {
-        $buff = "";
-        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";
-        $buff = trim($buff, "&");
-        return $buff;
+        return helper::class;
     }
 }

@@ -16,17 +16,18 @@
 
 namespace DtApp\ThinkLibrary\facade;
 
+use DtApp\ThinkLibrary\helper\Ints as helper;
 use think\Facade;
 
 /**
  * 数字门面
  * Class Ints
- * @see \DtApp\ThinkLibrary\Ints
+ * @see \DtApp\ThinkLibrary\helper\Ints
  * @package think\facade
- * @mixin \DtApp\ThinkLibrary\Ints
+ * @mixin helper
  *
- * @method \DtApp\ThinkLibrary\Ints isEvenNumbers(int $num) bool 判断一个数是不是偶数
- * @method \DtApp\ThinkLibrary\Ints isOddNumbers(int $num) bool 判断一个数是不是奇数
+ * @method helper isEvenNumbers(int $num) bool 判断一个数是不是偶数
+ * @method helper isOddNumbers(int $num) bool 判断一个数是不是奇数
  */
 class Ints extends Facade
 {
@@ -37,7 +38,7 @@ class Ints extends Facade
      */
     protected static function getFacadeClass()
     {
-        return 'DtApp\ThinkLibrary\Ints';
+        return helper::class;
     }
 }
 

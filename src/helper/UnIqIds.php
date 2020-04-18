@@ -14,15 +14,15 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 唯一ID管理类
- * Class UnIqId
- * @mixin UnIqId
- * @package DtApp\ThinkLibrary
+ * Class UnIqIds
+ * @mixin UnIqIds
+ * @package DtApp\ThinkLibrary\helper
  */
-class UnIqId
+class UnIqIds
 {
 
     /**

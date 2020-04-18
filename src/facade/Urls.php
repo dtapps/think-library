@@ -16,6 +16,7 @@
 
 namespace DtApp\ThinkLibrary\facade;
 
+use DtApp\ThinkLibrary\helper\Urls as helper;
 use think\Facade;
 
 /**
@@ -23,11 +24,11 @@ use think\Facade;
  * Class Urls
  * @see \DtApp\ThinkLibrary\Urls
  * @package think\facade
- * @mixin \DtApp\ThinkLibrary\Urls
+ * @mixin helper
  *
- * @method \DtApp\ThinkLibrary\Urls lenCode(string $url) static 编码
- * @method \DtApp\ThinkLibrary\Urls deCode(string $url) static 解码
- * @method \DtApp\ThinkLibrary\Urls toParams(array $data) static 格式化参数格式化成url参数
+ * @method helper lenCode(string $url) static 编码
+ * @method helper deCode(string $url) static 解码
+ * @method helper toParams(array $data) static 格式化参数格式化成url参数
  */
 class Urls extends Facade
 {
@@ -38,6 +39,6 @@ class Urls extends Facade
      */
     protected static function getFacadeClass()
     {
-        return 'DtApp\ThinkLibrary\Urls';
+        return helper::class;
     }
 }

@@ -17,12 +17,27 @@
 namespace DtApp\ThinkLibrary;
 
 /**
- * 日期管理类
- * Class Date
- * @mixin Date
+ * 模块注册服务
+ * Class Library
  * @package DtApp\ThinkLibrary
  */
-class Date
+class Library extends \think\Service
 {
+    /**
+     * 注册服务
+     */
+    public function register()
+    {
+        // 加载语言包
+        $this->app->lang->load(__DIR__ . '/lang/zh-cn.php', 'zh-cn');
+        $this->app->lang->load(__DIR__ . '/lang/en-us.php', 'en-us');
+    }
 
+    /**
+     * 启动服务
+     */
+    public function boot()
+    {
+
+    }
 }

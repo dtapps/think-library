@@ -16,16 +16,17 @@
 
 namespace DtApp\ThinkLibrary\facade;
 
+use DtApp\ThinkLibrary\helper\Dates as helper;
 use think\Facade;
 
 /**
  * 日期门面
- * Class Date
+ * Class Dates
  * @see \DtApp\ThinkLibrary\Date
  * @package think\facade
- * @mixin \DtApp\ThinkLibrary\Date
+ * @mixin helper
  */
-class Date extends Facade
+class Dates extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
@@ -34,6 +35,6 @@ class Date extends Facade
      */
     protected static function getFacadeClass()
     {
-        return 'DtApp\ThinkLibrary\Date';
+        return helper::class;
     }
 }

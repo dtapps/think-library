@@ -14,35 +14,15 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\helper;
 
 /**
- * 数字管理类
- * Class Ints
- * @mixin Ints
- * @package DtApp\ThinkLibrary
+ * 日期管理类
+ * Class Dates
+ * @mixin Dates
+ * @package DtApp\ThinkLibrary\helper
  */
-class Ints
+class Dates
 {
-    /**
-     * 判断一个数是不是偶数
-     * @param int $num
-     * @return bool
-     */
-    public function isEvenNumbers(int $num)
-    {
-        if ($num % 2 == 0) return true;
-        return false;
-    }
 
-    /**
-     * 判断一个数是不是奇数
-     * @param int $num
-     * @return bool
-     */
-    public function isOddNumbers(int $num)
-    {
-        if ($num % 2 == 0) return false;
-        return true;
-    }
 }

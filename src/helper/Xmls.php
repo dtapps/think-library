@@ -14,7 +14,7 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\helper;
 
 use DtApp\ThinkLibrary\exception\DtAppException;
 
@@ -22,7 +22,7 @@ use DtApp\ThinkLibrary\exception\DtAppException;
  * XML管理类
  * Class Xmls
  * @mixin Xmls
- * @package DtApp\ThinkLibrary
+ * @package DtApp\ThinkLibrary\helper
  */
 class Xmls
 {
