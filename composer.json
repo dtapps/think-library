@@ -32,8 +32,7 @@
   },
   "autoload": {
     "files": [
-      "src/common.php",
-      "src/helpers.php"
+      "src/common.php"
     ],
     "psr-4": {
       "DtApp\\ThinkLibrary\\": "src"
@@ -42,9 +41,7 @@
   "extra": {
     "think": {
       "services": [
-        "DtApp\\ThinkLibrary",
-        "DtApp\\ThinkLibrary\\service",
-        "DtApp\\ThinkLibrary\\service\\TimeService"
+        "DtApp\\ThinkLibrary"
       ],
       "config": {
         "dtapp": "src/config.php"

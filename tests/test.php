@@ -25,6 +25,5 @@ require '../vendor/autoload.php';
 
 var_dump(Time::getTime());
 
-var_dump(timed()->getTime());
-var_dump(app('timed')->getTime());
+var_dump(app()->timed->getTime());
 
