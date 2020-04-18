@@ -1,7 +1,7 @@
 <?php
 
 // +----------------------------------------------------------------------
-// | ThinkLibrary 6.0 for ThinkPhP 6.0
+// | ThinkLibrary 5.1 for ThinkPhP 5.1
 // +----------------------------------------------------------------------
 // | 版权所有 2017~2020 [ https://www.dtapp.net ]
 // +----------------------------------------------------------------------
@@ -14,19 +14,30 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service;
+namespace DtApp\ThinkLibrary\facade;
 
-use DtApp\ThinkLibrary\Service;
+use DtApp\ThinkLibrary\helper\Randoms as helper;
+use think\facade;
 
 /**
- * 测试服务
- * Class TestService
- * @package DtApp\ThinkLibrary\service
+ * 随机门面
+ * Class Randoms
+ * @see \DtApp\ThinkLibrary\Random
+ * @package think\facade
+ * @mixin helper
+ *
+ * @method helper generate(int $length = 6, int $type = 1) false|string 生成随机
  */
-class TestService extends Service
+class Randoms extends Facade
 {
-    public function index()
+    /**
+     * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
+     * @access protected
+     * @return string
+     */
+    protected static function getFacadeClass()
     {
-        return 'service.test.index';
+        return helper::class;
     }
 }
+

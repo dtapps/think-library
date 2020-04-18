@@ -14,7 +14,7 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\helper;
 
 use DtApp\ThinkLibrary\exception\DtAppException;
 
@@ -22,7 +22,7 @@ use DtApp\ThinkLibrary\exception\DtAppException;
  * XML管理类
  * Class Xmls
  * @mixin Xmls
- * @package DtApp\ThinkLibrary
+ * @package DtApp\ThinkLibrary\helper
  */
 class Xmls
 {
@@ -32,7 +32,7 @@ class Xmls
      * @return string
      * @throws DtAppException
      */
-    public function toXml(array $values)
+    public function toXml($values)
     {
         if (!is_array($values) || count($values) <= 0) throw new DtAppException('数组数据异常！');
         $xml = "<xml>";
@@ -55,7 +55,7 @@ class Xmls
      * @return mixed
      * @throws DtAppException
      */
-    public function toArray(string $xml)
+    public function toArray($xml)
     {
         if (!$xml) throw new DtAppException('xml数据异常！');
         libxml_disable_entity_loader(true);

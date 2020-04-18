@@ -14,13 +14,13 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 网址管理类
  * Class Urls
  * @mixin Urls
- * @package DtApp\ThinkLibrary
+ * @package DtApp\ThinkLibrary\helper
  */
 class Urls
 {
@@ -29,7 +29,7 @@ class Urls
      * @param string $url
      * @return string
      */
-   public function lenCode(string $url)
+    public function lenCode($url)
     {
         if (empty($url)) return false;
         return urlencode($url);
@@ -40,7 +40,7 @@ class Urls
      * @param string $url
      * @return string
      */
-   public function deCode(string $url)
+    public function deCode($url)
     {
         if (empty($url)) return false;
         return urldecode($url);
@@ -51,7 +51,7 @@ class Urls
      * @param array $data
      * @return string
      */
-   public function toParams(array $data)
+    public function toParams($data)
     {
         $buff = "";
         foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";

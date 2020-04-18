@@ -14,15 +14,15 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 验证管理类
- * Class Preg
- * @mixin Preg
- * @package DtApp\ThinkLibrary
+ * Class Pregs
+ * @mixin Pregs
+ * @package DtApp\ThinkLibrary\helper
  */
-class Preg
+class Pregs
 {
     /**
      * 验证手机号码

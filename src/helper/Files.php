@@ -14,7 +14,7 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\helper;
 
 use DtApp\ThinkLibrary\exception\DtAppException;
 use ZipArchive;
@@ -23,7 +23,7 @@ use ZipArchive;
  * 文件管理类
  * Class Files
  * @mixin Files
- * @package DtApp\ThinkLibrary
+ * @package DtApp\ThinkLibrary\helper
  */
 class Files
 {

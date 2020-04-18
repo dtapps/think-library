@@ -39,9 +39,6 @@
   },
   "extra": {
     "think": {
-      "services": [
-        "DtApp\\ThinkLibrary"
-      ],
       "config": {
         "dtapp": "src/config.php"
       }

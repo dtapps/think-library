@@ -16,18 +16,19 @@
 
 namespace DtApp\ThinkLibrary\facade;
 
+use DtApp\ThinkLibrary\helper\Files as helper;
 use think\Facade;
 
 /**
  * 文件门面
  * Class Files
- * @see \DtApp\ThinkLibrary\Files
+ * @see \DtApp\ThinkLibrary\helper\Files
  * @package think\facade
- * @mixin \DtApp\ThinkLibrary\Files
+ * @mixin helper
  *
- * @method \DtApp\ThinkLibrary\Files delete(string $name) bool 删除文件
- * @method \DtApp\ThinkLibrary\Files deletes(string $name) bool 删除文件夹
- * @method \DtApp\ThinkLibrary\Files folderZip(string $name, string $suffix_name = '.png', string $file_name = '*') bool 把文件夹里面的文件打包成zip文件
+ * @method helper delete(string $name) bool 删除文件
+ * @method helper deletes(string $name) bool 删除文件夹
+ * @method helper folderZip(string $name, string $suffix_name = '.png', string $file_name = '*') bool 把文件夹里面的文件打包成zip文件
  */
 class Files extends Facade
 {
@@ -38,6 +39,6 @@ class Files extends Facade
      */
     protected static function getFacadeClass()
     {
-        return 'DtApp\ThinkLibrary\Files';
+        return helper::class;
     }
 }

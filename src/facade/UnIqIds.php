@@ -16,22 +16,21 @@
 
 namespace DtApp\ThinkLibrary\facade;
 
-use think\facade;
+use DtApp\ThinkLibrary\helper\UnIqIds as helper;
+use think\Facade;
 
 /**
- * 字符串门面
- * Class Str
- * @see \DtApp\ThinkLibrary\Str
+ * 唯一ID门面
+ * Class UnIqIds
+ * @see \DtApp\ThinkLibrary\UnIqId
  * @package think\facade
- * @mixin \DtApp\ThinkLibrary\Str
+ * @mixin helper
  *
- * @method \DtApp\ThinkLibrary\Str extractBefore(string $str, int $start_num, int $end_num) bool|false|string 截取字符串前面n个字符
- * @method \DtApp\ThinkLibrary\Str extractRear(string $str, int $num) false|string 截取字符串最后n个字符
- * @method \DtApp\ThinkLibrary\Str filter(string $str) string 过滤字符串
- * @method \DtApp\ThinkLibrary\Str exitContain(string $str, $nee = 3, $del = ',') bool 判断字符串是否包含某个字符
- * @method \DtApp\ThinkLibrary\Str len(string $str) int 统计字符串长度
+ * @method helper random($size = 10, $type = 1, $prefix = '') static 获取随机字符串编码
+ * @method helper date($size = 16, $prefix = '') static 唯一日期编码
+ * @method helper number($size = 12, $prefix = '') static 唯一数字编码
  */
-class Str extends Facade
+class UnIqIds extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
@@ -40,6 +39,6 @@ class Str extends Facade
      */
     protected static function getFacadeClass()
     {
-        return 'DtApp\ThinkLibrary\Str';
+        return helper::class;
     }
 }

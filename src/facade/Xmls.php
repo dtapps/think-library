@@ -16,17 +16,18 @@
 
 namespace DtApp\ThinkLibrary\facade;
 
+use DtApp\ThinkLibrary\helper\Xmls as helper;
 use think\Facade;
 
 /**
  * XML门面
  * Class Xmls
- * @see \DtApp\ThinkLibrary\Xmls
+ * @see \DtApp\ThinkLibrary\helper\Xmls
  * @package think\facade
- * @mixin \DtApp\ThinkLibrary\Xmls
+ * @mixin helper
  *
- * @method \DtApp\ThinkLibrary\Xmls toXml(array $values) string 数组转换为xml
- * @method \DtApp\ThinkLibrary\Xmls toArray(string $xml) string 将XML转为array
+ * @method helper toXml(array $values) string 数组转换为xml
+ * @method helper toArray(string $xml) string 将XML转为array
  */
 class Xmls extends Facade
 {
@@ -37,6 +38,6 @@ class Xmls extends Facade
      */
     protected static function getFacadeClass()
     {
-        return 'DtApp\ThinkLibrary\Xmls';
+        return helper::class;
     }
 }

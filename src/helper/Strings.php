@@ -14,15 +14,15 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 字符串管理类
- * Class Str
- * @mixin Str
- * @package DtApp\ThinkLibrary
+ * Class Strings
+ * @mixin Strings
+ * @package DtApp\ThinkLibrary\helper
  */
-class Str
+class Strings
 {
     /**
      * 截取字符串前面n个字符
@@ -31,7 +31,7 @@ class Str
      * @param int $end_num 多少个
      * @return bool|false|string
      */
-    public function extractBefore(string $str, int $start_num, int $end_num)
+    public function extractBefore($str, $start_num, $end_num)
     {
         if (strlen($str) < $start_num + $end_num) return $str;
         return substr($str, $start_num, $end_num);
@@ -43,7 +43,7 @@ class Str
      * @param int $num 多少个
      * @return false|string
      */
-    public function extractRear(string $str, int $num)
+    public function extractRear($str, $num)
     {
         if (strlen($str) <= $num) return $str;
         return substr($str, -$num);
@@ -54,7 +54,7 @@ class Str
      * @param string $str
      * @return string
      */
-    public function filter(string $str)
+    public function filter($str)
     {
         $str = str_replace('`', '', $str);
         $str = str_replace('·', '', $str);
@@ -132,7 +132,7 @@ class Str
      * @param string $del
      * @return bool
      */
-    public function exitContain(string $str, $nee = 3, $del = ',')
+    public function exitContain($str, $nee = 3, $del = ',')
     {
         if (strpos($str, $del) !== false) {
             $var = explode($del, $str);
@@ -151,7 +151,7 @@ class Str
      * @param string $str 字符串
      * @return int
      */
-    public function len(string $str)
+    public function len($str)
     {
         return strlen($str);
     }

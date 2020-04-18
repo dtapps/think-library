@@ -16,16 +16,23 @@
 
 namespace DtApp\ThinkLibrary\facade;
 
-use think\Facade;
+use DtApp\ThinkLibrary\helper\Strings as helper;
+use think\facade;
 
 /**
- * 日期门面
- * Class Date
- * @see \DtApp\ThinkLibrary\Date
+ * 字符串门面
+ * Class Strings
+ * @see \DtApp\ThinkLibrary\Str
  * @package think\facade
- * @mixin \DtApp\ThinkLibrary\Date
+ * @mixin helper
+ *
+ * @method helper extractBefore(string $str, int $start_num, int $end_num) bool|false|string 截取字符串前面n个字符
+ * @method helper extractRear(string $str, int $num) false|string 截取字符串最后n个字符
+ * @method helper filter(string $str) string 过滤字符串
+ * @method helper exitContain(string $str, $nee = 3, $del = ',') bool 判断字符串是否包含某个字符
+ * @method helper len(string $str) int 统计字符串长度
  */
-class Date extends Facade
+class Strings extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
@@ -34,6 +41,6 @@ class Date extends Facade
      */
     protected static function getFacadeClass()
     {
-        return 'DtApp\ThinkLibrary\Date';
+        return helper::class;
     }
 }

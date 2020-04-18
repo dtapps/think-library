@@ -14,15 +14,15 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 随机管理类
- * Class Random
- * @mixin Random
- * @package DtApp\ThinkLibrary
+ * Class Randoms
+ * @mixin Randoms
+ * @package DtApp\ThinkLibrary\helper
  */
-class Random
+class Randoms
 {
     /**
      * 生成随机

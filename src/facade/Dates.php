@@ -14,15 +14,27 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\facade;
+
+use DtApp\ThinkLibrary\helper\Dates as helper;
+use think\Facade;
 
 /**
- * 日期管理类
- * Class Date
- * @mixin Date
- * @package DtApp\ThinkLibrary
+ * 日期门面
+ * Class Dates
+ * @see \DtApp\ThinkLibrary\Date
+ * @package think\facade
+ * @mixin helper
  */
-class Date
+class Dates extends Facade
 {
-
+    /**
+     * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
+     * @access protected
+     * @return string
+     */
+    protected static function getFacadeClass()
+    {
+        return helper::class;
+    }
 }

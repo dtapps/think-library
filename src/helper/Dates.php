@@ -12,31 +12,17 @@
 // | gitee 仓库地址 ：https://gitee.com/liguangchun/ThinkLibrary
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
-// +-
+// +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\facade;
-
-use think\facade;
+namespace DtApp\ThinkLibrary\helper;
 
 /**
- * 随机门面
- * Class Random
- * @see \DtApp\ThinkLibrary\Random
- * @package think\facade
- * @mixin \DtApp\ThinkLibrary\Random
- *
- * @method \DtApp\ThinkLibrary\Random generate(int $length = 6, int $type = 1) false|string 生成随机
+ * 日期管理类
+ * Class Dates
+ * @mixin Dates
+ * @package DtApp\ThinkLibrary\helper
  */
-class Random extends Facade
+class Dates
 {
-    /**
-     * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
-     * @access protected
-     * @return string
-     */
-    protected static function getFacadeClass()
-    {
-        return 'DtApp\ThinkLibrary\Random';
-    }
-}
 
+}
