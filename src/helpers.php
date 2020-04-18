@@ -14,17 +14,37 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-use DtApp\ThinkLibrary\facade\Preg;
-use DtApp\ThinkLibrary\facade\Time;
-use DtApp\ThinkLibrary\service\TestService;
 
-require '../vendor/autoload.php';
-//var_dump(Preg::isIphone(13800138000));
+//------------------------
+// 助手函数
+//-------------------------
 
-//var_dump(TestService::instance()->index());
+use DtApp\ThinkLibrary\helper\Time;
+use DtApp\ThinkLibrary\Xmls;
+use think\App;
 
-var_dump(Time::getTime());
+if (strpos(App::VERSION, '5.1') !== false) {
+    bind('timed', Time::class);
+}
 
-var_dump(timed()->getTime());
-var_dump(app('timed')->getTime());
+if (!function_exists('xmld')) {
+    /**
+     * 获取当前XML对象实例
+     * @return Xmls|object|App
+     */
+    function xmld(): Xmls
+    {
+        return app('xmld');
+    }
+}
 
+if (!function_exists('timed')) {
+    /**
+     * 获取当前时间对象实例
+     * @return Time|object|App
+     */
+    function timed(): Time
+    {
+        return app('timed');
+    }
+}

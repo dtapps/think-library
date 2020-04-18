@@ -14,13 +14,13 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 时间管理类
  * Class Time
  * @mixin Time
- * @package DtApp\ThinkLibrary
+ * @package DtApp\ThinkLibrary\helper
  */
 class Time
 {
