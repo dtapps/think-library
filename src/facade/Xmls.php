@@ -24,8 +24,8 @@ use think\Facade;
  * @package think\facade
  * @mixin \DtApp\ThinkLibrary\Xmls
  *
- * @method string toXml(array $values) string 数组转换为xml
- * @method mixed toArray(string $xml) string 将XML转为array
+ * @method \DtApp\ThinkLibrary\Xmls toXml(array $values) string 数组转换为xml
+ * @method \DtApp\ThinkLibrary\Xmls toArray(string $xml) string 将XML转为array
  */
 class Xmls extends Facade
 {

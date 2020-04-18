@@ -24,6 +24,3 @@ require '../vendor/autoload.php';
 //var_dump(TestService::instance()->index());
 
 var_dump(Time::getTime());
-
-var_dump(app()->timed->getTime());
-
