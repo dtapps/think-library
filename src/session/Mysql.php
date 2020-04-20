@@ -20,8 +20,6 @@ use think\contract\SessionHandlerInterface;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
 use think\db\exception\ModelNotFoundException;
-use think\Exception;
-use think\facade\Config;
 use think\facade\Db;
 
 /**
@@ -38,32 +36,17 @@ class Mysql implements SessionHandlerInterface
         'session_prefix' => 'think_',       // Session前缀
     ];
 
-    public function __construct(array $config = [])
-    {
-
-    }
-
     /**
      * read方法是在调用Session::start()的时候执行，并且只会执行一次。
      * @param string $sessionId
      * @return string
-     * @throws DbException
-     * @throws DataNotFoundException
-     * @throws ModelNotFoundException
      */
     public function read(string $sessionId): string
     {
-        $where = [
-            'session_id' => $this->config['session_prefix'] . $sessionId,
-            'session_expire' => time()
-        ];
-        $result = Db::table($this->table_name)
-            ->where($where)
-            ->find();
-        if (!empty($result)) {
-            return $result['session_data'];
-        }
-        return '';
+        return (string)Db::table($this->table_name)
+            ->where('session_id', $this->config['session_prefix'] . $sessionId)
+            ->where('session_expire', '>=', time())
+            ->value('session_data', '');
     }
 
     /**
@@ -74,11 +57,9 @@ class Mysql implements SessionHandlerInterface
      */
     public function delete(string $sessionId): bool
     {
-        $where = [
-            'session_id' => $this->config['session_prefix'] . $sessionId
-        ];
         $result = Db::table($this->table_name)
-            ->where($where)->delete();
+            ->where('session_id', $this->config['session_prefix'] . $sessionId)
+            ->delete();
         return $result ? true : false;
     }
 
@@ -93,25 +74,29 @@ class Mysql implements SessionHandlerInterface
      */
     public function write(string $sessionId, string $data): bool
     {
-        $params = [
-            'session_id' => $this->config['session_prefix'] . $sessionId,
-            'session_expire' => $this->config['session_expire'] + time(),
-            'session_data' => $data
-        ];
-        $where = [
-            'session_id' => $this->config['session_prefix'] . $sessionId
-        ];
         $get = Db::table($this->table_name)
-            ->where($where)
+            ->where('session_id', $this->config['session_prefix'] . $sessionId)
+            ->where('session_expire', '>=', time())
+            ->field('id')
             ->find();
-        if ($get) {
+        if (empty($get)) {
+            $params = [
+                'session_id' => $this->config['session_prefix'] . $sessionId,
+                'session_expire' => $this->config['session_expire'] + time(),
+                'session_data' => $data
+            ];
             $result = Db::table($this->table_name)
-                ->where($where)
+                ->insert($params);
+            return $result ? true : false;
+        } else {
+            $params = [
+                'session_expire' => $this->config['session_expire'] + time(),
+                'session_data' => $data
+            ];
+            $result = Db::table($this->table_name)
+                ->where('id', $get['id'])
                 ->update($params);
             return $result ? true : false;
         }
-        $result = Db::table($this->table_name)
-            ->insert($params);
-        return $result ? true : false;
     }
 }
