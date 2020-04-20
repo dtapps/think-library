@@ -23,13 +23,12 @@ use think\db\exception\ModelNotFoundException;
 use think\facade\Db;
 
 /**
- *
+ * Session保存在MySQL驱动
  * Class Mysql
  * @package DtApp\ThinkLibrary\session
  */
 class Mysql implements SessionHandlerInterface
 {
-    protected $handler = null;
     protected $table_name = 'think_session'; // 表名
     protected $config = [
         'session_expire' => 3600,           // Session有效期 单位：秒
