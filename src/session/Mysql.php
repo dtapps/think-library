@@ -72,34 +72,14 @@ class Mysql implements SessionHandlerInterface
 
         $this->config = array_merge($this->config, $config);
         $this->database = array_merge($this->database, $database);
-    }
 
-    /**
-     * 打开Session
-     * @param $save_path
-     * @param $session_name
-     * @return bool
-     * @throws Exception
-     */
-    public function open($save_path, $session_name)
-    {
+
         // 判断数据库配置是否可用
         if(empty($this->database)){
             throw new Exception('session error:database empty');
         }
         $this->handler = Db::connect($this->database);
         $this->table_name = $this->database['prefix'] . $this->config['table_name'];
-        return true;
-    }
-
-    /**
-     * 关闭Session
-     * @return bool
-     */
-    public function close()
-    {
-        $this->gc(ini_get('session.gc_maxlifetime'));
-        $this->handler = null;
         return true;
     }
 
