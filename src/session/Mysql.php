@@ -38,6 +38,11 @@ class Mysql implements SessionHandlerInterface
         'session_prefix' => 'think_',       // Session前缀
     ];
 
+    public function __construct(array $config = [])
+    {
+
+    }
+
     /**
      * read方法是在调用Session::start()的时候执行，并且只会执行一次。
      * @param string $sessionId
@@ -82,6 +87,9 @@ class Mysql implements SessionHandlerInterface
      * @param string $sessionId
      * @param string $data
      * @return bool
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      */
     public function write(string $sessionId, string $data): bool
     {
@@ -90,6 +98,18 @@ class Mysql implements SessionHandlerInterface
             'session_expire' => $this->config['session_expire'] + time(),
             'session_data' => $data
         ];
+        $where = [
+            'session_id' => $this->config['session_prefix'] . $sessionId
+        ];
+        $get = Db::table($this->table_name)
+            ->where($where)
+            ->find();
+        if ($get) {
+            $result = Db::table($this->table_name)
+                ->where($where)
+                ->update($params);
+            return $result ? true : false;
+        }
         $result = Db::table($this->table_name)
             ->insert($params);
         return $result ? true : false;
