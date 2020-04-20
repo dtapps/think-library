@@ -39,7 +39,7 @@ class Mysql implements SessionHandlerInterface
     ];
 
     /**
-     * 读取Session
+     * read方法是在调用Session::start()的时候执行，并且只会执行一次。
      * @param string $sessionId
      * @return string
      * @throws DbException
@@ -62,7 +62,7 @@ class Mysql implements SessionHandlerInterface
     }
 
     /**
-     * 删除Session
+     * delete方法是在销毁会话的时候执行（调用Session::destroy()方法）。
      * @param string $sessionId
      * @return bool
      * @throws DbException
@@ -78,7 +78,7 @@ class Mysql implements SessionHandlerInterface
     }
 
     /**
-     * 写入Session
+     * write方法是在本地化会话数据的时候执行（调用Session::save()方法），系统会在每次请求结束的时候自动执行。
      * @param string $sessionId
      * @param string $data
      * @return bool
