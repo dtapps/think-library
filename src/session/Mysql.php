@@ -82,7 +82,7 @@ class Mysql implements SessionHandlerInterface
         if (empty($get)) {
             $params = [
                 'session_id' => $this->config['session_prefix'] . $sessionId,
-                'session_expire' => +Times::dateRear("Y-m-d H:i:s", $this->config['session_expire']),
+                'session_expire' => Times::dateRear("Y-m-d H:i:s", $this->config['session_expire']),
                 'session_data' => $data
             ];
             $result = Db::table($this->table_name)
@@ -90,7 +90,7 @@ class Mysql implements SessionHandlerInterface
             return $result ? true : false;
         } else {
             $params = [
-                'session_expire' => +Times::dateRear("Y-m-d H:i:s", $this->config['session_expire']),
+                'session_expire' => Times::dateRear("Y-m-d H:i:s", $this->config['session_expire']),
                 'session_data' => $data
             ];
             $result = Db::table($this->table_name)
