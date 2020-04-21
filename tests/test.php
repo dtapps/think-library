@@ -23,4 +23,4 @@ require '../vendor/autoload.php';
 
 //var_dump(TestService::instance()->index());
 
-var_dump(Times::getTime());
+var_dump(Times::dateRear( "Y-m-d H:i:s",3600));

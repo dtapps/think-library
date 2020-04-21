@@ -16,6 +16,7 @@
 
 namespace DtApp\ThinkLibrary\session;
 
+use DtApp\ThinkLibrary\facade\Times;
 use think\contract\SessionHandlerInterface;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
@@ -31,7 +32,7 @@ class Mysql implements SessionHandlerInterface
 {
     protected $table_name = 'think_session'; // 表名
     protected $config = [
-        'session_expire' => 3600,           // Session有效期 单位：秒
+        'session_expire' => 1800,           // Session有效期 单位：秒
         'session_prefix' => 'think_',       // Session前缀
     ];
 
@@ -44,7 +45,7 @@ class Mysql implements SessionHandlerInterface
     {
         return (string)Db::table($this->table_name)
             ->where('session_id', $this->config['session_prefix'] . $sessionId)
-            ->where('session_expire', '>=', time())
+            ->whereTime('session_expire', '>=', time())
             ->value('session_data', '');
     }
 
@@ -75,13 +76,13 @@ class Mysql implements SessionHandlerInterface
     {
         $get = Db::table($this->table_name)
             ->where('session_id', $this->config['session_prefix'] . $sessionId)
-            ->where('session_expire', '>=', time())
+            ->whereTime('session_expire', '>=', time())
             ->field('id')
             ->find();
         if (empty($get)) {
             $params = [
                 'session_id' => $this->config['session_prefix'] . $sessionId,
-                'session_expire' => $this->config['session_expire'] + time(),
+                'session_expire' => Times::dateRear("Y-m-d H:i:s", $this->config['session_expire']),
                 'session_data' => $data
             ];
             $result = Db::table($this->table_name)
@@ -89,7 +90,7 @@ class Mysql implements SessionHandlerInterface
             return $result ? true : false;
         } else {
             $params = [
-                'session_expire' => $this->config['session_expire'] + time(),
+                'session_expire' => Times::dateRear("Y-m-d H:i:s", $this->config['session_expire']),
                 'session_data' => $data
             ];
             $result = Db::table($this->table_name)
