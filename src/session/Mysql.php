@@ -30,10 +30,20 @@ use think\facade\Db;
  */
 class Mysql implements SessionHandlerInterface
 {
-    protected $table_name = 'think_session'; // 表名
+    /**
+     * 表名
+     * @var string
+     */
+    protected $table_name = 'think_session';
+
+    /**
+     * session_expire Session有效期 单位：秒
+     * session_prefix Session前缀
+     * @var array
+     */
     protected $config = [
-        'session_expire' => 1800,           // Session有效期 单位：秒
-        'session_prefix' => 'think_',       // Session前缀
+        'session_expire' => 1800,
+        'session_prefix' => 'think_'
     ];
 
     /**

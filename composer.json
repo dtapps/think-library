@@ -20,7 +20,7 @@
   ],
   "homepage": "https://www.dtapp.net",
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.2",
     "ext-gd": "*",
     "ext-libxml": "*",
     "ext-json": "*",
@@ -28,7 +28,8 @@
     "ext-zip": "*",
     "topthink/framework": "^6.0.0",
     "topthink/think-orm": "^2.0",
-    "liguangchun/ip": "^1.1"
+    "liguangchun/ip": "^1.1",
+    "ext-bcmath": "*"
   },
   "autoload": {
     "files": [
