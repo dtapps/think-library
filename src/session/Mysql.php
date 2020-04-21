@@ -32,7 +32,7 @@ class Mysql implements SessionHandlerInterface
 {
     protected $table_name = 'think_session'; // 表名
     protected $config = [
-        'session_expire' => 3600,           // Session有效期 单位：秒
+        'session_expire' => 1800,           // Session有效期 单位：秒
         'session_prefix' => 'think_',       // Session前缀
     ];
 
