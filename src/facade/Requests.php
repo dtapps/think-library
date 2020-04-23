@@ -34,7 +34,7 @@ use think\Facade;
  * @method helper isPut() bool 判断是否为PUT方式
  * @method helper isDelete() bool 判断是否为DELETE方式
  * @method helper isAjax() bool 判断是否为Ajax方式
- * @method helper getWebsiteAddress() bool 获取域名地址
+ * @method helper getWebsiteAddress() string 获取域名地址
  */
 class Requests extends Facade
 {
