@@ -97,4 +97,56 @@ class Files
             return false;
         }
     }
+
+    /**
+     * 获取目录下的所有文件和目录
+     * @param string $path
+     * @return array|string
+     */
+    public function getFiles(string $path)
+    {
+        $files = [];
+        if (is_dir($path)) {
+            $path = dirname($path) . '/' . basename($path) . '/';
+            $file = dir($path);
+            while (false !== ($entry = $file->read())) {
+                if ($entry !== '.' && $entry !== '..') {
+                    $cur = $path . $entry;
+                    if (is_dir($cur)) {
+                        $subPath = $cur . '/';
+                        $this->getFiles($subPath);
+                    }
+                    $files[] = $cur;
+                }
+            }
+            $file->close();
+            return $files;
+        } else {
+            return [];
+        }
+    }
+
+    /**
+     * 删除目录下的文件
+     * @param string $path
+     * @return bool
+     */
+    public function rmFiles(string $path)
+    {
+        $files = $this->getFiles($path);
+        if (!is_array($files)) {
+            return false;
+        } elseif (empty($files)) {
+            return false;
+        } else {
+            foreach ($files as $item => $file) {
+                if (is_dir($file)) {
+                    rmdir($file);
+                } elseif (is_file($file)) {
+                    unlink($file);
+                }
+            }
+        }
+        return true;
+    }
 }

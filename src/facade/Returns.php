@@ -16,30 +16,27 @@
 
 namespace DtApp\ThinkLibrary\facade;
 
-use DtApp\ThinkLibrary\helper\Files as helper;
+use DtApp\ThinkLibrary\helper\Returns as helper;
 use think\Facade;
 
 /**
- * 文件门面
- * Class Files
- * @see \DtApp\ThinkLibrary\helper\Files
+ * 返回门面
+ * Class Returns
+ * @see \DtApp\ThinkLibrary\helper\Returns
  * @package think\facade
  * @mixin helper
  *
- * @method helper delete(string $name) bool 删除文件
- * @method helper deletes(string $name) bool 删除文件夹
- * @method helper folderZip(string $name, string $suffix_name = '.png', string $file_name = '*') bool 把文件夹里面的文件打包成zip文件
- * @method helper getFiles(string $path) array|string 获取目录下的所有文件和目录
- * @method helper rmFiles(string $path) bool 删除目录下的文件
+ * @method helper jsonSuccess(array $data = [], string $msg = 'success', int $code = 0) 返回Json-成功
+ * @method helper jsonError(string $msg = 'error', int $code = 1, array $data = []) 返回Json-错误
  */
-class Files extends Facade
+class Returns extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
      * @access protected
      * @return string
      */
-    protected static function getFacadeClass()
+    public static function getFacadeClass()
     {
         return helper::class;
     }
