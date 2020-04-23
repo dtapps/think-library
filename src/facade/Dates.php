@@ -23,6 +23,7 @@ use think\Facade;
  * 日期门面
  * Class Dates
  * @see \DtApp\ThinkLibrary\Date
+ * @package DtApp\ThinkLibrary\facade
  * @package think\facade
  * @mixin helper
  */

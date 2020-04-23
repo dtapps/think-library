@@ -22,7 +22,8 @@ use think\Facade;
 /**
  * 唯一ID门面
  * Class UnIqIds
- * @see \DtApp\ThinkLibrary\UnIqId
+ * @see \DtApp\ThinkLibrary\UnIqIds
+ * @package DtApp\ThinkLibrary\UnIqIds
  * @package think\facade
  * @mixin helper
  *

@@ -23,6 +23,7 @@ use think\Facade;
  * 返回门面
  * Class Returns
  * @see \DtApp\ThinkLibrary\helper\Returns
+ * @package DtApp\ThinkLibrary\Returns
  * @package think\facade
  * @mixin helper
  *

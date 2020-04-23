@@ -23,6 +23,7 @@ use think\facade;
  * 验证门面
  * Class Pregs
  * @see \DtApp\ThinkLibrary\helper\Pregs
+ * @package DtApp\ThinkLibrary\Pregs
  * @package think\facade
  * @mixin helper
  *

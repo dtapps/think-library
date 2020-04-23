@@ -23,6 +23,7 @@ use think\Facade;
  * 数字门面
  * Class Ints
  * @see \DtApp\ThinkLibrary\helper\Ints
+ * @package DtApp\ThinkLibrary\Ints
  * @package think\facade
  * @mixin helper
  *

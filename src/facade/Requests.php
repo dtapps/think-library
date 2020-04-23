@@ -16,29 +16,35 @@
 
 namespace DtApp\ThinkLibrary\facade;
 
-use DtApp\ThinkLibrary\helper\Randoms as helper;
-use think\facade;
+use DtApp\ThinkLibrary\helper\Requests as helper;
+use think\Facade;
 
 /**
- * 随机门面
- * Class Randoms
- * @see \DtApp\ThinkLibrary\Randoms
- * @package DtApp\ThinkLibrary\Randoms
+ * 请求门面
+ * Class Requests
+ * @see \DtApp\ThinkLibrary\helper\Requests
+ * @package DtApp\ThinkLibrary\facade
  * @package think\facade
  * @mixin helper
  *
- * @method helper generate(int $length = 6, int $type = 1) false|string 生成随机
+ * @method helper isEmpty(array $data, array $arr) array|bool 判断输入的参数
+ * @method helper isEmptyRet(array $data, array $arr) array 判断输入的参数为空就返回Json错误
+ * @method helper isGet() bool 判断是否为GET方式
+ * @method helper isPost() bool 判断是否为POST方式
+ * @method helper isPut() bool 判断是否为PUT方式
+ * @method helper isDelete() bool 判断是否为DELETE方式
+ * @method helper isAjax() bool 判断是否为Ajax方式
+ * @method helper getWebsiteAddress() bool 获取域名地址
  */
-class Randoms extends Facade
+class Requests extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
      * @access protected
      * @return string
      */
-    protected static function getFacadeClass()
+    public static function getFacadeClass()
     {
         return helper::class;
     }
 }
-

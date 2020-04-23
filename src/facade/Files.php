@@ -23,6 +23,7 @@ use think\Facade;
  * 文件门面
  * Class Files
  * @see \DtApp\ThinkLibrary\helper\Files
+ * @package DtApp\ThinkLibrary\facade
  * @package think\facade
  * @mixin helper
  *

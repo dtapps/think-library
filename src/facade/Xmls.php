@@ -23,6 +23,7 @@ use think\Facade;
  * XML门面
  * Class Xmls
  * @see \DtApp\ThinkLibrary\helper\Xmls
+ * @package DtApp\ThinkLibrary\Xmls
  * @package think\facade
  * @mixin helper
  *

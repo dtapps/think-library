@@ -22,7 +22,8 @@ use think\facade;
 /**
  * 字符串门面
  * Class Strings
- * @see \DtApp\ThinkLibrary\Str
+ * @see \DtApp\ThinkLibrary\Strings
+ * @package DtApp\ThinkLibrary\Strings
  * @package think\facade
  * @mixin helper
  *

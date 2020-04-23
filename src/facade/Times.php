@@ -23,6 +23,7 @@ use think\Facade;
  * 时间门面
  * Class Times
  * @see \DtApp\ThinkLibrary\helper\Times
+ * @package DtApp\ThinkLibrary\Times
  * @package think\facade
  * @mixin helper
  *

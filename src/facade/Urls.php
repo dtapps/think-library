@@ -23,6 +23,7 @@ use think\Facade;
  * 网址门面
  * Class Urls
  * @see \DtApp\ThinkLibrary\Urls
+ * @package DtApp\ThinkLibrary\Urls
  * @package think\facade
  * @mixin helper
  *
