@@ -147,7 +147,8 @@ class WatermarkService extends Service
             $backtrack['dynamic'] = $cVideoAvatar['dynamic'];
             $backtrack['origin_cover'] = $cVideoAvatar['origin_cover'];
             $backtrack['cover'] = $cVideoAvatar['cover'];
-            $backtrack['play_addr'] = $item_list['video']['play_addr']['url_list'][0];
+            $backtrack['play'] = $this->cVideoPlayUrl($item_list['video']['play_addr']['url_list'][0], 'play');
+            $backtrack['playwm'] = $this->cVideoPlayUrl($item_list['video']['play_addr']['url_list'][0], 'playwm');
             $this->backtrack = $backtrack;
         } else {
             $this->backtrack = [];
@@ -206,7 +207,8 @@ class WatermarkService extends Service
             $backtrack['video_info']['dynamic'] = $cVideoAvatar['dynamic'];
             $backtrack['video_info']['origin_cover'] = $cVideoAvatar['origin_cover'];
             $backtrack['video_info']['cover'] = $cVideoAvatar['cover'];
-            $backtrack['video_info']['play_addr'] = $item_list['video']['play_addr']['url_list'][0];
+            $backtrack['video_info']['play'] = $this->cVideoPlayUrl($item_list['video']['play_addr']['url_list'][0], 'play');
+            $backtrack['video_info']['playwm'] = $this->cVideoPlayUrl($item_list['video']['play_addr']['url_list'][0], 'playwm');
             $this->backtrack = $backtrack;
         } else {
             $this->backtrack = [];
@@ -331,5 +333,19 @@ class WatermarkService extends Service
         // height封面
         if (isset($data['cover']['url_list'][0])) $array['cover'] = substr($data['cover']['url_list'][0], 0, strpos($data['cover']['url_list'][0], '?from='));
         return $array;
+    }
+
+    /**
+     * 返回302网址
+     * @param $url
+     * @param $type
+     * @return mixed
+     */
+    private function cVideoPlayUrl($url, $type)
+    {
+        if ($type == 'play') $headers = get_headers(str_replace("/playwm/", "/play/", $url), TRUE);
+        else  $headers = get_headers($url, TRUE);
+        //输出跳转到的网址
+        return $headers['location'];
     }
 }
