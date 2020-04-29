@@ -24,7 +24,6 @@ namespace DtApp\ThinkLibrary\helper;
  */
 class UnIqIds
 {
-
     /**
      * 获取随机字符串编码
      * @param integer $size 字符串长度

@@ -14,48 +14,19 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\helper;
+namespace DtApp\ThinkLibrary\service\douyin;
+
+use Exception;
 
 /**
- * 网址管理类
- * Class Urls
- * @mixin Urls
- * @package DtApp\ThinkLibrary\helper
+ * 抖音错误处理
+ * Class DouYinException
+ * @package DtApp\ThinkLibrary\service\douyin
  */
-class Urls
+class DouYinException extends Exception
 {
-    /**
-     * 编码
-     * @param string $url
-     * @return string
-     */
-    public function lenCode(string $url)
+    public function errorMessage()
     {
-        if (empty($url)) return false;
-        return urlencode($url);
-    }
-
-    /**
-     * 解码
-     * @param string $url
-     * @return string
-     */
-    public function deCode(string $url)
-    {
-        if (empty($url)) return false;
-        return urldecode($url);
-    }
-
-    /**
-     * 格式化参数格式化成url参数
-     * @param array $data
-     * @return string
-     */
-    public function toParams(array $data)
-    {
-        $buff = "";
-        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";
-        $buff = trim($buff, "&");
-        return $buff;
+        return $this->getMessage();
     }
 }

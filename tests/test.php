@@ -14,13 +14,15 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-use DtApp\ThinkLibrary\facade\Pregs;
-use DtApp\ThinkLibrary\facade\Times;
-use DtApp\ThinkLibrary\service\TestService;
+
+use DtApp\ThinkLibrary\service\douyin\DouYinException;
+use DtApp\ThinkLibrary\service\douyin\WatermarkService;
 
 require '../vendor/autoload.php';
-//var_dump(Preg::isIphone(13800138000));
 
-//var_dump(TestService::instance()->index());
-
-var_dump(Times::dateRear( "Y-m-d H:i:s",3600));
+try {
+    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')
+        ->getAll()
+        ->toArray());
+} catch (DouYinException $e) {
+}

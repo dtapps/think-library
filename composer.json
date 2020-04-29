@@ -48,5 +48,11 @@
         "dtapp": "src/config.php"
       }
     }
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://mirrors.aliyun.com/composer/"
+    }
   }
 }
