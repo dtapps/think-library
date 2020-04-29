@@ -54,7 +54,7 @@ class WatermarkService extends Service
         }
         $content = $this->getContents($this->url);
         $this->itemId = $this->getItemId($content);
-        $this->dytk = $this->getDytk($content);
+        $this->dytk = $this->getDyTk($content);
         return $this;
     }
 
@@ -227,13 +227,9 @@ class WatermarkService extends Service
      */
     private function judgeUrl($url)
     {
-        if (strpos($url, 'douyin.com') !== false) {
-            return $url;
-        } else if (strpos($url, 'iesdouyin.com') !== false) {
-            return $url;
-        } else {
-            return '';
-        }
+        if (strpos($url, 'douyin.com') !== false) return $url;
+        else if (strpos($url, 'iesdouyin.com') !== false) return $url;
+        else return '';
     }
 
     /**
@@ -253,7 +249,7 @@ class WatermarkService extends Service
      * @param $content
      * @return mixed
      */
-    private function getDytk($content)
+    private function getDyTk($content)
     {
         preg_match("~dytk(.*?)}~", $content, $matches);
         $Dytk = $matches[1];
