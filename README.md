@@ -45,10 +45,15 @@ use DtApp\ThinkLibrary\service\douyin\DouYinException;
 use DtApp\ThinkLibrary\service\douyin\WatermarkService;
 
 try {
-    // 方法一
+    // 方法一 网址
     var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
-    // 方法二
-    $dy = WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/');
+    // 方法一 粘贴
+    var_dump(WatermarkService::instance()->url('#在抖音，记录美好生活#美丽电白欢迎您 https://v.douyin.com/vPGAdM/ 复制此链接，打开【抖音短视频】，直接观看视频！')->getAll()->toArray());
+    // 方法二 网址
+    $dy = WatermarkService::instance()->url('https://v.douyin.com/vPafcr/');
+    var_dump($dy->getAll()->toArray());
+    // 方法二 粘贴
+    $dy = WatermarkService::instance()->url('#在抖音，记录美好生活#2020茂名加油，广州加油，武汉加油！中国加油，众志成城！#航拍 #茂名#武汉 #广州 #旅拍 @抖音小助手 https://v.douyin.com/vPafcr/ 复制此链接，打开【抖音短视频】，直接观看视频！');
     var_dump($dy->getAll()->toArray());
     // 获取全部信息
     var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
@@ -70,5 +75,4 @@ try {
     // 错误提示
     var_dump($e->getMessage());
 }
-
 ```
