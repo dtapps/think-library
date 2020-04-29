@@ -36,3 +36,39 @@ composer update liguangchun/think-library -vvv
 ```text
 composer remove liguangchun/think-library -vvv
 ```
+
+## 抖音服务使用示例
+
+```text
+
+use DtApp\ThinkLibrary\service\douyin\DouYinException;
+use DtApp\ThinkLibrary\service\douyin\WatermarkService;
+
+try {
+    // 方法一
+    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
+    // 方法二
+    $dy = WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/');
+    var_dump($dy->getAll()->toArray());
+    // 获取全部信息
+    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
+    // 获取原全部信息
+    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getApi()->toArray());
+    // 获取视频信息
+    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getVideoInfo()->toArray());
+    // 获取音频信息
+    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getMusicInfo()->toArray());
+    // 获取分享信息
+    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getShareInfo()->toArray());
+    // 获取作者信息
+    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAuthorInfo()->toArray());
+    // 返回数组数据方法
+    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
+    // 返回Object数据方法
+    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toObject());
+} catch (DouYinException $e) {
+    // 错误提示
+    var_dump($e->getMessage());
+}
+
+```
