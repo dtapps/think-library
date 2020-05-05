@@ -18,6 +18,7 @@ namespace DtApp\ThinkLibrary\service\WeMini;
 
 use DtApp\Curl\CurlException;
 use DtApp\Curl\Get;
+use DtApp\Curl\Post;
 use DtApp\ThinkLibrary\Service;
 
 /**
@@ -28,15 +29,116 @@ use DtApp\ThinkLibrary\Service;
 class NewTmplService extends Service
 {
     /**
-     * 获取当前帐号下的个人模板列表
-     * @param $access_token
+     * 组合模板并添加至帐号下的个人模板库
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.addTemplate.html
+     * @param string $access_token 接口调用凭证
+     * @param array $data
      * @return bool|mixed|string
      * @throws CurlException
      */
-    public function getTemplateList($access_token)
+    public function addTemplate(string $access_token, array $data = [])
+    {
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/addtemplate?access_token=ACCESS_TOKEN";
+        $curl = new Get();
+        if (is_array($data)) $data = json_encode($data);
+        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), $data, true);
+    }
+
+    /**
+     * 删除帐号下的个人模板
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.deleteTemplate.html
+     * @param string $access_token 接口调用凭证
+     * @param string $priTmplId 要删除的模板id
+     * @return bool|mixed|string
+     * @throws CurlException
+     */
+    public function deleteTemplate(string $access_token, string $priTmplId)
+    {
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/deltemplate?access_token=ACCESS_TOKEN";
+        $curl = new Get();
+        $data = [
+            'priTmplId' => $priTmplId
+        ];
+        if (is_array($data)) $data = json_encode($data);
+        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), $data, true);
+    }
+
+    /**
+     * 获取小程序账号的类目
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getCategory.html
+     * @param string $access_token 接口调用凭证
+     * @return bool|mixed|string
+     * @throws CurlException
+     */
+    public function getCategory(string $access_token)
+    {
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getcategory?access_token=ACCESS_TOKEN";
+        $curl = new Get();
+        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), '', true);
+    }
+
+    /**
+     * 获取模板标题下的关键词列表
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getPubTemplateKeyWordsById.html
+     * @param string $access_token 接口调用凭证
+     * @param string $tid 模板标题 id
+     * @return bool|mixed|string
+     * @throws CurlException
+     */
+    public function getPubTemplateKeyWordsById(string $access_token, string $tid)
+    {
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatekeywords?access_token=ACCESS_TOKEN";
+        $curl = new Get();
+        $data = [
+            'tid' => $tid
+        ];
+        if (is_array($data)) $data = json_encode($data);
+        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), $data, true);
+    }
+
+    /**
+     * 获取帐号所属类目下的公共模板标题
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getPubTemplateTitleList.html
+     * @param string $access_token 接口调用凭证
+     * @param array $data
+     * @return bool|mixed|string
+     * @throws CurlException
+     */
+    public function getPubTemplateTitleList(string $access_token, array $data = [])
+    {
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatetitles?access_token=ACCESS_TOKEN";
+        $curl = new Get();
+        if (is_array($data)) $data = json_encode($data);
+        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), $data, true);
+    }
+
+    /**
+     * 获取当前帐号下的个人模板列表
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getTemplateList.html
+     * @param string $access_token 接口调用凭证
+     * @return bool|mixed|string
+     * @throws CurlException
+     */
+    public function getTemplateList(string $access_token)
     {
         $url = "https://api.weixin.qq.com/wxaapi/newtmpl/gettemplate?access_token=ACCESS_TOKEN";
         $curl = new Get();
         return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), '', true);
     }
+
+    /**
+     * 发送订阅消息
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.send.html
+     * @param string $access_token 接口调用凭证
+     * @param array $data
+     * @return bool|mixed|string
+     * @throws CurlException
+     */
+    public function send(string $access_token, array $data = [])
+    {
+        $url = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=ACCESS_TOKEN";
+        $curl = new Post();
+        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), $data, true);
+    }
+
 }
