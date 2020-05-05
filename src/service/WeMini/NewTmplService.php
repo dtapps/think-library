@@ -18,13 +18,14 @@ namespace DtApp\ThinkLibrary\service\WeMini;
 
 use DtApp\Curl\CurlException;
 use DtApp\Curl\Get;
+use DtApp\ThinkLibrary\Service;
 
 /**
  * 微信小程序 - 订阅消息
  * Class NewTmplService
  * @package DtApp\ThinkLibrary\service\WeMini
  */
-class NewTmplService
+class NewTmplService extends Service
 {
     /**
      * 获取当前帐号下的个人模板列表
