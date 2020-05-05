@@ -29,7 +29,11 @@
     "topthink/framework": "^6.0.0",
     "topthink/think-orm": "^2.0",
     "liguangchun/ip": "^1.1",
-    "ext-bcmath": "*"
+    "ext-bcmath": "*",
+    "aliyuncs/oss-sdk-php": "^2.3",
+    "obs/esdk-obs-php": "^3.19",
+    "baidubce/bce-sdk-php": "^0.8.22",
+    "qcloud/cos-sdk-v5": "^2.0"
   },
   "autoload": {
     "files": [

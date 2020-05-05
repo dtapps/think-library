@@ -16,6 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\douyin;
 
+use DtApp\ThinkLibrary\exception\DouYinException;
 use DtApp\ThinkLibrary\facade\Pregs;
 use DtApp\ThinkLibrary\Service;
 use stdClass;
@@ -238,11 +239,14 @@ class WatermarkService extends Service
      * 正则匹配 mid
      * @param $content
      * @return mixed
+     * @throws DouYinException
      */
     private function getItemId($content)
     {
         preg_match('/"(?<=itemId:\s\")\d+"/', $content, $matches);
+        if (!isset($matches[0])) throw new DouYinException('视频不存在');
         preg_match("~\"(.*?)\"~", $matches[0], $matches2);
+        if (!isset($matches2[1])) throw new DouYinException('视频不存在');
         return $matches2[1];
     }
 
@@ -250,12 +254,15 @@ class WatermarkService extends Service
      * 正则匹配 dytk
      * @param $content
      * @return mixed
+     * @throws DouYinException
      */
     private function getDyTk($content)
     {
         preg_match("~dytk(.*?)}~", $content, $matches);
+        if (!isset($matches[1])) throw new DouYinException('视频不存在');
         $Dytk = $matches[1];
         preg_match("~\"(.*?)\"~", $Dytk, $matches2);
+        if (!isset($matches2[1])) throw new DouYinException('视频不存在');
         return $matches2[1];
     }
 

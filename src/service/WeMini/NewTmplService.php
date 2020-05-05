@@ -14,19 +14,28 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\douyin;
+namespace DtApp\ThinkLibrary\service\WeMini;
 
-use Exception;
+use DtApp\Curl\CurlException;
+use DtApp\Curl\Get;
 
 /**
- * 抖音错误处理
- * Class DouYinException
- * @package DtApp\ThinkLibrary\service\douyin
+ * 微信小程序 - 订阅消息
+ * Class NewTmplService
+ * @package DtApp\ThinkLibrary\service\WeMini
  */
-class DouYinException extends Exception
+class NewTmplService
 {
-    public function errorMessage()
+    /**
+     * 获取当前帐号下的个人模板列表
+     * @param $access_token
+     * @return bool|mixed|string
+     * @throws CurlException
+     */
+    public function getTemplateList($access_token)
     {
-        return $this->getMessage();
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/gettemplate?access_token=ACCESS_TOKEN";
+        $curl = new Get();
+        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), '', true);
     }
 }
