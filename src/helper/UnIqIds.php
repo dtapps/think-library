@@ -40,9 +40,7 @@ class UnIqIds
         if (intval($type) === 2) $chars = "{$chars}";
         if (intval($type) === 3) $chars = "{$numbs}{$chars}";
         $string = $prefix . $chars[rand(1, strlen($chars) - 1)];
-        if (isset($chars)) while (strlen($string) < $size) {
-            $string .= $chars[rand(0, strlen($chars) - 1)];
-        }
+        if (isset($chars)) while (strlen($string) < $size) $string .= $chars[rand(0, strlen($chars) - 1)];
         return $string;
     }
 

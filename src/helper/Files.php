@@ -55,20 +55,14 @@ class Files
         while ($file = readdir($dh)) {
             if ($file != "." && $file != "..") {
                 $fullpath = $name . "/" . $file;
-                if (!is_dir($fullpath)) {
-                    unlink($fullpath);
-                } else {
-                    $this->deletes($fullpath);
-                }
+                if (!is_dir($fullpath)) unlink($fullpath);
+                else $this->deletes($fullpath);
             }
         }
         closedir($dh);
         //删除当前文件夹：
-        if (rmdir($name)) {
-            return true;
-        } else {
-            return false;
-        }
+        if (rmdir($name)) return true;
+        else return false;
     }
 
     /**

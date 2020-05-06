@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
@@ -31,7 +32,7 @@ class Strings
      * @param int $end_num 多少个
      * @return bool|false|string
      */
-    public function extractBefore(string $str, int $start_num, int $end_num)
+    public function extractBefore(string $str, int $start_num, int $end_num): string
     {
         if (strlen($str) < $start_num + $end_num) return $str;
         return substr($str, $start_num, $end_num);
@@ -43,7 +44,7 @@ class Strings
      * @param int $num 多少个
      * @return false|string
      */
-    public function extractRear(string $str, int $num)
+    public function extractRear(string $str, int $num): string
     {
         if (strlen($str) <= $num) return $str;
         return substr($str, -$num);
@@ -54,7 +55,7 @@ class Strings
      * @param string $str
      * @return string
      */
-    public function filter(string $str)
+    public function filter(string $str): string
     {
         $str = str_replace('`', '', $str);
         $str = str_replace('·', '', $str);
@@ -132,13 +133,11 @@ class Strings
      * @param string $del
      * @return bool
      */
-    public function exitContain(string $str, $nee = 3, $del = ',')
+    public function exitContain(string $str, $nee = 3, $del = ','): bool
     {
         if (strpos($str, $del) !== false) {
             $var = explode($del, $str);
-            foreach ($var as $v) {
-                if ($v == $nee) return true;
-            }
+            foreach ($var as $v) if ($v == $nee) return true;
             return false;
         } else {
             if ($str == $nee) return true;
@@ -151,8 +150,20 @@ class Strings
      * @param string $str 字符串
      * @return int
      */
-    public function len(string $str)
+    public function len(string $str): int
     {
         return strlen($str);
+    }
+
+    /**
+     * 删除空格
+     * @param $str
+     * @return string|string[]
+     */
+    private function trimAll($str): string
+    {
+        $oldchar = array(" ", "　", "\t", "\n", "\r");
+        $newchar = array("", "", "", "", "");
+        return str_replace($oldchar, $newchar, $str);
     }
 }
