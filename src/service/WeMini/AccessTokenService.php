@@ -13,50 +13,33 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
-declare (strict_types=1);
 
-namespace DtApp\ThinkLibrary\helper;
+namespace DtApp\ThinkLibrary\service\WeMini;
+
+use DtApp\Curl\CurlException;
+use DtApp\Curl\Get;
+use DtApp\ThinkLibrary\Service;
 
 /**
- * 网址管理类
- * Class Urls
- * @mixin Urls
- * @package DtApp\ThinkLibrary\helper
+ * 微信小程序 - 接口调用凭据
+ * Class AccessTokenService
+ * @package DtApp\ThinkLibrary\service\WeMini
  */
-class Urls
+class AccessTokenService extends Service
 {
     /**
-     * 编码
-     * @param string $url
-     * @return string
+     * 获取小程序全局唯一后台接口调用凭据（access_token）
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/access-token/auth.getAccessToken.html
+     * @param string $appid
+     * @param string $secret
+     * @param string $grant_type
+     * @return bool|mixed|string
+     * @throws CurlException
      */
-    public function lenCode(string $url): string
+    public function code2Session(string $appid, string $secret, string $grant_type = 'client_credential')
     {
-        if (empty($url)) return '';
-        return urlencode($url);
-    }
-
-    /**
-     * 解码
-     * @param string $url
-     * @return string
-     */
-    public function deCode(string $url): string
-    {
-        if (empty($url)) return '';
-        return urldecode($url);
-    }
-
-    /**
-     * 格式化参数格式化成url参数
-     * @param array $data
-     * @return string
-     */
-    public function toParams(array $data): string
-    {
-        $buff = "";
-        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";
-        $buff = trim($buff, "&");
-        return $buff;
+        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type={$grant_type}&appid={$appid}&secret={$secret}";
+        $curl = new Get();
+        return $curl->http($url, '', true);
     }
 }

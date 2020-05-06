@@ -13,37 +13,17 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
-declare (strict_types=1);
 
-namespace DtApp\ThinkLibrary\helper;
+namespace DtApp\ThinkLibrary\service\ip;
+
+use DtApp\ThinkLibrary\Service;
 
 /**
- * 数字管理类
- * Class Ints
- * @mixin Ints
- * @package DtApp\ThinkLibrary\helper
+ * IP-纯真数据库
+ * Class QqWryService
+ * @package DtApp\ThinkLibrary\service\ip
  */
-class Ints
+class QqWryService extends Service
 {
-    /**
-     * 判断一个数是不是偶数
-     * @param int $num
-     * @return bool
-     */
-    public function isEvenNumbers(int $num): bool
-    {
-        if ($num % 2 == 0) return true;
-        return false;
-    }
 
-    /**
-     * 判断一个数是不是奇数
-     * @param int $num
-     * @return bool
-     */
-    public function isOddNumbers(int $num): bool
-    {
-        if ($num % 2 == 0) return false;
-        return true;
-    }
 }

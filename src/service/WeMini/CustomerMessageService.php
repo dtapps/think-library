@@ -14,19 +14,16 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service;
+namespace DtApp\ThinkLibrary\service\WeMini;
 
 use DtApp\ThinkLibrary\Service;
 
 /**
- * 测试服务
- * Class TestService
- * @package DtApp\ThinkLibrary\service
+ * 微信小程序 - 客服消息
+ * Class CustomerMessageService
+ * @package DtApp\ThinkLibrary\service\WeMini
  */
-class TestService extends Service
+class CustomerMessageService extends Service
 {
-    public function index()
-    {
-        return 'service.test.index';
-    }
+
 }

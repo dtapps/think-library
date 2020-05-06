@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
@@ -33,7 +34,7 @@ class Files
      * @return bool
      * @throws DtAppException
      */
-    public function delete(string $name)
+    public function delete(string $name): bool
     {
         if (empty($name)) throw new DtAppException('请检查需要删除文件夹的名称');
         if (file_exists($name)) if (unlink($name)) return true;
@@ -46,7 +47,7 @@ class Files
      * @return bool
      * @throws DtAppException
      */
-    public function deletes(string $name)
+    public function deletes(string $name): bool
     {
         if (empty($name)) throw new DtAppException('请检查需要删除文件夹的名称');
         //先删除目录下的文件：
@@ -78,7 +79,7 @@ class Files
      * @return bool
      * @throws DtAppException
      */
-    public function folderZip(string $name, string $suffix_name = '.png', string $file_name = '*')
+    public function folderZip(string $name, string $suffix_name = '.png', string $file_name = '*'): bool
     {
         if (empty($name)) throw new DtAppException('请检查需要打包的路径名称');
         try {
@@ -103,7 +104,7 @@ class Files
      * @param string $path
      * @return array|string
      */
-    public function getFiles(string $path)
+    public function getFiles(string $path): array
     {
         $files = [];
         if (is_dir($path)) {
@@ -131,7 +132,7 @@ class Files
      * @param string $path
      * @return bool
      */
-    public function rmFiles(string $path)
+    public function rmFiles(string $path): bool
     {
         $files = $this->getFiles($path);
         if (!is_array($files)) {

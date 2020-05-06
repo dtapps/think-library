@@ -38,10 +38,10 @@ class NewTmplService extends Service
      */
     public function addTemplate(string $access_token, array $data = [])
     {
-        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/addtemplate?access_token=ACCESS_TOKEN";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/addtemplate?access_token={$access_token}";
         $curl = new Get();
         if (is_array($data)) $data = json_encode($data);
-        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), $data, true);
+        return $curl->http($url, $data, true);
     }
 
     /**
@@ -54,13 +54,13 @@ class NewTmplService extends Service
      */
     public function deleteTemplate(string $access_token, string $priTmplId)
     {
-        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/deltemplate?access_token=ACCESS_TOKEN";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/deltemplate?access_token={$access_token}";
         $curl = new Get();
         $data = [
             'priTmplId' => $priTmplId
         ];
         if (is_array($data)) $data = json_encode($data);
-        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), $data, true);
+        return $curl->http($url, $data, true);
     }
 
     /**
@@ -72,9 +72,9 @@ class NewTmplService extends Service
      */
     public function getCategory(string $access_token)
     {
-        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getcategory?access_token=ACCESS_TOKEN";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getcategory?access_token={$access_token}";
         $curl = new Get();
-        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), '', true);
+        return $curl->http($url, '', true);
     }
 
     /**
@@ -87,13 +87,13 @@ class NewTmplService extends Service
      */
     public function getPubTemplateKeyWordsById(string $access_token, string $tid)
     {
-        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatekeywords?access_token=ACCESS_TOKEN";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatekeywords?access_token={$access_token}";
         $curl = new Get();
         $data = [
             'tid' => $tid
         ];
         if (is_array($data)) $data = json_encode($data);
-        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), $data, true);
+        return $curl->http($url, $data, true);
     }
 
     /**
@@ -106,10 +106,10 @@ class NewTmplService extends Service
      */
     public function getPubTemplateTitleList(string $access_token, array $data = [])
     {
-        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatetitles?access_token=ACCESS_TOKEN";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatetitles?access_token={$access_token}";
         $curl = new Get();
         if (is_array($data)) $data = json_encode($data);
-        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), $data, true);
+        return $curl->http($url, $data, true);
     }
 
     /**
@@ -121,9 +121,9 @@ class NewTmplService extends Service
      */
     public function getTemplateList(string $access_token)
     {
-        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/gettemplate?access_token=ACCESS_TOKEN";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/gettemplate?access_token={$access_token}";
         $curl = new Get();
-        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), '', true);
+        return $curl->http($url, '', true);
     }
 
     /**
@@ -136,9 +136,9 @@ class NewTmplService extends Service
      */
     public function send(string $access_token, array $data = [])
     {
-        $url = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=ACCESS_TOKEN";
+        $url = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token={$access_token}";
         $curl = new Post();
-        return $curl->http(str_replace('ACCESS_TOKEN', $access_token, $url), $data, true);
+        return $curl->http($url, $data, true);
     }
 
 }

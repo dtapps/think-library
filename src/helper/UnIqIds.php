@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
@@ -31,7 +32,7 @@ class UnIqIds
      * @param string $prefix 编码前缀
      * @return string
      */
-    public function random($size = 10, $type = 1, $prefix = '')
+    public function random($size = 10, $type = 1, $prefix = ''): string
     {
         $numbs = '0123456789';
         $chars = 'abcdefghijklmnopqrstuvwxyz';
@@ -51,7 +52,7 @@ class UnIqIds
      * @param string $prefix
      * @return string
      */
-    public function date($size = 16, $prefix = '')
+    public function date($size = 16, $prefix = ''): string
     {
         if ($size < 14) $size = 14;
         $string = $prefix . date('Ymd') . (date('H') + date('i')) . date('s');
@@ -65,11 +66,11 @@ class UnIqIds
      * @param string $prefix
      * @return string
      */
-    public function number($size = 12, $prefix = '')
+    public function number($size = 12, $prefix = ''): string
     {
         $time = time() . '';
         if ($size < 10) $size = 10;
-        $string = $prefix . ($time[0] + $time[1]) . substr($time, 2) . rand(0, 9);
+        $string = $prefix . ($time[0] . $time[1]) . substr($time, 2) . rand(0, 9);
         while (strlen($string) < $size) $string .= rand(0, 9);
         return $string;
     }

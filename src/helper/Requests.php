@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
@@ -27,11 +28,11 @@ class Requests
      * 判断输入的参数
      * @param array $data
      * @param array $arr
-     * @return array|bool
+     * @return array
      */
-    public function isEmpty(array $data, array $arr)
+    public function isEmpty(array $data, array $arr): array
     {
-        foreach ($arr as $k => $v) if (empty(isset($data["$v"]) ? $data["$v"] : '')) return false;
+        foreach ($arr as $k => $v) if (empty(isset($data["$v"]) ? $data["$v"] : '')) return '';
         return $data;
     }
 
@@ -41,7 +42,7 @@ class Requests
      * @param array $arr
      * @return array
      */
-    public function isEmptyRet(array $data, array $arr)
+    public function isEmptyRet(array $data, array $arr): array
     {
         foreach ($arr as $k => $v) if (empty(isset($data["$v"]) ? $data["$v"] : '')) \DtApp\ThinkLibrary\facade\Returns::jsonError('请检查参数', 102);
         return $data;
@@ -51,7 +52,7 @@ class Requests
      * 判断是否为GET方式
      * @return bool
      */
-    public function isGet()
+    public function isGet(): bool
     {
         return request()->isGet();
     }
@@ -60,7 +61,7 @@ class Requests
      * 判断是否为POST方式
      * @return bool
      */
-    public function isPost()
+    public function isPost(): bool
     {
         return request()->isPost();
     }
@@ -69,7 +70,7 @@ class Requests
      * 判断是否为PUT方式
      * @return boolean
      */
-    public function isPut()
+    public function isPut(): bool
     {
         return request()->isPut();
     }
@@ -78,7 +79,7 @@ class Requests
      * 判断是否为DELETE方式
      * @return boolean
      */
-    public function isDelete()
+    public function isDelete(): bool
     {
         return request()->isDelete();
     }
@@ -87,7 +88,7 @@ class Requests
      * 判断是否为Ajax方式
      * @return bool
      */
-    public function isAjax()
+    public function isAjax(): bool
     {
         return request()->isAjax();
     }
@@ -96,7 +97,7 @@ class Requests
      * 获取域名地址
      * @return string
      */
-    public function getWebsiteAddress()
+    public function getWebsiteAddress(): string
     {
         $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
         return $http_type . $_SERVER['HTTP_HOST'] . "/";

@@ -13,50 +13,32 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
-declare (strict_types=1);
 
-namespace DtApp\ThinkLibrary\helper;
+namespace DtApp\ThinkLibrary\service\WeMini;
+
+use DtApp\Curl\CurlException;
+use DtApp\Curl\Get;
+use DtApp\ThinkLibrary\Service;
 
 /**
- * 网址管理类
- * Class Urls
- * @mixin Urls
- * @package DtApp\ThinkLibrary\helper
+ * 微信小程序 - 用户信息
+ * Class UserInfoService
+ * @package DtApp\ThinkLibrary\service\WeMini
  */
-class Urls
+class UserInfoService extends Service
 {
     /**
-     * 编码
-     * @param string $url
-     * @return string
+     * 用户支付完成后，获取该用户的 UnionId，无需用户授权
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/user-info/auth.getPaidUnionId.html
+     * @param string $access_token
+     * @param string $openid
+     * @return bool|mixed|string
+     * @throws CurlException
      */
-    public function lenCode(string $url): string
+    public function getPaidUnionId(string $access_token, string $openid)
     {
-        if (empty($url)) return '';
-        return urlencode($url);
-    }
-
-    /**
-     * 解码
-     * @param string $url
-     * @return string
-     */
-    public function deCode(string $url): string
-    {
-        if (empty($url)) return '';
-        return urldecode($url);
-    }
-
-    /**
-     * 格式化参数格式化成url参数
-     * @param array $data
-     * @return string
-     */
-    public function toParams(array $data): string
-    {
-        $buff = "";
-        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";
-        $buff = trim($buff, "&");
-        return $buff;
+        $url = "https://api.weixin.qq.com/wxa/getpaidunionid?access_token={$access_token}&openid={$openid}";
+        $curl = new Get();
+        return $curl->http($url, '', true);
     }
 }

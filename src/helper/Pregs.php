@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
@@ -30,7 +31,7 @@ class Pregs
      * @param $mobile
      * @return bool
      */
-    public function isIphone($mobile)
+    public function isIphone($mobile): bool
     {
         if (preg_match('/^[1]([3-9])[0-9]{9}$/', $mobile)) return true;
         return false;
@@ -42,7 +43,7 @@ class Pregs
      * @param $mobile
      * @return bool
      */
-    public function isIphoneAll($mobile)
+    public function isIphoneAll($mobile): bool
     {
         if (preg_match('/^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/', $mobile)) return true;
         return false;
@@ -54,7 +55,7 @@ class Pregs
      * @param $tel
      * @return bool
      */
-    public function isTel($tel)
+    public function isTel($tel): bool
     {
         if (preg_match("/^(\(\d{3,4}\)|\d{3,4}-)?\d{7,8}$/", $tel)) return true;
         return false;
@@ -66,7 +67,7 @@ class Pregs
      * @param int $id 身份证号码
      * @return bool
      */
-    public function isIdCard($id)
+    public function isIdCard($id): bool
     {
         if (preg_match("/^\d{15}|\d{18}$/", $id)) return true;
         return false;
@@ -78,7 +79,7 @@ class Pregs
      * @param $digit
      * @return bool
      */
-    public function isDigit($digit)
+    public function isDigit($digit): bool
     {
         if (preg_match("/^\d*$/", $digit)) return true;
         return false;
@@ -90,7 +91,7 @@ class Pregs
      * @param $num
      * @return bool
      */
-    public function isNum($num)
+    public function isNum($num): bool
     {
         if (is_numeric($num)) return true;
         return false;
@@ -102,7 +103,7 @@ class Pregs
      * @param $str
      * @return bool
      */
-    public function isStr($str)
+    public function isStr($str): bool
     {
         if (preg_match("/^\w+$/", $str)) return true;
         return false;
@@ -114,7 +115,7 @@ class Pregs
      * @param $str
      * @return bool
      */
-    public function isPassword($str)
+    public function isPassword($str): bool
     {
         if (preg_match("/^[a-zA-Z]\w{5,17}$/", $str)) return true;
         return false;
@@ -126,7 +127,7 @@ class Pregs
      * @param $str
      * @return bool
      */
-    public function isChinese($str)
+    public function isChinese($str): bool
     {
         if (preg_match("/^[\u4e00-\u9fa5],{0,}$/", $str)) return true;
         return false;
@@ -138,7 +139,7 @@ class Pregs
      * @param $email
      * @return bool
      */
-    public function isEmail($email)
+    public function isEmail($email): bool
     {
         if (preg_match("/^\w+[-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/", $email)) return true;
         return false;
@@ -150,7 +151,7 @@ class Pregs
      * @param $url
      * @return bool
      */
-    public function isLink($url)
+    public function isLink($url): bool
     {
         if (preg_match("/http:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is", $url)) return true;
         return false;
@@ -162,7 +163,7 @@ class Pregs
      * @param $qq
      * @return bool
      */
-    public function isQq($qq)
+    public function isQq($qq): bool
     {
         if (preg_match("/^[1-9][0-9]{4,}$/", $qq)) return true;
         return false;
@@ -174,7 +175,7 @@ class Pregs
      * @param $ip
      * @return bool
      */
-    public function isIp($ip)
+    public function isIp($ip): bool
     {
         if (preg_match("/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $ip)) return true;
         return false;

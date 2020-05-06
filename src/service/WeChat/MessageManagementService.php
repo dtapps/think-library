@@ -13,50 +13,34 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
-declare (strict_types=1);
 
-namespace DtApp\ThinkLibrary\helper;
+
+namespace DtApp\ThinkLibrary\service\WeChat;
+
+use DtApp\Curl\CurlException;
+use DtApp\Curl\Get;
+use DtApp\ThinkLibrary\Service;
 
 /**
- * 网址管理类
- * Class Urls
- * @mixin Urls
- * @package DtApp\ThinkLibrary\helper
+ * 微信公众号 - 消息管理
+ * Class MessageManagementService
+ * @package DtApp\ThinkLibrary\service\WeChat
  */
-class Urls
+class MessageManagementService extends Service
 {
     /**
-     * 编码
-     * @param string $url
-     * @return string
-     */
-    public function lenCode(string $url): string
-    {
-        if (empty($url)) return '';
-        return urlencode($url);
-    }
-
-    /**
-     * 解码
-     * @param string $url
-     * @return string
-     */
-    public function deCode(string $url): string
-    {
-        if (empty($url)) return '';
-        return urldecode($url);
-    }
-
-    /**
-     * 格式化参数格式化成url参数
+     * 设置所属行业
+     * https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html#0
+     * @param string $access_token
      * @param array $data
-     * @return string
+     * @return bool|mixed|string
+     * @throws CurlException
      */
-    public function toParams(array $data): string
+    public function setIndustry(string $access_token, array $data = [])
     {
-        $buff = "";
-        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";
-        $buff = trim($buff, "&");
-        return $buff;
+        $url = "https://api.weixin.qq.com/cgi-bin/template/api_set_industry?access_token={$access_token}";
+        $curl = new Get();
+        if (is_array($data)) $data = json_encode($data);
+        return $curl->http($url, $data, true);
     }
 }

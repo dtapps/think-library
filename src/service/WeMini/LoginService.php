@@ -13,50 +13,34 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
-declare (strict_types=1);
 
-namespace DtApp\ThinkLibrary\helper;
+namespace DtApp\ThinkLibrary\service\WeMini;
+
+use DtApp\Curl\CurlException;
+use DtApp\Curl\Get;
+use DtApp\ThinkLibrary\Service;
 
 /**
- * 网址管理类
- * Class Urls
- * @mixin Urls
- * @package DtApp\ThinkLibrary\helper
+ * 微信小程序 - 登录
+ * Class LoginService
+ * @package DtApp\ThinkLibrary\service\WeMini
  */
-class Urls
+class LoginService extends Service
 {
     /**
-     * 编码
-     * @param string $url
-     * @return string
+     * 登录凭证校验
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html
+     * @param string $appid
+     * @param string $secret
+     * @param string $js_code
+     * @param string $grant_type
+     * @return bool|mixed|string
+     * @throws CurlException
      */
-    public function lenCode(string $url): string
+    public function code2Session(string $appid, string $secret, string $js_code, string $grant_type = 'authorization_code')
     {
-        if (empty($url)) return '';
-        return urlencode($url);
-    }
-
-    /**
-     * 解码
-     * @param string $url
-     * @return string
-     */
-    public function deCode(string $url): string
-    {
-        if (empty($url)) return '';
-        return urldecode($url);
-    }
-
-    /**
-     * 格式化参数格式化成url参数
-     * @param array $data
-     * @return string
-     */
-    public function toParams(array $data): string
-    {
-        $buff = "";
-        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";
-        $buff = trim($buff, "&");
-        return $buff;
+        $url = "https://api.weixin.qq.com/sns/jscode2session?appid={$appid}&secret={$secret}&js_code={$js_code}&grant_type={$grant_type}";
+        $curl = new Get();
+        return $curl->http($url, '', true);
     }
 }
