@@ -38,10 +38,10 @@ class DingDingService extends Service
 
     /**
      * 配置access_token
-     * @param $str
+     * @param string $str
      * @return $this
      */
-    public function accessToken($str)
+    public function accessToken(string $str)
     {
         $this->access_token = $str;
         return $this;

@@ -37,10 +37,10 @@ class QyWeiXinService extends Service
 
     /**
      * 配置Key
-     * @param $str
+     * @param string $str
      * @return $this
      */
-    public function key($str)
+    public function key(string $str)
     {
         $this->key = $str;
         return $this;
