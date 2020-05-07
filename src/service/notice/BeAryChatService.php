@@ -16,7 +16,9 @@
 
 namespace DtApp\ThinkLibrary\service\notice;
 
-class BeAryChatService
+use DtApp\ThinkLibrary\Service;
+
+class BeAryChatService extends Service
 {
 
 }

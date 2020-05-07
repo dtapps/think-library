@@ -18,6 +18,7 @@ namespace DtApp\ThinkLibrary\service\notice;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\NoticeException;
+use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
@@ -25,7 +26,7 @@ use DtApp\ThinkLibrary\service\curl\HttpService;
  * Class QyWeiXinService
  * @package DtApp\ThinkLibrary\service\notice
  */
-class QyWeiXinService
+class QyWeiXinService extends Service
 {
     /**
      * 消息类型

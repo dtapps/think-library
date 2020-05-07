@@ -16,7 +16,9 @@
 
 namespace DtApp\ThinkLibrary\service\notice;
 
-class SendCloudService
+use DtApp\ThinkLibrary\Service;
+
+class SendCloudService extends Service
 {
 
 }

@@ -16,7 +16,9 @@
 
 namespace DtApp\ThinkLibrary\service\notice;
 
-class WorkKileService
+use DtApp\ThinkLibrary\Service;
+
+class WorkKileService extends Service
 {
 
 }
