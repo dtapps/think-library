@@ -47,7 +47,7 @@ class HttpService extends Service
 
     /**
      * 需要请求的数据
-     * @param string $str
+     * @param $str
      * @return $this
      */
     public function data($str)
