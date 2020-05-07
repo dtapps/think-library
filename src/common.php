@@ -14,8 +14,8 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-use DtApp\Ip\IpException;
-use DtApp\Ip\QqWry;
+use DtApp\ThinkLibrary\exception\IpException;
+use DtApp\ThinkLibrary\service\ip\QqWryService;
 
 if (!function_exists('get_ip_info')) {
 
@@ -36,8 +36,7 @@ if (!function_exists('get_ip_info')) {
                 $ip = $_SERVER['REMOTE_ADDR'];
             }
         }
-        $qqwry = new QqWry();
-        return $qqwry->getLocation($ip);
+        return QqWryService::instance()->getLocation($ip);
     }
 }
 
