@@ -18,7 +18,6 @@ namespace DtApp\ThinkLibrary\service\curl;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
-use Exception;
 
 /**
  * 宝塔网络请求接口
@@ -31,6 +30,7 @@ class BtService extends Service
     private $key;
     private $data = [];
     private $panel;
+    private $output;
     private $cookie;
     private $timeout = 60;
 
@@ -90,7 +90,7 @@ class BtService extends Service
     }
 
     /**
-     * 超时，数据
+     * 数据
      * @param array $array
      * @return $this
      */
@@ -109,6 +109,19 @@ class BtService extends Service
     public function toArray(bool $is = true)
     {
         if (empty($this->cookie)) throw new CurlException('请检查cookie内容');
+        if (!extension_loaded("curl")) throw new CurlException('请开启curl模块！', E_USER_DEPRECATED);
+        $this->http();
+        if (empty($is)) return $this->output;
+        if (is_array($this->output)) return $this->output;
+        return json_decode($this->output, true);
+    }
+
+    /**
+     * 发起请求
+     * @return $this
+     */
+    private function http()
+    {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->panel . $this->url);
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
@@ -122,13 +135,8 @@ class BtService extends Service
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $output = curl_exec($ch);
         curl_close($ch);
-        if (empty($is)) return $output;
-        try {
-            if (is_array($output)) return $output;
-            return json_decode($output, true);
-        } catch (Exception $e) {
-            return false;
-        }
+        $this->output = $output;
+        return $this;
     }
 
     /**

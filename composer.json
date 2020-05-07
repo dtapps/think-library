@@ -30,6 +30,7 @@
     "ext-bcmath": "*",
     "ext-iconv": "*",
     "ext-curl": "*",
+    "ext-http": "*",
     "topthink/framework": "^6.0.0",
     "topthink/think-orm": "^2.0",
     "aliyuncs/oss-sdk-php": "^2.3",
