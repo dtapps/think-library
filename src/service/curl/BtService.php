@@ -20,6 +20,11 @@ use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
 use Exception;
 
+/**
+ * 宝塔网络请求接口
+ * Class BtService
+ * @package DtApp\ThinkLibrary\service\curl
+ */
 class BtService extends Service
 {
     private $url;
