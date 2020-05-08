@@ -15,6 +15,11 @@
 
 ## 安装
 
+部分代码来自互联网，若有异议可以联系作者进行删除。
+
+- Gitee仓库地址：https://gitee.com/liguangchun/ThinkLibrary
+- Github仓库地址：https://github.com/GC0202/ThinkLibrary
+
 ### 开发版
 ```text
 composer require liguangchun/think-library ^6.x-dev -vvv
