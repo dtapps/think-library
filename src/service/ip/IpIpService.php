@@ -29,6 +29,11 @@ class IpIpService extends Service
 {
     public $reader = null;
 
+    /**
+     * IpIpService constructor.
+     * @param App $app
+     * @throws Exception
+     */
     public function __construct(App $app)
     {
         $this->reader = new IpIpReader(__DIR__ . '/bin/ipipfree.ipdb');
