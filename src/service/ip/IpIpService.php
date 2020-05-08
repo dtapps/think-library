@@ -16,6 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\ip;
 
+use DtApp\ThinkLibrary\Service;
 use Exception;
 
 /**
@@ -23,7 +24,7 @@ use Exception;
  * Class IpIpService
  * @package DtApp\ThinkLibrary\service\ip
  */
-class IpIpService
+class IpIpService extends Service
 {
     public $reader = null;
 
