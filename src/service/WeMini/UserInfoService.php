@@ -16,9 +16,9 @@
 
 namespace DtApp\ThinkLibrary\service\WeMini;
 
-use DtApp\Curl\CurlException;
-use DtApp\Curl\Get;
+use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
  * 微信小程序 - 用户信息
@@ -38,7 +38,8 @@ class UserInfoService extends Service
     public function getPaidUnionId(string $access_token, string $openid)
     {
         $url = "https://api.weixin.qq.com/wxa/getpaidunionid?access_token={$access_token}&openid={$openid}";
-        $curl = new Get();
-        return $curl->http($url, '', true);
+        return HttpService::instance()
+            ->url($url)
+            ->toArray();
     }
 }

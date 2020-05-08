@@ -16,9 +16,9 @@
 
 namespace DtApp\ThinkLibrary\service\WeMini;
 
-use DtApp\Curl\CurlException;
-use DtApp\Curl\Get;
+use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
  * 微信小程序 - 登录
@@ -40,7 +40,8 @@ class LoginService extends Service
     public function code2Session(string $appid, string $secret, string $js_code, string $grant_type = 'authorization_code')
     {
         $url = "https://api.weixin.qq.com/sns/jscode2session?appid={$appid}&secret={$secret}&js_code={$js_code}&grant_type={$grant_type}";
-        $curl = new Get();
-        return $curl->http($url, '', true);
+        return HttpService::instance()
+            ->url($url)
+            ->toArray();
     }
 }

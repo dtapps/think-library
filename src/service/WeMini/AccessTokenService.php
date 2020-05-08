@@ -16,9 +16,9 @@
 
 namespace DtApp\ThinkLibrary\service\WeMini;
 
-use DtApp\Curl\CurlException;
-use DtApp\Curl\Get;
+use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
  * 微信小程序 - 接口调用凭据
@@ -39,7 +39,8 @@ class AccessTokenService extends Service
     public function code2Session(string $appid, string $secret, string $grant_type = 'client_credential')
     {
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type={$grant_type}&appid={$appid}&secret={$secret}";
-        $curl = new Get();
-        return $curl->http($url, '', true);
+         return HttpService::instance()
+        ->url($url)
+        ->toArray();
     }
 }

@@ -17,9 +17,9 @@
 
 namespace DtApp\ThinkLibrary\service\WeChat;
 
-use DtApp\Curl\CurlException;
-use DtApp\Curl\Get;
+use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
  * 微信公众号 - 消息管理
@@ -39,8 +39,10 @@ class MessageManagementService extends Service
     public function setIndustry(string $access_token, array $data = [])
     {
         $url = "https://api.weixin.qq.com/cgi-bin/template/api_set_industry?access_token={$access_token}";
-        $curl = new Get();
         if (is_array($data)) $data = json_encode($data);
-        return $curl->http($url, $data, true);
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->toArray();
     }
 }

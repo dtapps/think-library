@@ -16,9 +16,9 @@
 
 namespace DtApp\ThinkLibrary\service\WeMini;
 
-use DtApp\Curl\CurlException;
-use DtApp\Curl\Post;
+use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
  * 微信小程序 - 小程序码
@@ -38,8 +38,11 @@ class QrCodeService extends Service
     public function createWxaQrCode(string $access_token, array $data = [])
     {
         $url = "https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token={$access_token}";
-        $curl = new Post();
-        return $curl->http($url, $data);
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
     }
 
     /**
@@ -53,8 +56,11 @@ class QrCodeService extends Service
     public function getWxaCode(string $access_token, array $data = [])
     {
         $url = "https://api.weixin.qq.com/wxa/getwxacode?access_token={$access_token}";
-        $curl = new Post();
-        return $curl->http($url, $data);
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
     }
 
     /**
@@ -68,7 +74,10 @@ class QrCodeService extends Service
     public function getWxaCodeUnLimit(string $access_token, array $data = [])
     {
         $url = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token={$access_token}";
-        $curl = new Post();
-        return $curl->http($url, $data);
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
     }
 }
