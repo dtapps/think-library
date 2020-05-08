@@ -14,15 +14,9 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-use DtApp\ThinkLibrary\exception\CurlException;
-use DtApp\ThinkLibrary\service\curl\HttpService;
+use DtApp\ThinkLibrary\service\MacService;
 
 require '../vendor/autoload.php';
 
-try {
-    var_dump(HttpService::instance()
-        ->url('https://api.dtapp.net')
-        ->toArray());
-} catch (CurlException $e) {
-    var_dump($e->getMessage());
-}
+var_dump(MacService::instance()
+->get());

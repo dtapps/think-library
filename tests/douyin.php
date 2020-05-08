@@ -14,15 +14,15 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-use DtApp\ThinkLibrary\exception\CurlException;
-use DtApp\ThinkLibrary\service\curl\HttpService;
+use DtApp\ThinkLibrary\exception\DouYinException;
+use DtApp\ThinkLibrary\service\douyin\WatermarkService;
 
 require '../vendor/autoload.php';
 
 try {
-    var_dump(HttpService::instance()
-        ->url('https://api.dtapp.net')
-        ->toArray());
-} catch (CurlException $e) {
+    // 方法一 网址
+    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
+} catch (DouYinException $e) {
+    // 错误提示
     var_dump($e->getMessage());
 }
