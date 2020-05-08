@@ -17,6 +17,7 @@
 namespace DtApp\ThinkLibrary\service\ip;
 
 use DtApp\ThinkLibrary\exception\CurlException;
+use DtApp\ThinkLibrary\exception\IpException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
@@ -183,5 +184,55 @@ class OnlineService extends Service
         $res = substr($res, 0, -1);
         $res = json_decode($res, true);
         return $res;
+    }
+
+    /**
+     * 淘宝
+     * @param string $ip IP地址
+     * @return bool|mixed|string
+     * @throws CurlException
+     */
+    public function taoBao(string $ip = '')
+    {
+        if (empty($this->ip)) $this->ip = get_ip();
+        $url = "http://ip.taobao.com/service/getIpInfo.php?ip={$this->ip}";
+        return HttpService::instance()
+            ->url($url)
+            ->toArray();
+    }
+
+    /**
+     * 阿里云
+     * @param string $appcode
+     * @return bool|mixed|string
+     * @throws IpException
+     */
+    public function aliYun(string $appcode = '')
+    {
+        if (empty($this->ip)) $this->ip = get_ip();
+        $host = "http://iploc.market.alicloudapi.com";
+        $path = "/v3/ip";
+        $method = "GET";
+        if (empty($appcode)) throw new IpException('请检查阿里-阿里云配置信息 appcode');
+        $headers = array();
+        array_push($headers, "Authorization:APPCODE " . $appcode);
+        $querys = "ip={$this->ip}";
+        $bodys = "";
+        $url = $host . $path . "?" . $querys;
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_FAILONERROR, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        if (1 == strpos("$" . $host, "https://")) {
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        }
+        $content = curl_exec($curl);
+        curl_close($curl);
+        return json_decode($content, true);
     }
 }
