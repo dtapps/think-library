@@ -18,6 +18,7 @@ namespace DtApp\ThinkLibrary\service\ip;
 
 use DtApp\ThinkLibrary\Service;
 use Exception;
+use think\App;
 
 /**
  * IP  - IPIP
@@ -28,14 +29,10 @@ class IpIpService extends Service
 {
     public $reader = null;
 
-    /**
-     *
-     * IpIpService constructor.
-     * @throws Exception
-     */
-    public function __construct()
+    public function __construct(App $app)
     {
         $this->reader = new IpIpReader(__DIR__ . '/bin/ipipfree.ipdb');
+        parent::__construct($app);
     }
 
     /**
