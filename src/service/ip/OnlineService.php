@@ -121,7 +121,7 @@ class OnlineService extends Service
      * @return bool|false|mixed|string
      * @throws CurlException
      */
-    public function pcOnLine()
+    public function pConLine()
     {
         $url = "http://whois.pconline.com.cn/ipJson.jsp?json=true";
         if (!empty($this->ip)) $url = "http://whois.pconline.com.cn/ipJson.jsp?json=true&ip={$this->ip}";
