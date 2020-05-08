@@ -56,9 +56,9 @@ if (!function_exists('get_ip')) {
             if (false !== $pos) unset($arr[$pos]);
             $ip = trim($arr[0]);
         } elseif (isset($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER('HTTP_CLIENT_IP', '');
+            $ip = $_SERVER('HTTP_CLIENT_IP');
         } elseif (isset($_SERVER['REMOTE_ADDR'])) {
-            $ip = $_SERVER('REMOTE_ADDR', '');
+            $ip = $_SERVER('REMOTE_ADDR');
         }
         return $ip;
     }
