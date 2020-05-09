@@ -32,10 +32,16 @@
     "ext-curl": "*",
     "topthink/framework": "^6.0.0",
     "topthink/think-orm": "^2.0",
+    "topthink/think-view": "^1.0",
+    "topthink/think-multi-app": "^1.0",
     "aliyuncs/oss-sdk-php": "^2.3",
     "obs/esdk-obs-php": "^3.19",
     "baidubce/bce-sdk-php": "^0.8.22",
     "qcloud/cos-sdk-v5": "^2.0"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^4.2",
+    "topthink/think-trace":"^1.0"
   },
   "autoload": {
     "files": [
