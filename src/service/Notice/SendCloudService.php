@@ -14,45 +14,11 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\crypt;
+namespace DtApp\ThinkLibrary\service\Notice;
 
 use DtApp\ThinkLibrary\Service;
 
-class AesService extends Service
+class SendCloudService extends Service
 {
-    private $key;
-    private $iv;
 
-    public function key($str)
-    {
-        $this->key = $str;
-        return $this;
-    }
-
-    public function iv($str)
-    {
-        $this->iv = $str;
-        return $this;
-    }
-
-    /**
-     * 加密
-     * @param $data
-     * @return string
-     */
-    public function encrypt($data)
-    {
-        if (!empty(is_array($data))) $data = json_encode($data);
-        return urlencode(base64_encode(openssl_encrypt($data, 'AES-128-CBC', $this->key, 1, $this->iv)));
-    }
-
-    /**
-     * 解密
-     * @param $data
-     * @return false|string
-     */
-    public function decrypt($data)
-    {
-        return openssl_decrypt(base64_decode(urldecode($data)), "AES-128-CBC", $this->key, true, $this->iv);
-    }
 }

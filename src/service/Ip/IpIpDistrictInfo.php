@@ -14,11 +14,29 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\notice;
+namespace DtApp\ThinkLibrary\service\Ip;
 
-use DtApp\ThinkLibrary\Service;
 
-class SendCloudService extends Service
+class IpIpDistrictInfo
 {
+    public $country_name = '';
+    public $region_name = '';
+    public $city_name = '';
+    public $district_name = '';
+    public $china_admin_code = '';
+    public $covering_radius = '';
+    public $longitude = '';
+    public $latitude = '';
 
+    public function __construct(array $data)
+    {
+        foreach ($data AS $field => $value) {
+            $this->{$field} = $value;
+        }
+    }
+
+    public function __get($name)
+    {
+        return $this->{$name};
+    }
 }

@@ -14,7 +14,7 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\ip;
+namespace DtApp\ThinkLibrary\service\Ip;
 
 use BadMethodCallException;
 use Exception;

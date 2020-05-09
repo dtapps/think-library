@@ -15,7 +15,7 @@
 // +----------------------------------------------------------------------
 
 use DtApp\ThinkLibrary\exception\DouYinException;
-use DtApp\ThinkLibrary\service\douyin\WatermarkService;
+use DtApp\ThinkLibrary\service\DouYin\WatermarkService;
 
 require '../vendor/autoload.php';
 

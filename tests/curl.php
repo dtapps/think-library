@@ -15,7 +15,7 @@
 // +----------------------------------------------------------------------
 
 use DtApp\ThinkLibrary\exception\CurlException;
-use DtApp\ThinkLibrary\service\curl\HttpService;
+use DtApp\ThinkLibrary\service\Curl\HttpService;
 
 require '../vendor/autoload.php';
 

@@ -15,7 +15,7 @@
 // +----------------------------------------------------------------------
 
 use DtApp\ThinkLibrary\exception\IpException;
-use DtApp\ThinkLibrary\service\ip\QqWryService;
+use DtApp\ThinkLibrary\service\Ip\QqWryService;
 
 if (!function_exists('get_ip_info')) {
 

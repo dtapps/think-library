@@ -18,7 +18,7 @@ namespace DtApp\ThinkLibrary\service\WeMini;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\curl\HttpService;
+use DtApp\ThinkLibrary\service\Curl\HttpService;
 
 /**
  * 微信小程序 - 接口调用凭据

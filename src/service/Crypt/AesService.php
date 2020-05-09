@@ -14,35 +14,45 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
+namespace DtApp\ThinkLibrary\service\Crypt;
 
-namespace DtApp\ThinkLibrary\service\WeChat;
-
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\Curl\HttpService;
 
-/**
- * 微信公众号 - 消息管理
- * Class MessageManagementService
- * @package DtApp\ThinkLibrary\service\WeChat
- */
-class MessageManagementService extends Service
+class AesService extends Service
 {
-    /**
-     * 设置所属行业
-     * https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html#0
-     * @param string $access_token
-     * @param array $data
-     * @return bool|mixed|string
-     * @throws CurlException
-     */
-    public function setIndustry(string $access_token, array $data = [])
+    private $key;
+    private $iv;
+
+    public function key($str)
     {
-        $url = "https://api.weixin.qq.com/cgi-bin/template/api_set_industry?access_token={$access_token}";
-        if (is_array($data)) $data = json_encode($data);
-        return HttpService::instance()
-            ->url($url)
-            ->data($data)
-            ->toArray();
+        $this->key = $str;
+        return $this;
+    }
+
+    public function iv($str)
+    {
+        $this->iv = $str;
+        return $this;
+    }
+
+    /**
+     * 加密
+     * @param $data
+     * @return string
+     */
+    public function encrypt($data)
+    {
+        if (!empty(is_array($data))) $data = json_encode($data);
+        return urlencode(base64_encode(openssl_encrypt($data, 'AES-128-CBC', $this->key, 1, $this->iv)));
+    }
+
+    /**
+     * 解密
+     * @param $data
+     * @return false|string
+     */
+    public function decrypt($data)
+    {
+        return openssl_decrypt(base64_decode(urldecode($data)), "AES-128-CBC", $this->key, true, $this->iv);
     }
 }

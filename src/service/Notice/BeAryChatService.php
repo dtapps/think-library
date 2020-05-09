@@ -14,11 +14,11 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\notice;
+namespace DtApp\ThinkLibrary\service\Notice;
 
 use DtApp\ThinkLibrary\Service;
 
-class WorkKileService extends Service
+class BeAryChatService extends Service
 {
 
 }

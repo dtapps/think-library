@@ -14,12 +14,12 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\ip;
+namespace DtApp\ThinkLibrary\service\Ip;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\IpException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\curl\HttpService;
+use DtApp\ThinkLibrary\service\Curl\HttpService;
 
 /**
  * IP  - 在线查询接口

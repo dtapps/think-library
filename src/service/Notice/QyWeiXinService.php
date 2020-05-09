@@ -14,12 +14,12 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\notice;
+namespace DtApp\ThinkLibrary\service\Notice;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\NoticeException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\curl\HttpService;
+use DtApp\ThinkLibrary\service\Curl\HttpService;
 
 /**
  * 通知 - 企业微信
