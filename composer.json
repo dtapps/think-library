@@ -40,8 +40,7 @@
     "qcloud/cos-sdk-v5": "^2.0"
   },
   "require-dev": {
-    "symfony/var-dumper": "^4.2",
-    "topthink/think-trace":"^1.0"
+    "symfony/var-dumper": "^4.2"
   },
   "autoload": {
     "files": [

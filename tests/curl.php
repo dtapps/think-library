@@ -20,9 +20,9 @@ use DtApp\ThinkLibrary\service\Curl\HttpService;
 require '../vendor/autoload.php';
 
 try {
-    var_dump(HttpService::instance()
+    dump(HttpService::instance()
         ->url('https://api.dtapp.net')
         ->toArray());
 } catch (CurlException $e) {
-    var_dump($e->getMessage());
+    dump($e->getMessage());
 }

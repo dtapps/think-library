@@ -21,8 +21,8 @@ require '../vendor/autoload.php';
 
 try {
     // 方法一 网址
-    var_dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
+    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
 } catch (DouYinException $e) {
     // 错误提示
-    var_dump($e->getMessage());
+    dump($e->getMessage());
 }

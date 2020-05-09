@@ -18,5 +18,5 @@ use DtApp\ThinkLibrary\service\MacService;
 
 require '../vendor/autoload.php';
 
-var_dump(MacService::instance()
+dump(MacService::instance()
 ->get());
