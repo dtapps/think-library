@@ -27,8 +27,9 @@ use think\Facade;
  * @package think\facade
  * @mixin helper
  *
- * @method helper rand(int $num) mixed 数组随机返回一个下标
- * @method helper randValue(int $num) mixed 数组随机返回一个值
+ * @method helper rand(array $arr) mixed 数组随机返回一个下标
+ * @method helper randValue(array $arr) mixed 数组随机返回一个值
+ * @method helper split(array $data, $num = 5) array 分隔数组
  */
 class Arrays extends Facade
 {
