@@ -74,9 +74,10 @@ class DingDingService extends Service
         if (empty($this->access_token)) throw new NoticeException("请检查access_token");
         if (empty($data['msgtype'])) $data['msgtype'] = $this->msgType;
         $result = HttpService::instance()
-            ->url("https://oapi.dingtalk.com/robot/send?access_token=" . $this->access_token)
+            ->url("https://" . DingTalkConstant::$CALL_TYPE_OAPI . ".dingtalk.com/robot/send?access_token=" . $this->access_token)
             ->data($data)
             ->toArray();
+
         if ($result['errcode'] == 0) return true;
         return false;
     }
