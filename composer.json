@@ -37,7 +37,8 @@
     "aliyuncs/oss-sdk-php": "^2.3",
     "obs/esdk-obs-php": "^3.19",
     "baidubce/bce-sdk-php": "^0.8.22",
-    "qcloud/cos-sdk-v5": "^2.0"
+    "qcloud/cos-sdk-v5": "^2.0",
+    "sydkj/shopping_api":"dev-master"
   },
   "require-dev": {
     "symfony/var-dumper": "^4.2"
