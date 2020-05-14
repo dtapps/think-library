@@ -72,7 +72,6 @@ class WebApps extends Service
      */
     public function redirectUri(string $redirectUri)
     {
-        dump($redirectUri);
         if (empty(Pregs::isLink($redirectUri))) throw new WeChatException("请检查redirectUri，是否正确");
         $this->redirect_uri = Urls::lenCode($redirectUri);
         return $this;
