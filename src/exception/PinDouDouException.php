@@ -14,33 +14,19 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-return [
-    // 淘宝
-    'taobao' => [
-        // 淘宝客
-        'tbk' => [
-            'app_key' => '',
-            'app_secret' => '',
-        ]
-    ],
-    // 拼多多
-    'pinduoduo' => [
-        // 进宝
-        'jinbao' => [
-            // 开放平台分配的clientId
-            'client_id' => '',
-            // 开放平台分配的clientSecret
-            'client_secret' => '',
-        ]
-    ],
-    // 京东
-    'jd' => [
-        // 京东联盟
-        'union' => [
-            // 联盟分配给应用的appkey
-            'app_key' => '',
-            // 联盟分配给应用的secretkey
-            'secret_key' => '',
-        ]
-    ]
-];
+namespace DtApp\ThinkLibrary\exception;
+
+use Exception;
+
+/**
+ * 拼多多错误处理
+ * Class PinDouDouException
+ * @package DtApp\ThinkLibrary\exception
+ */
+class PinDouDouException extends Exception
+{
+    public function errorMessage()
+    {
+        return $this->getMessage();
+    }
+}
