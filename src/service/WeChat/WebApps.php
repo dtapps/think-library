@@ -16,10 +16,12 @@
 
 namespace DtApp\ThinkLibrary\service\WeChat;
 
+use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\WeChatException;
 use DtApp\ThinkLibrary\facade\Pregs;
 use DtApp\ThinkLibrary\facade\Urls;
 use DtApp\ThinkLibrary\Service;
+use DtApp\ThinkLibrary\service\Curl\HttpService;
 
 /**
  * Class WebApps
@@ -27,17 +29,19 @@ use DtApp\ThinkLibrary\Service;
  */
 class WebApps extends Service
 {
-    /**
-     * 微信授权登录（OAuth2.0）
-     * @var string
-     */
-    private $authorize_url = 'https://open.weixin.qq.com/connect/oauth2/authorize';
+    private $url = "https://open.weixin.qq.com/";
 
     /**
      * 公众号的唯一标识
      * @var
      */
     private $app_id;
+
+    /**
+     * 公众号的appsecret
+     * @var
+     */
+    private $app_secret;
 
     /**
      * 授权后重定向的回调链接地址， 请使用 urlEncode 对链接进行处理
@@ -52,6 +56,7 @@ class WebApps extends Service
     private $response_type = 'code';
     private $scope = "snsapi_base";
     private $state = "";
+    private $grant_type = "authorization_code";
 
     /**
      * 公众号的唯一标识
@@ -117,6 +122,82 @@ class WebApps extends Service
             'scope' => $this->scope,
             'state' => $this->state
         ]);
-        return header("Location:{$this->authorize_url}?$params#wechat_redirect");
+        return header("Location:{$this->url}connect/oauth2/authorize?$params#wechat_redirect");
+    }
+
+    /**
+     * 通过code换取网页授权access_token
+     * @param string $code
+     * @return array|bool|mixed|string
+     * @throws CurlException
+     */
+    public function accessToken(string $code)
+    {
+        return HttpService::instance()
+            ->url("{$this->url}/sns/oauth2/access_token")
+            ->data([
+                'appid' => $this->app_id,
+                'secret' => $this->app_secret,
+                'code' => $code,
+                'grant_type' => $this->grant_type
+            ])
+            ->toArray();
+    }
+
+    /**
+     * 刷新access_token（如果需要）
+     * @param string $refreshToken
+     * @return array|bool|mixed|string
+     * @throws CurlException
+     */
+    public function refreshToken(string $refreshToken)
+    {
+        $this->grant_type = "refresh_token";
+        return HttpService::instance()
+            ->url("{$this->url}/sns/oauth2/refresh_token")
+            ->data([
+                'appid' => $this->app_id,
+                'grant_type' => $this->grant_type,
+                'refresh_token' => $refreshToken
+            ])
+            ->toArray();
+    }
+
+    /**
+     * 拉取用户信息(需scope为 snsapi_userinfo)
+     * @param string $accessToken
+     * @param string $openid
+     * @param string $lang
+     * @return array|bool|mixed|string
+     * @throws CurlException
+     */
+    public function useInfo(string $accessToken, string $openid, $lang = "zh_CN")
+    {
+        return HttpService::instance()
+            ->url("{$this->url}/sns/userinfo")
+            ->data([
+                'access_token' => $accessToken,
+                'openid' => $openid,
+                'lang' => $lang
+            ])
+            ->toArray();
+    }
+
+    /**
+     * 检验授权凭证（access_token）是否有效
+     * @param string $accessToken
+     * @param string $openid
+     * @return array|bool|mixed|string
+     * @throws CurlException
+     */
+    public function auth(string $accessToken, string $openid)
+    {
+        return HttpService::instance()
+            ->url("{$this->url}/sns/auth")
+            ->data([
+                'access_token' => $accessToken,
+                'openid' => $openid
+            ])
+            ->toArray();
     }
 }
