@@ -70,6 +70,17 @@ class WebApps extends Service
     }
 
     /**
+     * 公众号的appsecret
+     * @param string $appSecret
+     * @return $this
+     */
+    public function appSecret(string $appSecret)
+    {
+        $this->app_secret = $appSecret;
+        return $this;
+    }
+
+    /**
      * 授权后重定向的回调链接地址， 请使用 urlEncode 对链接进行处理
      * @param string $redirectUri
      * @return $this
