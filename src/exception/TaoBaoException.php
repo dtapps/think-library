@@ -19,11 +19,11 @@ namespace DtApp\ThinkLibrary\exception;
 use Exception;
 
 /**
- * 淘宝客错误处理
+ * 淘宝错误处理
  * Class TaoBaoKeException
  * @package DtApp\ThinkLibrary\exception
  */
-class TaoBaoKeException extends Exception
+class TaoBaoException extends Exception
 {
     public function errorMessage()
     {

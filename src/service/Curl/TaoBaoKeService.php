@@ -17,7 +17,7 @@
 namespace DtApp\ThinkLibrary\service\Curl;
 
 use DtApp\ThinkLibrary\exception\CurlException;
-use DtApp\ThinkLibrary\exception\TaoBaoKeException;
+use DtApp\ThinkLibrary\exception\TaoBaoException;
 use DtApp\ThinkLibrary\Service;
 
 /**
@@ -139,13 +139,13 @@ class TaoBaoKeService extends Service
      * 组参
      * @param array $arr
      * @return $this
-     * @throws TaoBaoKeException
+     * @throws TaoBaoException
      */
     public function data(array $arr)
     {
         $this->app_key = empty($this->app_key) ? config('dtapp.taobao.tbk.app_key') : $this->app_key;
-        if (empty($this->app_key)) throw new TaoBaoKeException('请检查app_key参数');
-        if (empty($this->method)) throw new TaoBaoKeException('请检查method参数');
+        if (empty($this->app_key)) throw new TaoBaoException('请检查app_key参数');
+        if (empty($this->method)) throw new TaoBaoException('请检查method参数');
 
         $arr['app_key'] = $this->app_key;
         $arr['method'] = $this->method;
@@ -162,13 +162,13 @@ class TaoBaoKeService extends Service
      * @param string $value
      * @param string $name
      * @return $this
-     * @throws TaoBaoKeException
+     * @throws TaoBaoException
      */
     public function datas(string $value, string $name = "requests")
     {
         $this->app_key = empty($this->app_key) ? config('dtapp.taobao.tbk.app_key') : $this->app_key;
-        if (empty($this->app_key)) throw new TaoBaoKeException('请检查app_key参数');
-        if (empty($this->method)) throw new TaoBaoKeException('请检查method参数');
+        if (empty($this->app_key)) throw new TaoBaoException('请检查app_key参数');
+        if (empty($this->method)) throw new TaoBaoException('请检查method参数');
 
         $arr = [];
         $arr['app_key'] = $this->app_key;
@@ -184,7 +184,7 @@ class TaoBaoKeService extends Service
 
     /**
      * 网络请求
-     * @throws TaoBaoKeException
+     * @throws TaoBaoException
      */
     private function http()
     {
@@ -204,7 +204,7 @@ class TaoBaoKeService extends Service
     /**
      * 返回数组数据
      * @return array|mixed
-     * @throws CurlException|TaoBaoKeException
+     * @throws CurlException|TaoBaoException
      */
     public function toArray()
     {
@@ -220,7 +220,7 @@ class TaoBaoKeService extends Service
     /**
      * 返回Xml数据
      * @return mixed
-     * @throws CurlException|TaoBaoKeException
+     * @throws CurlException|TaoBaoException
      */
     public function toXml()
     {
@@ -234,12 +234,12 @@ class TaoBaoKeService extends Service
     /**
      * 签名
      * @return string
-     * @throws TaoBaoKeException
+     * @throws TaoBaoException
      */
     private function createSign()
     {
         $this->app_secret = empty($this->app_secret) ? config('dtapp.taobao.tbk.app_secret') : $this->app_secret;
-        if (empty($this->app_secret)) throw new TaoBaoKeException('请检查app_secret参数');
+        if (empty($this->app_secret)) throw new TaoBaoException('请检查app_secret参数');
 
         $sign = $this->app_secret;
         ksort($this->param);
