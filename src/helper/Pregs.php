@@ -153,7 +153,7 @@ class Pregs
      */
     public function isLink($url): bool
     {
-        if (preg_match("/http:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is", $url)) return true;
+        if (preg_match("/http|https:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is", $url)) return true;
         return false;
     }
 

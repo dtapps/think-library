@@ -20,27 +20,23 @@ use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\Curl\HttpService;
 
-/**
- * 微信公众号 - 消息管理
- * Class MessageManagementService
- * @package DtApp\ThinkLibrary\service\WeChat
- */
-class MessageManagementService extends Service
+class WiFiService extends Service
 {
     /**
-     * 设置所属行业
-     * https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html#0
+     * 连Wi-Fi完成页跳转小程序
+     * https://developers.weixin.qq.com/doc/offiaccount/WiFi_via_WeChat/WiFi_mini_programs.html
      * @param string $access_token
      * @param array $data
-     * @return bool|mixed|string
+     * @return array|bool|mixed|string
      * @throws CurlException
      */
-    public function setIndustry(string $access_token, array $data = [])
+    public function fiNihPageSet(string $access_token, array $data = [])
     {
-        $url = "https://api.weixin.qq.com/cgi-bin/template/api_set_industry?access_token={$access_token}";
+        $url = "https://api.weixin.qq.com/bizwifi/finishpage/set?access_token={$access_token}";
         if (is_array($data)) $data = json_encode($data);
         return HttpService::instance()
             ->url($url)
+            ->post()
             ->data($data)
             ->toArray();
     }
