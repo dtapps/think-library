@@ -20,6 +20,11 @@ use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\PinDouDouException;
 use DtApp\ThinkLibrary\Service;
 
+/**
+ * 进宝
+ * Class JinBaoService
+ * @package DtApp\ThinkLibrary\service\PinDuoDuo
+ */
 class JinBaoService extends Service
 {
     /**

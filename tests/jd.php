@@ -14,31 +14,22 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\TaoBao;
+use DtApp\ThinkLibrary\exception\CurlException;
+use DtApp\ThinkLibrary\exception\JdException;
+use DtApp\ThinkLibrary\service\Jd\UnionService;
 
-use DtApp\ThinkLibrary\Service;
+require '../vendor/autoload.php';
 
-class TbkItemService extends Service
-{
-    /**
-     * 淘宝客-公用-商品关联推荐
-     * https://open.taobao.com/api.htm?docId=24517&docType=2
-     */
-    public function recommend(string $fields, int $num_iid, int $count = 20, int $platform = 1)
-    {
-        $c = new \TopClient();
-        $c->appkey = $appkey;
-        $c->secretKey = $secret;
-        $req = new TbkIte;
-        $req->setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url");
-        $req->setNumIid("123");
-        $req->setCount("20");
-        $req->setPlatform("1");
-        $resp = $c->execute($req);
-    }
-
-    public function info()
-    {
-
-    }
+try {
+    dump(UnionService::instance()
+        ->param([
+            'eliteId' => 1
+        ])
+        ->goodsJIngFenQuery()
+        ->toArray()
+    );
+} catch (JdException $e) {
+    dump($e->getMessage());
+} catch (CurlException $e) {
+    dump($e->getMessage());
 }
