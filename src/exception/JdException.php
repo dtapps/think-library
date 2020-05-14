@@ -19,11 +19,11 @@ namespace DtApp\ThinkLibrary\exception;
 use Exception;
 
 /**
- * 京东联盟错误处理
+ * 京东错误处理
  * Class JdUnionException
  * @package DtApp\ThinkLibrary\exception
  */
-class JdUnionException extends Exception
+class JdException extends Exception
 {
     public function errorMessage()
     {

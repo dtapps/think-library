@@ -17,7 +17,7 @@
 namespace DtApp\ThinkLibrary\service\Curl;
 
 use DtApp\ThinkLibrary\exception\CurlException;
-use DtApp\ThinkLibrary\exception\JdUnionException;
+use DtApp\ThinkLibrary\exception\JdException;
 use DtApp\ThinkLibrary\Service;
 
 /**
@@ -135,13 +135,13 @@ class JdUnionService extends Service
      * 组参
      * @param array $array
      * @return $this
-     * @throws JdUnionException
+     * @throws JdException
      */
     public function data(array $array)
     {
         $this->app_key = empty($this->app_key) ? config('dtapp.jd.union.app_key') : $this->app_key;
-        if (empty($this->app_key)) throw new JdUnionException('请检查app_key参数');
-        if (empty($this->method)) throw new JdUnionException('请检查method参数');
+        if (empty($this->app_key)) throw new JdException('请检查app_key参数');
+        if (empty($this->method)) throw new JdException('请检查method参数');
 
         $arr = [];
         $arr['method'] = $this->method;
@@ -157,7 +157,7 @@ class JdUnionService extends Service
 
     /**
      * 网络请求
-     * @throws JdUnionException
+     * @throws JdException
      */
     private function http()
     {
@@ -175,7 +175,7 @@ class JdUnionService extends Service
     /**
      * 返回数组数据
      * @return array|mixed
-     * @throws CurlException|JdUnionException
+     * @throws CurlException|JdException
      */
     public function toArray()
     {
@@ -190,12 +190,12 @@ class JdUnionService extends Service
     /**
      * 签名
      * @return string
-     * @throws JdUnionException
+     * @throws JdException
      */
     private function createSign()
     {
         $this->secret_key = empty($this->secret_key) ? config('dtapp.jd.union.secret_key') : $this->secret_key;
-        if (empty($this->secret_key)) throw new JdUnionException('请检查secret_key参数');
+        if (empty($this->secret_key)) throw new JdException('请检查secret_key参数');
 
         $sign = $this->secret_key;
         ksort($this->param);
