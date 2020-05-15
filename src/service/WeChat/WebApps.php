@@ -139,28 +139,30 @@ class WebApps extends Service
     /**
      * 通过code换取网页授权access_token
      * @param string $code
+     * @param bool $is
      * @return array|bool|mixed|string
      * @throws CurlException
      */
-    public function accessToken(string $code)
+    public function accessToken(string $code, bool $is = false)
     {
         return HttpService::instance()
             ->url("{$this->url}/sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
-            ->toArray();
+            ->toArray($is);
     }
 
     /**
      * 刷新access_token（如果需要）
      * @param string $refreshToken
+     * @param bool $is
      * @return array|bool|mixed|string
      * @throws CurlException
      */
-    public function refreshToken(string $refreshToken)
+    public function refreshToken(string $refreshToken, bool $is = false)
     {
         $this->grant_type = "refresh_token";
         return HttpService::instance()
             ->url("{$this->url}/sns/oauth2/refresh_token?appid={$this->app_id}&grant_type={$this->grant_type}&refresh_token={$refreshToken}")
-            ->toArray();
+            ->toArray($is);
     }
 
     /**
@@ -168,27 +170,29 @@ class WebApps extends Service
      * @param string $accessToken
      * @param string $openid
      * @param string $lang
+     * @param bool $is
      * @return array|bool|mixed|string
      * @throws CurlException
      */
-    public function useInfo(string $accessToken, string $openid, $lang = "zh_CN")
+    public function useInfo(string $accessToken, string $openid, $lang = "zh_CN", bool $is = false)
     {
         return HttpService::instance()
             ->url("{$this->url}/sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}")
-            ->toArray();
+            ->toArray($is);
     }
 
     /**
      * 检验授权凭证（access_token）是否有效
      * @param string $accessToken
      * @param string $openid
+     * @param bool $is
      * @return array|bool|mixed|string
      * @throws CurlException
      */
-    public function auth(string $accessToken, string $openid)
+    public function auth(string $accessToken, string $openid, bool $is = false)
     {
         return HttpService::instance()
             ->url("{$this->url}/sns/auth?access_token={$accessToken}&openid={$openid}")
-            ->toArray();
+            ->toArray($is);
     }
 }
