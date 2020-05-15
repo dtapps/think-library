@@ -145,13 +145,7 @@ class WebApps extends Service
     public function accessToken(string $code)
     {
         return HttpService::instance()
-            ->url("{$this->url}/sns/oauth2/access_token")
-            ->data([
-                'appid' => $this->app_id,
-                'secret' => $this->app_secret,
-                'code' => $code,
-                'grant_type' => $this->grant_type
-            ])
+            ->url("{$this->url}/sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
             ->toArray();
     }
 
@@ -165,12 +159,7 @@ class WebApps extends Service
     {
         $this->grant_type = "refresh_token";
         return HttpService::instance()
-            ->url("{$this->url}/sns/oauth2/refresh_token")
-            ->data([
-                'appid' => $this->app_id,
-                'grant_type' => $this->grant_type,
-                'refresh_token' => $refreshToken
-            ])
+            ->url("{$this->url}/sns/oauth2/refresh_token?appid={$this->app_id}&grant_type={$this->grant_type}&refresh_token={$refreshToken}")
             ->toArray();
     }
 
@@ -185,12 +174,7 @@ class WebApps extends Service
     public function useInfo(string $accessToken, string $openid, $lang = "zh_CN")
     {
         return HttpService::instance()
-            ->url("{$this->url}/sns/userinfo")
-            ->data([
-                'access_token' => $accessToken,
-                'openid' => $openid,
-                'lang' => $lang
-            ])
+            ->url("{$this->url}/sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}")
             ->toArray();
     }
 
@@ -204,11 +188,7 @@ class WebApps extends Service
     public function auth(string $accessToken, string $openid)
     {
         return HttpService::instance()
-            ->url("{$this->url}/sns/auth")
-            ->data([
-                'access_token' => $accessToken,
-                'openid' => $openid
-            ])
+            ->url("{$this->url}/sns/auth?access_token={$accessToken}&openid={$openid}")
             ->toArray();
     }
 }
