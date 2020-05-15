@@ -146,7 +146,6 @@ class WebApps extends Service
      */
     public function accessToken(string $code, bool $is = false)
     {
-        dump("{$this->api_url}sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}");
         return HttpService::instance()
             ->url("{$this->api_url}sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
             ->toArray($is);
