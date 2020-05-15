@@ -144,7 +144,7 @@ class WebApps extends Service
      * @return array|bool|mixed|string
      * @throws CurlException
      */
-    public function accessToken(string $code, bool $is = false)
+    public function accessToken(string $code, bool $is = true)
     {
         return HttpService::instance()
             ->url("{$this->api_url}sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
@@ -158,7 +158,7 @@ class WebApps extends Service
      * @return array|bool|mixed|string
      * @throws CurlException
      */
-    public function refreshToken(string $refreshToken, bool $is = false)
+    public function refreshToken(string $refreshToken, bool $is = true)
     {
         $this->grant_type = "refresh_token";
         return HttpService::instance()
@@ -175,7 +175,7 @@ class WebApps extends Service
      * @return array|bool|mixed|string
      * @throws CurlException
      */
-    public function useInfo(string $accessToken, string $openid, $lang = "zh_CN", bool $is = false)
+    public function useInfo(string $accessToken, string $openid, $lang = "zh_CN", bool $is = true)
     {
         return HttpService::instance()
             ->url("{$this->api_url}sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}")
@@ -190,7 +190,7 @@ class WebApps extends Service
      * @return array|bool|mixed|string
      * @throws CurlException
      */
-    public function auth(string $accessToken, string $openid, bool $is = false)
+    public function auth(string $accessToken, string $openid, bool $is = true)
     {
         return HttpService::instance()
             ->url("{$this->api_url}sns/auth?access_token={$accessToken}&openid={$openid}")
