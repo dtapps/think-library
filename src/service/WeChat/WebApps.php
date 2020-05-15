@@ -196,4 +196,45 @@ class WebApps extends Service
             ->url("{$this->api_url}sns/auth?access_token={$accessToken}&openid={$openid}")
             ->toArray($is);
     }
+
+    /**
+     * 分享
+     * @param string $accessToken
+     * @param string $appId
+     * @return array
+     * @throws CurlException
+     * @throws WeChatException
+     */
+    public function share(string $accessToken, string $appId)
+    {
+        $res = HttpService::instance()
+            ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken}&type=jsapi")
+            ->toArray();
+        if (!empty($res['errcode'])) throw new WeChatException('accessToken已过期');
+        // 注意 URL 一定要动态获取，不能 hardcode.
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $timestamp = time();
+        $nonceStr = $this->createNonceStr();
+        // 获得jsapi_ticket之后，就可以生成JS-SDK权限验证的签名了。
+        $jsapiTicket = $res['ticket'];
+        // 这里参数的顺序要按照 key 值 ASCII 码升序排序
+        $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
+        return [
+            "appId" => $appId,
+            "nonceStr" => $nonceStr,
+            "timestamp" => $timestamp,
+            "url" => $url,
+            "signature" => sha1($string),
+            "rawString" => $string
+        ];
+    }
+
+    private function createNonceStr($length = 16)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $str = "";
+        for ($i = 0; $i < $length; $i++) $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+        return $str;
+    }
 }
