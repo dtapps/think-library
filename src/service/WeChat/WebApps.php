@@ -29,7 +29,8 @@ use DtApp\ThinkLibrary\service\Curl\HttpService;
  */
 class WebApps extends Service
 {
-    private $url = "https://open.weixin.qq.com/";
+    private $open_url = "https://open.weixin.qq.com/";
+    private $api_url = "https://api.weixin.qq.com/";
 
     /**
      * 公众号的唯一标识
@@ -133,11 +134,13 @@ class WebApps extends Service
             'scope' => $this->scope,
             'state' => $this->state
         ]);
-        return header("Location:{$this->url}connect/oauth2/authorize?$params#wechat_redirect");
+        return header("Location:{$this->open_url}connect/oauth2/authorize?$params#wechat_redirect");
     }
 
     /**
      * 通过code换取网页授权access_token
+     * https://open.weixin.qq.com/sns/oauth2/access_token?appid=wx277cd242fb0ec11b&secret=082efbc59b97b41d349f15612a1b4b55&code=021JTZym1c3Zzn0eDgzm122Yym1JTZy7&grant_type=authorization_code
+     * https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
      * @param string $code
      * @param bool $is
      * @return array|bool|mixed|string
@@ -146,7 +149,7 @@ class WebApps extends Service
     public function accessToken(string $code, bool $is = false)
     {
         return HttpService::instance()
-            ->url("{$this->url}/sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
+            ->url("{$this->api_url}/sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
             ->toArray($is);
     }
 
@@ -161,7 +164,7 @@ class WebApps extends Service
     {
         $this->grant_type = "refresh_token";
         return HttpService::instance()
-            ->url("{$this->url}/sns/oauth2/refresh_token?appid={$this->app_id}&grant_type={$this->grant_type}&refresh_token={$refreshToken}")
+            ->url("{$this->api_url}sns/oauth2/refresh_token?appid={$this->app_id}&grant_type={$this->grant_type}&refresh_token={$refreshToken}")
             ->toArray($is);
     }
 
@@ -177,7 +180,7 @@ class WebApps extends Service
     public function useInfo(string $accessToken, string $openid, $lang = "zh_CN", bool $is = false)
     {
         return HttpService::instance()
-            ->url("{$this->url}/sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}")
+            ->url("{$this->api_url}sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}")
             ->toArray($is);
     }
 
@@ -192,7 +195,7 @@ class WebApps extends Service
     public function auth(string $accessToken, string $openid, bool $is = false)
     {
         return HttpService::instance()
-            ->url("{$this->url}/sns/auth?access_token={$accessToken}&openid={$openid}")
+            ->url("{$this->api_url}sns/auth?access_token={$accessToken}&openid={$openid}")
             ->toArray($is);
     }
 }
