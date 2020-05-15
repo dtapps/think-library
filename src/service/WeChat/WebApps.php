@@ -139,8 +139,6 @@ class WebApps extends Service
 
     /**
      * 通过code换取网页授权access_token
-     * https://open.weixin.qq.com/sns/oauth2/access_token?appid=wx277cd242fb0ec11b&secret=082efbc59b97b41d349f15612a1b4b55&code=021JTZym1c3Zzn0eDgzm122Yym1JTZy7&grant_type=authorization_code
-     * https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
      * @param string $code
      * @param bool $is
      * @return array|bool|mixed|string
@@ -148,6 +146,7 @@ class WebApps extends Service
      */
     public function accessToken(string $code, bool $is = false)
     {
+        dump("{$this->api_url}sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}");
         return HttpService::instance()
             ->url("{$this->api_url}sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
             ->toArray($is);
