@@ -205,16 +205,33 @@ class WebApps extends Service
      */
     public function share()
     {
-        $accessToken = cache($this->app_id . '_access_token', '');
-        if (empty($accessToken)) {
+        // 文件名
+        $file = "{$this->app->getRootPath()}runtime/{$this->app_id}_access_token.json";
+        // 获取数据
+        $accessToken = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
+        if (empty($accessToken) || !is_array($accessToken)) $accessToken = [
+            'access_token' => '',
+            'expires_in' => '',
+            'expires_time' => '',
+        ];
+        if (empty($accessToken['expires_time'])) {
             $accessToken_res = HttpService::instance()
                 ->url("{$this->api_url}cgi-bin/token/grant_type?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                 ->toArray();
-            cache($this->app_id . '_access_token', $accessToken_res['access_token'], 6000);
-            $accessToken = $accessToken_res['access_token'];
+            $accessToken_res['expires_time'] = time() + 6000;
+            file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
+            $accessToken = $accessToken_res;
+        } else if ($accessToken['expires_time'] <= time()) {
+            $accessToken_res = HttpService::instance()
+                ->url("{$this->api_url}cgi-bin/token/grant_type?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                ->toArray();
+            $accessToken_res['expires_time'] = time() + 6000;
+            file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
+            $accessToken = $accessToken_res;
         }
+
         $res = HttpService::instance()
-            ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken}&type=jsapi")
+            ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken['expires_time']}&type=jsapi")
             ->toArray();
         dump($res);
         if (!empty($res['errcode'])) throw new WeChatException('accessToken已过期');
