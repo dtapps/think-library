@@ -206,6 +206,64 @@ class WebApps extends Service
     public function share()
     {
         $this->grant_type = "client_credential";
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        if (!isset($accessToken['access_token'])) throw  new WeChatException("获取access_token错误，" . $accessToken['errmsg']);
+        $res = HttpService::instance()
+            ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
+            ->toArray();
+        if (!empty($res['errcode'])) throw new WeChatException('accessToken已过期');
+        // 注意 URL 一定要动态获取，不能 hardcode.
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $timestamp = time();
+        $nonceStr = $this->createNonceStr();
+        // 获得jsapi_ticket之后，就可以生成JS-SDK权限验证的签名了。
+        $jsapiTicket = $res['ticket'];
+        // 这里参数的顺序要按照 key 值 ASCII 码升序排序
+        $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
+        return [
+            "appId" => $this->app_id,
+            "nonceStr" => $nonceStr,
+            "timestamp" => $timestamp,
+            "url" => $url,
+            "signature" => sha1($string),
+            "rawString" => $string
+        ];
+    }
+
+    private function createNonceStr($length = 16)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $str = "";
+        for ($i = 0; $i < $length; $i++) $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+        return $str;
+    }
+
+    /**
+     * 生成二维码
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws CurlException
+     */
+    public function qrCode(array $data)
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        return HttpService::instance()
+            ->url("{$this->api_url}cgi-bin/qrcode/create?access_token={$accessToken['access_token']}")
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 获取access_token信息
+     * @return array|bool|mixed|string|string[]
+     * @throws CurlException
+     */
+    private function getAccessToken()
+    {
         // 文件名
         $file = "{$this->app->getRootPath()}runtime/{$this->app_id}_access_token.json";
         // 获取数据
@@ -237,35 +295,6 @@ class WebApps extends Service
             file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
             $accessToken = $accessToken_res;
         }
-        if (!isset($accessToken['access_token'])) throw  new WeChatException("获取access_token错误，" . $accessToken['errmsg']);
-        $res = HttpService::instance()
-            ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
-            ->toArray();
-        if (!empty($res['errcode'])) throw new WeChatException('accessToken已过期');
-        // 注意 URL 一定要动态获取，不能 hardcode.
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $timestamp = time();
-        $nonceStr = $this->createNonceStr();
-        // 获得jsapi_ticket之后，就可以生成JS-SDK权限验证的签名了。
-        $jsapiTicket = $res['ticket'];
-        // 这里参数的顺序要按照 key 值 ASCII 码升序排序
-        $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
-        return [
-            "appId" => $this->app_id,
-            "nonceStr" => $nonceStr,
-            "timestamp" => $timestamp,
-            "url" => $url,
-            "signature" => sha1($string),
-            "rawString" => $string
-        ];
-    }
-
-    private function createNonceStr($length = 16)
-    {
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        $str = "";
-        for ($i = 0; $i < $length; $i++) $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
-        return $str;
+        return $accessToken;
     }
 }
