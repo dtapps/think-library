@@ -199,14 +199,20 @@ class WebApps extends Service
 
     /**
      * 分享
-     * @param string $accessToken
-     * @param string $appId
      * @return array
      * @throws CurlException
      * @throws WeChatException
      */
-    public function share(string $accessToken, string $appId)
+    public function share()
     {
+        $accessToken = cache($this->app_id . '_access_token', '');
+        if (empty($accessToken)) {
+            $accessToken_res = HttpService::instance()
+                ->url("{$this->api_url}cgi-bin/token/grant_type?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                ->toArray();
+            cache($this->app_id . '_access_token', $accessToken_res['access_token'], 6000);
+            $accessToken = $accessToken_res['access_token'];
+        }
         $res = HttpService::instance()
             ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken}&type=jsapi")
             ->toArray();
@@ -222,7 +228,7 @@ class WebApps extends Service
         // 这里参数的顺序要按照 key 值 ASCII 码升序排序
         $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
         return [
-            "appId" => $appId,
+            "appId" => $this->app_id,
             "nonceStr" => $nonceStr,
             "timestamp" => $timestamp,
             "url" => $url,
