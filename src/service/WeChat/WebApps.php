@@ -205,7 +205,6 @@ class WebApps extends Service
      */
     public function share()
     {
-        $this->grant_type = "client_credential";
         // 获取数据
         $accessToken = $this->getAccessToken();
         if (!isset($accessToken['access_token'])) throw  new WeChatException("获取access_token错误，" . $accessToken['errmsg']);
@@ -264,6 +263,7 @@ class WebApps extends Service
      */
     private function getAccessToken()
     {
+        $this->grant_type = "client_credential";
         // 文件名
         $file = "{$this->app->getRootPath()}runtime/{$this->app_id}_access_token.json";
         // 获取数据

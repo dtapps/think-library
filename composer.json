@@ -30,6 +30,7 @@
     "ext-bcmath": "*",
     "ext-iconv": "*",
     "ext-curl": "*",
+    "ext-dom": "*",
     "topthink/framework": "^6.0.0",
     "topthink/think-orm": "^2.0",
     "topthink/think-view": "^1.0",
