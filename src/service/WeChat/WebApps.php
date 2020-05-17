@@ -257,6 +257,24 @@ class WebApps extends Service
     }
 
     /**
+     * 发送模板消息
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws CurlException
+     */
+    public function messageTemplateSend(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$accessToken['access_token']}";
+        if (is_array($data)) $data = json_encode($data);
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->toArray();
+    }
+
+    /**
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
      * @throws CurlException
