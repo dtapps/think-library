@@ -133,7 +133,7 @@ class TbkService extends Service
     public function param(array $param, string $name = '')
     {
         if (empty($name)) $this->param = $param;
-        else  $this->param[$name] = $param;
+        else  $this->param["$name"] = json_encode($param);
         return $this;
     }
 
