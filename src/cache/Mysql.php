@@ -86,6 +86,7 @@ class Mysql
         if (empty($this->cache_name)) throw new CacheException("名称未配置");
         $cache = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
+            ->order('id desc')
             ->field('cache_expire,cache_value')
             ->find();
         if (empty($cache['cache_expire'])) return $cache['cache_value'];
