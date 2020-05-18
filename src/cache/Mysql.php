@@ -47,10 +47,10 @@ class Mysql
 
     /**
      * 过期时间
-     * @param string $cache_expire
+     * @param int $cache_expire
      * @return $this
      */
-    public function expire(string $cache_expire)
+    public function expire(int $cache_expire)
     {
         $this->cache_expire = $cache_expire;
         return $this;
@@ -69,7 +69,7 @@ class Mysql
             ->insert([
                 'cache_name' => $this->cache_name,
                 'cache_value' => $cache_value,
-                'cache_expire' => Times::dateRear($this->cache_expire)
+                'cache_expire' => Times::dateRear("Y-m-d H:i:s", $this->cache_expire)
             ]);
     }
 
@@ -89,7 +89,7 @@ class Mysql
             ->field('cache_expire,cache_value')
             ->find();
         if (empty($cache['cache_expire'])) return $cache['cache_value'];
-        if ($cache['cache_expire'] < time()) return "";
+        if ($cache['cache_expire'] < time()) return false;
         return $cache['cache_value'];
     }
 
@@ -102,9 +102,10 @@ class Mysql
     public function delete()
     {
         if (empty($this->cache_name)) throw new CacheException("名称未配置");
-        return Db::table($this->table)
+        $result = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->delete();
+        return $result ? true : false;
     }
 
     /**
@@ -118,18 +119,20 @@ class Mysql
     {
         if (empty($this->cache_name)) throw new CacheException("名称未配置");
         if (empty($this->cache_expire)) {
-            return Db::table($this->table)
-                ->where('cache_name', $this->cache_name)
-                ->update([
-                    'cache_value' => $this->cache_expire,
-                ]);
-        } else {
-            return Db::table($this->table)
+            $result = Db::table($this->table)
                 ->where('cache_name', $this->cache_name)
                 ->update([
                     'cache_value' => $cache_value,
-                    'cache_expire' => $this->cache_expire
                 ]);
+            return $result ? true : false;
+        } else {
+            $result = Db::table($this->table)
+                ->where('cache_name', $this->cache_name)
+                ->update([
+                    'cache_value' => $cache_value,
+                    'cache_expire' => Times::dateRear("Y-m-d H:i:s", $this->cache_expire)
+                ]);
+            return $result ? true : false;
         }
     }
 
