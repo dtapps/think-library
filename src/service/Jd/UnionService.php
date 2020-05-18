@@ -124,11 +124,13 @@ class UnionService extends Service
     /**
      * 组参
      * @param array $param
+     * @param string $name
      * @return $this
      */
-    public function param(array $param)
+    public function param(array $param, string $name = '')
     {
-        $this->param = $param;
+        if (empty($name)) $this->param = $param;
+        else  $this->param[$name] = $param;
         return $this;
     }
 

@@ -115,11 +115,13 @@ class JinBaoService extends Service
     /**
      * 请求参数
      * @param array $param
+     * @param string $name
      * @return $this
      */
-    public function param(array $param)
+    public function param(array $param, string $name = '')
     {
-        $this->param = $param;
+        if (empty($name)) $this->param = $param;
+        else  $this->param[$name] = $param;
         return $this;
     }
 
@@ -456,7 +458,7 @@ class JinBaoService extends Service
     private function createStrParam()
     {
         $strParam = '';
-        foreach ($this->param as $key => $val) if ($key != '' && $val != '') $strParam .= $key . '=' . urlencode($val) . '&';
+        foreach ($this->param as $key => $val) if ($key != '' && $val != '' && !is_array($val)) $strParam .= $key . '=' . urlencode($val) . '&';
         return $strParam;
     }
 }
