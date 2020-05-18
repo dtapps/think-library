@@ -16,6 +16,8 @@
 
 namespace DtApp\ThinkLibrary\service\WeChat;
 
+use DtApp\ThinkLibrary\cache\Mysql;
+use DtApp\ThinkLibrary\exception\CacheException;
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\WeChatException;
 use DtApp\ThinkLibrary\facade\Pregs;
@@ -58,6 +60,12 @@ class WebApps extends Service
     private $scope = "snsapi_base";
     private $state = "";
     private $grant_type = "authorization_code";
+
+    /**
+     * 驱动方式
+     * @var string
+     */
+    private $cache = "file";
 
     /**
      * 公众号的唯一标识
@@ -116,6 +124,17 @@ class WebApps extends Service
     public function state(string $state)
     {
         $this->state = $state;
+        return $this;
+    }
+
+    /**
+     * 驱动方式
+     * @param string $cache
+     * @return $this
+     */
+    public function cache(string $cache)
+    {
+        $this->cache = $cache;
         return $this;
     }
 
@@ -201,7 +220,7 @@ class WebApps extends Service
      * 分享
      * @return array
      * @throws CurlException
-     * @throws WeChatException
+     * @throws WeChatException|CacheException
      */
     public function share()
     {
@@ -243,7 +262,9 @@ class WebApps extends Service
      * 生成二维码
      * @param array $data
      * @return array|bool|mixed|string
+     * @throws CacheException
      * @throws CurlException
+     * @throws WeChatException
      */
     public function qrCode(array $data)
     {
@@ -260,7 +281,9 @@ class WebApps extends Service
      * 发送模板消息
      * @param array $data
      * @return array|bool|mixed|string
+     * @throws CacheException
      * @throws CurlException
+     * @throws WeChatException
      */
     public function messageTemplateSend(array $data = [])
     {
@@ -278,7 +301,9 @@ class WebApps extends Service
      * 将一条长链接转成短链接
      * @param string $long_url
      * @return bool
+     * @throws CacheException
      * @throws CurlException
+     * @throws WeChatException
      */
     public function shortUrl(string $long_url)
     {
@@ -298,41 +323,66 @@ class WebApps extends Service
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
      * @throws CurlException
+     * @throws CacheException|WeChatException
      */
     private function getAccessToken()
     {
         $this->grant_type = "client_credential";
-        // 文件名
-        $file = "{$this->app->getRootPath()}runtime/{$this->app_id}_access_token.json";
-        // 获取数据
-        $accessToken = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
-        if (empty($accessToken) || !is_array($accessToken)) $accessToken = [
-            'access_token' => '',
-            'expires_in' => '',
-            'expires_time' => '',
-        ];
-        if (empty($accessToken['expires_time'])) {
-            $accessToken_res = HttpService::instance()
-                ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
-                ->toArray();
-            $accessToken_res['expires_time'] = time() + 6000;
-            file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
-            $accessToken = $accessToken_res;
-        } else if (!isset($accessToken['access_token'])) {
-            $accessToken_res = HttpService::instance()
-                ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
-                ->toArray();
-            $accessToken_res['expires_time'] = time() + 6000;
-            file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
-            $accessToken = $accessToken_res;
-        } else if ($accessToken['expires_time'] <= time()) {
-            $accessToken_res = HttpService::instance()
-                ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
-                ->toArray();
-            $accessToken_res['expires_time'] = time() + 6000;
-            file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
-            $accessToken = $accessToken_res;
-        }
-        return $accessToken;
+        if ($this->cache == "file") {
+            // 文件名
+            $file = "{$this->app->getRootPath()}runtime/{$this->app_id}_access_token.json";
+            // 获取数据
+            $accessToken = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
+            if (empty($accessToken) || !is_array($accessToken)) $accessToken = [
+                'access_token' => '',
+                'expires_in' => '',
+                'expires_time' => '',
+            ];
+            if (empty($accessToken['expires_time'])) {
+                $accessToken_res = HttpService::instance()
+                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->toArray();
+                $accessToken_res['expires_time'] = time() + 6000;
+                file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
+                $accessToken = $accessToken_res;
+            } else if (!isset($accessToken['access_token'])) {
+                $accessToken_res = HttpService::instance()
+                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->toArray();
+                $accessToken_res['expires_time'] = time() + 6000;
+                file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
+                $accessToken = $accessToken_res;
+            } else if ($accessToken['expires_time'] <= time()) {
+                $accessToken_res = HttpService::instance()
+                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->toArray();
+                $accessToken_res['expires_time'] = time() + 6000;
+                file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
+                $accessToken = $accessToken_res;
+            }
+            return $accessToken;
+        } else if ($this->cache == "mysql") {
+            $access_token = [];
+            // 文件名
+            $file = "{$this->app_id}_access_token";
+            // 获取数据
+            $cache_mysql = new Mysql();
+            $cache_mysql_value = $cache_mysql
+                ->name($file)
+                ->get();
+            if (!empty($cache_mysql_value)) {
+                $access_token['access_token'] = $cache_mysql_value;
+            } else {
+                $accessToken_res = HttpService::instance()
+                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->toArray();
+                $cache_mysql
+                    ->name($file)
+                    ->expire(time() + 6000)
+                    ->set($accessToken_res['access_token']);
+                $access_token['access_token'] = $accessToken_res['access_token'];
+            }
+            return $access_token;
+        } else throw new WeChatException("驱动方式错误");
     }
 }
