@@ -18,9 +18,7 @@ namespace DtApp\ThinkLibrary\cache;
 
 use DtApp\ThinkLibrary\exception\CacheException;
 use DtApp\ThinkLibrary\facade\Times;
-use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
-use think\db\exception\ModelNotFoundException;
 use think\facade\Db;
 
 /**
@@ -77,21 +75,15 @@ class Mysql
      * 获取
      * @return string
      * @throws CacheException
-     * @throws DbException
-     * @throws DataNotFoundException
-     * @throws ModelNotFoundException
      */
     public function get()
     {
         if (empty($this->cache_name)) throw new CacheException("名称未配置");
-        $cache = Db::table($this->table)
+        return Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->order('id desc')
-            ->field('cache_expire,cache_value')
-            ->find();
-        if (empty($cache['cache_expire'])) return $cache['cache_value'];
-        if ($cache['cache_expire'] < time()) return false;
-        return $cache['cache_value'];
+            ->whereTime('cache_expire', '>', time())
+            ->value('cache_value', '');
     }
 
     /**
@@ -119,22 +111,13 @@ class Mysql
     public function update($cache_value)
     {
         if (empty($this->cache_name)) throw new CacheException("名称未配置");
-        if (empty($this->cache_expire)) {
-            $result = Db::table($this->table)
-                ->where('cache_name', $this->cache_name)
-                ->update([
-                    'cache_value' => $cache_value,
-                ]);
-            return $result ? true : false;
-        } else {
-            $result = Db::table($this->table)
-                ->where('cache_name', $this->cache_name)
-                ->update([
-                    'cache_value' => $cache_value,
-                    'cache_expire' => Times::dateRear("Y-m-d H:i:s", $this->cache_expire)
-                ]);
-            return $result ? true : false;
-        }
+        $result = Db::table($this->table)
+            ->where('cache_name', $this->cache_name)
+            ->update([
+                'cache_value' => $cache_value,
+                'cache_expire' => Times::dateRear("Y-m-d H:i:s", $this->cache_expire)
+            ]);
+        return $result ? true : false;
     }
 
     /**
