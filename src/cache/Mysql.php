@@ -63,12 +63,13 @@ class Mysql
     public function set($cache_value)
     {
         if (empty($this->cache_name)) throw new CacheException("名称未配置");
-        return Db::table($this->table)
+        $result = Db::table($this->table)
             ->insert([
                 'cache_name' => $this->cache_name,
                 'cache_value' => $cache_value,
                 'cache_expire' => Times::dateRear("Y-m-d H:i:s", $this->cache_expire)
             ]);
+        return $result ? true : false;
     }
 
     /**
