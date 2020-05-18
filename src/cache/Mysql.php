@@ -17,6 +17,7 @@
 namespace DtApp\ThinkLibrary\cache;
 
 use DtApp\ThinkLibrary\exception\CacheException;
+use DtApp\ThinkLibrary\facade\Times;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
 use think\db\exception\ModelNotFoundException;
@@ -68,7 +69,7 @@ class Mysql
             ->insert([
                 'cache_name' => $this->cache_name,
                 'cache_value' => $cache_value,
-                'cache_expire' => $this->cache_expire
+                'cache_expire' =>  Times::dateRear("Y-m-d H:i:s", $this->cache_expire)
             ]);
     }
 
