@@ -369,10 +369,6 @@ class ApiService extends Service
      */
     protected function HttpPostCookie(string $url, array $data = [], bool $is_json = true)
     {
-        $config = [
-            'bt_panel' => $this->panel,
-            'bt_key' => $this->key
-        ];
         //定义cookie保存位置
         $file = app()->getRootPath() . 'runtime/dtapp/bt/cookie/';
         $cookie_file = $file . md5($this->panel) . '.cookie';
