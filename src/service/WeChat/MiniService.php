@@ -22,10 +22,10 @@ use DtApp\ThinkLibrary\service\Curl\HttpService;
 
 /**
  * 微信小程序
- * Class WeChatMiniService
+ * Class MiniService
  * @package DtApp\ThinkLibrary\service\WeChat
  */
-class WeChatMiniService extends Service
+class MiniService extends Service
 {
     private $api_url = "https://api.weixin.qq.com/";
 
