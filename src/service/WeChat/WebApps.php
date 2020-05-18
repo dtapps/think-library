@@ -276,12 +276,11 @@ class WebApps extends Service
 
     /**
      * 将一条长链接转成短链接
-     * @param string $url 网址
-     * @param string $accessToken token
+     * @param string $long_url
      * @return bool
      * @throws CurlException
      */
-    public function shortUrl(string $url, string $accessToken)
+    public function shortUrl(string $long_url)
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
@@ -290,7 +289,7 @@ class WebApps extends Service
             ->url($url)
             ->data([
                 'action' => 'long2short',
-                'long_url' => $url
+                'long_url' => $long_url
             ])
             ->toArray();
     }
