@@ -275,6 +275,31 @@ class WebApps extends Service
     }
 
     /**
+     * 将一条长链接转成短链接
+     * @param string $url 网址
+     * @param string $accessToken token
+     * @return bool
+     * @throws CurlException
+     */
+    public function shortUrl(string $url, string $accessToken)
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $data = [
+            'access_token' => $accessToken['access_token']
+        ];
+        $params = Urls::toParams($data);
+        $url = 'https://api.weixin.qq.com/cgi-bin/shorturl' . "?$params";
+        return HttpService::instance()
+            ->url($url)
+            ->data([
+                'action' => 'long2short',
+                'long_url' => $url
+            ])
+            ->toArray();
+    }
+
+    /**
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
      * @throws CurlException
