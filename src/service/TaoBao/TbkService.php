@@ -131,7 +131,11 @@ class TbkService extends Service
      */
     public function param(array $param)
     {
-        $this->param = $param;
+        if ($this->method == 'taobao.tbk.spread.get') {
+            $this->param['requests'] = $param;
+        } else {
+            $this->param = $param;
+        }
         return $this;
     }
 
