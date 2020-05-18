@@ -17,7 +17,9 @@
 namespace DtApp\ThinkLibrary\cache;
 
 use DtApp\ThinkLibrary\exception\CacheException;
+use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
+use think\db\exception\ModelNotFoundException;
 use think\facade\Db;
 
 /**
@@ -74,13 +76,17 @@ class Mysql
      * 获取
      * @return string
      * @throws CacheException
+     * @throws DbException
+     * @throws DataNotFoundException
+     * @throws ModelNotFoundException
      */
     public function get()
     {
         if (empty($this->cache_name)) throw new CacheException("名称未配置");
         $cache = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
-            ->field('cache_expire,cache_value');
+            ->field('cache_expire,cache_value')
+            ->find();
         if (empty($cache['cache_expire'])) return $cache['cache_value'];
         if ($cache['cache_expire'] < time()) return "";
         return $cache['cache_value'];

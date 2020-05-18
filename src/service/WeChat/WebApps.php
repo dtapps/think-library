@@ -24,6 +24,9 @@ use DtApp\ThinkLibrary\facade\Pregs;
 use DtApp\ThinkLibrary\facade\Urls;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\Curl\HttpService;
+use think\db\exception\DataNotFoundException;
+use think\db\exception\DbException;
+use think\db\exception\ModelNotFoundException;
 
 /**
  * Class WebApps
@@ -219,8 +222,12 @@ class WebApps extends Service
     /**
      * 分享
      * @return array
+     * @throws CacheException
      * @throws CurlException
-     * @throws WeChatException|CacheException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
+     * @throws WeChatException
      */
     public function share()
     {
@@ -264,6 +271,9 @@ class WebApps extends Service
      * @return array|bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function qrCode(array $data)
@@ -283,6 +293,9 @@ class WebApps extends Service
      * @return array|bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function messageTemplateSend(array $data = [])
@@ -303,6 +316,9 @@ class WebApps extends Service
      * @return bool
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function shortUrl(string $long_url)
@@ -322,8 +338,12 @@ class WebApps extends Service
     /**
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
+     * @throws CacheException
      * @throws CurlException
-     * @throws CacheException|WeChatException
+     * @throws WeChatException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      */
     private function getAccessToken()
     {
