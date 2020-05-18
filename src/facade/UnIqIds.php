@@ -27,9 +27,9 @@ use think\Facade;
  * @package think\facade
  * @mixin helper
  *
- * @method helper random($size = 10, $type = 1, $prefix = '') static 获取随机字符串编码
- * @method helper date($size = 16, $prefix = '') static 唯一日期编码
- * @method helper number($size = 12, $prefix = '') static 唯一数字编码
+ * @method helper random($size = 10, $type = 1, $prefix = '') string 获取随机字符串编码
+ * @method helper date($size = 16, $prefix = '') string 唯一日期编码
+ * @method helper number($size = 12, $prefix = '') string 唯一数字编码
  */
 class UnIqIds extends Facade
 {

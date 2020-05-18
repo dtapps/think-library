@@ -27,9 +27,9 @@ use think\Facade;
  * @package think\facade
  * @mixin helper
  *
- * @method helper lenCode(string $url) static 编码
- * @method helper deCode(string $url) static 解码
- * @method helper toParams(array $data) static 格式化参数格式化成url参数
+ * @method helper lenCode(string $url) string 编码
+ * @method helper deCode(string $url) string 解码
+ * @method helper toParams(array $data) string 格式化参数格式化成url参数
  */
 class Urls extends Facade
 {

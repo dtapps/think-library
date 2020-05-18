@@ -266,7 +266,7 @@ class WebApps extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$accessToken['access_token']}";
+        $url = "{$this->api_url}cgi-bin/message/template/send?access_token={$accessToken['access_token']}";
         if (is_array($data)) $data = json_encode($data);
         return HttpService::instance()
             ->url($url)
@@ -285,11 +285,7 @@ class WebApps extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $data = [
-            'access_token' => $accessToken['access_token']
-        ];
-        $params = Urls::toParams($data);
-        $url = 'https://api.weixin.qq.com/cgi-bin/shorturl' . "?$params";
+        $url = "{$this->api_url}cgi-bin/shorturl?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data([
