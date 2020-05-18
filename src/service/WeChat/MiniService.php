@@ -447,7 +447,7 @@ class MiniService extends Service
                     ->toArray();
                 $cache_mysql
                     ->name($file)
-                    ->expire(time() + 6000)
+                    ->expire(6000)
                     ->set($accessToken_res['access_token']);
                 $access_token['access_token'] = $accessToken_res['access_token'];
             }

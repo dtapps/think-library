@@ -69,7 +69,7 @@ class Mysql
             ->insert([
                 'cache_name' => $this->cache_name,
                 'cache_value' => $cache_value,
-                'cache_expire' =>  Times::dateRear("Y-m-d H:i:s", $this->cache_expire)
+                'cache_expire' => Times::dateRear($this->cache_expire)
             ]);
     }
 
