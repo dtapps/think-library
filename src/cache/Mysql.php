@@ -65,7 +65,7 @@ class Mysql
         return Db::table($this->table)
             ->insert([
                 'cache_name' => $this->cache_name,
-                'cache_value' => $this->cache_expire,
+                'cache_value' => $cache_value,
                 'cache_expire' => $this->cache_expire
             ]);
     }
@@ -135,7 +135,7 @@ class Mysql
      */
     public function inc(int $int = 1)
     {
-        $cache_value = $this->get();
+        $cache_value = (int)$this->get();
         return Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->update([
@@ -152,7 +152,7 @@ class Mysql
      */
     public function dec(int $int = 1)
     {
-        $cache_value = $this->get();
+        $cache_value = (int)$this->get();
         return Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->update([
