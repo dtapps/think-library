@@ -34,7 +34,6 @@ class MiniService extends Service
     private $grant_type = "client_credential";
 
     /**
-     * 公众号的唯一标识
      * @param string $appId
      * @return $this
      */
@@ -45,7 +44,6 @@ class MiniService extends Service
     }
 
     /**
-     * 公众号的appsecret
      * @param string $appSecret
      * @return $this
      */
