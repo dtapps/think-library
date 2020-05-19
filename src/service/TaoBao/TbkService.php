@@ -127,13 +127,11 @@ class TbkService extends Service
     /**
      * 请求参数
      * @param array $param
-     * @param string $name
      * @return $this
      */
-    public function param(array $param, string $name = '')
+    public function param(array $param)
     {
-        if (empty($name)) $this->param = $param;
-        else  $this->param["$name"] = json_encode($param);
+        $this->param = $param;
         return $this;
     }
 
