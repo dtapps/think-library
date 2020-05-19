@@ -150,6 +150,17 @@ class UnionService extends Service
     }
 
     /**
+     * 获取配置信息
+     * @return $this
+     */
+    private function getConfig()
+    {
+        $this->app_key = config('dtapp.jd.union.app_key');
+        $this->secret_key = config('dtapp.jd.union.secret_key');
+        return $this;
+    }
+
+    /**
      * 网站/APP获取推广链接接口
      * https://union.jd.com/openplatform/api/10421
      * @return array|mixed
@@ -314,7 +325,7 @@ class UnionService extends Service
     {
         //首先检测是否支持curl
         if (!extension_loaded("curl")) throw new CurlException('请开启curl模块！', E_USER_DEPRECATED);
-        $this->app_key = empty($this->app_key) ? config('dtapp.jd.union.app_key') : $this->app_key;
+        if (empty($this->app_key)) $this->getConfig();
         if (empty($this->app_key)) throw new JdException('请检查app_key参数');
         if (empty($this->method)) throw new JdException('请检查method参数');
         $this->params['method'] = $this->method;
@@ -337,7 +348,7 @@ class UnionService extends Service
      */
     private function createSign()
     {
-        $this->secret_key = empty($this->secret_key) ? config('dtapp.jd.union.secret_key') : $this->secret_key;
+        if (empty($this->secret_key)) $this->getConfig();
         if (empty($this->secret_key)) throw new JdException('请检查secret_key参数');
 
         $sign = $this->secret_key;

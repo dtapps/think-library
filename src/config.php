@@ -42,5 +42,12 @@ return [
             // 联盟分配给应用的secretkey
             'secret_key' => '',
         ]
+    ],
+    // 宝塔
+    'bt' => [
+        // 密钥
+        'key' => '',
+        // 网址
+        'panel' => '',
     ]
 ];

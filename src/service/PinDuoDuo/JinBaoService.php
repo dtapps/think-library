@@ -143,6 +143,17 @@ class JinBaoService extends Service
     }
 
     /**
+     * 获取配置信息
+     * @return $this
+     */
+    private function getConfig()
+    {
+        $this->client_id = config('dtapp.pinduoduo.jinbao.client_id');
+        $this->client_secret = config('dtapp.pinduoduo.jinbao.client_secret');
+        return $this;
+    }
+
+    /**
      * 获取商品信息 - 多多进宝商品查询
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.search
      * @param array $data
@@ -404,10 +415,8 @@ class JinBaoService extends Service
     {
         //首先检测是否支持curl
         if (!extension_loaded("curl")) throw new CurlException('请开启curl模块！', E_USER_DEPRECATED);
-        $this->client_id = empty($this->client_id) ? config('dtapp.pinduoduo.jinbao.client_id') : $this->client_id;
-        $this->client_secret = empty($this->client_secret) ? config('dtapp.pinduoduo.jinbao.client_secret') : $this->client_secret;
+        if (empty($this->client_id)) $this->getConfig();
         if (empty($this->client_id)) throw new PinDouDouException('请检查client_id参数');
-        if (empty($this->client_secret)) throw new PinDouDouException('请检查client_secret参数');
         $this->param['type'] = $this->type;
         $this->param['client_id'] = $this->client_id;
         $this->param['timestamp'] = time();
@@ -438,7 +447,7 @@ class JinBaoService extends Service
      */
     private function createSign()
     {
-        $this->client_secret = empty($this->client_secret) ? config('dtapp.pinduoduo.jinbao.client_secret') : $this->client_secret;
+        if (empty($this->client_secret)) $this->getConfig();
         if (empty($this->client_secret)) throw new PinDouDouException('请检查client_secret参数');
 
         $sign = $this->client_secret;

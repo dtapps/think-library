@@ -136,6 +136,17 @@ class TbkService extends Service
     }
 
     /**
+     * 获取配置信息
+     * @return $this
+     */
+    private function getConfig()
+    {
+        $this->app_key = config('dtapp.taobao.tbk.app_key');
+        $this->app_secret = config('dtapp.taobao.tbk.app_secret');
+        return $this;
+    }
+
+    /**
      * 订单查询 - 淘宝客-推广者-所有订单查询
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=40173&docType=2
      * @return $this
@@ -458,7 +469,7 @@ class TbkService extends Service
         //首先检测是否支持curl
         if (!extension_loaded("curl")) throw new CurlException('请开启curl模块！', E_USER_DEPRECATED);
         $this->format = "json";
-        $this->app_key = empty($this->app_key) ? config('dtapp.taobao.tbk.app_key') : $this->app_key;
+        if (empty($this->app_key)) $this->getConfig();
         if (empty($this->app_key)) throw new TaoBaoException('请检查app_key参数');
         if (empty($this->method)) throw new TaoBaoException('请检查method参数');
         $this->param['app_key'] = $this->app_key;
@@ -514,7 +525,7 @@ class TbkService extends Service
      */
     private function createSign()
     {
-        $this->app_secret = empty($this->app_secret) ? config('dtapp.taobao.tbk.app_secret') : $this->app_secret;
+        if (empty($this->app_secret)) $this->getConfig();
         if (empty($this->app_secret)) throw new TaoBaoException('请检查app_secret参数');
 
         $sign = $this->app_secret;
