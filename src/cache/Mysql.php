@@ -131,11 +131,12 @@ class Mysql
     public function inc(int $int = 1)
     {
         $cache_value = (int)$this->get();
-        return Db::table($this->table)
+        $result = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->update([
                 'cache_value' => $cache_value + $int
             ]);
+        return $result ? true : false;
     }
 
     /**
@@ -148,10 +149,11 @@ class Mysql
     public function dec(int $int = 1)
     {
         $cache_value = (int)$this->get();
-        return Db::table($this->table)
+        $result = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->update([
                 'cache_value' => $cache_value - $int
             ]);
+        return $result ? true : false;
     }
 }

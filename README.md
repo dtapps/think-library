@@ -23,7 +23,7 @@
 - 阿里云仓库地址：https://github.com/GC0202/ThinkLibrary
 - CODING：https://liguangchun-01.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
 - CODING：https://aizhineng.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
-- https://liguangchundt.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
+- 腾讯云：https://liguangchundt.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
 - 微信：https://git.weixin.qq.com/liguangchun/ThinkLibrary
 - 华为云：https://codehub-cn-south-1.devcloud.huaweicloud.com/composer00001/ThinkLibrary.git
 
