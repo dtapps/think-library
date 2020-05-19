@@ -16,8 +16,8 @@
 
 namespace DtApp\ThinkLibrary\exception;
 
-use HttpException;
 use think\exception\Handle;
+use think\exception\HttpException;
 use think\exception\ValidateException;
 use think\Request;
 use think\Response;
