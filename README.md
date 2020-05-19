@@ -17,8 +17,15 @@
 
 部分代码来自互联网，若有异议可以联系作者进行删除。
 
-- Gitee仓库地址：https://gitee.com/liguangchun/ThinkLibrary
 - Github仓库地址：https://github.com/GC0202/ThinkLibrary
+- 码云仓库地址：https://gitee.com/liguangchun/ThinkLibrary
+- gitlab：https://gitlab.com/liguangchun/thinklibrary
+- 阿里云仓库地址：https://github.com/GC0202/ThinkLibrary
+- CODING：https://liguangchun-01.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
+- CODING：https://aizhineng.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
+- https://liguangchundt.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
+- 微信：https://git.weixin.qq.com/liguangchun/ThinkLibrary
+- 华为云：https://codehub-cn-south-1.devcloud.huaweicloud.com/composer00001/ThinkLibrary.git
 
 ### 开发版
 ```text
