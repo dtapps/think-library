@@ -74,6 +74,18 @@ class MiniService extends Service
     }
 
     /**
+     * 获取配置信息
+     * @return $this
+     */
+    private function getConfig()
+    {
+        $this->cache = config('dtapp.wechat.mini.cache');
+        $this->app_id = config('dtapp.wechat.mini.app_id');
+        $this->app_secret = config('dtapp.wechat.mini.app_secret');
+        return $this;
+    }
+
+    /**
      * 用户支付完成后，获取该用户的 UnionId，无需用户授权
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/user-info/auth.getPaidUnionId.html
      * @param string $openid
@@ -303,10 +315,14 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html
      * @param string $js_code
      * @return bool|mixed|string
-     * @throws CurlException
+     * @throws CurlException|WeChatException
      */
     public function code2Session(string $js_code)
     {
+        if (empty($this->app_id)) $this->getConfig();
+        if (empty($this->app_secret)) $this->getConfig();
+        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
+        if (empty($this->app_secret)) throw new WeChatException('请检查app_secret参数');
         $this->grant_type = "authorization_code";
         $url = "{$this->api_url}sns/jscode2session?appid={$this->app_id}&secret={$this->app_secret}&js_code={$js_code}&grant_type={$this->grant_type}";
         return HttpService::instance()
@@ -320,7 +336,7 @@ class MiniService extends Service
      * @param string $encrypted_data
      * @param string $iv
      * @return bool|mixed
-     * @throws CurlException
+     * @throws CurlException|WeChatException
      */
     public function userInfo(string $js_code, string $encrypted_data, string $iv)
     {
@@ -336,7 +352,7 @@ class MiniService extends Service
      * @param string $encrypted_data
      * @param string $iv
      * @return mixed
-     * @throws CurlException
+     * @throws CurlException|WeChatException
      */
     public function userPhone(string $js_code, string $encrypted_data, string $iv)
     {
@@ -369,7 +385,12 @@ class MiniService extends Service
      */
     private function getAccessToken()
     {
-
+        if (empty($this->cache)) $this->getConfig();
+        if (empty($this->app_id)) $this->getConfig();
+        if (empty($this->app_secret)) $this->getConfig();
+        if (empty($this->cache)) throw new WeChatException('请检查cache参数');
+        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
+        if (empty($this->app_secret)) throw new WeChatException('请检查app_secret参数');
         $this->grant_type = "client_credential";
         if ($this->cache == "file") {
             // 文件名

@@ -60,5 +60,23 @@ return [
     // 高德地图
     'amap' => [
         'key' => ''
+    ],
+    // 微信
+    'wechat' => [
+        // 公众号
+        'webapp' => [
+            'app_id' => '',
+            'app_secret' => '',
+        ],
+        // 小程序
+        'mini' => [
+            'cache' => 'file',
+            'app_key' => '',
+            'app_secret' => '',
+        ],
+        // 企业微信
+        'qy' => [
+
+        ]
     ]
 ];

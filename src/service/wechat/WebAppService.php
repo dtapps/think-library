@@ -91,6 +91,17 @@ class WebAppService extends Service
     }
 
     /**
+     * 获取配置信息
+     * @return $this
+     */
+    private function getConfig()
+    {
+        $this->app_id = config('dtapp.wechat.webapp.app_id');
+        $this->app_secret = config('dtapp.wechat.webapp.app_secret');
+        return $this;
+    }
+
+    /**
      * 授权后重定向的回调链接地址， 请使用 urlEncode 对链接进行处理
      * @param string $redirectUri
      * @return $this
@@ -162,10 +173,14 @@ class WebAppService extends Service
      * @param string $code
      * @param bool $is
      * @return array|bool|mixed|string
-     * @throws CurlException
+     * @throws CurlException|WeChatException
      */
     public function accessToken(string $code, bool $is = true)
     {
+        if (empty($this->app_id)) $this->getConfig();
+        if (empty($this->app_secret)) $this->getConfig();
+        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
+        if (empty($this->app_secret)) throw new WeChatException('请检查app_secret参数');
         return HttpService::instance()
             ->url("{$this->api_url}sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
             ->toArray($is);
@@ -177,9 +192,12 @@ class WebAppService extends Service
      * @param bool $is
      * @return array|bool|mixed|string
      * @throws CurlException
+     * @throws WeChatException
      */
     public function refreshToken(string $refreshToken, bool $is = true)
     {
+        if (empty($this->app_id)) $this->getConfig();
+        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
         $this->grant_type = "refresh_token";
         return HttpService::instance()
             ->url("{$this->api_url}sns/oauth2/refresh_token?appid={$this->app_id}&grant_type={$this->grant_type}&refresh_token={$refreshToken}")
@@ -226,6 +244,8 @@ class WebAppService extends Service
      */
     public function share()
     {
+        if (empty($this->app_id)) $this->getConfig();
+        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
         // 获取数据
         $accessToken = $this->getAccessToken();
         if (!isset($accessToken['access_token'])) throw  new WeChatException("获取access_token错误，" . $accessToken['errmsg']);
@@ -374,6 +394,13 @@ class WebAppService extends Service
      */
     private function getAccessToken()
     {
+        if (empty($this->cache)) $this->getConfig();
+        if (empty($this->app_id)) $this->getConfig();
+        if (empty($this->app_secret)) $this->getConfig();
+        if (empty($this->cache)) throw new WeChatException('请检查cache参数');
+        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
+        if (empty($this->app_secret)) throw new WeChatException('请检查app_secret参数');
+
         $this->grant_type = "client_credential";
         if ($this->cache == "file") {
             // 文件名
