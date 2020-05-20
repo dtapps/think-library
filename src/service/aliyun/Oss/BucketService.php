@@ -14,32 +14,11 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\WeMini;
+namespace DtApp\ThinkLibrary\service\aliyun\oss;
 
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\Curl\HttpService;
 
-/**
- * 微信小程序 - 用户信息
- * Class UserInfoService
- * @package DtApp\ThinkLibrary\service\WeMini
- */
-class UserInfoService extends Service
+class BucketService extends Service
 {
-    /**
-     * 用户支付完成后，获取该用户的 UnionId，无需用户授权
-     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/user-info/auth.getPaidUnionId.html
-     * @param string $access_token
-     * @param string $openid
-     * @return bool|mixed|string
-     * @throws CurlException
-     */
-    public function getPaidUnionId(string $access_token, string $openid)
-    {
-        $url = "https://api.weixin.qq.com/wxa/getpaidunionid?access_token={$access_token}&openid={$openid}";
-        return HttpService::instance()
-            ->url($url)
-            ->toArray();
-    }
+
 }

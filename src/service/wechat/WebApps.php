@@ -14,7 +14,7 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\WeChat;
+namespace DtApp\ThinkLibrary\service\wechat;
 
 use DtApp\ThinkLibrary\cache\Mysql;
 use DtApp\ThinkLibrary\exception\CacheException;
@@ -23,10 +23,7 @@ use DtApp\ThinkLibrary\exception\WeChatException;
 use DtApp\ThinkLibrary\facade\Pregs;
 use DtApp\ThinkLibrary\facade\Urls;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\Curl\HttpService;
-use think\db\exception\DataNotFoundException;
-use think\db\exception\DbException;
-use think\db\exception\ModelNotFoundException;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
  * Class WebApps
@@ -224,9 +221,6 @@ class WebApps extends Service
      * @return array
      * @throws CacheException
      * @throws CurlException
-     * @throws DataNotFoundException
-     * @throws DbException
-     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function share()
@@ -271,9 +265,6 @@ class WebApps extends Service
      * @return array|bool|mixed|string
      * @throws CacheException
      * @throws CurlException
-     * @throws DataNotFoundException
-     * @throws DbException
-     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function qrCode(array $data)
@@ -293,9 +284,6 @@ class WebApps extends Service
      * @return array|bool|mixed|string
      * @throws CacheException
      * @throws CurlException
-     * @throws DataNotFoundException
-     * @throws DbException
-     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function messageTemplateSend(array $data = [])
@@ -311,14 +299,33 @@ class WebApps extends Service
     }
 
     /**
+     * 设置所属行业
+     * https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html#0
+     * @param string $access_token
+     * @param array $data
+     * @return bool|mixed|string
+     * @throws CacheException
+     * @throws CurlException
+     * @throws WeChatException
+     */
+    public function setIndustry(string $access_token, array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "{$this->api_url}cgi-bin/template/api_set_industry?access_token={$accessToken['access_token']}";
+        if (is_array($data)) $data = json_encode($data);
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->toArray();
+    }
+
+    /**
      * 将一条长链接转成短链接
      * @param string $long_url
      * @return bool
      * @throws CacheException
      * @throws CurlException
-     * @throws DataNotFoundException
-     * @throws DbException
-     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function shortUrl(string $long_url)
@@ -336,14 +343,33 @@ class WebApps extends Service
     }
 
     /**
+     * 连Wi-Fi完成页跳转小程序
+     * https://developers.weixin.qq.com/doc/offiaccount/WiFi_via_WeChat/WiFi_mini_programs.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws CacheException
+     * @throws CurlException
+     * @throws WeChatException
+     */
+    public function fiNihPageSet(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "{$this->api_url}bizwifi/finishpage/set?access_token={$accessToken['access_token']}";
+        if (is_array($data)) $data = json_encode($data);
+        return HttpService::instance()
+            ->url($url)
+            ->post()
+            ->data($data)
+            ->toArray();
+    }
+
+    /**
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
      * @throws CacheException
      * @throws CurlException
      * @throws WeChatException
-     * @throws DataNotFoundException
-     * @throws DbException
-     * @throws ModelNotFoundException
      */
     private function getAccessToken()
     {
@@ -398,7 +424,7 @@ class WebApps extends Service
                     ->toArray();
                 $cache_mysql
                     ->name($file)
-                    ->expire( 6000)
+                    ->expire(6000)
                     ->set($accessToken_res['access_token']);
                 $access_token['access_token'] = $accessToken_res['access_token'];
             }

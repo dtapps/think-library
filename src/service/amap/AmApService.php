@@ -19,7 +19,7 @@ namespace DtApp\ThinkLibrary\service\amap;
 use DtApp\ThinkLibrary\exception\AliException;
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\Curl\HttpService;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
  * 高德地图

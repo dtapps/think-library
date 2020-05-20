@@ -14,7 +14,7 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\PinDuoDuo;
+namespace DtApp\ThinkLibrary\service\pindoudou;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\PinDouDouException;

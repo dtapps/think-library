@@ -14,7 +14,7 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\TaoBao;
+namespace DtApp\ThinkLibrary\service\taobao;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\TaoBaoException;

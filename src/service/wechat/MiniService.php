@@ -14,14 +14,14 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\WeChat;
+namespace DtApp\ThinkLibrary\service\wechat;
 
 use DtApp\ThinkLibrary\cache\Mysql;
 use DtApp\ThinkLibrary\exception\CacheException;
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\WeChatException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\Curl\HttpService;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
 use think\db\exception\ModelNotFoundException;

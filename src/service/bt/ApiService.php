@@ -19,7 +19,7 @@ namespace DtApp\ThinkLibrary\service\bt;
 use DtApp\ThinkLibrary\exception\BtException;
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\Curl\BtService;
+use DtApp\ThinkLibrary\service\curl\BtService;
 
 /**
  * 宝塔Api

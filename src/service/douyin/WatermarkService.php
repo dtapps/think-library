@@ -14,7 +14,7 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\DouYin;
+namespace DtApp\ThinkLibrary\service\douyin;
 
 use DtApp\ThinkLibrary\exception\DouYinException;
 use DtApp\ThinkLibrary\facade\Pregs;

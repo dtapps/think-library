@@ -14,19 +14,19 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\Notice;
+namespace DtApp\ThinkLibrary\service\wechat;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\NoticeException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\Curl\HttpService;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
- * 通知 - 企业微信
- * Class QyWeiXinService
- * @package DtApp\ThinkLibrary\service\notice
+ * 企业微信
+ * Class Qy
+ * @package DtApp\ThinkLibrary\service\wechat
  */
-class QyWeiXinService extends Service
+class Qy extends Service
 {
     /**
      * 消息类型

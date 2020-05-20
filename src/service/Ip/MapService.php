@@ -19,7 +19,7 @@ namespace DtApp\ThinkLibrary\service\Ip;
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\IpException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\Curl\HttpService;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
  * IP  - 地图

@@ -19,7 +19,7 @@ namespace DtApp\ThinkLibrary\service\baidu;
 use DtApp\ThinkLibrary\exception\BaiduException;
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\Curl\HttpService;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
  * 百度地图

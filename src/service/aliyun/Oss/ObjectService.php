@@ -14,16 +14,12 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\WeMini;
+namespace DtApp\ThinkLibrary\service\aliyun\oss;
+
 
 use DtApp\ThinkLibrary\Service;
 
-/**
- * 微信小程序 - 客服消息
- * Class CustomerMessageService
- * @package DtApp\ThinkLibrary\service\WeMini
- */
-class CustomerMessageService extends Service
+class ObjectService extends Service
 {
 
 }

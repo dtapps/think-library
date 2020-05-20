@@ -19,7 +19,7 @@ namespace DtApp\ThinkLibrary\service\Notice;
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\NoticeException;
 use DtApp\ThinkLibrary\Service;
-use DtApp\ThinkLibrary\service\Curl\HttpService;
+use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
  * 通知  - 钉钉
