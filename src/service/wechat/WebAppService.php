@@ -26,10 +26,11 @@ use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
- * Class WebApps
+ * 公众号
+ * Class WebAppService
  * @package DtApp\ThinkLibrary\service\WeChat
  */
-class WebApps extends Service
+class WebAppService extends Service
 {
     private $open_url = "https://open.weixin.qq.com/";
     private $api_url = "https://api.weixin.qq.com/";

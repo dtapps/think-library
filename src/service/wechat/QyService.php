@@ -23,10 +23,10 @@ use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
  * 企业微信
- * Class Qy
+ * Class QyService
  * @package DtApp\ThinkLibrary\service\wechat
  */
-class Qy extends Service
+class QyService extends Service
 {
     /**
      * 消息类型

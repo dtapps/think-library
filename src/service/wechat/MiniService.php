@@ -322,7 +322,7 @@ class MiniService extends Service
      * @throws ModelNotFoundException
      * @throws WeChatException
      */
-    public function send(array $data = [])
+    public function subscribeMessageSend(array $data = [])
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
