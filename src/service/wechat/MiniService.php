@@ -331,6 +331,22 @@ class MiniService extends Service
     }
 
     /**
+     * 数据签名校验，并且获取解密后的明文.
+     * @param string $js_code
+     * @param string $encrypted_data
+     * @param string $iv
+     * @return mixed
+     * @throws CurlException
+     */
+    public function userPhone(string $js_code, string $encrypted_data, string $iv)
+    {
+        $session = $this->code2Session($js_code);
+        if (!isset($session['openid'])) return false;
+        $result = openssl_decrypt(base64_decode($encrypted_data), "AES-128-CBC", base64_decode($session['session_key']), 1, base64_decode($iv));
+        return json_decode($result, true);
+    }
+
+    /**
      * 获取小程序全局唯一后台接口调用凭据（access_token）
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/access-token/auth.getAccessToken.html
      * @return bool|mixed|string
@@ -342,19 +358,6 @@ class MiniService extends Service
     {
         // 获取数据
         return $this->getAccessToken();
-    }
-
-    /**
-     * 数据签名校验
-     * @param string $encrypted_data
-     * @param string $session_key
-     * @param string $iv
-     * @return mixed
-     */
-    public function decode(string $encrypted_data, string $session_key, string $iv)
-    {
-        $result = openssl_decrypt(base64_decode($encrypted_data), "AES-128-CBC", base64_decode($session_key), 1, base64_decode($iv));
-        return json_decode($result, true);
     }
 
     /**
