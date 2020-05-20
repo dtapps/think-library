@@ -16,6 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\baidu;
 
+use DtApp\ThinkLibrary\exception\BaiduException;
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\Curl\HttpService;
@@ -41,16 +42,28 @@ class LbsYunService extends Service
     }
 
     /**
+     * 获取配置信息
+     * @return $this
+     */
+    private function getConfig()
+    {
+        $this->ak = config('dtapp.baidu.lbs.ak');
+        return $this;
+    }
+
+    /**
      * 国内天气查询
      * http://lbsyun.baidu.com/index.php?title=webapi/weather
      * @param $district_id
      * @param string $coordtype
      * @param string $location
      * @return array|bool|mixed|string
-     * @throws CurlException
+     * @throws CurlException|BaiduException
      */
     public function weather($district_id = 110100, string $coordtype = "bd09ll", string $location = "")
     {
+        if (empty($this->ak)) $this->getConfig();
+        if (empty($this->ak)) throw new BaiduException('请检查ak参数');
         $data = http_build_query([
             "district_id" => $district_id,
             "coordtype" => $coordtype,
@@ -73,9 +86,12 @@ class LbsYunService extends Service
      * @param string $language
      * @return array|bool|mixed|string
      * @throws CurlException
+     * @throws BaiduException
      */
     public function weatherAbroad($district_id = 110100, string $coordtype = "bd09ll", string $location = "", string $language = "cn")
     {
+        if (empty($this->ak)) $this->getConfig();
+        if (empty($this->ak)) throw new BaiduException('请检查ak参数');
         $data = http_build_query([
             "district_id" => $district_id,
             "coordtype" => $coordtype,

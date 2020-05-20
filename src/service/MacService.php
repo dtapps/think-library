@@ -25,13 +25,7 @@ use DtApp\ThinkLibrary\Service;
  */
 class MacService extends Service
 {
-    private $result = array();
-
-    /**
-     * 所有mac地址
-     * @var array
-     */
-    private $macAddrs = array();
+    private $result = [];
 
     /**
      * 第一个mac地址

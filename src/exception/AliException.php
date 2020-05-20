@@ -14,28 +14,19 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary;
+namespace DtApp\ThinkLibrary\exception;
+
+use Exception;
 
 /**
- * 模块注册服务
- * Class Library
- * @package DtApp\ThinkLibrary
+ * 阿里错误处理
+ * Class AliException
+ * @package DtApp\ThinkLibrary\exception
  */
-class Library extends \think\Service
+class AliException extends Exception
 {
-    /**
-     * 注册服务
-     */
-    public function register()
+    public function errorMessage()
     {
-
-    }
-
-    /**
-     * 启动服务
-     */
-    public function boot()
-    {
-
+        return $this->getMessage();
     }
 }

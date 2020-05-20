@@ -16,6 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\amap;
 
+use DtApp\ThinkLibrary\exception\AliException;
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\Curl\HttpService;
@@ -41,15 +42,28 @@ class AmApService extends Service
     }
 
     /**
+     * 获取配置信息
+     * @return $this
+     */
+    private function getConfig()
+    {
+        $this->key = config('dtapp.amap.key');
+        return $this;
+    }
+
+    /**
      * 天气查询
      * https://lbs.amap.com/api/webservice/guide/api/weatherinfo
      * @param string $city
      * @param string $extensions
      * @return array|bool|mixed|string
      * @throws CurlException
+     * @throws AliException
      */
     public function weather($city = "110101", $extensions = "base")
     {
+        if (empty($this->key)) $this->getConfig();
+        if (empty($this->key)) throw new AliException('请检查key参数');
         $data = http_build_query([
             "city" => $city,
             "extensions" => $extensions,
