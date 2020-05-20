@@ -14,11 +14,11 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\aliyun\oss;
+namespace DtApp\ThinkLibrary\service\aliyun;
 
 use DtApp\ThinkLibrary\Service;
 
-class BucketService extends Service
+class OssService extends Service
 {
 
 }
