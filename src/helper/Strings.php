@@ -160,10 +160,22 @@ class Strings
      * @param $str
      * @return string|string[]
      */
-    private function trimAll($str): string
+    public function trimAll($str): string
     {
         $oldchar = array(" ", "　", "\t", "\n", "\r");
         $newchar = array("", "", "", "", "");
         return str_replace($oldchar, $newchar, $str);
+    }
+
+    /**
+     * 替换字符串
+     * @param string $search
+     * @param string $replace
+     * @param string $subject
+     * @return string|string[]
+     */
+    public function replace(string $search, string $replace, string $subject)
+    {
+        return str_replace($search, $replace, $subject);
     }
 }

@@ -33,6 +33,7 @@ use think\facade;
  * @method helper exitContain(string $str, $nee = 3, $del = ',') bool 判断字符串是否包含某个字符
  * @method helper len(string $str) int 统计字符串长度
  * @method helper trimAll(string $str) string 删除空格
+ * @method helper replace(string $search, string $replace, string $subject) string 替换字符串
  */
 class Strings extends Facade
 {

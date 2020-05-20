@@ -18,6 +18,7 @@ namespace DtApp\ThinkLibrary\service\Jd;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\JdException;
+use DtApp\ThinkLibrary\facade\Strings;
 use DtApp\ThinkLibrary\Service;
 
 /**
@@ -336,9 +337,16 @@ class UnionService extends Service
         $this->params['sign_method'] = $this->sign_method;
         $this->params['param_json'] = json_encode($this->param);
         $this->http();
-        if (is_array($this->output)) return $this->output;
-        if (is_object($this->output)) $this->output = json_encode($this->output);
-        return json_decode($this->output, true);
+        $response = Strings::replace('.', '_', $this->method) . "_response";
+        if (isset($this->output["$response"]['result'])) {
+            if (is_array($this->output["$response"]['result'])) return $this->output["$response"]['result'];
+            if (is_object($this->output["$response"]['result'])) $this->output = json_encode($this->output["$response"]['result']);
+            return json_decode($this->output["$response"]['result'], true);
+        } else {
+            if (is_array($this->output)) return $this->output;
+            if (is_object($this->output)) $this->output = json_encode($this->output);
+            return json_decode($this->output, true);
+        }
     }
 
     /**

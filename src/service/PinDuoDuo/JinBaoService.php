@@ -18,6 +18,7 @@ namespace DtApp\ThinkLibrary\service\PinDuoDuo;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\PinDouDouException;
+use DtApp\ThinkLibrary\facade\Strings;
 use DtApp\ThinkLibrary\Service;
 
 /**
@@ -156,10 +157,9 @@ class JinBaoService extends Service
     /**
      * 获取商品信息 - 多多进宝商品查询
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.search
-     * @param array $data
      * @return array|mixed
      */
-    public function goodsSearch(array $data = [])
+    public function goodsSearch()
     {
         $this->type = 'pdd.ddk.goods.search';
         return $this;
@@ -423,9 +423,27 @@ class JinBaoService extends Service
         $this->param['data_type'] = $this->data_type;
         $this->param['version'] = $this->version;
         $this->http();
-        if (is_array($this->output)) return $this->output;
-        if (is_object($this->output)) return $this->object2array($this->output);
-        return json_decode($this->output, true);
+        if (isset($this->output['error_response'])) {
+            // 错误
+            if (is_array($this->output)) return $this->output;
+            if (is_object($this->output)) return $this->object2array($this->output);
+            return json_decode($this->output, true);
+        } else {
+            // 正常
+            $response = substr(Strings::replace('.', '_', $this->type), 8) . "_response";
+            if (is_array($this->output)) {
+                if (isset($this->output["$response"])) return $this->output["$response"];
+                return $this->output;
+            }
+            if (is_object($this->output)) {
+                $this->output = $this->object2array($this->output);
+                if (isset($this->output["$response"])) return $this->output["$response"];
+                return $this->output;
+            }
+            $this->output = json_decode($this->output, true);
+            if (isset($this->output["$response"])) return $this->output["$response"];
+            return $this->output;
+        }
     }
 
     /**

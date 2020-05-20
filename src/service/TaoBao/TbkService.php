@@ -18,6 +18,7 @@ namespace DtApp\ThinkLibrary\service\TaoBao;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\TaoBaoException;
+use DtApp\ThinkLibrary\facade\Strings;
 use DtApp\ThinkLibrary\Service;
 
 /**
@@ -479,9 +480,23 @@ class TbkService extends Service
         $this->param['sign_method'] = $this->sign_method;
         $this->param['timestamp'] = date('Y-m-d H:i:s');
         $this->http();
-        if (is_array($this->output)) return $this->output;
-        if (is_object($this->output)) $this->output = json_encode($this->output);
-        return json_decode($this->output, true);
+        if (isset($this->output['error_response'])) {
+            // 错误
+            if (is_array($this->output)) return $this->output;
+            if (is_object($this->output)) $this->output = json_encode($this->output);
+            return json_decode($this->output, true);
+        } else {
+            // 正常
+            $response = substr(Strings::replace('.', '_', $this->method), 7) . "_response";
+            if (is_array($this->output)) {
+                if (isset($this->output["$response"])) return $this->output["$response"];
+                return $this->output;
+            };
+            if (is_object($this->output)) $this->output = json_encode($this->output);
+            $this->output = json_decode($this->output, true);
+            if (isset($this->output["$response"])) return $this->output["$response"];
+            else return $this->output;
+        }
     }
 
     /**
