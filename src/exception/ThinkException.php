@@ -69,6 +69,6 @@ class ThinkException extends Handle
                 ->accessToken($access_token)
                 ->text($msg);
         }
-        return false;
+        return true;
     }
 }
