@@ -78,5 +78,13 @@ return [
         'qy' => [
 
         ]
+    ],
+    // 错误通知
+    'exception' => [
+        'type' => 'dingtalk',
+        // 钉钉
+        'dingtalk' => [
+            'access_token' => ''
+        ]
     ]
 ];

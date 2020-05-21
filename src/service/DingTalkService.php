@@ -14,27 +14,29 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\Notice;
+namespace DtApp\ThinkLibrary\service;
 
+use DtApp\ThinkLibrary\exception\AliException;
 use DtApp\ThinkLibrary\exception\CurlException;
-use DtApp\ThinkLibrary\exception\NoticeException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
 /**
- * 通知  - 钉钉
- * Class DingDingService
- * @package DtApp\ThinkLibrary\service\notice
+ * 钉钉
+ * Class DingTalkService
+ * @package DtApp\ThinkLibrary\service
  */
-class DingDingService extends Service
+class DingTalkService extends Service
 {
     /**
      * 消息类型
      * @var string
      */
-    private $msgType = 'text';
+    private $msg_type = 'text';
 
     private $access_token;
+
+    private $oapi_url = "https://oapi.dingtalk.com/";
 
     /**
      * 配置access_token
@@ -51,11 +53,12 @@ class DingDingService extends Service
      * 发送文本消息
      * @param string $content 消息内容
      * @return bool    发送结果
-     * @throws NoticeException|CurlException
+     * @throws AliException
+     * @throws CurlException
      */
     public function text(string $content)
     {
-        $this->msgType = 'text';
+        $this->msg_type = 'text';
         return $this->sendMsg([
             'text' => [
                 'content' => $content,
@@ -67,18 +70,19 @@ class DingDingService extends Service
      * 组装发送消息
      * @param array $data 消息内容数组
      * @return bool 发送结果
-     * @throws NoticeException|CurlException
+     * @throws AliException
+     * @throws CurlException
      */
     private function sendMsg(array $data)
     {
-        if (empty($this->access_token)) throw new NoticeException("请检查access_token");
-        if (empty($data['msgtype'])) $data['msgtype'] = $this->msgType;
+        if (empty($this->access_token)) throw new AliException("请检查access_token");
+        if (empty($data['msgtype'])) $data['msgtype'] = $this->msg_type;
         $result = HttpService::instance()
-            ->url("https://" . DingTalkConstant::$CALL_TYPE_OAPI . ".dingtalk.com/robot/send?access_token=" . $this->access_token)
+            ->url("{$this->oapi_url}robot/send?access_token=" . $this->access_token)
             ->data($data)
+            ->post()
             ->toArray();
-
-        if ($result['errcode'] == 0) return true;
-        return false;
+        if ($result['errcode'] == 0) return $result['errmsg'];
+        throw new CurlException(json_encode($result));
     }
 }

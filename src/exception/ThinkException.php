@@ -16,6 +16,7 @@
 
 namespace DtApp\ThinkLibrary\exception;
 
+use DtApp\ThinkLibrary\service\DingTalkService;
 use think\exception\Handle;
 use think\exception\HttpException;
 use think\exception\ValidateException;
@@ -23,6 +24,11 @@ use think\Request;
 use think\Response;
 use Throwable;
 
+/**
+ * 异常处理接管
+ * Class ThinkException
+ * @package DtApp\ThinkLibrary\exception
+ */
 class ThinkException extends Handle
 {
     /**
@@ -30,6 +36,8 @@ class ThinkException extends Handle
      * @param Request $request
      * @param Throwable $e
      * @return Response
+     * @throws AliException
+     * @throws CurlException
      */
     public function render($request, Throwable $e): Response
     {
@@ -41,6 +49,14 @@ class ThinkException extends Handle
         // 请求异常
         if ($e instanceof HttpException && $request->isAjax()) {
             return response($e->getMessage(), $e->getStatusCode());
+        }
+
+        $nt = config('dtapp.exception.type', '');
+        if (!empty($nt) && $nt == 'dingtalk') {
+            $access_token = config('dtapp.exception.dingtalk.access_token', '');
+            if (!empty($access_token)) DingTalkService::instance()
+                ->accessToken($access_token)
+                ->text($e->getMessage());
         }
 
         // 其他错误交给系统处理
