@@ -42,24 +42,33 @@ class ThinkException extends Handle
     public function render($request, Throwable $e): Response
     {
         // 参数验证错误
-        if ($e instanceof ValidateException) {
-            return json($e->getError(), 422);
-        }
+        if ($e instanceof ValidateException) return json($e->getError(), 422);
 
         // 请求异常
-        if ($e instanceof HttpException && $request->isAjax()) {
-            return response($e->getMessage(), $e->getStatusCode());
-        }
+        if ($e instanceof HttpException && $request->isAjax()) return response($e->getMessage(), $e->getStatusCode());
 
-        $nt = config('dtapp.exception.type', '');
-        if (!empty($nt) && $nt == 'dingtalk') {
-            $access_token = config('dtapp.exception.dingtalk.access_token', '');
-            if (!empty($access_token)) DingTalkService::instance()
-                ->accessToken($access_token)
-                ->text($e->getMessage());
-        }
+        $this->show($e->getMessage());
 
         // 其他错误交给系统处理
         return parent::render($request, $e);
+    }
+
+    /**
+     * @param $msg
+     * @return bool
+     * @throws AliException
+     * @throws CurlException
+     */
+    private function show($msg)
+    {
+        if (empty($msg)) return true;
+        $nt = config('dtapp.exception.type', '');
+        if (!empty($nt) && $nt == 'dingtalk') {
+            $access_token = config('dtapp.exception.dingtalk.access_token', '');
+            if (!empty($access_token)) return DingTalkService::instance()
+                ->accessToken($access_token)
+                ->text($msg);
+        }
+        return false;
     }
 }
