@@ -53,10 +53,10 @@ composer remove liguangchun/think-library -vvv
 
 ```php
 
-use DtApp\ThinkLibrary\service\MacService;
+use DtApp\ThinkLibrary\service\SystemService;
 
-dump(MacService::instance()
-->get());
+dump(SystemService::instance()
+->mac());
 
 ```
 

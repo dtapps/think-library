@@ -157,8 +157,8 @@ class UnionService extends Service
      */
     private function getConfig()
     {
-        $this->app_key = config('dtapp.jd.union.app_key');
-        $this->secret_key = config('dtapp.jd.union.secret_key');
+        $this->app_key = $this->app->config->get('dtapp.jd.union.app_key');
+        $this->secret_key = $this->app->config->get('dtapp.jd.union.secret_key');
         return $this;
     }
 

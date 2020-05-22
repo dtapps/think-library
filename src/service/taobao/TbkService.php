@@ -143,8 +143,8 @@ class TbkService extends Service
      */
     private function getConfig()
     {
-        $this->app_key = config('dtapp.taobao.tbk.app_key');
-        $this->app_secret = config('dtapp.taobao.tbk.app_secret');
+        $this->app_key = $this->app->config->get('dtapp.taobao.tbk.app_key');
+        $this->app_secret = $this->app->config->get('dtapp.taobao.tbk.app_secret');
         return $this;
     }
 

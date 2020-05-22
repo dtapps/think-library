@@ -19,12 +19,52 @@ namespace DtApp\ThinkLibrary\service;
 use DtApp\ThinkLibrary\Service;
 
 /**
- * 获取电脑MAC地址
- * Class MacService
+ * 系统服务
+ * Class SystemService
  * @package DtApp\ThinkLibrary\service
  */
-class MacService extends Service
+class SystemService extends Service
 {
+    /**
+     * 生成最短URL地址
+     * @param string $url 路由地址
+     * @param array $vars PATH 变量
+     * @param boolean|string $suffix 后缀
+     * @param boolean|string $domain 域名
+     * @param boolean|string $fillSuffix 补上后缀
+     * @return string
+     */
+    public function uri($url = '', array $vars = [], $suffix = true, $domain = false, $fillSuffix = false)
+    {
+        $default_app = $this->app->config->get('app.default_app', 'index');
+        $default_action = $this->app->config->get('route.default_action', 'index');
+        $default_controller = $this->app->config->get('route.default_controller', 'Index');
+        $url_html_suffix = $this->app->config->get('route.url_html_suffix', 'html');
+        $pathinfo_depr = $this->app->config->get('route.pathinfo_depr', '/');
+        $url_common_param = $this->app->config->get('route.url_common_param', true);
+        if (empty($url)) $url = "{$default_app}/{$default_action}/{$default_controller}";
+        if (empty($suffix) && !empty($fillSuffix)) {
+            if (empty($url_common_param)) $location = $this->app->route->buildUrl($url, $vars)->suffix($suffix)->domain($domain)->build();
+            else $location = $this->app->route->buildUrl($url, [])->suffix($suffix)->domain($domain)->build();
+            $location = $location . "{$pathinfo_depr}" . $this->arr_to_str($vars, $pathinfo_depr) . ".{$url_html_suffix}";
+        } else $location = $this->app->route->buildUrl($url, $vars)->suffix($suffix)->domain($domain)->build();
+        return $location;
+    }
+
+    /**
+     * 二维数组转化为字符串，中间用,隔开
+     * @param $arr
+     * @param string $glue
+     * @return false|string
+     */
+    private function arr_to_str($arr, $glue = "/")
+    {
+        $t = '';
+        foreach ($arr as $k => $v) $t .= $k . $glue . $v . $glue;
+        $t = substr($t, 0, -1); // 利用字符串截取函数消除最后一个
+        return $t;
+    }
+
     private $result = [];
 
     /**
@@ -33,8 +73,11 @@ class MacService extends Service
      */
     private $macAddr;
 
-
-    public function get()
+    /**
+     * 获取电脑MAC地址
+     * @return mixed
+     */
+    public function mac()
     {
         switch (strtolower(PHP_OS)) {
             case 'unix':

@@ -96,8 +96,8 @@ class WebAppService extends Service
      */
     private function getConfig()
     {
-        $this->app_id = config('dtapp.wechat.webapp.app_id');
-        $this->app_secret = config('dtapp.wechat.webapp.app_secret');
+        $this->app_id = $this->app->config->get('dtapp.wechat.webapp.app_id');
+        $this->app_secret = $this->app->config->get('dtapp.wechat.webapp.app_secret');
         return $this;
     }
 
