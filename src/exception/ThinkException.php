@@ -16,7 +16,9 @@
 
 namespace DtApp\ThinkLibrary\exception;
 
+use DtApp\ThinkLibrary\service\curl\HttpService;
 use DtApp\ThinkLibrary\service\DingTalkService;
+use DtApp\ThinkLibrary\service\SystemService;
 use think\exception\Handle;
 use think\exception\HttpException;
 use think\exception\ValidateException;
@@ -68,6 +70,21 @@ class ThinkException extends Handle
             if (!empty($access_token)) return DingTalkService::instance()
                 ->accessToken($access_token)
                 ->text($msg);
+        }
+        if (!empty($nt) && $nt == 'wechat') {
+            $openid = config('dtapp.exception.wechat.openid', '');
+            if (!empty($access_token)) return HttpService::instance()
+                ->url("https://api.dtapp.net/v1/wechatmp/tmplmsgWebError/openid/{$openid}")
+                ->post()
+                ->data([
+                    'domain' => request()->domain(),
+                    'url' => request()->url(),
+                    'node' => config('dtapp.exception.wechat.node', ''),
+                    'info' => '服务器IP为：' . SystemService::instance()
+                            ->linuxIp(),
+                    'error' => base64_encode($msg)
+                ])
+                ->toArray();
         }
         return true;
     }

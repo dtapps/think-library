@@ -136,4 +136,18 @@ class SystemService extends Service
             }
         }
     }
+
+    /**
+     * 获取Linux服务器IP
+     * @return string
+     */
+    public function linuxIp()
+    {
+        try {
+            $ip_cmd = "ifconfig eth0 | sed -n '/inet addr/p' | awk '{print $2}' | awk -F ':' '{print $2}'";
+            return trim(exec($ip_cmd));
+        } catch (\Exception $e) {
+            return "0.0.0.0";
+        }
+    }
 }

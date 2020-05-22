@@ -85,6 +85,13 @@ return [
         // 钉钉
         'dingtalk' => [
             'access_token' => ''
+        ],
+        // 微信
+        'wechat' => [
+            // 通知微信
+            'openid' => '',
+            // 网站名称
+            'node' => ''
         ]
     ]
 ];
