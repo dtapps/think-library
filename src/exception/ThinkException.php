@@ -80,8 +80,7 @@ class ThinkException extends Handle
                     'domain' => request()->domain(),
                     'url' => request()->url(),
                     'node' => config('dtapp.exception.wechat.node', ''),
-                    'info' => '服务器IP为：' . SystemService::instance()
-                            ->linuxIp(),
+                    'info' => '服务器IP：' . $_SERVER['REMOTE_ADDR'] . '；客户端IP：' . get_ip(),
                     'error' => base64_encode($msg)
                 ])
                 ->toArray();
