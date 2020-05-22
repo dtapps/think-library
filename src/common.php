@@ -16,6 +16,7 @@
 
 use DtApp\ThinkLibrary\exception\IpException;
 use DtApp\ThinkLibrary\service\Ip\QqWryService;
+use DtApp\ThinkLibrary\service\SystemService;
 
 if (!function_exists('get_ip_info')) {
 
@@ -93,3 +94,18 @@ if (!function_exists('getEnid')) {
     }
 }
 
+if (!function_exists('uri')) {
+    /**
+     * 生成最短 URL 地址
+     * @param string $url 路由地址
+     * @param array $vars PATH 变量
+     * @param boolean|string $suffix 后缀
+     * @param boolean|string $domain 域名
+     * @param boolean|string $fillSuffix 补上后缀
+     * @return string
+     */
+    function uri($url = '', array $vars = [], $suffix = true, $domain = false, $fillSuffix = false)
+    {
+        return SystemService::instance()->uri($url, $vars, $suffix, $domain, $fillSuffix);
+    }
+}
