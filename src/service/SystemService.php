@@ -46,7 +46,8 @@ class SystemService extends Service
         if (empty($suffix) && !empty($fillSuffix)) {
             if (empty($url_common_param)) $location = $this->app->route->buildUrl($url, $vars)->suffix($suffix)->domain($domain)->build();
             else $location = $this->app->route->buildUrl($url, [])->suffix($suffix)->domain($domain)->build();
-            $location = $location . "{$pathinfo_depr}" . $this->arr_to_str($vars, $pathinfo_depr) . ".{$url_html_suffix}";
+            if (empty($vars)) $location = substr($location . "{$pathinfo_depr}" . $this->arr_to_str($vars, $pathinfo_depr), 0, -1) . ".{$url_html_suffix}";
+            else $location = $location . "{$pathinfo_depr}" . $this->arr_to_str($vars, $pathinfo_depr) . ".{$url_html_suffix}";
         } else $location = $this->app->route->buildUrl($url, $vars)->suffix($suffix)->domain($domain)->build();
         return $location;
     }
