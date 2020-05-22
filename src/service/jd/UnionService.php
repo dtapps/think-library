@@ -39,6 +39,7 @@ class UnionService extends Service
      * @var
      */
     private $method = '';
+    private $response = '';
 
     /**
      * 联盟分配给应用的appkey

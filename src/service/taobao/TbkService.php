@@ -51,6 +51,7 @@ class TbkService extends Service
      * @var string
      */
     private $method = '';
+    private $response = '';
 
     /**
      * 签名的摘要算法

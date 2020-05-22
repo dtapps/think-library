@@ -18,7 +18,6 @@ namespace DtApp\ThinkLibrary\service\pinduoduo;
 
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\PinDouDouException;
-use DtApp\ThinkLibrary\facade\Strings;
 use DtApp\ThinkLibrary\Service;
 
 /**
@@ -39,6 +38,7 @@ class JinBaoService extends Service
      * @var string
      */
     private $type = '';
+    private $response = '';
 
     /**
      * 开放平台分配的clientId
@@ -162,6 +162,7 @@ class JinBaoService extends Service
     public function goodsSearch()
     {
         $this->type = 'pdd.ddk.goods.search';
+        $this->response = 'goods_search_response';
         return $this;
     }
 
@@ -173,6 +174,7 @@ class JinBaoService extends Service
     public function goodsPidGenerate()
     {
         $this->type = 'pdd.ddk.goods.pid.generate';
+        $this->response = 'p_id_generate_response';
         return $this;
     }
 
@@ -184,6 +186,7 @@ class JinBaoService extends Service
     public function goodsPidQuery()
     {
         $this->type = 'pdd.ddk.goods.pid.query';
+        $this->response = 'p_id_query_response';
         return $this;
     }
 
@@ -195,6 +198,7 @@ class JinBaoService extends Service
     public function orderDetailGet()
     {
         $this->type = 'pdd.ddk.order.detail.get';
+        $this->response = 'order_detail_response';
         return $this;
     }
 
@@ -206,6 +210,7 @@ class JinBaoService extends Service
     public function orderListIncrementGet()
     {
         $this->type = 'pdd.ddk.order.list.increment.get';
+        $this->response = 'order_list_get_response';
         return $this;
     }
 
@@ -217,16 +222,19 @@ class JinBaoService extends Service
     public function orderListRangeGet()
     {
         $this->type = 'pdd.ddk.order.list.range.get';
+        $this->response = 'order_list_get_response';
         return $this;
     }
 
     /**
      * CPA效果数据 - 查询CPA数据
+     * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.finance.cpa.query
      * @return array|mixed
      */
     public function financeCpaQuery()
     {
         $this->type = 'pdd.ddk.finance.cpa.query';
+        $this->response = 'finance_cpa_query_response';
         return $this;
     }
 
@@ -238,6 +246,7 @@ class JinBaoService extends Service
     public function goodsPromotionUrlGenerate()
     {
         $this->type = 'pdd.ddk.goods.promotion.url.generate';
+        $this->response = 'goods_promotion_url_generate_response';
         return $this;
     }
 
@@ -249,6 +258,7 @@ class JinBaoService extends Service
     public function weAppQrcodeUrlGen()
     {
         $this->type = 'pdd.ddk.weapp.qrcode.url.gen';
+        $this->response = 'weapp_qrcode_generate_response';
         return $this;
     }
 
@@ -260,6 +270,7 @@ class JinBaoService extends Service
     public function goodsZsUitUrlGen()
     {
         $this->type = 'pdd.ddk.goods.zs.unit.url.gen';
+        $this->response = 'goods_zs_unit_generate_response';
         return $this;
     }
 
@@ -271,6 +282,7 @@ class JinBaoService extends Service
     public function resourceUrlGen()
     {
         $this->type = 'pdd.ddk.resource.url.gen';
+        $this->response = 'resource_url_response';
         return $this;
     }
 
@@ -282,6 +294,7 @@ class JinBaoService extends Service
     public function themePromUrlGenerate()
     {
         $this->type = 'pdd.ddk.theme.prom.url.generate';
+        $this->response = 'theme_promotion_url_generate_response';
         return $this;
     }
 
@@ -293,6 +306,7 @@ class JinBaoService extends Service
     public function mallUrlGen()
     {
         $this->type = 'pdd.ddk.mall.url.gen';
+        $this->response = 'mall_coupon_generate_url_response';
         return $this;
     }
 
@@ -304,6 +318,7 @@ class JinBaoService extends Service
     public function rpPromUrlGenerate()
     {
         $this->type = 'pdd.ddk.rp.prom.url.generate';
+        $this->response = 'rp_promotion_url_generate_response';
         return $this;
     }
 
@@ -315,6 +330,7 @@ class JinBaoService extends Service
     public function goodsDetail()
     {
         $this->type = 'pdd.ddk.goods.detail';
+        $this->response = 'goods_detail_response';
         return $this;
     }
 
@@ -326,6 +342,7 @@ class JinBaoService extends Service
     public function goodsUnitQuery()
     {
         $this->type = 'pdd.ddk.goods.unit.query';
+        $this->response = 'ddk_goods_unit_query_response';
         return $this;
     }
 
@@ -337,6 +354,7 @@ class JinBaoService extends Service
     public function goodsBasicInfoGet()
     {
         $this->type = 'pdd.ddk.goods.basic.info.get';
+        $this->response = 'goods_basic_detail_response';
         return $this;
     }
 
@@ -348,6 +366,7 @@ class JinBaoService extends Service
     public function couponInfoQuery()
     {
         $this->type = 'pdd.ddk.coupon.info.query';
+        $this->response = 'ddk_coupon_info_query_response';
         return $this;
     }
 
@@ -359,6 +378,7 @@ class JinBaoService extends Service
     public function goodsListGet()
     {
         $this->type = 'pdd.ddk.mall.goods.list.get';
+        $this->response = 'goods_info_list_response';
         return $this;
     }
 
@@ -370,6 +390,7 @@ class JinBaoService extends Service
     public function topGoodsListQuery()
     {
         $this->type = 'pdd.ddk.top.goods.list.query';
+        $this->response = 'top_goods_list_get_response';
         return $this;
     }
 
@@ -381,6 +402,7 @@ class JinBaoService extends Service
     public function goodsRecommendGet()
     {
         $this->type = 'pdd.ddk.goods.recommend.get';
+        $this->response = 'goods_basic_detail_response';
         return $this;
     }
 
@@ -392,6 +414,7 @@ class JinBaoService extends Service
     public function themeListGet()
     {
         $this->type = 'pdd.ddk.theme.list.get';
+        $this->response = 'theme_list_get_response';
         return $this;
     }
 
@@ -403,6 +426,7 @@ class JinBaoService extends Service
     public function themeGoodsSearch()
     {
         $this->type = 'pdd.ddk.theme.goods.search';
+        $this->response = 'theme_list_get_response';
         return $this;
     }
 
@@ -430,18 +454,17 @@ class JinBaoService extends Service
             return json_decode($this->output, true);
         } else {
             // 正常
-            $response = substr(Strings::replace('.', '_', $this->type), 8) . "_response";
             if (is_array($this->output)) {
-                if (isset($this->output["$response"])) return $this->output["$response"];
+                if (isset($this->output["{$this->response}"])) return $this->output["{$this->response}"];
                 return $this->output;
             }
             if (is_object($this->output)) {
                 $this->output = $this->object2array($this->output);
-                if (isset($this->output["$response"])) return $this->output["$response"];
+                if (isset($this->output["$this->response"])) return $this->output["$this->response"];
                 return $this->output;
             }
             $this->output = json_decode($this->output, true);
-            if (isset($this->output["$response"])) return $this->output["$response"];
+            if (isset($this->output["$this->response"])) return $this->output["$this->response"];
             return $this->output;
         }
     }
