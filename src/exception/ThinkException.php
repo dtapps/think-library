@@ -73,7 +73,7 @@ class ThinkException extends Handle
         }
         if (!empty($nt) && $nt == 'wechat') {
             $openid = config('dtapp.exception.wechat.openid', '');
-            if (!empty($access_token)) return HttpService::instance()
+            if (!empty($openid)) return HttpService::instance()
                 ->url("https://api.dtapp.net/v1/wechatmp/tmplmsgWebError/openid/{$openid}")
                 ->post()
                 ->data([
