@@ -94,7 +94,7 @@ class ThinkException extends Handle
                     'url' => request()->url(),
                     'node' => config('dtapp.exception.wechat.node', ''),
                     'info' => "ServerIp：" . $ip . "；CdnIp：" . $_SERVER['REMOTE_ADDR'] . "；ClientIp：" . get_ip(),
-                    'ip' => $ipinfo,
+                    'ip' => $ipinfo['location_all'],
                     'error' => base64_encode($msg)
                 ])
                 ->toArray();
