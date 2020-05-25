@@ -18,7 +18,7 @@ namespace DtApp\ThinkLibrary\exception;
 
 use DtApp\ThinkLibrary\service\curl\HttpService;
 use DtApp\ThinkLibrary\service\DingTalkService;
-use DtApp\ThinkLibrary\service\SystemService;
+use DtApp\ThinkLibrary\service\Ip\QqWryService;
 use think\exception\Handle;
 use think\exception\HttpException;
 use think\exception\ValidateException;
@@ -39,7 +39,7 @@ class ThinkException extends Handle
      * @param Throwable $e
      * @return Response
      * @throws AliException
-     * @throws CurlException
+     * @throws CurlException|IpException
      */
     public function render($request, Throwable $e): Response
     {
@@ -60,6 +60,7 @@ class ThinkException extends Handle
      * @return bool
      * @throws AliException
      * @throws CurlException
+     * @throws IpException
      */
     private function show($msg)
     {
@@ -73,6 +74,10 @@ class ThinkException extends Handle
         }
         if (!empty($nt) && $nt == 'wechat') {
             $openid = config('dtapp.exception.wechat.openid', '');
+            $ip = config('dtapp.exception.wechat.ip', '未配置');
+            $seip = get_ip();
+            $ipinfo = QqWryService::instance()->getLocation($seip);
+            if (isset($ipinfo['location_all'])) $ipinfo['location_all'] = '';
             if (!empty($openid)) return HttpService::instance()
                 ->url("https://api.dtapp.net/v1/wechatmp/tmplmsgWebError/openid/{$openid}")
                 ->post()
@@ -80,7 +85,8 @@ class ThinkException extends Handle
                     'domain' => request()->domain(),
                     'url' => request()->url(),
                     'node' => config('dtapp.exception.wechat.node', ''),
-                    'info' => "服务器IP：" . $_SERVER['REMOTE_ADDR'] . "；客户端IP：" . get_ip(),
+                    'info' => "ServerIp：" . $ip . "；CdnIp：" . $_SERVER['REMOTE_ADDR'] . "；ClientIp：" . get_ip(),
+                    'ip' => $ipinfo,
                     'error' => base64_encode($msg)
                 ])
                 ->toArray();

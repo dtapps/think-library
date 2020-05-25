@@ -23,7 +23,7 @@ if (!function_exists('get_ip_info')) {
     /**
      * 获取请求IP信息
      * @param string $ip
-     * @return string
+     * @return mixed|null
      * @throws IpException
      */
     function get_ip_info($ip = '')
