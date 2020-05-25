@@ -86,6 +86,10 @@ return [
         'dingtalk' => [
             'access_token' => ''
         ],
+        // 企业微信
+        'qyweixin' => [
+            'key' => ''
+        ],
         // 微信
         'wechat' => [
             // 通知微信
