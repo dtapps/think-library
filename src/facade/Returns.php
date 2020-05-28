@@ -27,8 +27,8 @@ use think\Facade;
  * @package think\facade
  * @mixin helper
  *
- * @method helper jsonSuccess(array $data = [], string $msg = 'success', int $code = 0) 返回Json-成功
- * @method helper jsonError(string $msg = 'error', int $code = 1, array $data = []) 返回Json-错误
+ * @method helper jsonSuccess(array $data = [], string $msg = 'success', int $code = 0, array $ext = []) 返回Json-成功
+ * @method helper jsonError(string $msg = 'error', int $code = 1, array $data = [], array $ext = []) 返回Json-错误
  */
 class Returns extends Facade
 {

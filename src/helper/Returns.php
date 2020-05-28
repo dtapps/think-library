@@ -30,12 +30,14 @@ class Returns
      * @param array $data 数据
      * @param string $msg 描述
      * @param int $code 状态
+     * @param array $ext 扩展字段
      */
-    public function jsonSuccess(array $data = [], string $msg = 'success', int $code = 0)
+    public function jsonSuccess(array $data = [], string $msg = 'success', int $code = 0, array $ext = [])
     {
         date_default_timezone_set('Asia/Shanghai');
         header('Content-Type:application/json; charset=utf-8');
-        throw new HttpResponseException(json(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data]));
+        if (!empty($ext) && is_array($ext)) throw new HttpResponseException(json(array_merge(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data], $ext)));
+        else throw new HttpResponseException(json(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data]));
     }
 
     /**
@@ -43,11 +45,13 @@ class Returns
      * @param string $msg 描述
      * @param int $code 状态码
      * @param array $data 数据
+     * @param array $ext 扩展字段
      */
-    public function jsonError(string $msg = 'error', int $code = 1, array $data = [])
+    public function jsonError(string $msg = 'error', int $code = 1, array $data = [], array $ext = [])
     {
         date_default_timezone_set('Asia/Shanghai');
         header('Content-Type:application/json; charset=utf-8');
-        throw new HttpResponseException(json(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data]));
+        if (!empty($ext) && is_array($ext)) throw new HttpResponseException(json(array_merge(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data], $ext)));
+        else throw new HttpResponseException(json(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data]));
     }
 }
