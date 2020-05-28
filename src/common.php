@@ -14,6 +14,8 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
+use DtApp\ThinkLibrary\cache\Mysql;
+use DtApp\ThinkLibrary\exception\CacheException;
 use DtApp\ThinkLibrary\exception\IpException;
 use DtApp\ThinkLibrary\service\Ip\QqWryService;
 use DtApp\ThinkLibrary\service\SystemService;
@@ -107,5 +109,30 @@ if (!function_exists('uri')) {
     function uri($url = '', array $vars = [], $suffix = true, $domain = false, $fillSuffix = false)
     {
         return SystemService::instance()->uri($url, $vars, $suffix, $domain, $fillSuffix);
+    }
+}
+
+if (!function_exists('dtacache')) {
+    /**
+     * 缓存
+     * @param string $name
+     * @param $value
+     * @param int $expire
+     * @return bool|int|string
+     * @throws CacheException
+     */
+    function dtacache($name = '', $value = [], $expire = 6000)
+    {
+        $myc = new Mysql();
+        if (empty($value)) {
+            return $myc->name($name)
+                ->get();
+        } else {
+            $myc->name($name)
+                ->expire($expire)
+                ->set($value);
+            return $myc->name($name)
+                ->get();
+        }
     }
 }
