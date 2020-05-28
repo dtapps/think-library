@@ -19,6 +19,9 @@ use DtApp\ThinkLibrary\exception\CacheException;
 use DtApp\ThinkLibrary\exception\IpException;
 use DtApp\ThinkLibrary\service\Ip\QqWryService;
 use DtApp\ThinkLibrary\service\SystemService;
+use think\db\exception\DataNotFoundException;
+use think\db\exception\DbException;
+use think\db\exception\ModelNotFoundException;
 
 if (!function_exists('get_ip_info')) {
 
@@ -116,10 +119,13 @@ if (!function_exists('dtacache')) {
     /**
      * 缓存
      * @param string $name
-     * @param $value
+     * @param array $value
      * @param int $expire
      * @return bool|int|string
      * @throws CacheException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      */
     function dtacache($name = '', $value = [], $expire = 6000)
     {
@@ -128,9 +134,16 @@ if (!function_exists('dtacache')) {
             return $myc->name($name)
                 ->get();
         } else {
-            $myc->name($name)
-                ->expire($expire)
-                ->set($value);
+            if ($myc->name($name)
+                ->get()) {
+                $myc->name($name)
+                    ->expire($expire)
+                    ->set($value);
+            } else {
+                $myc->name($name)
+                    ->expire($expire)
+                    ->update($value);
+            }
             return $myc->name($name)
                 ->get();
         }
