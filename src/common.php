@@ -125,9 +125,12 @@ if (!function_exists('dtacache')) {
     {
         $myc = new Mysql();
         if (empty($value)) {
-            return $myc->name($name)
+            $data = $myc->name($name)
                 ->get();
+            if (is_null(json_decode($data))) return json_decode($data, true);
+            else return $data;
         } else {
+            if (is_array($value)) $value = json_encode($value);
             $myc->name($name)
                 ->expire($expire)
                 ->set($value);
