@@ -134,8 +134,8 @@ if (!function_exists('dtacache')) {
             return $myc->name($name)
                 ->get();
         } else {
-            if ($myc->name($name)
-                ->get()) {
+            if (empty($myc->name($name)
+                ->get())) {
                 $myc->name($name)
                     ->expire($expire)
                     ->set($value);
