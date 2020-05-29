@@ -530,6 +530,22 @@ class WebAppService extends Service
     }
 
     /**
+     * 微信内H5调起支付
+     * @param string $prepay_id
+     * @return array
+     */
+    public function h5Pay(string $prepay_id)
+    {
+        $array['appId'] = $this->app_id;
+        $array['timeStamp'] = time();
+        $array['nonceStr'] = Randoms::generate(32, 3);
+        $array['package'] = "prepay_id={$prepay_id}";
+        $array['signType'] = 'HMAC-SHA256';
+        $array['paySign'] = $this->paySign($array);
+        return $array;
+    }
+
+    /**
      * 生成支付签名
      * @param array $array 参与签名的内容组成的数组
      * @param bool $hmacsha256 是否使用 HMAC-SHA256算法，否则使用MD5
