@@ -523,9 +523,10 @@ class WebAppService extends Service
         $array['appid'] = $this->app_id;
         $array['mch_id'] = $this->mch_id;
         $array['nonce_str'] = Randoms::generate(32, 3);
-        $array['sign'] = $this->paySign($array, false);
-        $array['sign_type'] = 'md5';
-        return $this->postXmlCurl(Xmls::toXml($array));
+        $array['sign_type'] = 'HMAC-SHA256';
+        $array['sign'] = $this->paySign($array);
+        $res = $this->postXmlCurl(Xmls::toXml($array));
+        return Xmls::toArray($res);
     }
 
     /**
@@ -539,12 +540,12 @@ class WebAppService extends Service
         // 排序
         ksort($array);
         // 转成字符串
-        $str = Urls::toParams($array);
+        $stringA = Urls::toParams($array);
         // 在字符串接商户支付秘钥
-        $str .= "&key=" . $this->mch_key;
+        $stringSignTemp = "{$stringA}&key=" . $this->mch_key;
         //步骤四：MD5或HMAC-SHA256C加密
-        if ($hmacsha256) $str = hash_hmac("sha256", $str, $this->mch_key);
-        else $str = md5($str);
+        if ($hmacsha256) $str = hash_hmac("sha256", $stringSignTemp, $this->mch_key);
+        else $str = md5($stringSignTemp);
         //符转大写
         return strtoupper($str);
     }
