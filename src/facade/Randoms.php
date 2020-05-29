@@ -22,7 +22,7 @@ use think\facade;
 /**
  * 随机门面
  * Class Randoms
- * @see \DtApp\ThinkLibrary\Randoms
+ * @see \DtApp\ThinkLibrary\helper\Randoms
  * @package DtApp\ThinkLibrary\Randoms
  * @package think\facade
  * @mixin helper

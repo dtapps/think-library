@@ -16,11 +16,11 @@
 
 namespace DtApp\ThinkLibrary\service\wechat;
 
-use DtApp\ThinkLibrary\cache\Mysql;
 use DtApp\ThinkLibrary\exception\CacheException;
 use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\WeChatException;
 use DtApp\ThinkLibrary\facade\Pregs;
+use DtApp\ThinkLibrary\facade\Randoms;
 use DtApp\ThinkLibrary\facade\Urls;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
@@ -70,6 +70,39 @@ class WebAppService extends Service
      * @var string
      */
     private $cache = "file";
+
+    /**
+     * 商户平台设置的密钥key
+     * @var
+     */
+    private $mch_key;
+
+    /**
+     * @param string $mchKey
+     * @return $this
+     */
+    public function mchKey(string $mchKey)
+    {
+        $this->mch_key = $mchKey;
+        return $this;
+    }
+
+    /**
+     * 商户号
+     * @var
+     */
+    private $mch_id;
+
+    /**
+     * 商户号
+     * @param string $mchId
+     * @return $this
+     */
+    public function mchId(string $mchId)
+    {
+        $this->mch_id = $mchId;
+        return $this;
+    }
 
     /**
      * 公众号的唯一标识
@@ -476,5 +509,73 @@ class WebAppService extends Service
             }
             return $access_token;
         } else throw new WeChatException("驱动方式错误");
+    }
+
+    /**
+     * 微信支付
+     * https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1
+     * @param array $array
+     */
+    public function payUnfIedOrder(array $array)
+    {
+        $array['appid'] = $this->app_id;
+        $array['mch_id'] = $this->mch_id;
+        $array['nonce_str'] = Randoms::generate(32, 3);
+        $array['sign'] = $this->paySign($array, false);
+        $array['sign_type'] = 'md5';
+        return $this->postXmlCurl($array);
+    }
+
+    /**
+     * 生成支付签名
+     * @param array $array 参与签名的内容组成的数组
+     * @param bool $hmacsha256 是否使用 HMAC-SHA256算法，否则使用MD5
+     * @return string
+     */
+    private function paySign(array $array, bool $hmacsha256 = true)
+    {
+        // 排序
+        ksort($array);
+        // 转成字符串
+        $str = Urls::toParams($array);
+        // 在字符串接商户支付秘钥
+        $str .= "&key=" . $this->mch_key;
+        //步骤四：MD5或HMAC-SHA256C加密
+        if ($hmacsha256) $str = hash_hmac("sha256", $str, $this->mch_key);
+        else $str = md5($str);
+        //符转大写
+        return strtoupper($str);
+    }
+
+    private function postXmlCurl($xml)
+    {
+        $ch = curl_init();
+        //设置超时
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+        curl_setopt($ch, CURLOPT_URL, "https://api.mch.weixin.qq.com/pay/unifiedorder");
+        //设置header
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        //要求结果为字符串且输出到屏幕上
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+        //试试手气新增，增加之后 curl 不报 60# 错误，可以请求到微信的响应
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);  //不验证 SSL 证书
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);//不验证 SSL 证书域名
+        //post提交方式
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
+        //运行curl
+        $data = curl_exec($ch);
+        //返回结果
+        if ($data) {
+            curl_close($ch);
+            return $data;
+        } else {
+            $error = curl_errno($ch);
+            curl_close($ch);
+            return "curl error, error code " . $error;
+            //throw new WxPayException("curl出错，错误码:$error");
+        }
     }
 }

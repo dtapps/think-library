@@ -19,7 +19,6 @@ namespace DtApp\ThinkLibrary\helper;
 /**
  * 随机管理类
  * Class Randoms
- * @mixin Randoms
  * @package DtApp\ThinkLibrary\helper
  */
 class Randoms
