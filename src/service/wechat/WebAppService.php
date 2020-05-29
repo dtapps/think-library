@@ -22,6 +22,7 @@ use DtApp\ThinkLibrary\exception\WeChatException;
 use DtApp\ThinkLibrary\facade\Pregs;
 use DtApp\ThinkLibrary\facade\Randoms;
 use DtApp\ThinkLibrary\facade\Urls;
+use DtApp\ThinkLibrary\facade\Xmls;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 use think\db\exception\DataNotFoundException;
@@ -524,7 +525,7 @@ class WebAppService extends Service
         $array['nonce_str'] = Randoms::generate(32, 3);
         $array['sign'] = $this->paySign($array, false);
         $array['sign_type'] = 'md5';
-        return $this->postXmlCurl($array);
+        return $this->postXmlCurl(Xmls::toXml($array));
     }
 
     /**
