@@ -515,6 +515,7 @@ class WebAppService extends Service
      * 微信支付
      * https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1
      * @param array $array
+     * @return bool|string
      */
     public function payUnfIedOrder(array $array)
     {
