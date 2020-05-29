@@ -22,6 +22,9 @@ use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\WeChatException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
+use think\db\exception\DataNotFoundException;
+use think\db\exception\DbException;
+use think\db\exception\ModelNotFoundException;
 
 /**
  * 微信小程序
@@ -92,6 +95,9 @@ class MiniService extends Service
      * @return bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function getPaidUnionId(string $openid)
@@ -111,6 +117,9 @@ class MiniService extends Service
      * @return array|bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function createWxaQrCode(array $data = [])
@@ -132,6 +141,9 @@ class MiniService extends Service
      * @return array|bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function getWxaCode(array $data = [])
@@ -153,6 +165,9 @@ class MiniService extends Service
      * @return array|bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function getWxaCodeUnLimit(array $data = [])
@@ -174,6 +189,9 @@ class MiniService extends Service
      * @return bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function addTemplate(array $data = [])
@@ -194,6 +212,9 @@ class MiniService extends Service
      * @return bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function deleteTemplate(string $priTmplId)
@@ -216,6 +237,9 @@ class MiniService extends Service
      * @return bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function getCategory()
@@ -235,6 +259,9 @@ class MiniService extends Service
      * @return bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function getPubTemplateKeyWordsById(string $tid)
@@ -258,6 +285,9 @@ class MiniService extends Service
      * @return bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function getPubTemplateTitleList(array $data = [])
@@ -277,6 +307,9 @@ class MiniService extends Service
      * @return bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function getTemplateList()
@@ -296,6 +329,9 @@ class MiniService extends Service
      * @return bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function subscribeMessageSend(array $data = [])
@@ -368,6 +404,9 @@ class MiniService extends Service
      * @return bool|mixed|string
      * @throws CacheException
      * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      * @throws WeChatException
      */
     public function accessToken()
@@ -382,6 +421,9 @@ class MiniService extends Service
      * @throws CacheException
      * @throws CurlException
      * @throws WeChatException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
      */
     private function getAccessToken()
     {
@@ -430,20 +472,14 @@ class MiniService extends Service
             // 文件名
             $file = "{$this->app_id}_access_token";
             // 获取数据
-            $cache_mysql = new Mysql();
-            $cache_mysql_value = $cache_mysql
-                ->name($file)
-                ->get();
+            $cache_mysql_value = dtacache($file);
             if (!empty($cache_mysql_value)) {
                 $access_token['access_token'] = $cache_mysql_value;
             } else {
                 $accessToken_res = HttpService::instance()
                     ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
-                $cache_mysql
-                    ->name($file)
-                    ->expire(6000)
-                    ->set($accessToken_res['access_token']);
+                dtacache($file, $accessToken_res['access_token'], 6000);
                 $access_token['access_token'] = $accessToken_res['access_token'];
             }
             return $access_token;
