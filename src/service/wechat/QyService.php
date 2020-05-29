@@ -34,6 +34,7 @@ class QyService extends Service
      */
     private $msgType = 'text';
     private $key;
+    private $url = 'https://qyapi.weixin.qq.com/';
 
     /**
      * 配置Key
@@ -91,7 +92,7 @@ class QyService extends Service
         if (empty($this->key)) throw new NoticeException("请检查KEY");
         if (empty($data['msgtype'])) $data['msgtype'] = $this->msgType;
         $result = HttpService::instance()
-            ->url("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=" . $this->key)
+            ->url("{$this->url}cgi-bin/webhook/send?key=" . $this->key)
             ->data($data)
             ->toArray();
         if ($result['errcode'] == 0) return true;
