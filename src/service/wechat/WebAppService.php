@@ -292,7 +292,15 @@ class WebAppService extends Service
         $res = HttpService::instance()
             ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
             ->toArray();
-        if (!empty($res['errcode'])) throw new WeChatException('accessToken已过期');
+        if (!empty($res['errcode'])) {
+            // 获取数据
+            $accessToken = $this->getAccessToken();
+            if (!isset($accessToken['access_token'])) throw  new WeChatException("获取access_token错误，" . $accessToken['errmsg']);
+            $res = HttpService::instance()
+                ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
+                ->toArray();
+            if (!empty($res['errcode'])) throw new WeChatException('accessToken已过期');
+        }
         // 注意 URL 一定要动态获取，不能 hardcode.
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
         $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
