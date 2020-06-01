@@ -642,6 +642,7 @@ class WebAppService extends Service
                 'expires_time' => '',
             ];
             if (empty($accessToken['expires_time'])) {
+                // 文件不存在
                 $accessToken_res = HttpService::instance()
                     ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
@@ -649,6 +650,7 @@ class WebAppService extends Service
                 file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
                 $accessToken = $accessToken_res;
             } else if (!isset($accessToken['access_token'])) {
+                // 内容不存在
                 $accessToken_res = HttpService::instance()
                     ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
@@ -656,6 +658,17 @@ class WebAppService extends Service
                 file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
                 $accessToken = $accessToken_res;
             } else if ($accessToken['expires_time'] <= time()) {
+                $accessToken_res = HttpService::instance()
+                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->toArray();
+                $accessToken_res['expires_time'] = time() + 6000;
+                file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
+                $accessToken = $accessToken_res;
+            }
+            $judge = HttpService::instance()
+                ->url("{$this->api_url}cgi-bin/getcallbackip?access_token={$accessToken['access_token']}")
+                ->toArray();
+            if (!empty($judge)) {
                 $accessToken_res = HttpService::instance()
                     ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
@@ -673,6 +686,16 @@ class WebAppService extends Service
             if (!empty($cache_mysql_value)) {
                 $access_token['access_token'] = $cache_mysql_value;
             } else {
+                $accessToken_res = HttpService::instance()
+                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->toArray();
+                dtacache($file, $accessToken_res['access_token'], 6000);
+                $access_token['access_token'] = $accessToken_res['access_token'];
+            }
+            $judge = HttpService::instance()
+                ->url("{$this->api_url}cgi-bin/getcallbackip?access_token={$accessToken['access_token']}")
+                ->toArray();
+            if (!empty($judge)) {
                 $accessToken_res = HttpService::instance()
                     ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
