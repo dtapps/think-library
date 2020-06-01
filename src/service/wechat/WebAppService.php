@@ -441,6 +441,169 @@ class WebAppService extends Service
     }
 
     /**
+     * 自定义菜单 获取自定义菜单配置
+     * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Getting_Custom_Menu_Configurations.html
+     * @return array|bool|mixed|string
+     * @throws CacheException
+     * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
+     * @throws WeChatException
+     */
+    public function menuGet()
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "{$this->api_url}cgi-bin/menu/get?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->toArray();
+    }
+
+    /**
+     * 自定义菜单 创建个性化菜单
+     * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Personalized_menu_interface.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws CacheException
+     * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
+     * @throws WeChatException
+     */
+    public function menuAddConditional(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "{$this->api_url}cgi-bin/menu/addconditional?access_token={$accessToken['access_token']}";
+        if (is_array($data)) $data = json_encode($data);
+        return HttpService::instance()
+            ->url($url)
+            ->post()
+            ->data($data)
+            ->toArray();
+    }
+
+    /**
+     * 自定义菜单 删除个性化菜单
+     * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Personalized_menu_interface.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws CacheException
+     * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
+     * @throws WeChatException
+     */
+    public function menuDelConditional(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "{$this->api_url}cgi-bin/menu/delconditional?access_token={$accessToken['access_token']}";
+        if (is_array($data)) $data = json_encode($data);
+        return HttpService::instance()
+            ->url($url)
+            ->post()
+            ->data($data)
+            ->toArray();
+    }
+
+    /**
+     * 自定义菜单 测试个性化菜单匹配结果
+     * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Personalized_menu_interface.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws CacheException
+     * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
+     * @throws WeChatException
+     */
+    public function menuTryMatch(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "{$this->api_url}cgi-bin/menu/trymatch?access_token={$accessToken['access_token']}";
+        if (is_array($data)) $data = json_encode($data);
+        return HttpService::instance()
+            ->url($url)
+            ->post()
+            ->data($data)
+            ->toArray();
+    }
+
+    /**
+     * 自定义菜单 删除接口
+     * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Deleting_Custom-Defined_Menu.html
+     * @return array|bool|mixed|string
+     * @throws CacheException
+     * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
+     * @throws WeChatException
+     */
+    public function menuDelete()
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "{$this->api_url}cgi-bin/menu/delete?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->toArray();
+    }
+
+    /**
+     * 自定义菜单 查询接口
+     * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Querying_Custom_Menus.html
+     * @return array|bool|mixed|string
+     * @throws CacheException
+     * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
+     * @throws WeChatException
+     */
+    public function getCurrentSelfmenuInfo()
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "{$this->api_url}cgi-bin/get_current_selfmenu_info?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->toArray();
+    }
+
+    /**
+     * 自定义菜单 创建接口
+     * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Creating_Custom-Defined_Menu.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws CacheException
+     * @throws CurlException
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
+     * @throws WeChatException
+     */
+    public function menuCreate(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "{$this->api_url}cgi-bin/menu/create?access_token={$accessToken['access_token']}";
+        if (is_array($data)) $data = json_encode($data);
+        return HttpService::instance()
+            ->url($url)
+            ->post()
+            ->data($data)
+            ->toArray();
+    }
+
+    /**
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
      * @throws CacheException
