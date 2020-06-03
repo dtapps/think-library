@@ -52,7 +52,7 @@ class HttpService extends Service
      */
     public function data($str)
     {
-        if (is_array($str)) $this->data = json_encode($str);
+        if (is_array($str)) $this->data = json_encode($str,JSON_UNESCAPED_UNICODE);
         else $this->data = $str;
         return $this;
     }

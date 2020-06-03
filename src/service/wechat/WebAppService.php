@@ -366,7 +366,6 @@ class WebAppService extends Service
         // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "{$this->api_url}cgi-bin/message/template/send?access_token={$accessToken['access_token']}";
-        if (is_array($data)) $data = json_encode($data);
         return HttpService::instance()
             ->url($url)
             ->data($data)
@@ -391,7 +390,6 @@ class WebAppService extends Service
         // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "{$this->api_url}cgi-bin/template/api_set_industry?access_token={$accessToken['access_token']}";
-        if (is_array($data)) $data = json_encode($data);
         return HttpService::instance()
             ->url($url)
             ->data($data)
@@ -440,7 +438,6 @@ class WebAppService extends Service
         // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "{$this->api_url}bizwifi/finishpage/set?access_token={$accessToken['access_token']}";
-        if (is_array($data)) $data = json_encode($data);
         return HttpService::instance()
             ->url($url)
             ->post()
@@ -486,7 +483,6 @@ class WebAppService extends Service
         // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "{$this->api_url}cgi-bin/menu/addconditional?access_token={$accessToken['access_token']}";
-        if (is_array($data)) $data = json_encode($data);
         return HttpService::instance()
             ->url($url)
             ->post()
@@ -511,7 +507,6 @@ class WebAppService extends Service
         // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "{$this->api_url}cgi-bin/menu/delconditional?access_token={$accessToken['access_token']}";
-        if (is_array($data)) $data = json_encode($data);
         return HttpService::instance()
             ->url($url)
             ->post()
@@ -536,7 +531,6 @@ class WebAppService extends Service
         // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "{$this->api_url}cgi-bin/menu/trymatch?access_token={$accessToken['access_token']}";
-        if (is_array($data)) $data = json_encode($data);
         return HttpService::instance()
             ->url($url)
             ->post()
@@ -603,7 +597,6 @@ class WebAppService extends Service
         // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "{$this->api_url}cgi-bin/menu/create?access_token={$accessToken['access_token']}";
-        if (is_array($data)) $data = json_encode($data);
         return HttpService::instance()
             ->url($url)
             ->post()
