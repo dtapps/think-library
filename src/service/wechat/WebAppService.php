@@ -17,7 +17,6 @@
 namespace DtApp\ThinkLibrary\service\wechat;
 
 use DtApp\ThinkLibrary\exception\CacheException;
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\WeChatException;
 use DtApp\ThinkLibrary\facade\Pregs;
 use DtApp\ThinkLibrary\facade\Randoms;
@@ -210,7 +209,7 @@ class WebAppService extends Service
      * @param string $code
      * @param bool $is
      * @return array|bool|mixed|string
-     * @throws CurlException|WeChatException
+     * @throws WeChatException
      */
     public function accessToken(string $code, bool $is = true)
     {
@@ -228,7 +227,6 @@ class WebAppService extends Service
      * @param string $refreshToken
      * @param bool $is
      * @return array|bool|mixed|string
-     * @throws CurlException
      * @throws WeChatException
      */
     public function refreshToken(string $refreshToken, bool $is = true)
@@ -248,7 +246,6 @@ class WebAppService extends Service
      * @param string $lang
      * @param bool $is
      * @return array|bool|mixed|string
-     * @throws CurlException
      */
     public function useInfo(string $accessToken, string $openid, $lang = "zh_CN", bool $is = true)
     {
@@ -263,7 +260,6 @@ class WebAppService extends Service
      * @param string $openid
      * @param bool $is
      * @return array|bool|mixed|string
-     * @throws CurlException
      */
     public function auth(string $accessToken, string $openid, bool $is = true)
     {
@@ -276,7 +272,6 @@ class WebAppService extends Service
      * 分享
      * @return array
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -333,7 +328,6 @@ class WebAppService extends Service
      * @param array $data
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -355,7 +349,6 @@ class WebAppService extends Service
      * @param array $data
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -379,7 +372,6 @@ class WebAppService extends Service
      * @param array $data
      * @return bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -401,7 +393,6 @@ class WebAppService extends Service
      * @param string $long_url
      * @return bool
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -427,7 +418,6 @@ class WebAppService extends Service
      * @param array $data
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -450,7 +440,6 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Getting_Custom_Menu_Configurations.html
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -472,7 +461,6 @@ class WebAppService extends Service
      * @param array $data
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -496,7 +484,6 @@ class WebAppService extends Service
      * @param array $data
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -520,7 +507,6 @@ class WebAppService extends Service
      * @param array $data
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -543,7 +529,6 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Deleting_Custom-Defined_Menu.html
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -564,7 +549,6 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Querying_Custom_Menus.html
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -586,7 +570,6 @@ class WebAppService extends Service
      * @param array $data
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -608,7 +591,6 @@ class WebAppService extends Service
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
      * @throws CacheException
-     * @throws CurlException
      * @throws WeChatException
      * @throws DataNotFoundException
      * @throws DbException

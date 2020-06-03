@@ -64,17 +64,12 @@ dump(SystemService::instance()
 
 ```php
 
-use DtApp\ThinkLibrary\exception\CurlException;
+
 use DtApp\ThinkLibrary\service\baidu\LbsYunService;
 
-try {
-    // 获取天气信息
-    dump(LbsYunService::instance()
+dump(LbsYunService::instance()
         ->ak("")
         ->weather());
-} catch (CurlException $e) {
-    dump($e->getMessage());
-}
 
 ```
 
@@ -82,17 +77,12 @@ try {
 
 ```php
 
-use DtApp\ThinkLibrary\exception\CurlException;
+
 use DtApp\ThinkLibrary\service\amap\AmApService;
 
-try {
-    // 获取天气信息 
-    dump(AmApService::instance()
+dump(AmApService::instance()
         ->key("")
         ->weather());
-} catch (CurlException $e) {
-    dump($e->getMessage());
-}
 
 
 ```

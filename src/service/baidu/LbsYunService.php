@@ -17,7 +17,6 @@
 namespace DtApp\ThinkLibrary\service\baidu;
 
 use DtApp\ThinkLibrary\exception\BaiduException;
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
@@ -58,7 +57,7 @@ class LbsYunService extends Service
      * @param string $coordtype
      * @param string $location
      * @return array|bool|mixed|string
-     * @throws CurlException|BaiduException
+     * @throws BaiduException
      */
     public function weather($district_id = 110100, string $coordtype = "bd09ll", string $location = "")
     {
@@ -85,7 +84,6 @@ class LbsYunService extends Service
      * @param string $location
      * @param string $language
      * @return array|bool|mixed|string
-     * @throws CurlException
      * @throws BaiduException
      */
     public function weatherAbroad($district_id = 110100, string $coordtype = "bd09ll", string $location = "", string $language = "cn")

@@ -40,7 +40,7 @@ class ThinkException extends Handle
      * @param Throwable $e
      * @return Response
      * @throws AliException
-     * @throws CurlException|IpException|NoticeException
+     * @throws IpException|NoticeException
      */
     public function render($request, Throwable $e): Response
     {
@@ -60,7 +60,6 @@ class ThinkException extends Handle
      * @param $msg
      * @return bool
      * @throws AliException
-     * @throws CurlException
      * @throws IpException
      * @throws NoticeException
      */

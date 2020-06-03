@@ -16,10 +16,10 @@
 
 namespace DtApp\ThinkLibrary\service\jd;
 
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\JdException;
 use DtApp\ThinkLibrary\facade\Strings;
 use DtApp\ThinkLibrary\Service;
+use think\exception\HttpException;
 
 /**
  * 京东联盟
@@ -321,12 +321,12 @@ class UnionService extends Service
     /**
      * 返回数组数据
      * @return array|mixed
-     * @throws CurlException|JdException
+     * @throws JdException
      */
     public function toArray()
     {
         //首先检测是否支持curl
-        if (!extension_loaded("curl")) throw new CurlException('请开启curl模块！', E_USER_DEPRECATED);
+        if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
         if (empty($this->app_key)) $this->getConfig();
         if (empty($this->app_key)) throw new JdException('请检查app_key参数');
         if (empty($this->method)) throw new JdException('请检查method参数');

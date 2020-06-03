@@ -16,9 +16,9 @@
 
 namespace DtApp\ThinkLibrary\service\pinduoduo;
 
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\PinDouDouException;
 use DtApp\ThinkLibrary\Service;
+use think\exception\HttpException;
 
 /**
  * 进宝
@@ -433,12 +433,12 @@ class JinBaoService extends Service
     /**
      * 返回数组数据
      * @return array|mixed
-     * @throws CurlException|PinDouDouException
+     * @throws PinDouDouException
      */
     public function toArray()
     {
         //首先检测是否支持curl
-        if (!extension_loaded("curl")) throw new CurlException('请开启curl模块！', E_USER_DEPRECATED);
+        if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
         if (empty($this->client_id)) $this->getConfig();
         if (empty($this->client_id)) throw new PinDouDouException('请检查client_id参数');
         $this->param['type'] = $this->type;

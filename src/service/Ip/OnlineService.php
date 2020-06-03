@@ -16,7 +16,6 @@
 
 namespace DtApp\ThinkLibrary\service\Ip;
 
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\IpException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
@@ -48,7 +47,6 @@ class OnlineService extends Service
     /**
      * 哔哩哔哩ip查询接口
      * @return array|bool|mixed|string
-     * @throws CurlException
      */
     public function biliBili()
     {
@@ -62,7 +60,6 @@ class OnlineService extends Service
      * batch
      * @param string $lang 语言
      * @return array|bool|mixed|string
-     * @throws CurlException
      */
     public function batch(string $lang = 'zh-CN')
     {
@@ -75,7 +72,6 @@ class OnlineService extends Service
     /**
      * lookup
      * @return array|bool|mixed|string
-     * @throws CurlException
      */
     public function lookup()
     {
@@ -88,7 +84,6 @@ class OnlineService extends Service
     /**
      * 网易IP查询接口
      * @return array|bool|mixed|string
-     * @throws CurlException
      */
     public function netEase()
     {
@@ -101,7 +96,6 @@ class OnlineService extends Service
     /**
      * 百度搜索
      * @return bool|false|mixed|string|string[]
-     * @throws CurlException
      */
     public function baidu()
     {
@@ -120,7 +114,6 @@ class OnlineService extends Service
     /**
      * 太平洋
      * @return bool|false|mixed|string
-     * @throws CurlException
      */
     public function pConLine()
     {
@@ -138,7 +131,6 @@ class OnlineService extends Service
     /**
      * 新浪
      * @return bool|false|mixed|string|string[]
-     * @throws CurlException
      */
     public function siNa()
     {
@@ -159,7 +151,6 @@ class OnlineService extends Service
     /**
      * 好搜
      * @return bool|mixed|string
-     * @throws CurlException
      */
     public function so()
     {
@@ -172,7 +163,6 @@ class OnlineService extends Service
 
     /**
      * 搜狐
-     * @throws CurlException
      */
     public function soHu()
     {
@@ -190,7 +180,6 @@ class OnlineService extends Service
      * 淘宝
      * @param string $ip IP地址
      * @return bool|mixed|string
-     * @throws CurlException
      */
     public function taoBao(string $ip = '')
     {

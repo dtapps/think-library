@@ -16,7 +16,6 @@
 
 namespace DtApp\ThinkLibrary\service\jdcloud;
 
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
@@ -60,7 +59,6 @@ class VientianeService extends Service
      * 空气质量实时数据
      * https://wx.jdcloud.com/market/datas/26/1656
      * @return array|bool|mixed|string
-     * @throws CurlException
      */
     public function pm25Cities()
     {
@@ -71,7 +69,6 @@ class VientianeService extends Service
     /**
      * 中国和世界天气预报
      * https://wx.jdcloud.com/market/datas/26/10610
-     * @throws CurlException
      */
     public function heFreeWeather()
     {
@@ -82,7 +79,6 @@ class VientianeService extends Service
     /**
      * 全国天气预报
      * https://wx.jdcloud.com/market/datas/26/11065
-     * @throws CurlException
      */
     public function jiSuApiWeather()
     {
@@ -93,7 +89,6 @@ class VientianeService extends Service
     /**
      * 菜谱大全
      * https://wx.jdcloud.com/market/datas/26/11072
-     * @throws CurlException
      */
     public function jiSuApiSearch()
     {
@@ -104,7 +99,6 @@ class VientianeService extends Service
     /**
      * IP商圈字典
      * https://wx.jdcloud.com/market/datas/26/13432
-     * @throws CurlException
      */
     public function rtBaSiaIpAreaDict()
     {
@@ -115,7 +109,6 @@ class VientianeService extends Service
     /**
      * 请求
      * @return array|bool|mixed|string
-     * @throws CurlException
      */
     private function http()
     {

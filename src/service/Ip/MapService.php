@@ -16,7 +16,6 @@
 
 namespace DtApp\ThinkLibrary\service\Ip;
 
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\IpException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
@@ -85,7 +84,6 @@ class MapService extends Service
      * @param string $output
      * @return array|bool|mixed|string
      * @throws IpException
-     * @throws CurlException
      */
     public function qq(string $output = 'JSON')
     {
@@ -103,7 +101,6 @@ class MapService extends Service
      * http://lbsyun.baidu.com/index.php?title=webapi/ip-api
      * @param string $coor
      * @return array|bool|mixed|string
-     * @throws CurlException
      * @throws IpException
      */
     public function baidu(string $coor = 'bd09ll')
@@ -122,7 +119,6 @@ class MapService extends Service
      * https://lbs.amap.com/api/webservice/guide/api/ipconfig
      * @param string $output
      * @return array|bool|mixed|string
-     * @throws CurlException
      * @throws IpException
      */
     public function amap(string $output = 'JSON')

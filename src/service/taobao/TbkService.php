@@ -16,10 +16,10 @@
 
 namespace DtApp\ThinkLibrary\service\taobao;
 
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\TaoBaoException;
 use DtApp\ThinkLibrary\facade\Strings;
 use DtApp\ThinkLibrary\Service;
+use think\exception\HttpException;
 
 /**
  * 淘宝客
@@ -463,13 +463,12 @@ class TbkService extends Service
     /**
      * 返回Array
      * @return array|mixed
-     * @throws CurlException
      * @throws TaoBaoException
      */
     public function toArray()
     {
         //首先检测是否支持curl
-        if (!extension_loaded("curl")) throw new CurlException('请开启curl模块！', E_USER_DEPRECATED);
+        if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
         $this->format = "json";
         if (empty($this->app_key)) $this->getConfig();
         if (empty($this->app_key)) throw new TaoBaoException('请检查app_key参数');
@@ -503,13 +502,12 @@ class TbkService extends Service
     /**
      * 返回Xml
      * @return mixed
-     * @throws CurlException
      * @throws TaoBaoException
      */
     public function toXml()
     {
         //首先检测是否支持curl
-        if (!extension_loaded("curl")) throw new CurlException('请开启curl模块！', E_USER_DEPRECATED);
+        if (!extension_loaded("curl")) throw new HttpException('请开启curl模块！', E_USER_DEPRECATED);
         $this->format = "xml";
         $this->http();
         return $this->output;

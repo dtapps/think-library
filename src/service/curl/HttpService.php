@@ -16,8 +16,8 @@
 
 namespace DtApp\ThinkLibrary\service\curl;
 
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
+use think\exception\HttpException;
 
 /**
  * 通用网络请求
@@ -138,12 +138,11 @@ class HttpService extends Service
      * 返回数组数据
      * @param bool $is
      * @return array|bool|mixed|string
-     * @throws CurlException
      */
     public function toArray(bool $is = true)
     {
         //首先检测是否支持curl
-        if (!extension_loaded("curl")) throw new CurlException('请开启curl模块！', E_USER_DEPRECATED);
+        if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
         if ($this->method === 'GET') {
             $this->httpGet();
         } else if ($this->method === 'POST') {
@@ -152,7 +151,7 @@ class HttpService extends Service
             $this->httpXml();
         } else if ($this->method === 'FILE') {
             $this->httpFile();
-        } else throw new CurlException('请求方式异常');
+        } else throw new HttpException(404,'请求方式异常');
         if (empty($is)) return $this->output;
         if (is_array($this->output)) return $this->output;
         return json_decode($this->output, true);

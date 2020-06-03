@@ -16,7 +16,6 @@
 
 namespace DtApp\ThinkLibrary\service\wechat;
 
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\NoticeException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
@@ -51,7 +50,6 @@ class QyService extends Service
      * 发送文本消息
      * @param string $content 消息内容
      * @return bool
-     * @throws CurlException
      * @throws NoticeException
      */
     public function text(string $content = '')
@@ -68,7 +66,6 @@ class QyService extends Service
      * 发送markdown消息
      * @param string $content 消息内容
      * @return bool
-     * @throws CurlException
      * @throws NoticeException
      */
     public function markdown(string $content = '')
@@ -85,7 +82,7 @@ class QyService extends Service
      * 组装发送消息
      * @param array $data 消息内容数组
      * @return bool
-     * @throws NoticeException|CurlException
+     * @throws NoticeException
      */
     private function sendMsg(array $data)
     {

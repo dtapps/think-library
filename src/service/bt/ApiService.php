@@ -17,7 +17,6 @@
 namespace DtApp\ThinkLibrary\service\bt;
 
 use DtApp\ThinkLibrary\exception\BtException;
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\BtService;
 
@@ -329,7 +328,7 @@ class ApiService extends Service
     /**
      * 发起网络请求
      * @return $this
-     * @throws CurlException|BtException
+     * @throws BtException
      */
     private function getHttp()
     {
@@ -341,7 +340,7 @@ class ApiService extends Service
     /**
      * 返回Array
      * @return array|mixed
-     * @throws CurlException
+     * @throws BtException
      */
     public function toArray()
     {
@@ -377,7 +376,7 @@ class ApiService extends Service
      * @param array $data 数据
      * @param bool $is_json 是否返回Json格式
      * @return bool|mixed|string
-     * @throws CurlException|BtException
+     * @throws BtException
      */
     protected function HttpPostCookie(string $url, array $data = [], bool $is_json = true)
     {

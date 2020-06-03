@@ -17,7 +17,6 @@
 namespace DtApp\ThinkLibrary\service\amap;
 
 use DtApp\ThinkLibrary\exception\AliException;
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
@@ -57,7 +56,6 @@ class AmApService extends Service
      * @param string $city
      * @param string $extensions
      * @return array|bool|mixed|string
-     * @throws CurlException
      * @throws AliException
      */
     public function weather($city = "110101", $extensions = "base")

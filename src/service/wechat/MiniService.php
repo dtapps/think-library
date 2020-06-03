@@ -16,9 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\wechat;
 
-use DtApp\ThinkLibrary\cache\Mysql;
 use DtApp\ThinkLibrary\exception\CacheException;
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\exception\WeChatException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
@@ -94,7 +92,6 @@ class MiniService extends Service
      * @param string $openid
      * @return bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -116,7 +113,6 @@ class MiniService extends Service
      * @param array $data
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -140,7 +136,6 @@ class MiniService extends Service
      * @param array $data
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -164,7 +159,6 @@ class MiniService extends Service
      * @param array $data
      * @return array|bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -188,7 +182,6 @@ class MiniService extends Service
      * @param array $data
      * @return bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -211,7 +204,6 @@ class MiniService extends Service
      * @param string $priTmplId 要删除的模板id
      * @return bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -236,7 +228,6 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getCategory.html
      * @return bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -258,7 +249,6 @@ class MiniService extends Service
      * @param string $tid 模板标题 id
      * @return bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -284,7 +274,6 @@ class MiniService extends Service
      * @param array $data
      * @return bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -306,7 +295,6 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getTemplateList.html
      * @return bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -328,7 +316,6 @@ class MiniService extends Service
      * @param array $data
      * @return bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -351,7 +338,7 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html
      * @param string $js_code
      * @return bool|mixed|string
-     * @throws CurlException|WeChatException
+     * @throws WeChatException
      */
     public function code2Session(string $js_code)
     {
@@ -372,7 +359,7 @@ class MiniService extends Service
      * @param string $encrypted_data
      * @param string $iv
      * @return bool|mixed
-     * @throws CurlException|WeChatException
+     * @throws WeChatException
      */
     public function userInfo(string $js_code, string $encrypted_data, string $iv)
     {
@@ -388,7 +375,7 @@ class MiniService extends Service
      * @param string $encrypted_data
      * @param string $iv
      * @return mixed
-     * @throws CurlException|WeChatException
+     * @throws WeChatException
      */
     public function userPhone(string $js_code, string $encrypted_data, string $iv)
     {
@@ -403,7 +390,6 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/access-token/auth.getAccessToken.html
      * @return bool|mixed|string
      * @throws CacheException
-     * @throws CurlException
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
@@ -419,7 +405,6 @@ class MiniService extends Service
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
      * @throws CacheException
-     * @throws CurlException
      * @throws WeChatException
      * @throws DataNotFoundException
      * @throws DbException

@@ -17,9 +17,9 @@
 namespace DtApp\ThinkLibrary\service;
 
 use DtApp\ThinkLibrary\exception\AliException;
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
+use think\exception\HttpException;
 
 /**
  * 钉钉
@@ -54,7 +54,6 @@ class DingTalkService extends Service
      * @param string $content 消息内容
      * @return bool    发送结果
      * @throws AliException
-     * @throws CurlException
      */
     public function text(string $content)
     {
@@ -71,7 +70,6 @@ class DingTalkService extends Service
      * @param array $data 消息内容数组
      * @return bool 发送结果
      * @throws AliException
-     * @throws CurlException
      */
     private function sendMsg(array $data)
     {
@@ -83,6 +81,6 @@ class DingTalkService extends Service
             ->post()
             ->toArray();
         if ($result['errcode'] == 0) return $result['errmsg'];
-        throw new CurlException(json_encode($result), JSON_UNESCAPED_UNICODE);
+        throw new HttpException(404,  json_encode($result, JSON_UNESCAPED_UNICODE));
     }
 }

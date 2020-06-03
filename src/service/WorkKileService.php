@@ -16,7 +16,6 @@
 
 namespace DtApp\ThinkLibrary\service;
 
-use DtApp\ThinkLibrary\exception\CurlException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
@@ -33,7 +32,6 @@ class WorkKileService extends Service
      * @param string $user 发送对象
      * @param string $content 消息内容
      * @return bool 发送结果
-     * @throws CurlException
      */
     public function text(string $webhook, string $user, string $content)
     {
@@ -48,7 +46,6 @@ class WorkKileService extends Service
      * @param string $webhook
      * @param array $data 消息内容数组
      * @return bool 发送结果
-     * @throws CurlException
      */
     private function sendMsg(string $webhook, array $data)
     {
