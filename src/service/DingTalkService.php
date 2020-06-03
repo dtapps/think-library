@@ -83,6 +83,6 @@ class DingTalkService extends Service
             ->post()
             ->toArray();
         if ($result['errcode'] == 0) return $result['errmsg'];
-        throw new CurlException(json_encode($result));
+        throw new CurlException(json_encode($result), JSON_UNESCAPED_UNICODE);
     }
 }

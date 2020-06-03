@@ -484,7 +484,7 @@ class TbkService extends Service
         if (isset($this->output['error_response'])) {
             // 错误
             if (is_array($this->output)) return $this->output;
-            if (is_object($this->output)) $this->output = json_encode($this->output);
+            if (is_object($this->output)) $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
             return json_decode($this->output, true);
         } else {
             // 正常
@@ -493,7 +493,7 @@ class TbkService extends Service
                 if (isset($this->output["$response"])) return $this->output["$response"];
                 return $this->output;
             };
-            if (is_object($this->output)) $this->output = json_encode($this->output);
+            if (is_object($this->output)) $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
             $this->output = json_decode($this->output, true);
             if (isset($this->output["$response"])) return $this->output["$response"];
             else return $this->output;
