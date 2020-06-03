@@ -668,7 +668,7 @@ class WebAppService extends Service
                 $access_token['access_token'] = $accessToken_res['access_token'];
             }
             $judge = HttpService::instance()
-                ->url("{$this->api_url}cgi-bin/getcallbackip?access_token={$accessToken['access_token']}")
+                ->url("{$this->api_url}cgi-bin/getcallbackip?access_token={$access_token['access_token']}")
                 ->toArray();
             if (!empty($judge)) {
                 $accessToken_res = HttpService::instance()
