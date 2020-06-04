@@ -39,8 +39,7 @@ class ThinkException extends Handle
      * @param Request $request
      * @param Throwable $e
      * @return Response
-     * @throws AliException
-     * @throws IpException|NoticeException
+     * @throws DtaException
      */
     public function render($request, Throwable $e): Response
     {
@@ -59,9 +58,7 @@ class ThinkException extends Handle
     /**
      * @param $msg
      * @return bool
-     * @throws AliException
-     * @throws IpException
-     * @throws NoticeException
+     * @throws DtaException
      */
     private function show($msg)
     {

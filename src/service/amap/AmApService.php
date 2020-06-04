@@ -16,7 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\amap;
 
-use DtApp\ThinkLibrary\exception\AliException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
@@ -56,12 +56,12 @@ class AmApService extends Service
      * @param string $city
      * @param string $extensions
      * @return array|bool|mixed|string
-     * @throws AliException
+     * @throws DtaException
      */
     public function weather($city = "110101", $extensions = "base")
     {
         if (empty($this->key)) $this->getConfig();
-        if (empty($this->key)) throw new AliException('请检查key参数');
+        if (empty($this->key)) throw new DtaException('请检查key参数');
         $data = http_build_query([
             "city" => $city,
             "extensions" => $extensions,

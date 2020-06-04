@@ -16,7 +16,7 @@
 
 namespace DtApp\ThinkLibrary\cache;
 
-use DtApp\ThinkLibrary\exception\CacheException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\facade\Times;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
@@ -60,11 +60,11 @@ class Mysql
      * 设置
      * @param $cache_value
      * @return int|string
-     * @throws CacheException
+     * @throws DtaException
      */
     public function set($cache_value)
     {
-        if (empty($this->cache_name)) throw new CacheException("名称未配置");
+        if (empty($this->cache_name)) throw new DtaException("名称未配置");
         $result = Db::table($this->table)
             ->insert([
                 'cache_name' => $this->cache_name,
@@ -77,14 +77,14 @@ class Mysql
     /**
      * 获取
      * @return string
-     * @throws CacheException
-     * @throws DbException
      * @throws DataNotFoundException
+     * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
      */
     public function get()
     {
-        if (empty($this->cache_name)) throw new CacheException("名称未配置");
+        if (empty($this->cache_name)) throw new DtaException("名称未配置");
         $cache = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->order('id desc')
@@ -96,12 +96,12 @@ class Mysql
     /**
      * 删除
      * @return int
-     * @throws CacheException
      * @throws DbException
+     * @throws DtaException
      */
     public function delete()
     {
-        if (empty($this->cache_name)) throw new CacheException("名称未配置");
+        if (empty($this->cache_name)) throw new DtaException("名称未配置");
         $result = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->delete();
@@ -112,12 +112,12 @@ class Mysql
      * 更新
      * @param $cache_value
      * @return int
-     * @throws CacheException
      * @throws DbException
+     * @throws DtaException
      */
     public function update($cache_value)
     {
-        if (empty($this->cache_name)) throw new CacheException("名称未配置");
+        if (empty($this->cache_name)) throw new DtaException("名称未配置");
         $result = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->update([
@@ -131,8 +131,10 @@ class Mysql
      * 自增
      * @param int $int
      * @return int
-     * @throws CacheException
+     * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
+     * @throws ModelNotFoundException
      */
     public function inc(int $int = 1)
     {
@@ -149,8 +151,10 @@ class Mysql
      * 自减
      * @param int $int
      * @return int
-     * @throws CacheException
+     * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
+     * @throws ModelNotFoundException
      */
     public function dec(int $int = 1)
     {

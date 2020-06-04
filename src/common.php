@@ -15,8 +15,7 @@
 // +----------------------------------------------------------------------
 
 use DtApp\ThinkLibrary\cache\Mysql;
-use DtApp\ThinkLibrary\exception\CacheException;
-use DtApp\ThinkLibrary\exception\IpException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\service\Ip\QqWryService;
 use DtApp\ThinkLibrary\service\SystemService;
 use think\db\exception\DataNotFoundException;
@@ -29,7 +28,7 @@ if (!function_exists('get_ip_info')) {
      * 获取请求IP信息
      * @param string $ip
      * @return mixed|null
-     * @throws IpException
+     * @throws DtaException
      */
     function get_ip_info($ip = '')
     {
@@ -122,9 +121,9 @@ if (!function_exists('dtacache')) {
      * @param array $value
      * @param int $expire
      * @return bool|int|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
      */
     function dtacache($name = '', $value = [], $expire = 6000)

@@ -16,7 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service;
 
-use DtApp\ThinkLibrary\exception\AliException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 use think\exception\HttpException;
@@ -53,7 +53,7 @@ class DingTalkService extends Service
      * 发送文本消息
      * @param string $content 消息内容
      * @return bool    发送结果
-     * @throws AliException
+     * @throws DtaException
      */
     public function text(string $content)
     {
@@ -69,11 +69,11 @@ class DingTalkService extends Service
      * 组装发送消息
      * @param array $data 消息内容数组
      * @return bool 发送结果
-     * @throws AliException
+     * @throws DtaException
      */
     private function sendMsg(array $data)
     {
-        if (empty($this->access_token)) throw new AliException("请检查access_token");
+        if (empty($this->access_token)) throw new DtaException("请检查access_token");
         if (empty($data['msgtype'])) $data['msgtype'] = $this->msg_type;
         $result = HttpService::instance()
             ->url("{$this->oapi_url}robot/send?access_token=" . $this->access_token)

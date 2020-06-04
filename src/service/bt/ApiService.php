@@ -16,7 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\bt;
 
-use DtApp\ThinkLibrary\exception\BtException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\BtService;
 
@@ -328,7 +328,7 @@ class ApiService extends Service
     /**
      * 发起网络请求
      * @return $this
-     * @throws BtException
+     * @throws DtaException
      */
     private function getHttp()
     {
@@ -340,7 +340,7 @@ class ApiService extends Service
     /**
      * 返回Array
      * @return array|mixed
-     * @throws BtException
+     * @throws DtaException
      */
     public function toArray()
     {
@@ -376,12 +376,12 @@ class ApiService extends Service
      * @param array $data 数据
      * @param bool $is_json 是否返回Json格式
      * @return bool|mixed|string
-     * @throws BtException
+     * @throws DtaException
      */
     protected function HttpPostCookie(string $url, array $data = [], bool $is_json = true)
     {
         if (empty($this->panel)) $this->getConfig();
-        if (empty($this->panel)) throw new BtException('请检查panel参数');
+        if (empty($this->panel)) throw new DtaException('请检查panel参数');
         //定义cookie保存位置
         $file = app()->getRootPath() . 'runtime/dtapp/bt/cookie/';
         $cookie_file = $file . md5($this->panel) . '.cookie';
@@ -391,7 +391,7 @@ class ApiService extends Service
             fclose($fp);
         }
         if (empty($this->key)) $this->getConfig();
-        if (empty($this->key)) throw new BtException('请检查key参数');
+        if (empty($this->key)) throw new DtaException('请检查key参数');
         return BtService::instance()
             ->panel($this->panel)
             ->key($this->key)

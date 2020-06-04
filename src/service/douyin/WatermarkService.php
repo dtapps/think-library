@@ -16,7 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\douyin;
 
-use DtApp\ThinkLibrary\exception\DouYinException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\facade\Pregs;
 use DtApp\ThinkLibrary\Service;
 use stdClass;
@@ -39,18 +39,18 @@ class WatermarkService extends Service
      * 配置网址
      * @param $str
      * @return $this
-     * @throws DouYinException
+     * @throws DtaException
      */
     public function url($str)
     {
         if (Pregs::isLink($str)) {
             $url = $this->judgeUrl($str);
-            if (empty($url)) throw new DouYinException('配置网址内容不正确');
+            if (empty($url)) throw new DtaException('配置网址内容不正确');
             $this->url = $url;
         } else {
             preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $str, $match);
             $url = $this->judgeUrl($match[0][0]);
-            if (empty($url)) throw new DouYinException('配置网址内容不正确');
+            if (empty($url)) throw new DtaException('配置网址内容不正确');
             $this->url = $url;
         }
         $content = $this->getContents($this->url);
@@ -239,14 +239,14 @@ class WatermarkService extends Service
      * 正则匹配 mid
      * @param $content
      * @return mixed
-     * @throws DouYinException
+     * @throws DtaException
      */
     private function getItemId($content)
     {
         preg_match('/"(?<=itemId:\s\")\d+"/', $content, $matches);
-        if (!isset($matches[0])) throw new DouYinException('视频不存在');
+        if (!isset($matches[0])) throw new DtaException('视频不存在');
         preg_match("~\"(.*?)\"~", $matches[0], $matches2);
-        if (!isset($matches2[1])) throw new DouYinException('视频不存在');
+        if (!isset($matches2[1])) throw new DtaException('视频不存在');
         return $matches2[1];
     }
 
@@ -254,15 +254,15 @@ class WatermarkService extends Service
      * 正则匹配 dytk
      * @param $content
      * @return mixed
-     * @throws DouYinException
+     * @throws DtaException
      */
     private function getDyTk($content)
     {
         preg_match("~dytk(.*?)}~", $content, $matches);
-        if (!isset($matches[1])) throw new DouYinException('视频不存在');
+        if (!isset($matches[1])) throw new DtaException('视频不存在');
         $Dytk = $matches[1];
         preg_match("~\"(.*?)\"~", $Dytk, $matches2);
-        if (!isset($matches2[1])) throw new DouYinException('视频不存在');
+        if (!isset($matches2[1])) throw new DtaException('视频不存在');
         return $matches2[1];
     }
 

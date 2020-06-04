@@ -16,8 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\wechat;
 
-use DtApp\ThinkLibrary\exception\CacheException;
-use DtApp\ThinkLibrary\exception\WeChatException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\facade\Pregs;
 use DtApp\ThinkLibrary\facade\Randoms;
 use DtApp\ThinkLibrary\facade\Urls;
@@ -141,11 +140,11 @@ class WebAppService extends Service
      * 授权后重定向的回调链接地址， 请使用 urlEncode 对链接进行处理
      * @param string $redirectUri
      * @return $this
-     * @throws WeChatException
+     * @throws DtaException
      */
     public function redirectUri(string $redirectUri)
     {
-        if (empty(Pregs::isLink($redirectUri))) throw new WeChatException("请检查redirectUri，是否正确");
+        if (empty(Pregs::isLink($redirectUri))) throw new DtaException("请检查redirectUri，是否正确");
         $this->redirect_uri = Urls::lenCode($redirectUri);
         return $this;
     }
@@ -154,13 +153,13 @@ class WebAppService extends Service
      * 应用授权作用域，snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid），snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且， 即使在未关注的情况下，只要用户授权，也能获取其信息 ）
      * @param string $scope
      * @return $this
-     * @throws WeChatException
+     * @throws DtaException
      */
     public function scope(string $scope)
     {
         if ($scope === "snsapi_base") $this->scope = $scope;
         elseif ($scope === "snsapi_userinfo") $this->scope = $scope;
-        else throw new WeChatException("请检查scope参数");
+        else throw new DtaException("请检查scope参数");
         return $this;
     }
 
@@ -189,11 +188,12 @@ class WebAppService extends Service
     /**
      * 网页授权
      * https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html#0
-     * @throws WeChatException
+     * @return void
+     * @throws DtaException
      */
     public function oauth2()
     {
-        if (strlen($this->state) > 128) throw new WeChatException("请检查state参数，最多128字节");
+        if (strlen($this->state) > 128) throw new DtaException("请检查state参数，最多128字节");
         $params = Urls::toParams([
             'appid' => $this->app_id,
             'redirect_uri' => $this->redirect_uri,
@@ -209,14 +209,14 @@ class WebAppService extends Service
      * @param string $code
      * @param bool $is
      * @return array|bool|mixed|string
-     * @throws WeChatException
+     * @throws DtaException
      */
     public function accessToken(string $code, bool $is = true)
     {
         if (empty($this->app_id)) $this->getConfig();
         if (empty($this->app_secret)) $this->getConfig();
-        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
-        if (empty($this->app_secret)) throw new WeChatException('请检查app_secret参数');
+        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
+        if (empty($this->app_secret)) throw new DtaException('请检查app_secret参数');
         return HttpService::instance()
             ->url("{$this->api_url}sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
             ->toArray($is);
@@ -227,12 +227,12 @@ class WebAppService extends Service
      * @param string $refreshToken
      * @param bool $is
      * @return array|bool|mixed|string
-     * @throws WeChatException
+     * @throws DtaException
      */
     public function refreshToken(string $refreshToken, bool $is = true)
     {
         if (empty($this->app_id)) $this->getConfig();
-        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
+        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
         $this->grant_type = "refresh_token";
         return HttpService::instance()
             ->url("{$this->api_url}sns/oauth2/refresh_token?appid={$this->app_id}&grant_type={$this->grant_type}&refresh_token={$refreshToken}")
@@ -271,30 +271,29 @@ class WebAppService extends Service
     /**
      * 分享
      * @return array
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function share()
     {
         if (empty($this->app_id)) $this->getConfig();
-        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
+        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
         // 获取数据
         $accessToken = $this->getAccessToken();
-        if (!isset($accessToken['access_token'])) throw  new WeChatException("获取access_token错误，" . $accessToken['errmsg']);
+        if (!isset($accessToken['access_token'])) throw  new DtaException("获取access_token错误，" . $accessToken['errmsg']);
         $res = HttpService::instance()
             ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
             ->toArray();
         if (!empty($res['errcode'])) {
             // 获取数据
             $accessToken = $this->getAccessToken();
-            if (!isset($accessToken['access_token'])) throw  new WeChatException("获取access_token错误，" . $accessToken['errmsg']);
+            if (!isset($accessToken['access_token'])) throw  new DtaException("获取access_token错误，" . $accessToken['errmsg']);
             $res = HttpService::instance()
                 ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
                 ->toArray();
-            if (!empty($res['errcode'])) throw new WeChatException('accessToken已过期');
+            if (!empty($res['errcode'])) throw new DtaException('accessToken已过期');
         }
         // 注意 URL 一定要动态获取，不能 hardcode.
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
@@ -327,11 +326,10 @@ class WebAppService extends Service
      * 生成二维码
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function qrCode(array $data)
     {
@@ -348,11 +346,10 @@ class WebAppService extends Service
      * 发送模板消息
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function messageTemplateSend(array $data = [])
     {
@@ -371,11 +368,10 @@ class WebAppService extends Service
      * @param string $access_token
      * @param array $data
      * @return bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function setIndustry(string $access_token, array $data = [])
     {
@@ -392,11 +388,10 @@ class WebAppService extends Service
      * 将一条长链接转成短链接
      * @param string $long_url
      * @return bool
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function shortUrl(string $long_url)
     {
@@ -417,11 +412,10 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/WiFi_via_WeChat/WiFi_mini_programs.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function fiNihPageSet(array $data = [])
     {
@@ -439,11 +433,10 @@ class WebAppService extends Service
      * 自定义菜单 获取自定义菜单配置
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Getting_Custom_Menu_Configurations.html
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function menuGet()
     {
@@ -460,11 +453,10 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Personalized_menu_interface.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function menuAddConditional(array $data = [])
     {
@@ -483,11 +475,10 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Personalized_menu_interface.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function menuDelConditional(array $data = [])
     {
@@ -506,11 +497,10 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Personalized_menu_interface.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function menuTryMatch(array $data = [])
     {
@@ -528,11 +518,10 @@ class WebAppService extends Service
      * 自定义菜单 删除接口
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Deleting_Custom-Defined_Menu.html
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function menuDelete()
     {
@@ -548,11 +537,10 @@ class WebAppService extends Service
      * 自定义菜单 查询接口
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Querying_Custom_Menus.html
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function getCurrentSelfmenuInfo()
     {
@@ -569,11 +557,10 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Creating_Custom-Defined_Menu.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function menuCreate(array $data = [])
     {
@@ -590,10 +577,9 @@ class WebAppService extends Service
     /**
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
-     * @throws CacheException
-     * @throws WeChatException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
      */
     private function getAccessToken()
@@ -601,9 +587,9 @@ class WebAppService extends Service
         if (empty($this->cache)) $this->getConfig();
         if (empty($this->app_id)) $this->getConfig();
         if (empty($this->app_secret)) $this->getConfig();
-        if (empty($this->cache)) throw new WeChatException('请检查cache参数');
-        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
-        if (empty($this->app_secret)) throw new WeChatException('请检查app_secret参数');
+        if (empty($this->cache)) throw new DtaException('请检查cache参数');
+        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
+        if (empty($this->app_secret)) throw new DtaException('请检查app_secret参数');
 
         $this->grant_type = "client_credential";
         if ($this->cache == "file") {
@@ -678,7 +664,7 @@ class WebAppService extends Service
                 $access_token['access_token'] = $accessToken_res['access_token'];
             }
             return $access_token;
-        } else throw new WeChatException("驱动方式错误");
+        } else throw new DtaException("驱动方式错误");
     }
 
     /**

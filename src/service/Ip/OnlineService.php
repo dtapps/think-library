@@ -16,7 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\Ip;
 
-use DtApp\ThinkLibrary\exception\IpException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
@@ -194,7 +194,7 @@ class OnlineService extends Service
      * 阿里云
      * @param string $appcode
      * @return bool|mixed|string
-     * @throws IpException
+     * @throws DtaException
      */
     public function aliYun(string $appcode = '')
     {
@@ -202,7 +202,7 @@ class OnlineService extends Service
         $host = "http://iploc.market.alicloudapi.com";
         $path = "/v3/ip";
         $method = "GET";
-        if (empty($appcode)) throw new IpException('请检查阿里-阿里云配置信息 appcode');
+        if (empty($appcode)) throw new DtaException('请检查阿里-阿里云配置信息 appcode');
         $headers = array();
         array_push($headers, "Authorization:APPCODE " . $appcode);
         $querys = "ip={$this->ip}";

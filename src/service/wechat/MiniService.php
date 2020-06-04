@@ -16,8 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\wechat;
 
-use DtApp\ThinkLibrary\exception\CacheException;
-use DtApp\ThinkLibrary\exception\WeChatException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 use think\db\exception\DataNotFoundException;
@@ -91,11 +90,10 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/user-info/auth.getPaidUnionId.html
      * @param string $openid
      * @return bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function getPaidUnionId(string $openid)
     {
@@ -112,11 +110,10 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/qr-code/wxacode.createQRCode.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function createWxaQrCode(array $data = [])
     {
@@ -135,11 +132,10 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/qr-code/wxacode.get.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function getWxaCode(array $data = [])
     {
@@ -158,11 +154,10 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/qr-code/wxacode.getUnlimited.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function getWxaCodeUnLimit(array $data = [])
     {
@@ -181,11 +176,10 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.addTemplate.html
      * @param array $data
      * @return bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function addTemplate(array $data = [])
     {
@@ -203,11 +197,10 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.deleteTemplate.html
      * @param string $priTmplId 要删除的模板id
      * @return bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function deleteTemplate(string $priTmplId)
     {
@@ -227,11 +220,10 @@ class MiniService extends Service
      * 获取小程序账号的类目
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getCategory.html
      * @return bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function getCategory()
     {
@@ -248,11 +240,10 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getPubTemplateKeyWordsById.html
      * @param string $tid 模板标题 id
      * @return bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function getPubTemplateKeyWordsById(string $tid)
     {
@@ -273,11 +264,10 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getPubTemplateTitleList.html
      * @param array $data
      * @return bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function getPubTemplateTitleList(array $data = [])
     {
@@ -294,11 +284,10 @@ class MiniService extends Service
      * 获取当前帐号下的个人模板列表
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getTemplateList.html
      * @return bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function getTemplateList()
     {
@@ -315,11 +304,10 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.send.html
      * @param array $data
      * @return bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function subscribeMessageSend(array $data = [])
     {
@@ -338,14 +326,14 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html
      * @param string $js_code
      * @return bool|mixed|string
-     * @throws WeChatException
+     * @throws DtaException
      */
     public function code2Session(string $js_code)
     {
         if (empty($this->app_id)) $this->getConfig();
         if (empty($this->app_secret)) $this->getConfig();
-        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
-        if (empty($this->app_secret)) throw new WeChatException('请检查app_secret参数');
+        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
+        if (empty($this->app_secret)) throw new DtaException('请检查app_secret参数');
         $this->grant_type = "authorization_code";
         $url = "{$this->api_url}sns/jscode2session?appid={$this->app_id}&secret={$this->app_secret}&js_code={$js_code}&grant_type={$this->grant_type}";
         return HttpService::instance()
@@ -359,7 +347,7 @@ class MiniService extends Service
      * @param string $encrypted_data
      * @param string $iv
      * @return bool|mixed
-     * @throws WeChatException
+     * @throws DtaException
      */
     public function userInfo(string $js_code, string $encrypted_data, string $iv)
     {
@@ -375,7 +363,7 @@ class MiniService extends Service
      * @param string $encrypted_data
      * @param string $iv
      * @return mixed
-     * @throws WeChatException
+     * @throws DtaException
      */
     public function userPhone(string $js_code, string $encrypted_data, string $iv)
     {
@@ -389,11 +377,10 @@ class MiniService extends Service
      * 获取小程序全局唯一后台接口调用凭据（access_token）
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/access-token/auth.getAccessToken.html
      * @return bool|mixed|string
-     * @throws CacheException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
-     * @throws WeChatException
      */
     public function accessToken()
     {
@@ -404,10 +391,9 @@ class MiniService extends Service
     /**
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
-     * @throws CacheException
-     * @throws WeChatException
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws DtaException
      * @throws ModelNotFoundException
      */
     private function getAccessToken()
@@ -415,9 +401,9 @@ class MiniService extends Service
         if (empty($this->cache)) $this->getConfig();
         if (empty($this->app_id)) $this->getConfig();
         if (empty($this->app_secret)) $this->getConfig();
-        if (empty($this->cache)) throw new WeChatException('请检查cache参数');
-        if (empty($this->app_id)) throw new WeChatException('请检查app_id参数');
-        if (empty($this->app_secret)) throw new WeChatException('请检查app_secret参数');
+        if (empty($this->cache)) throw new DtaException('请检查cache参数');
+        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
+        if (empty($this->app_secret)) throw new DtaException('请检查app_secret参数');
         $this->grant_type = "client_credential";
         if ($this->cache == "file") {
             // 文件名
@@ -468,6 +454,6 @@ class MiniService extends Service
                 $access_token['access_token'] = $accessToken_res['access_token'];
             }
             return $access_token;
-        } else throw new WeChatException("驱动方式错误");
+        } else throw new DtaException("驱动方式错误");
     }
 }

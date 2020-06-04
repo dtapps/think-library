@@ -16,9 +16,8 @@
 
 namespace DtApp\ThinkLibrary\service\Ip;
 
-use DtApp\ThinkLibrary\exception\IpException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
-use Exception;
 use think\App;
 
 /**
@@ -89,7 +88,7 @@ class QqWryService extends Service
      * 获取省信息
      * @param string $ip
      * @return mixed
-     * @throws IpException
+     * @throws DtaException
      */
     public function getProvince(string $ip = '')
     {
@@ -100,7 +99,7 @@ class QqWryService extends Service
      * 获取城市信息
      * @param string $ip
      * @return mixed
-     * @throws IpException
+     * @throws DtaException
      */
     public function getCity(string $ip = '')
     {
@@ -111,7 +110,7 @@ class QqWryService extends Service
      * 获取地区信息
      * @param string $ip
      * @return mixed
-     * @throws IpException
+     * @throws DtaException
      */
     public function getArea(string $ip = '')
     {
@@ -122,7 +121,7 @@ class QqWryService extends Service
      * 获取运营商信息
      * @param string $ip
      * @return mixed
-     * @throws IpException
+     * @throws DtaException
      */
     public function getExtend(string $ip = '')
     {
@@ -133,7 +132,7 @@ class QqWryService extends Service
      * 根据所给 IP 地址或域名返回所在地区信息
      * @param string $ip
      * @return mixed|null
-     * @throws IpException
+     * @throws DtaException
      */
     public function getLocation(string $ip = '')
     {
@@ -144,7 +143,7 @@ class QqWryService extends Service
         }
         static $locationData = [];
         if (!isset($locationData[$ip])) {
-            if (!$this->fp) throw new IpException('数据库文件不存在!');            // 如果数据文件没有被正确打开，则直接返回错误
+            if (!$this->fp) throw new DtaException('数据库文件不存在!');            // 如果数据文件没有被正确打开，则直接返回错误
             $location['ip'] = $ip;   // 将输入的域名转化为IP地址
             $ip = $this->packIp($location['ip']);   // 将输入的IP地址转化为可比较的IP地址
             // 不合法的IP地址会被转化为255.255.255.255
@@ -397,48 +396,36 @@ class QqWryService extends Service
         $district['lng'] = '';
 
         if (!empty($province_name)) {
-            try {
-                $json_province = json_decode(file_get_contents(__DIR__ . '/bin/province.json'), true);
-                foreach ($json_province['rows'] as $key => $value) {
-                    if ($value['name'] == $province_name) {
-                        $province['name'] = $value['name'];
-                        $province['adcode'] = $value['adcode'];
-                        $province['lat'] = $value['lat'];
-                        $province['lng'] = $value['lng'];
-                    }
+            $json_province = json_decode(file_get_contents(__DIR__ . '/bin/province.json'), true);
+            foreach ($json_province['rows'] as $key => $value) {
+                if ($value['name'] == $province_name) {
+                    $province['name'] = $value['name'];
+                    $province['adcode'] = $value['adcode'];
+                    $province['lat'] = $value['lat'];
+                    $province['lng'] = $value['lng'];
                 }
-            } catch (Exception $e) {
-
             }
         }
         if (!empty($city_name)) {
-            try {
-                $json_city = json_decode(file_get_contents(__DIR__ . '/bin/city.json'), true);
-                foreach ($json_city['rows'] as $key => $value) {
-                    if ($value['name'] == $city_name) {
-                        $city['name'] = $value['name'];
-                        $city['adcode'] = $value['adcode'];
-                        $city['lat'] = $value['lat'];
-                        $city['lng'] = $value['lng'];
-                    }
+            $json_city = json_decode(file_get_contents(__DIR__ . '/bin/city.json'), true);
+            foreach ($json_city['rows'] as $key => $value) {
+                if ($value['name'] == $city_name) {
+                    $city['name'] = $value['name'];
+                    $city['adcode'] = $value['adcode'];
+                    $city['lat'] = $value['lat'];
+                    $city['lng'] = $value['lng'];
                 }
-            } catch (Exception $e) {
-
             }
         }
         if (!empty($district_name)) {
-            try {
-                $json_district = json_decode(file_get_contents(__DIR__ . '/bin/district.json'), true);
-                foreach ($json_district['rows'] as $key => $value) {
-                    if ($value['name'] == $district_name) {
-                        $district['name'] = $value['name'];
-                        $district['adcode'] = $value['adcode'];
-                        $district['lat'] = $value['lat'];
-                        $district['lng'] = $value['lng'];
-                    }
+            $json_district = json_decode(file_get_contents(__DIR__ . '/bin/district.json'), true);
+            foreach ($json_district['rows'] as $key => $value) {
+                if ($value['name'] == $district_name) {
+                    $district['name'] = $value['name'];
+                    $district['adcode'] = $value['adcode'];
+                    $district['lat'] = $value['lat'];
+                    $district['lng'] = $value['lng'];
                 }
-            } catch (Exception $e) {
-
             }
         }
         return [

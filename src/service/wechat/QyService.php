@@ -16,7 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\wechat;
 
-use DtApp\ThinkLibrary\exception\NoticeException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
@@ -50,7 +50,7 @@ class QyService extends Service
      * 发送文本消息
      * @param string $content 消息内容
      * @return bool
-     * @throws NoticeException
+     * @throws DtaException
      */
     public function text(string $content = '')
     {
@@ -66,7 +66,7 @@ class QyService extends Service
      * 发送markdown消息
      * @param string $content 消息内容
      * @return bool
-     * @throws NoticeException
+     * @throws DtaException
      */
     public function markdown(string $content = '')
     {
@@ -82,11 +82,11 @@ class QyService extends Service
      * 组装发送消息
      * @param array $data 消息内容数组
      * @return bool
-     * @throws NoticeException
+     * @throws DtaException
      */
     private function sendMsg(array $data)
     {
-        if (empty($this->key)) throw new NoticeException("请检查KEY");
+        if (empty($this->key)) throw new DtaException("请检查KEY");
         if (empty($data['msgtype'])) $data['msgtype'] = $this->msgType;
         $result = HttpService::instance()
             ->url("{$this->url}cgi-bin/webhook/send?key=" . $this->key)

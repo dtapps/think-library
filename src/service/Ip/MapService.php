@@ -16,7 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\Ip;
 
-use DtApp\ThinkLibrary\exception\IpException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
@@ -83,11 +83,11 @@ class MapService extends Service
      * https://lbs.qq.com/webservice_v1/guide-ip.html
      * @param string $output
      * @return array|bool|mixed|string
-     * @throws IpException
+     * @throws DtaException
      */
     public function qq(string $output = 'JSON')
     {
-        if (empty($this->key)) throw new IpException('开发密钥不能为空');
+        if (empty($this->key)) throw new DtaException('开发密钥不能为空');
         if (empty($this->ip)) $this->ip = get_ip();
         $url = "https://apis.map.qq.com/ws/location/v1/ip?key={$this->key}&output={$output}";
         if (!empty($this->ip)) $url = "https://apis.map.qq.com/ws/location/v1/ip?key={$this->key}&ip={$this->ip}&output={$output}";
@@ -101,11 +101,11 @@ class MapService extends Service
      * http://lbsyun.baidu.com/index.php?title=webapi/ip-api
      * @param string $coor
      * @return array|bool|mixed|string
-     * @throws IpException
+     * @throws DtaException
      */
     public function baidu(string $coor = 'bd09ll')
     {
-        if (empty($this->ak)) throw new IpException('开发者密钥不能为空');
+        if (empty($this->ak)) throw new DtaException('开发者密钥不能为空');
         if (empty($this->ip)) $this->ip = get_ip();
         $url = "https://api.map.baidu.com/location/ip?ak={$this->ak}&coor={$coor}";
         if (!empty($this->ip)) $url = "https://api.map.baidu.com/location/ip?ak={$this->ak}&ip={$this->ip}&coor={$coor}";
@@ -119,11 +119,11 @@ class MapService extends Service
      * https://lbs.amap.com/api/webservice/guide/api/ipconfig
      * @param string $output
      * @return array|bool|mixed|string
-     * @throws IpException
+     * @throws DtaException
      */
     public function amap(string $output = 'JSON')
     {
-        if (empty($this->key)) throw new IpException('开发密钥不能为空');
+        if (empty($this->key)) throw new DtaException('开发密钥不能为空');
         if (empty($this->ip)) $this->ip = get_ip();
         $url = "https://restapi.amap.com/v3/ip?parameters&key={$this->key}&output={$output}";
         if (!empty($this->ip)) $url = "https://restapi.amap.com/v3/ip?key={$this->key}&ip={$this->ip}&output={$output}";

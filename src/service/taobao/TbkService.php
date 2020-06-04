@@ -16,7 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\taobao;
 
-use DtApp\ThinkLibrary\exception\TaoBaoException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\facade\Strings;
 use DtApp\ThinkLibrary\Service;
 use think\exception\HttpException;
@@ -241,11 +241,11 @@ class TbkService extends Service
      * 淘口令 - 淘宝客-公用-淘口令生成
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=31127&docType=2
      * @return array|mixed
-     * @throws TaoBaoException
+     * @throws DtaException
      */
     public function tpWdCreate()
     {
-        if (isset($this->param['text'])) if (strlen($this->param['text']) < 5) throw new TaoBaoException('请检查text参数长度');
+        if (isset($this->param['text'])) if (strlen($this->param['text']) < 5) throw new DtaException('请检查text参数长度');
         $this->method = 'taobao.tbk.tpwd.create';
         return $this;
     }
@@ -463,7 +463,7 @@ class TbkService extends Service
     /**
      * 返回Array
      * @return array|mixed
-     * @throws TaoBaoException
+     * @throws DtaException
      */
     public function toArray()
     {
@@ -471,8 +471,8 @@ class TbkService extends Service
         if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
         $this->format = "json";
         if (empty($this->app_key)) $this->getConfig();
-        if (empty($this->app_key)) throw new TaoBaoException('请检查app_key参数');
-        if (empty($this->method)) throw new TaoBaoException('请检查method参数');
+        if (empty($this->app_key)) throw new DtaException('请检查app_key参数');
+        if (empty($this->method)) throw new DtaException('请检查method参数');
         $this->param['app_key'] = $this->app_key;
         $this->param['method'] = $this->method;
         $this->param['format'] = $this->format;
@@ -502,7 +502,7 @@ class TbkService extends Service
     /**
      * 返回Xml
      * @return mixed
-     * @throws TaoBaoException
+     * @throws DtaException
      */
     public function toXml()
     {
@@ -515,7 +515,7 @@ class TbkService extends Service
 
     /**
      * 网络请求
-     * @throws TaoBaoException
+     * @throws DtaException
      */
     private function http()
     {
@@ -535,12 +535,12 @@ class TbkService extends Service
     /**
      * 签名
      * @return string
-     * @throws TaoBaoException
+     * @throws DtaException
      */
     private function createSign()
     {
         if (empty($this->app_secret)) $this->getConfig();
-        if (empty($this->app_secret)) throw new TaoBaoException('请检查app_secret参数');
+        if (empty($this->app_secret)) throw new DtaException('请检查app_secret参数');
 
         $sign = $this->app_secret;
         ksort($this->param);

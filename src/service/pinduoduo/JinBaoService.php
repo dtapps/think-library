@@ -16,7 +16,7 @@
 
 namespace DtApp\ThinkLibrary\service\pinduoduo;
 
-use DtApp\ThinkLibrary\exception\PinDouDouException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use think\exception\HttpException;
 
@@ -126,7 +126,8 @@ class JinBaoService extends Service
 
     /**
      * 网络请求
-     * @throws PinDouDouException
+     * @return JinBaoService
+     * @throws DtaException
      */
     private function http()
     {
@@ -433,14 +434,14 @@ class JinBaoService extends Service
     /**
      * 返回数组数据
      * @return array|mixed
-     * @throws PinDouDouException
+     * @throws DtaException
      */
     public function toArray()
     {
         //首先检测是否支持curl
         if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
         if (empty($this->client_id)) $this->getConfig();
-        if (empty($this->client_id)) throw new PinDouDouException('请检查client_id参数');
+        if (empty($this->client_id)) throw new DtaException('请检查client_id参数');
         $this->param['type'] = $this->type;
         $this->param['client_id'] = $this->client_id;
         $this->param['timestamp'] = time();
@@ -484,12 +485,12 @@ class JinBaoService extends Service
     /**
      * 签名
      * @return string
-     * @throws PinDouDouException
+     * @throws DtaException
      */
     private function createSign()
     {
         if (empty($this->client_secret)) $this->getConfig();
-        if (empty($this->client_secret)) throw new PinDouDouException('请检查client_secret参数');
+        if (empty($this->client_secret)) throw new DtaException('请检查client_secret参数');
 
         $sign = $this->client_secret;
         ksort($this->param);

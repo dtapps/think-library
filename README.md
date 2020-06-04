@@ -91,7 +91,7 @@ dump(AmApService::instance()
 
 ```php
 
-use DtApp\ThinkLibrary\exception\DouYinException;
+use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\service\douyin\WatermarkService;
 
 try {
@@ -121,7 +121,7 @@ try {
     dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
     // 返回Object数据方法
     dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toObject());
-} catch (DouYinException $e) {
+} catch (DtaException $e) {
     // 错误提示
     dump($e->getMessage());
 }
