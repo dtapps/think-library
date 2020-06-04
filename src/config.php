@@ -65,6 +65,7 @@ return [
     'wechat' => [
         // 公众号
         'webapp' => [
+            'cache' => 'file',
             'app_id' => '',
             'app_secret' => '',
         ],
