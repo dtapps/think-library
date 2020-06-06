@@ -124,7 +124,7 @@ class MiniService extends Service
             ->url($url)
             ->data($data)
             ->post()
-            ->toArray();
+            ->toArray(false);
     }
 
     /**
@@ -146,7 +146,7 @@ class MiniService extends Service
             ->url($url)
             ->data($data)
             ->post()
-            ->toArray();
+            ->toArray(false);
     }
 
     /**
@@ -168,7 +168,7 @@ class MiniService extends Service
             ->url($url)
             ->data($data)
             ->post()
-            ->toArray();
+            ->toArray(false);
     }
 
     /**
