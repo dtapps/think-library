@@ -14,21 +14,21 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\aliyun;
+namespace DtApp\ThinkLibrary\service\baidu;
 
+use BaiduBce\Services\Bos\BosClient;
 use DtApp\ThinkLibrary\Service;
-use OSS\Core\OssException;
-use OSS\OssClient;
+use Exception;
 
 /**
- * 阿里云对象存储
- * Class OssService
- * @package DtApp\ThinkLibrary\service\aliyun
+ * 百度云对象存储
+ * Class BosService
+ * @package DtApp\ThinkLibrary\service\baidu
  */
-class OssService extends Service
+class BosService extends Service
 {
     private $accessKeyId;
-    private $accessKeySecret;
+    private $secretAccessKey;
     private $endpoint;
     private $bucket;
 
@@ -38,9 +38,9 @@ class OssService extends Service
         return $this;
     }
 
-    public function accessKeySecret(string $accessKeySecret)
+    public function secretAccessKey(string $secretAccessKey)
     {
-        $this->accessKeySecret = $accessKeySecret;
+        $this->secretAccessKey = $secretAccessKey;
         return $this;
     }
 
@@ -62,10 +62,10 @@ class OssService extends Service
      */
     private function getConfig()
     {
-        $this->accessKeyId = $this->app->config->get('dtapp.aliyun.oss.access_key_id');
-        $this->accessKeySecret = $this->app->config->get('dtapp.aliyun.oss.access_key_secret');
-        $this->endpoint = $this->app->config->get('dtapp.aliyun.oss.endpoint');
-        $this->bucket = $this->app->config->get('dtapp.aliyun.oss.bucket');
+        $this->accessKeyId = $this->app->config->get('dtapp.baidu.bos.access_key_id');
+        $this->secretAccessKey = $this->app->config->get('dtapp.baidu.bos.secret_access_key');
+        $this->endpoint = $this->app->config->get('dtapp.baidu.bos.endpoint');
+        $this->bucket = $this->app->config->get('dtapp.baidu.bos.bucket');
         return $this;
     }
 
@@ -73,20 +73,26 @@ class OssService extends Service
      * 上传文件
      * @param $object
      * @param $filePath
-     * @return bool|string
+     * @return bool
+     * @throws Exception
      */
-    public function upload($object, $filePath)
+    private function upload($object, $filePath)
     {
-        if (empty($this->accessKeySecret)) $this->getConfig();
-        if (empty($this->accessKeySecret)) $this->getConfig();
+        if (empty($this->accessKeyId)) $this->getConfig();
+        if (empty($this->secretAccessKey)) $this->getConfig();
         if (empty($this->endpoint)) $this->getConfig();
+        // 设置BosClient的Access Key ID、Secret Access Key和ENDPOINT
+        $BOS_TEST_CONFIG = array(
+            'credentials' => array(
+                'accessKeyId' => $this->accessKeyId,
+                'secretAccessKey' => $this->secretAccessKey,
+            ),
+            'endpoint' => $this->endpoint,
+        );
+        $client = new BosClient($BOS_TEST_CONFIG);
+        // 从文件中直接上传Object
         if (empty($this->bucket)) $this->getConfig();
-        try {
-            $ossClient = new OssClient($this->accessKeyId, $this->accessKeySecret, $this->endpoint);
-            $ossClient->uploadFile($this->bucket, $object, $filePath);
-            return true;
-        } catch (OssException $e) {
-            return $e->getMessage();
-        }
+        $client->putObjectFromFile($this->bucket, $object, $filePath);
+        return true;
     }
 }

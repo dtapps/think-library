@@ -14,33 +14,32 @@
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
-namespace DtApp\ThinkLibrary\service\aliyun;
+namespace DtApp\ThinkLibrary\service\huaweicloud;
 
 use DtApp\ThinkLibrary\Service;
-use OSS\Core\OssException;
-use OSS\OssClient;
+use Obs\ObsClient;
 
 /**
- * 阿里云对象存储
- * Class OssService
- * @package DtApp\ThinkLibrary\service\aliyun
+ * 华为云对象存储
+ * Class ObsService
+ * @package DtApp\ThinkLibrary\service\huaweicloud
  */
-class OssService extends Service
+class ObsService extends Service
 {
-    private $accessKeyId;
-    private $accessKeySecret;
+    private $key;
+    private $secret;
     private $endpoint;
     private $bucket;
 
-    public function accessKeyId(string $accessKeyId)
+    public function key(string $key)
     {
-        $this->accessKeyId = $accessKeyId;
+        $this->key = $key;
         return $this;
     }
 
-    public function accessKeySecret(string $accessKeySecret)
+    public function secret(string $secret)
     {
-        $this->accessKeySecret = $accessKeySecret;
+        $this->secret = $secret;
         return $this;
     }
 
@@ -62,31 +61,40 @@ class OssService extends Service
      */
     private function getConfig()
     {
-        $this->accessKeyId = $this->app->config->get('dtapp.aliyun.oss.access_key_id');
-        $this->accessKeySecret = $this->app->config->get('dtapp.aliyun.oss.access_key_secret');
-        $this->endpoint = $this->app->config->get('dtapp.aliyun.oss.endpoint');
-        $this->bucket = $this->app->config->get('dtapp.aliyun.oss.bucket');
+        $this->key = $this->app->config->get('dtapp.huaweicloud.obs.key');
+        $this->secret = $this->app->config->get('dtapp.huaweicloud.obs.secret');
+        $this->endpoint = $this->app->config->get('dtapp.huaweicloud.obs.endpoint');
+        $this->bucket = $this->app->config->get('dtapp.huaweicloud.obs.bucket');
         return $this;
     }
 
     /**
-     * 上传文件
+     * 上传到华为云
      * @param $object
      * @param $filePath
-     * @return bool|string
+     * @return bool
      */
-    public function upload($object, $filePath)
+    private function upload($object, $filePath)
     {
-        if (empty($this->accessKeySecret)) $this->getConfig();
-        if (empty($this->accessKeySecret)) $this->getConfig();
+        if (empty($this->key)) $this->getConfig();
+        if (empty($this->secret)) $this->getConfig();
         if (empty($this->endpoint)) $this->getConfig();
+        // 创建ObsClient实例
+        $obsClient = new ObsClient([
+            'key' => $this->key,
+            'secret' => $this->secret,
+            'endpoint' => $this->endpoint
+        ]);
         if (empty($this->bucket)) $this->getConfig();
-        try {
-            $ossClient = new OssClient($this->accessKeyId, $this->accessKeySecret, $this->endpoint);
-            $ossClient->uploadFile($this->bucket, $object, $filePath);
+        $resp = $obsClient->putObject([
+            'Bucket' => $this->bucket,
+            'Key' => $object,
+            'SourceFile' => $filePath  // localfile为待上传的本地文件路径，需要指定到具体的文件名
+        ]);
+        if (isset($resp['RequestId'])) {
             return true;
-        } catch (OssException $e) {
-            return $e->getMessage();
+        } else {
+            return false;
         }
     }
 }

@@ -55,6 +55,13 @@ return [
         // 地图
         'lbs' => [
             'ak' => ''
+        ],
+        // 百度云
+        'bos' => [
+            'access_key_id' => '',
+            'secret_access_key' => '',
+            'endpoint' => '',
+            'bucket' => '',
         ]
     ],
     // 高德地图
@@ -100,5 +107,32 @@ return [
             // 服务器IP（节点）
             'ip' => ''
         ]
-    ]
+    ],
+    // 阿里云
+    'aliyun' => [
+        'oss' => [
+            'access_key_id' => '',
+            'access_key_secret' => '',
+            'endpoint' => '',
+            'bucket' => '',
+        ]
+    ],
+    // 腾讯云
+    'tencent' => [
+        'cos' => [
+            'secret_id' => '',
+            'secret_key' => '',
+            'region' => '',
+            'bucket' => '',
+        ]
+    ],
+    // 华为云
+    'huaweicloud' => [
+        'obs' => [
+            'key' => '',
+            'secret' => '',
+            'endpoint' => '',
+            'bucket' => '',
+        ]
+    ],
 ];
