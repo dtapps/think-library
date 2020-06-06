@@ -135,4 +135,8 @@ return [
             'bucket' => '',
         ]
     ],
+    // 本地存储
+    'storage' => [
+        'path' => ''
+    ],
 ];

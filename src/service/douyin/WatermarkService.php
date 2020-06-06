@@ -34,6 +34,7 @@ class WatermarkService extends Service
     private $dytk;
     private $contents;
     private $backtrack;
+    private $storage;
 
     /**
      * 配置网址
@@ -56,6 +57,12 @@ class WatermarkService extends Service
         $content = $this->getContents($this->url);
         $this->itemId = $this->getItemId($content);
         $this->dytk = $this->getDyTk($content);
+        return $this;
+    }
+
+    public function storage(string $type)
+    {
+        $this->storage = $type;
         return $this;
     }
 
