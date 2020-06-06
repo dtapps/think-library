@@ -27,7 +27,6 @@
     "ext-simplexml": "*",
     "ext-zip": "*",
     "ext-openssl": "*",
-    "ext-bcmath": "*",
     "ext-iconv": "*",
     "ext-curl": "*",
     "ext-dom": "*",
