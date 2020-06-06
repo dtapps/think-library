@@ -374,6 +374,19 @@ class MiniService extends Service
     }
 
     /**
+     * 数据签名校验，并且获取解密后的明文.
+     * @param string $session_key
+     * @param string $encrypted_data
+     * @param string $iv
+     * @return mixed
+     */
+    public function decode(string $session_key, string $encrypted_data, string $iv)
+    {
+        $result = openssl_decrypt(base64_decode($encrypted_data), "AES-128-CBC", base64_decode($session_key), 1, base64_decode($iv));
+        return json_decode($result, true);
+    }
+
+    /**
      * 获取小程序全局唯一后台接口调用凭据（access_token）
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/access-token/auth.getAccessToken.html
      * @return bool|mixed|string
