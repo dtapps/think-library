@@ -69,35 +69,6 @@ if (!function_exists('get_ip')) {
     }
 }
 
-if (!function_exists('getEnid')) {
-
-    /**
-     * 10进制转化36进制
-     * https://blog.csdn.net/zhangchb/article/details/78855083
-     * @param int $format
-     * @return mixed|string
-     */
-    function getEnid($format = 8)
-    {
-        $dic = array(
-            0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6', 7 => '7', 8 => '8', 9 => '9',
-            10 => 'A', 11 => 'B', 12 => 'C', 13 => 'D', 14 => 'E', 15 => 'F', 16 => 'G', 17 => 'H', 18 => 'I',
-            19 => 'J', 20 => 'K', 21 => 'L', 22 => 'M', 23 => 'N', 24 => 'O', 25 => 'P', 26 => 'Q', 27 => 'R',
-            28 => 'S', 29 => 'T', 30 => 'U', 31 => 'V', 32 => 'W', 33 => 'X', 34 => 'Y', 35 => 'Z'
-        );
-        $int = session('user.id');
-        $arr = array();
-        $loop = true;
-        while ($loop) {
-            $arr[] = $dic[bcmod($int, 36)];
-            $int = floor(bcdiv($int, 36));
-            if ($int == 0) $loop = false;
-        }
-        array_pad($arr, $format, $dic[0]);
-        return implode('', array_reverse($arr));
-    }
-}
-
 if (!function_exists('uri')) {
     /**
      * 生成最短 URL 地址
