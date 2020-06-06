@@ -16,7 +16,7 @@
 
 use DtApp\ThinkLibrary\cache\Mysql;
 use DtApp\ThinkLibrary\exception\DtaException;
-use DtApp\ThinkLibrary\service\Ip\QqWryService;
+use DtApp\ThinkLibrary\service\QqWryService;
 use DtApp\ThinkLibrary\service\SystemService;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;

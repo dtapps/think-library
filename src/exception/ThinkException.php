@@ -18,7 +18,7 @@ namespace DtApp\ThinkLibrary\exception;
 
 use DtApp\ThinkLibrary\service\curl\HttpService;
 use DtApp\ThinkLibrary\service\DingTalkService;
-use DtApp\ThinkLibrary\service\Ip\QqWryService;
+use DtApp\ThinkLibrary\service\QqWryService;
 use DtApp\ThinkLibrary\service\wechat\QyService;
 use think\exception\Handle;
 use think\exception\HttpException;
