@@ -276,94 +276,94 @@ class WatermarkService extends Service
                     case "aliyun":
                         // 头像
                         $backtrack['yun']['author_info']['avatar'] = OssService::instance()
-                            ->upload($system_path . $backtrack['author_info']['uid'] . ".jpeg", $yun_path . $backtrack['author_info']['uid'] . ".jpeg");
+                            ->upload($yun_path . $backtrack['author_info']['uid'] . ".jpeg", $system_path . $backtrack['author_info']['uid'] . ".jpeg");
                         // 音频
                         $backtrack['yun']['music_info']['play'] = OssService::instance()
-                            ->upload($system_path . $backtrack['music_info']['mid'] . ".mp3", $yun_path . $backtrack['music_info']['mid'] . ".mp3");
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
                         // 封面
                         $backtrack['yun']['video_info']['dynamic'] = OssService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
                         // 封面
                         $backtrack['yun']['video_info']['origin_cover'] = OssService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
                         // 封面
                         $backtrack['yun']['video_info']['cover'] = OssService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg");
                         // 视频
                         $backtrack['yun']['video_info']['play'] = OssService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_play" . ".mp4", $yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_play" . ".mp4");
                         // 视频
                         $backtrack['yun']['video_info']['playwm'] = OssService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
                         break;
                     case "tencent":
                         // 头像
                         $backtrack['yun']['author_info']['avatar'] = CosService::instance()
-                            ->upload($system_path . $backtrack['author_info']['uid'] . ".jpeg", $yun_path . $backtrack['author_info']['uid'] . ".jpeg");
+                            ->upload($yun_path . $backtrack['author_info']['uid'] . ".jpeg", $system_path . $backtrack['author_info']['uid'] . ".jpeg");
                         // 音频
                         $backtrack['yun']['music_info']['play'] = CosService::instance()
-                            ->upload($system_path . $backtrack['music_info']['mid'] . ".mp3", $yun_path . $backtrack['music_info']['mid'] . ".mp3");
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
                         // 封面
                         $backtrack['yun']['video_info']['dynamic'] = CosService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
                         // 封面
                         $backtrack['yun']['video_info']['origin_cover'] = CosService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
                         // 封面
                         $backtrack['yun']['video_info']['cover'] = CosService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg");
                         // 视频
                         $backtrack['yun']['video_info']['play'] = CosService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_play" . ".mp4", $yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_play" . ".mp4");
                         // 视频
                         $backtrack['yun']['video_info']['playwm'] = CosService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
                         break;
                     case "huaweicloud":
                         // 头像
                         $backtrack['yun']['author_info']['avatar'] = ObsService::instance()
-                            ->upload($system_path . $backtrack['author_info']['uid'] . ".jpeg", $yun_path . $backtrack['author_info']['uid'] . ".jpeg");
+                            ->upload($yun_path . $backtrack['author_info']['uid'] . ".jpeg", $system_path . $backtrack['author_info']['uid'] . ".jpeg");
                         // 音频
                         $backtrack['yun']['music_info']['play'] = ObsService::instance()
-                            ->upload($system_path . $backtrack['music_info']['mid'] . ".mp3", $yun_path . $backtrack['music_info']['mid'] . ".mp3");
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
                         // 封面
                         $backtrack['yun']['video_info']['dynamic'] = ObsService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
                         // 封面
                         $backtrack['yun']['video_info']['origin_cover'] = ObsService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
                         // 封面
                         $backtrack['yun']['video_info']['cover'] = ObsService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg");
                         // 视频
                         $backtrack['yun']['video_info']['play'] = ObsService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_play" . ".mp4", $yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_play" . ".mp4");
                         // 视频
                         $backtrack['yun']['video_info']['playwm'] = ObsService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
                         break;
                     case "baidu":
                         // 头像
                         $backtrack['yun']['author_info']['avatar'] = BosService::instance()
-                            ->upload($system_path . $backtrack['author_info']['uid'] . ".jpeg", $yun_path . $backtrack['author_info']['uid'] . ".jpeg");
+                            ->upload($yun_path . $backtrack['author_info']['uid'] . ".jpeg", $system_path . $backtrack['author_info']['uid'] . ".jpeg");
                         // 音频
                         $backtrack['yun']['music_info']['play'] = BosService::instance()
-                            ->upload($system_path . $backtrack['music_info']['mid'] . ".mp3", $yun_path . $backtrack['music_info']['mid'] . ".mp3");
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
                         // 封面
                         $backtrack['yun']['video_info']['dynamic'] = BosService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
                         // 封面
                         $backtrack['yun']['video_info']['origin_cover'] = BosService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
                         // 封面
                         $backtrack['yun']['video_info']['cover'] = BosService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg", $yun_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg");
                         // 视频
                         $backtrack['yun']['video_info']['play'] = BosService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_play" . ".mp4", $yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_play" . ".mp4");
                         // 视频
                         $backtrack['yun']['video_info']['playwm'] = BosService::instance()
-                            ->upload($system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
                         break;
                     default:
                         break;
