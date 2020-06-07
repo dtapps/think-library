@@ -70,8 +70,8 @@ class StorageService extends Service
         if (empty($this->path)) $this->getConfig();
         // 判断文件夹是否存在
         is_dir($this->path) or mkdir($this->path, 0777, true);
-        $return_content = $this->http_get_data("{$this->path}{$name}");
-        $fp = @fopen($name, "a"); //将文件绑定到流
+        $return_content = $this->http_get_data($this->remotely);
+        $fp = @fopen("{$this->path}{$name}", "a"); //将文件绑定到流
         fwrite($fp, $return_content); //写入文件
         return [
             'file_name' => $name,
