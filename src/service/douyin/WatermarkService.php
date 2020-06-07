@@ -297,7 +297,7 @@ class WatermarkService extends Service
                             ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = OssService::instance()
-                            ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".mp3", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".mp3");
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
                         // 视频封面
                         $backtrack['yun']['video_info']['dynamic'] = OssService::instance()
                             ->upload($yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
@@ -326,7 +326,7 @@ class WatermarkService extends Service
                             ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = CosService::instance()
-                            ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".mp3", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".mp3");
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
                         // 视频封面
                         $backtrack['yun']['video_info']['dynamic'] = CosService::instance()
                             ->upload($yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
@@ -355,7 +355,7 @@ class WatermarkService extends Service
                             ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = ObsService::instance()
-                            ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".mp3", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".mp3");
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
                         // 视频封面
                         $backtrack['yun']['video_info']['dynamic'] = ObsService::instance()
                             ->upload($yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
@@ -384,7 +384,7 @@ class WatermarkService extends Service
                             ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = BosService::instance()
-                            ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".mp3", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".mp3");
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
                         // 视频封面
                         $backtrack['yun']['video_info']['dynamic'] = BosService::instance()
                             ->upload($yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
