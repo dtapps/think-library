@@ -630,7 +630,7 @@ class WebAppService extends Service
             $judge = HttpService::instance()
                 ->url("{$this->api_url}cgi-bin/getcallbackip?access_token={$accessToken['access_token']}")
                 ->toArray();
-            if (!empty($judge)) {
+            if (!isset($judge['ip_list'])) {
                 $accessToken_res = HttpService::instance()
                     ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
@@ -657,7 +657,7 @@ class WebAppService extends Service
             $judge = HttpService::instance()
                 ->url("{$this->api_url}cgi-bin/getcallbackip?access_token={$access_token['access_token']}")
                 ->toArray();
-            if (!empty($judge)) {
+            if (!isset($judge['ip_list'])) {
                 $accessToken_res = HttpService::instance()
                     ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
