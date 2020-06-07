@@ -233,6 +233,7 @@ class WatermarkService extends Service
             $backtrack['video_info']['play'] = $this->cVideoPlayUrl($item_list['video']['play_addr']['url_list'][0], 'play');
             $backtrack['video_info']['playwm'] = $this->cVideoPlayUrl($item_list['video']['play_addr']['url_list'][0], 'playwm');
             if (!empty($this->storage)) {
+                // 保存文件
                 // 作者头像
                 StorageService::instance()
                     ->path($this->storagePath . $backtrack['author_info']['uid'] . "/")
