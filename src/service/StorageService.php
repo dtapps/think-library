@@ -63,13 +63,11 @@ class StorageService extends Service
     /**
      * 保存文件
      * @param string $name 保存的文件名
-     * @param string $path
      * @return false|int
      */
-    public function save(string $name, string $path = '')
+    public function save(string $name)
     {
         if (empty($this->path)) $this->getConfig();
-        if (!empty($path)) $this->path = "{$this->path}/{$path}";
         // 判断是否存在
         is_dir($this->path) or mkdir($this->path, 0777, true);
         return file_put_contents("{$this->path}/{$name}", $this->remotely);
@@ -78,13 +76,11 @@ class StorageService extends Service
     /**
      * 删除文件
      * @param string $name
-     * @param string $path
      * @return bool
      */
-    public function delete(string $name, string $path = '')
+    public function delete(string $name)
     {
         if (empty($this->path)) $this->getConfig();
-        if (!empty($path)) $this->path = "{$this->path}/{$path}";
         if (file_exists($name)) if (unlink($name)) return true;
         return false;
     }
@@ -92,13 +88,11 @@ class StorageService extends Service
     /**
      * 统计文件大小
      * @param string $name
-     * @param string $path
      * @return string
      */
-    public function bytes(string $name, string $path = '')
+    public function bytes(string $name)
     {
         if (empty($this->path)) $this->getConfig();
-        if (!empty($path)) $this->path = "{$this->path}/{$path}";
         $bytes = filesize($this->path . $name);
         if ($bytes >= 1073741824) $bytes = round($bytes / 1073741824 * 100) / 100 . 'GB';
         elseif ($bytes >= 1048576) $bytes = round($bytes / 1048576 * 100) / 100 . 'MB';
@@ -109,13 +103,11 @@ class StorageService extends Service
 
     /**
      * 获取文件路径
-     * @param string $path
      * @return string
      */
-    public function getPath(string $path = '')
+    public function getPath()
     {
         if (empty($this->path)) $this->getConfig();
-        if (!empty($path)) $this->path = "{$this->path}/{$path}";
         return $this->path;
     }
 }
