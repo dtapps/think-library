@@ -63,14 +63,42 @@ class StorageService extends Service
     /**
      * 保存文件
      * @param string $name 保存的文件名
-     * @return false|int
+     * @return array
      */
     public function save(string $name)
     {
         if (empty($this->path)) $this->getConfig();
-        // 判断是否存在
+        // 判断文件夹是否存在
         is_dir($this->path) or mkdir($this->path, 0777, true);
-        return file_put_contents("{$this->path}{$name}", file_get_contents($this->remotely));
+        $return_content = $this->http_get_data("{$this->path}{$name}");
+        $fp = @fopen($name, "a"); //将文件绑定到流
+        fwrite($fp, $return_content); //写入文件
+        return [
+            'file_name' => $name,
+            'path' => $this->path,
+            'remotely' => $this->remotely,
+            'save_path' => "{$this->path}{$name}",
+            'size' => $this->bytes("{$this->path}{$name}")
+        ];
+    }
+
+    /**
+     * 下载
+     * @param $url
+     * @return false|string
+     */
+    private function http_get_data($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        ob_start();
+        curl_exec($ch);
+        $return_content = ob_get_contents();
+        ob_end_clean();
+        $return_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        return $return_content;
     }
 
     /**

@@ -236,47 +236,48 @@ class WatermarkService extends Service
             if (!empty($this->storage)) {
                 // 保存文件
                 // 作者头像
-                StorageService::instance()
+                $author_info_avatar = StorageService::instance()
                     ->path($this->storagePath)
                     ->remotely($backtrack['author_info']['avatar'])
                     ->save($backtrack['author_info']['uid'] . ".jpeg");
                 // 音频头像
-                StorageService::instance()
+                $music_info_avatar = StorageService::instance()
                     ->path($this->storagePath)
                     ->remotely($backtrack['music_info']['avatar'])
                     ->save($backtrack['music_info']['mid'] . ".jpeg");
                 // 音频文件
-                if (!empty($backtrack['music_info']['play'])) StorageService::instance()
+                if (!empty($backtrack['music_info']['play'])) $music_info_play = StorageService::instance()
                     ->path($this->storagePath)
                     ->remotely($backtrack['music_info']['play'])
                     ->save($backtrack['music_info']['mid'] . ".mp3");
+                else $music_info_play = ['size' => '0kb'];
                 // 音频封面
-                StorageService::instance()
+                $music_info_cover = StorageService::instance()
                     ->path($this->storagePath)
                     ->remotely($backtrack['music_info']['cover'])
                     ->save($backtrack['music_info']['mid'] . "_cover" . ".jpeg");
                 // 视频封面
-                StorageService::instance()
+                $video_info_dynamic = StorageService::instance()
                     ->path($this->storagePath)
                     ->remotely($backtrack['video_info']['dynamic'])
                     ->save($backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
                 // 视频封面
-                StorageService::instance()
+                $video_info_origin_cover = StorageService::instance()
                     ->path($this->storagePath)
                     ->remotely($backtrack['video_info']['origin_cover'])
                     ->save($backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
                 // 视频封面
-                StorageService::instance()
+                $video_info_cover = StorageService::instance()
                     ->path($this->storagePath)
                     ->remotely($backtrack['video_info']['cover'])
                     ->save($backtrack['video_info']['vid'] . "_cover" . ".jpeg");
                 // 视频文件
-                StorageService::instance()
+                $video_info_play = StorageService::instance()
                     ->path($this->storagePath)
                     ->remotely($backtrack['video_info']['play'])
                     ->save($backtrack['video_info']['vid'] . "_play" . ".mp4");
                 // 视频文件
-                StorageService::instance()
+                $video_info_playwm = StorageService::instance()
                     ->path($this->storagePath)
                     ->remotely($backtrack['video_info']['playwm'])
                     ->save($backtrack['video_info']['vid'] . "_playwm" . ".mp4");
@@ -412,79 +413,23 @@ class WatermarkService extends Service
                 }
                 // 大小信息
                 // 作者头像
-                $backtrack['size']['author_info']['avatar'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->bytes($backtrack['author_info']['uid'] . ".jpeg");
+                $backtrack['size']['author_info']['avatar'] = $author_info_avatar['size'];
                 // 音频头像
-                $backtrack['size']['music_info']['avatar'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->bytes($backtrack['music_info']['mid'] . ".jpeg");
+                $backtrack['size']['music_info']['avatar'] = $music_info_avatar['size'];
                 // 音频文件
-                if (!empty($backtrack['music_info']['play'])) $backtrack['size']['music_info']['play'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->bytes($backtrack['music_info']['mid'] . ".mp3");
-                else $backtrack['size']['music_info']['play'] = '0kb';
+                $backtrack['size']['music_info']['play'] = $music_info_play['size'];
                 // 音频封面
-                $backtrack['size']['music_info']['cover'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->bytes($backtrack['music_info']['mid'] . "_cover" . ".jpeg");
+                $backtrack['size']['music_info']['cover'] = $music_info_cover['size'];
                 // 视频封面
-                $backtrack['size']['video_info']['dynamic'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->bytes($backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
+                $backtrack['size']['video_info']['dynamic'] = $video_info_dynamic['size'];
                 // 视频封面
-                $backtrack['size']['video_info']['origin_cover'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->bytes($backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
+                $backtrack['size']['video_info']['origin_cover'] = $video_info_origin_cover['size'];
                 // 视频封面
-                $backtrack['size']['video_info']['cover'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->bytes($backtrack['video_info']['vid'] . "_cover" . ".jpeg");
+                $backtrack['size']['video_info']['cover'] = $video_info_cover['size'];
                 // 视频文件
-                $backtrack['size']['video_info']['play'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->bytes($backtrack['video_info']['vid'] . "_play" . ".mp4");
+                $backtrack['size']['video_info']['play'] = $video_info_play['size'];
                 // 视频文件
-                $backtrack['size']['video_info']['playwm'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->bytes($backtrack['video_info']['vid'] . "_playwm" . ".mp4");
-                // 删除文件
-                // 作者头像
-                StorageService::instance()
-                    ->path($this->storagePath)
-                    ->delete($backtrack['author_info']['uid'] . ".jpeg");
-                // 音频头像
-                $backtrack['size']['music_info']['avatar'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->delete($backtrack['music_info']['mid'] . ".jpeg");
-                // 音频文件
-                if (!empty($backtrack['music_info']['play'])) $backtrack['size']['music_info']['play'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->delete($backtrack['music_info']['mid'] . ".mp3");
-                // 音频封面
-                $backtrack['size']['music_info']['cover'] = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->delete($backtrack['music_info']['mid'] . "_cover" . ".jpeg");
-                // 视频封面
-                StorageService::instance()
-                    ->path($this->storagePath)
-                    ->delete($backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
-                // 视频封面
-                StorageService::instance()
-                    ->path($this->storagePath)
-                    ->delete($backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
-                // 视频封面
-                StorageService::instance()
-                    ->path($this->storagePath)
-                    ->delete($backtrack['video_info']['vid'] . "_cover" . ".jpeg");
-                // 视频文件
-                StorageService::instance()
-                    ->path($this->storagePath)
-                    ->delete($backtrack['video_info']['vid'] . "_play" . ".mp4");
-                // 视频文件
-                StorageService::instance()
-                    ->path($this->storagePath)
-                    ->delete($backtrack['video_info']['vid'] . "_playwm" . ".mp4");
+                $backtrack['size']['video_info']['playwm'] = $video_info_playwm['size'];
             }
             $this->backtrack = $backtrack;
         } else {
@@ -493,10 +438,22 @@ class WatermarkService extends Service
         return $this;
     }
 
+    /**
+     * 获取
+     * @param $url
+     * @return bool|string
+     */
     private function getContents($url)
     {
-        ini_set('user_agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1');
-        return file_get_contents($url);
+        $c = curl_init();
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+        //curl_setopt($c, CURLOPT_HEADER, 1);//输出远程服务器的header信息  
+        curl_setopt($c, CURLOPT_USERAGENT, 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1');
+        curl_setopt($c, CURLOPT_URL, $url);
+        $contents = curl_exec($c);
+        curl_close($c);
+        if ($contents) return $contents;
+        else return '';
     }
 
     /**
@@ -627,7 +584,7 @@ class WatermarkService extends Service
     private function cVideoPlayUrl($url, $type)
     {
         if ($type == 'play') $headers = get_headers(str_replace("/playwm/", "/play/", $url), TRUE);
-        else  $headers = get_headers($url, TRUE);
+        else $headers = get_headers($url, TRUE);
         //输出跳转到的网址
         return $headers['location'];
     }
