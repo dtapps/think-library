@@ -70,7 +70,6 @@ class StorageService extends Service
         if (empty($this->path)) $this->getConfig();
         // 判断是否存在
         is_dir($this->path) or mkdir($this->path, 0777, true);
-        if (strpos($this->remotely, 'https')) $this->remotely = str_replace("https", "http", $this->remotely);
         return file_put_contents("{$this->path}{$name}", file_get_contents($this->remotely));
     }
 
