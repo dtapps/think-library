@@ -445,15 +445,8 @@ class WatermarkService extends Service
      */
     private function getContents($url)
     {
-        $c = curl_init();
-        curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-        //curl_setopt($c, CURLOPT_HEADER, 1);//输出远程服务器的header信息  
-        curl_setopt($c, CURLOPT_USERAGENT, 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1');
-        curl_setopt($c, CURLOPT_URL, $url);
-        $contents = curl_exec($c);
-        curl_close($c);
-        if ($contents) return $contents;
-        else return '';
+        ini_set('user_agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1');
+        return file_get_contents($url);
     }
 
     /**
