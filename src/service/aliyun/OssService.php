@@ -75,7 +75,7 @@ class OssService extends Service
      * @param $filePath
      * @return bool|string
      */
-    public function upload($object, $filePath)
+    public function upload(string $object, string $filePath)
     {
         if (empty($this->accessKeySecret)) $this->getConfig();
         if (empty($this->accessKeySecret)) $this->getConfig();
@@ -84,7 +84,7 @@ class OssService extends Service
         try {
             $ossClient = new OssClient($this->accessKeyId, $this->accessKeySecret, $this->endpoint);
             $ossClient->uploadFile($this->bucket, $object, $filePath);
-            return true;
+            return $this->app->config->get('dtapp.aliyun.oss.url') . $filePath;
         } catch (OssException $e) {
             return $e->getMessage();
         }

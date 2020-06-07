@@ -76,7 +76,7 @@ class BosService extends Service
      * @return bool
      * @throws Exception
      */
-    private function upload($object, $filePath)
+    public function upload(string $object, string $filePath)
     {
         if (empty($this->accessKeyId)) $this->getConfig();
         if (empty($this->secretAccessKey)) $this->getConfig();
@@ -93,6 +93,6 @@ class BosService extends Service
         // 从文件中直接上传Object
         if (empty($this->bucket)) $this->getConfig();
         $client->putObjectFromFile($this->bucket, $object, $filePath);
-        return true;
+        return $this->app->config->get('dtapp.baidu.bos.url') . $filePath;
     }
 }

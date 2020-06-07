@@ -76,7 +76,7 @@ class CosService extends Service
      * @return bool
      * @throws Exception
      */
-    private function upload($object, $filePath)
+    public function upload(string $object, string $filePath)
     {
         if (empty($this->secretId)) $this->getConfig();
         if (empty($this->secretKey)) $this->getConfig();
@@ -102,6 +102,6 @@ class CosService extends Service
                     'Body' => $file)
             );
         }
-        return true;
+        return $this->app->config->get('dtapp.tencent.cos.url') . $filePath;
     }
 }

@@ -26,10 +26,27 @@ use DtApp\ThinkLibrary\Service;
 class StorageService extends Service
 {
     private $path = '';
+    private $remotely = '';
 
+    /**
+     * 文件夹
+     * @param string $path
+     * @return $this
+     */
     public function path(string $path)
     {
         $this->path = $path;
+        return $this;
+    }
+
+    /**
+     * 需要保存的远程文件
+     * @param string $remotely
+     * @return $this
+     */
+    public function remotely(string $remotely)
+    {
+        $this->remotely = $remotely;
         return $this;
     }
 
@@ -45,42 +62,60 @@ class StorageService extends Service
 
     /**
      * 保存文件
-     * @param $name
+     * @param string $name 保存的文件名
      * @param string $path
      * @return false|int
      */
     public function save(string $name, string $path = '')
     {
         if (empty($this->path)) $this->getConfig();
-        if (empty($path)) $this->path = "{$this->path}/{$name}";
-        else $this->path = $path;
-        return file_put_contents($this->path, $name);
+        if (!empty($path)) $this->path = "{$this->path}/{$path}";
+        // 判断是否存在
+        is_dir($this->path) or mkdir($this->path, 0777, true);
+        return file_put_contents("{$this->path}/{$name}", $this->remotely);
     }
 
     /**
      * 删除文件
      * @param string $name
+     * @param string $path
      * @return bool
      */
-    public function delete(string $name)
+    public function delete(string $name, string $path = '')
     {
         if (empty($this->path)) $this->getConfig();
+        if (!empty($path)) $this->path = "{$this->path}/{$path}";
         if (file_exists($name)) if (unlink($name)) return true;
         return false;
     }
 
     /**
      * 统计文件大小
-     * @param $bytes
+     * @param string $name
+     * @param string $path
      * @return string
      */
-    public function bytes($bytes)
+    public function bytes(string $name, string $path = '')
     {
-        $bytes = filesize($bytes);
+        if (empty($this->path)) $this->getConfig();
+        if (!empty($path)) $this->path = "{$this->path}/{$path}";
+        $bytes = filesize($this->path . $name);
         if ($bytes >= 1073741824) $bytes = round($bytes / 1073741824 * 100) / 100 . 'GB';
         elseif ($bytes >= 1048576) $bytes = round($bytes / 1048576 * 100) / 100 . 'MB';
         elseif ($bytes >= 1024) $bytes = round($bytes / 1024 * 100) / 100 . 'KB';
         else   $bytes = $bytes . 'Bytes';
         return $bytes;
+    }
+
+    /**
+     * 获取文件路径
+     * @param string $path
+     * @return string
+     */
+    public function getPath(string $path = '')
+    {
+        if (empty($this->path)) $this->getConfig();
+        if (!empty($path)) $this->path = "{$this->path}/{$path}";
+        return $this->path;
     }
 }

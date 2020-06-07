@@ -74,7 +74,7 @@ class ObsService extends Service
      * @param $filePath
      * @return bool
      */
-    private function upload($object, $filePath)
+    public function upload(string $object, string $filePath)
     {
         if (empty($this->key)) $this->getConfig();
         if (empty($this->secret)) $this->getConfig();
@@ -92,7 +92,7 @@ class ObsService extends Service
             'SourceFile' => $filePath  // localfile为待上传的本地文件路径，需要指定到具体的文件名
         ]);
         if (isset($resp['RequestId'])) {
-            return true;
+            return $this->app->config->get('dtapp.huaweicloud.obs.url') . $filePath;
         } else {
             return false;
         }

@@ -62,6 +62,7 @@ return [
             'secret_access_key' => '',
             'endpoint' => '',
             'bucket' => '',
+            'url' => '',
         ]
     ],
     // 高德地图
@@ -115,6 +116,7 @@ return [
             'access_key_secret' => '',
             'endpoint' => '',
             'bucket' => '',
+            'url' => '',
         ]
     ],
     // 腾讯云
@@ -124,6 +126,7 @@ return [
             'secret_key' => '',
             'region' => '',
             'bucket' => '',
+            'url' => '',
         ]
     ],
     // 华为云
@@ -133,6 +136,7 @@ return [
             'secret' => '',
             'endpoint' => '',
             'bucket' => '',
+            'url' => '',
         ]
     ],
     // 本地存储
