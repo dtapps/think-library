@@ -24,6 +24,7 @@ use DtApp\ThinkLibrary\service\baidu\BosService;
 use DtApp\ThinkLibrary\service\huaweicloud\ObsService;
 use DtApp\ThinkLibrary\service\StorageService;
 use DtApp\ThinkLibrary\service\tencent\CosService;
+use Exception;
 use stdClass;
 
 /**
@@ -192,6 +193,7 @@ class WatermarkService extends Service
     /**
      * 获取全部信息
      * @return $this
+     * @throws Exception
      */
     public function getAll()
     {

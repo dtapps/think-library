@@ -93,6 +93,6 @@ class BosService extends Service
         // 从文件中直接上传Object
         if (empty($this->bucket)) $this->getConfig();
         $client->putObjectFromFile($this->bucket, $object, $filePath);
-        return $this->app->config->get('dtapp.baidu.bos.url') . $filePath;
+        return $this->app->config->get('dtapp.baidu.bos.url') . $object;
     }
 }

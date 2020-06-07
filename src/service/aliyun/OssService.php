@@ -84,7 +84,7 @@ class OssService extends Service
         try {
             $ossClient = new OssClient($this->accessKeyId, $this->accessKeySecret, $this->endpoint);
             $ossClient->uploadFile($this->bucket, $object, $filePath);
-            return $this->app->config->get('dtapp.aliyun.oss.url') . $filePath;
+            return $this->app->config->get('dtapp.aliyun.oss.url') . $object;
         } catch (OssException $e) {
             return $e->getMessage();
         }
