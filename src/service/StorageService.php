@@ -78,7 +78,7 @@ class StorageService extends Service
             'path' => $this->path,
             'remotely' => $this->remotely,
             'save_path' => "{$this->path}{$name}",
-            'size' => $this->bytes("{$this->path}{$name}")
+            'size' => $this->bytes($name)
         ];
     }
 
