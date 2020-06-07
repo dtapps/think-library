@@ -70,7 +70,7 @@ class StorageService extends Service
         if (empty($this->path)) $this->getConfig();
         // 判断是否存在
         is_dir($this->path) or mkdir($this->path, 0777, true);
-        return file_put_contents("{$this->path}/{$name}", $this->remotely);
+        return file_put_contents("{$this->path}{$name}", $this->remotely);
     }
 
     /**
