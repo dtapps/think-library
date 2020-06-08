@@ -50,8 +50,7 @@ class TbkService extends Service
      * API接口名称
      * @var string
      */
-    private $method = '';
-    private $response = '';
+    private $method = '', $response = '';
 
     /**
      * 签名的摘要算法

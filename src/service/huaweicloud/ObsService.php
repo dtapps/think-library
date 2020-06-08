@@ -21,15 +21,13 @@ use Obs\ObsClient;
 
 /**
  * 华为云对象存储
+ * https://www.huaweicloud.com/product/obs.html
  * Class ObsService
  * @package DtApp\ThinkLibrary\service\huaweicloud
  */
 class ObsService extends Service
 {
-    private $key;
-    private $secret;
-    private $endpoint;
-    private $bucket;
+    private $key, $secret, $endpoint, $bucket;
 
     public function key(string $key)
     {

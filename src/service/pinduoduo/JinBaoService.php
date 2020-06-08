@@ -37,8 +37,7 @@ class JinBaoService extends Service
      * API接口名称
      * @var string
      */
-    private $type = '';
-    private $response = '';
+    private $type = '', $response = '';
 
     /**
      * 开放平台分配的clientId

@@ -31,8 +31,7 @@ use think\facade\Db;
 class Mysql
 {
     private $table = "think_cache";
-    private $cache_name;
-    private $cache_expire = 0;
+    private $cache_name, $cache_expire = 0;
 
     /**
      * 名称

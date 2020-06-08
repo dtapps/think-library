@@ -22,6 +22,7 @@ use DtApp\ThinkLibrary\service\curl\BtService;
 
 /**
  * 宝塔Api
+ * https://www.bt.cn/
  * Class ApiService
  * @package DtApp\ThinkLibrary\service\bt
  */
@@ -32,10 +33,7 @@ class ApiService extends Service
     private $limit = 15;
     private $order = 'id desc';
     private $where = [];
-    private $contents;
-    private $backtrack;
-    private $key;
-    private $panel;
+    private $contents, $backtrack, $key, $panel;
 
     public function key(string $key)
     {

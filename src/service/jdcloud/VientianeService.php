@@ -29,9 +29,7 @@ class VientianeService extends Service
 {
     private $url = "https://way.jd.com/";
 
-    private $param;
-
-    private $app_key;
+    private $param, $app_key;
 
     /**
      * 您申请的appkey

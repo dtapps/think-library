@@ -22,15 +22,13 @@ use Exception;
 
 /**
  * 百度云对象存储
+ * https://cloud.baidu.com/product/bos.html
  * Class BosService
  * @package DtApp\ThinkLibrary\service\baidu
  */
 class BosService extends Service
 {
-    private $accessKeyId;
-    private $secretAccessKey;
-    private $endpoint;
-    private $bucket;
+    private $accessKeyId, $secretAccessKey, $endpoint, $bucket;
 
     public function accessKeyId(string $accessKeyId)
     {

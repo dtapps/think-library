@@ -37,13 +37,9 @@ class Xmls
         if (!is_array($values) || count($values) <= 0) throw new Exception('数组数据异常！');
         $xml = "<xml>";
         foreach ($values as $key => $val) {
-            if (is_array($val)) {
-                $xml .= "<" . $key . ">" . $this->toXml($val) . "</" . $key . ">";
-            } else if (is_numeric($val)) {
-                $xml .= "<" . $key . ">" . $val . "</" . $key . ">";
-            } else {
-                $xml .= "<" . $key . "><![CDATA[" . $val . "]]></" . $key . ">";
-            }
+            if (is_array($val)) $xml .= "<" . $key . ">" . $this->toXml($val) . "</" . $key . ">";
+            else if (is_numeric($val)) $xml .= "<" . $key . ">" . $val . "</" . $key . ">";
+            else $xml .= "<" . $key . "><![CDATA[" . $val . "]]></" . $key . ">";
         }
         $xml .= "</xml>";
         return $xml;

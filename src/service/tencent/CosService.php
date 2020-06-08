@@ -22,15 +22,13 @@ use Qcloud\Cos\Client;
 
 /**
  * 腾讯云对象存储
+ * https://cloud.tencent.com/product/cos
  * Class CosService
  * @package DtApp\ThinkLibrary\service\tencent
  */
 class CosService extends Service
 {
-    private $secretId;
-    private $secretKey;
-    private $region;
-    private $bucket;
+    private $secretId, $secretKey, $region, $bucket;
 
     public function secretId(string $secretId)
     {

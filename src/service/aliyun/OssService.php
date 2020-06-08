@@ -22,15 +22,13 @@ use OSS\OssClient;
 
 /**
  * 阿里云对象存储
+ * https://www.aliyun.com/product/oss
  * Class OssService
  * @package DtApp\ThinkLibrary\service\aliyun
  */
 class OssService extends Service
 {
-    private $accessKeyId;
-    private $accessKeySecret;
-    private $endpoint;
-    private $bucket;
+    private $accessKeyId, $accessKeySecret, $endpoint, $bucket;
 
     public function accessKeyId(string $accessKeyId)
     {

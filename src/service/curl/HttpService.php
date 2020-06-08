@@ -26,10 +26,7 @@ use think\exception\HttpException;
  */
 class HttpService extends Service
 {
-    private $url;
-    private $data;
-    private $cert;
-    private $output;
+    private $url, $data, $cert, $output;
     private $timeout = 60;
     private $method = 'GET';
     private $headers = 'application/json;charset=utf-8';
@@ -52,7 +49,7 @@ class HttpService extends Service
      */
     public function data($str)
     {
-        if (is_array($str)) $this->data = json_encode($str,JSON_UNESCAPED_UNICODE);
+        if (is_array($str)) $this->data = json_encode($str, JSON_UNESCAPED_UNICODE);
         else $this->data = $str;
         return $this;
     }
@@ -151,7 +148,7 @@ class HttpService extends Service
             $this->httpXml();
         } else if ($this->method === 'FILE') {
             $this->httpFile();
-        } else throw new HttpException(404,'请求方式异常');
+        } else throw new HttpException(404, '请求方式异常');
         if (empty($is)) return $this->output;
         if (is_array($this->output)) return $this->output;
         return json_decode($this->output, true);

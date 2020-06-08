@@ -21,17 +21,14 @@ use think\exception\HttpException;
 
 /**
  * 宝塔网络请求接口
+ * https://www.bt.cn/
  * Class BtService
  * @package DtApp\ThinkLibrary\service\curl
  */
 class BtService extends Service
 {
-    private $url;
-    private $key;
+    private $url, $key, $panel, $output, $cookie;
     private $data = [];
-    private $panel;
-    private $output;
-    private $cookie;
     private $timeout = 60;
 
     /**
@@ -107,7 +104,7 @@ class BtService extends Service
      */
     public function toArray(bool $is = true)
     {
-        if (empty($this->cookie)) throw new HttpException(404,'请检查cookie内容');
+        if (empty($this->cookie)) throw new HttpException(404, '请检查cookie内容');
         if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
         $this->http();
         if (empty($is)) return $this->output;

@@ -38,8 +38,7 @@ class UnionService extends Service
      * API接口名称
      * @var
      */
-    private $method = '';
-    private $response = '';
+    private $method = '', $response = '';
 
     /**
      * 联盟分配给应用的appkey
@@ -87,8 +86,7 @@ class UnionService extends Service
      * 需要发送的的参数
      * @var
      */
-    private $param;
-    private $params;
+    private $param, $params;
 
     /**
      * 联盟分配给应用的appkey

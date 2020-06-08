@@ -32,8 +32,7 @@ class MiniService extends Service
 {
     private $api_url = "https://api.weixin.qq.com/";
 
-    private $app_id;
-    private $app_secret;
+    private $app_id, $app_secret;
     private $grant_type = "client_credential";
 
     /**

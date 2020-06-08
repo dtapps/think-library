@@ -25,8 +25,7 @@ use DtApp\ThinkLibrary\Service;
  */
 class StorageService extends Service
 {
-    private $path = '';
-    private $remotely = '';
+    private $path = '', $remotely = '';
 
     /**
      * 文件夹

@@ -20,8 +20,7 @@ use DtApp\ThinkLibrary\Service;
 
 class AesService extends Service
 {
-    private $key;
-    private $iv;
+    private $key, $iv;
 
     public function key($str)
     {

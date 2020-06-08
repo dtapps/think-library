@@ -34,14 +34,7 @@ use stdClass;
  */
 class WatermarkService extends Service
 {
-    private $url;
-    private $api_url;
-    private $itemId;
-    private $dytk;
-    private $contents;
-    private $backtrack;
-    private $storage;
-    private $storagePath;
+    private $url, $apiUrl, $itemId, $dytk, $contents, $backtrack, $storage, $storagePath;
 
     /**
      * 配置网址
@@ -184,8 +177,8 @@ class WatermarkService extends Service
      */
     public function getApi()
     {
-        $this->api_url = "https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids={$this->itemId}&dytk={$this->dytk}";
-        $this->contents = $this->getContents($this->api_url);
+        $this->apiUrl = "https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids={$this->itemId}&dytk={$this->dytk}";
+        $this->contents = $this->getContents($this->apiUrl);
         $this->backtrack = $this->contents;
         return $this;
     }

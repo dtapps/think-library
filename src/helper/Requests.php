@@ -32,7 +32,7 @@ class Requests
      */
     public function isEmpty(array $data, array $arr): array
     {
-        foreach ($arr as $k => $v) if (empty(isset($data["$v"]) ? $data["$v"] : '')) return '';
+        foreach ($arr as $k => $v) if (empty(isset($data["$v"]) ? $data["$v"] : '')) return [];
         return $data;
     }
 

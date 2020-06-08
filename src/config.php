@@ -143,4 +143,24 @@ return [
     'storage' => [
         'path' => ''
     ],
+    // 又拍云
+    'upyun' => [
+        // 又拍云存储
+        'uss' => [
+            'service_name' => '',
+            'operator_name' => '',
+            'operator_password' => '',
+            'url' => '',
+        ]
+    ],
+    // 七牛云
+    'qiniu' => [
+        // 云存储
+        'kodo' => [
+            'access_key' => '',
+            'secret_key' => '',
+            'bucket' => '',
+            'url' => '',
+        ]
+    ],
 ];
