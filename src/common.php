@@ -62,9 +62,7 @@ if (!function_exists('get_ip')) {
             //为了兼容百度的CDN，所以转成数组
             $arr = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
             return $arr[0];
-        } else {
-            return $_SERVER['REMOTE_ADDR'];
-        }
+        } else return $_SERVER['REMOTE_ADDR'];
     }
 }
 
