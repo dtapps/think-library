@@ -37,7 +37,10 @@
     "aliyuncs/oss-sdk-php": "^2.3",
     "obs/esdk-obs-php": "^3.19",
     "baidubce/bce-sdk-php": "^0.8.22",
-    "qcloud/cos-sdk-v5": "^2.0"
+    "qcloud/cos-sdk-v5": "^2.0",
+    "qiniu/php-sdk": "^7.2",
+    "upyun/sdk": "^3.4",
+    "jdcloud-api/jdcloud-sdk-php": "^5.2"
   },
   "require-dev": {
     "symfony/var-dumper": "^4.2"
