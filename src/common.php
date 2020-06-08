@@ -22,6 +22,11 @@ use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
 use think\db\exception\ModelNotFoundException;
 
+/**
+ * 定义当前版本
+ */
+const VERSION = '6.0.56';
+
 if (!function_exists('get_ip_info')) {
 
     /**
