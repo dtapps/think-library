@@ -89,7 +89,7 @@ class Mysql
             ->order('id desc')
             ->whereTime('cache_expire', '>', time())
             ->find();
-        return $cache['cache_value'];
+        return isset($cache['cache_value']) ? $cache['cache_value'] : '';
     }
 
     /**
