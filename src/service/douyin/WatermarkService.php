@@ -209,13 +209,13 @@ class WatermarkService extends Service
             $backtrack['share_info']['title'] = $item_list['share_info']['share_title'];
             $backtrack['share_info']['url'] = $item_list['share_url'];
             // 音乐信息
-            $backtrack['music_info']['id'] = $item_list['music']['id'];
-            $backtrack['music_info']['mid'] = $item_list['music']['mid'];
-            $backtrack['music_info']['title'] = $item_list['music']['title'];
-            $backtrack['music_info']['author'] = $item_list['music']['author'];
-            $backtrack['music_info']['avatar'] = $this->cMusicAvatar($item_list['music']);
-            $backtrack['music_info']['play'] = $item_list['music']['play_url']['uri'];
-            $backtrack['music_info']['cover'] = $item_list['music']['cover_large']['url_list'][0];
+            $backtrack['music_info']['id'] = isset($item_list['music']['id']) ? $item_list['music']['id'] : '';
+            $backtrack['music_info']['mid'] = isset($item_list['music']['mid']) ? $item_list['music']['mid'] : '';
+            $backtrack['music_info']['title'] = isset($item_list['music']['title']) ? $item_list['music']['title'] : '';
+            $backtrack['music_info']['author'] = isset($item_list['music']['author']) ? $item_list['music']['author'] : '';
+            $backtrack['music_info']['avatar'] = isset($item_list['music']) ? $this->cMusicAvatar($item_list['music']) : '';
+            $backtrack['music_info']['play'] = isset($item_list['music']['play_url']['uri']) ? $item_list['music']['play_url']['uri'] : '';
+            $backtrack['music_info']['cover'] = isset($item_list['music']['cover_large']['url_list'][0]) ? $item_list['music']['cover_large']['url_list'][0] : '';
             // 视频信息
             $backtrack['video_info']['vid'] = $item_list['video']['vid'];
             $backtrack['video_info']['desc'] = $item_list['desc'];

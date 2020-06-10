@@ -194,6 +194,7 @@ class WebAppService extends Service
      */
     public function oauth2()
     {
+        if (empty($this->app_id)) $this->getConfig();
         if (strlen($this->state) > 128) throw new DtaException("请检查state参数，最多128字节");
         $params = Urls::toParams([
             'appid' => $this->app_id,
@@ -250,6 +251,8 @@ class WebAppService extends Service
      */
     public function useInfo(string $accessToken, string $openid, $lang = "zh_CN", bool $is = true)
     {
+        if (empty($this->app_id)) $this->getConfig();
+        if (empty($this->app_secret)) $this->getConfig();
         return HttpService::instance()
             ->url("{$this->api_url}sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}")
             ->toArray($is);
@@ -264,6 +267,8 @@ class WebAppService extends Service
      */
     public function auth(string $accessToken, string $openid, bool $is = true)
     {
+        if (empty($this->app_id)) $this->getConfig();
+        if (empty($this->app_secret)) $this->getConfig();
         return HttpService::instance()
             ->url("{$this->api_url}sns/auth?access_token={$accessToken}&openid={$openid}")
             ->toArray($is);
