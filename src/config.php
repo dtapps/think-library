@@ -163,4 +163,37 @@ return [
             'url' => '',
         ]
     ],
+    // 金山云
+    'ksyun' => [
+        // 云存储
+        'ks3' => [
+            'access_key_iD' => '',
+            'access_key_secret' => '',
+            'endpoint' => '',
+            'bucket' => '',
+            'url' => '',
+        ]
+    ],
+    // 网易云
+    'netease' => [
+        // 云存储
+        'ks3' => [
+            'access_key_id' => '',
+            'access_key_secret' => '',
+            'endpoint' => '',
+            'bucket' => '',
+            'url' => '',
+        ]
+    ],
+    // UCloud优刻得
+    'ucloud' => [
+        // 云存储
+        'ufile' => [
+            'proxy_suffix' => '',
+            'public_key' => '',
+            'private_key' => '',
+            'bucket' => '',
+            'url' => '',
+        ]
+    ],
 ];

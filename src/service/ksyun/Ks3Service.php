@@ -1,0 +1,122 @@
+<?php
+
+// +----------------------------------------------------------------------
+// | ThinkLibrary 6.0 for ThinkPhP 6.0
+// +----------------------------------------------------------------------
+// | 版权所有 2017~2020 [ https://www.dtapp.net ]
+// +----------------------------------------------------------------------
+// | 官方网站: https://gitee.com/liguangchun/ThinkLibrary
+// +----------------------------------------------------------------------
+// | 开源协议 ( https://mit-license.org )
+// +----------------------------------------------------------------------
+// | gitee 仓库地址 ：https://gitee.com/liguangchun/ThinkLibrary
+// | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
+// | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
+// +----------------------------------------------------------------------
+
+namespace DtApp\ThinkLibrary\service\ksyun;
+
+use DtApp\ThinkLibrary\Service;
+use Ks3Client;
+use Ks3ServiceException;
+
+/**
+ * 金山云对象存储
+ * https://www.ksyun.com/nv/product/KS3.html
+ * Class Ks3Service
+ * @package DtApp\ThinkLibrary\service\ksyun
+ */
+class Ks3Service extends Service
+{
+    private $accessKeyID, $accessKeySecret, $endpoint, $bucket;
+
+    public function accessKeyID(string $accessKeyID)
+    {
+        $this->accessKeyID = $accessKeyID;
+        return $this;
+    }
+
+    public function accessKeySecret(string $accessKeySecret)
+    {
+        $this->accessKeySecret = $accessKeySecret;
+        return $this;
+    }
+
+    public function endpoint(string $endpoint)
+    {
+        $this->endpoint = $endpoint;
+        return $this;
+    }
+
+    public function bucket(string $bucket)
+    {
+        $this->bucket = $bucket;
+        return $this;
+    }
+
+    /**
+     * 获取配置信息
+     * @return $this
+     */
+    private function getConfig()
+    {
+        $this->accessKeyID = $this->app->config->get('dtapp.ksyun.ks3.access_key_iD');
+        $this->accessKeySecret = $this->app->config->get('dtapp.ksyun.ks3.access_key_secret');
+        $this->endpoint = $this->app->config->get('dtapp.ksyun.ks3.endpoint');
+        $this->bucket = $this->app->config->get('dtapp.ksyun.ks3.bucket');
+        return $this;
+    }
+
+    /**
+     * 上传文件
+     * @param string $object
+     * @param string $filePath
+     * @return bool|string
+     */
+    public function upload(string $object, string $filePath)
+    {
+        if (empty($this->accessKeyID)) $this->getConfig();
+        if (empty($this->accessKeySecret)) $this->getConfig();
+        if (empty($this->endpoint)) $this->getConfig();
+        //是否使用VHOST
+        define("KS3_API_VHOST", FALSE);
+        //是否开启日志(写入日志文件)
+        define("KS3_API_LOG", TRUE);
+        //是否显示日志(直接输出日志)
+        define("KS3_API_DISPLAY_LOG", TRUE);
+        //定义日志目录(默认是该项目log下)
+        define("KS3_API_LOG_PATH", "");
+        //是否使用HTTPS
+        define("KS3_API_USE_HTTPS", FALSE);
+        //是否开启curl debug模式
+        define("KS3_API_DEBUG_MODE", FALSE);
+        $client = new Ks3Client($this->accessKeyID, $this->accessKeySecret, $this->endpoint);
+        if (empty($this->bucket)) $this->getConfig();
+        $content = fopen($filePath, "r");
+        $args = [
+            "Bucket" => $this->bucket,
+            "Key" => $object,
+            "Content" => [
+                //要上传的内容
+                "content" => $content,//可以是文件路径或者resource,如果文件大于2G，请提供文件路径
+                "seek_position" => 0//跳过文件开头?个字节
+            ],
+            "ACL" => "public-read",//可以设置访问权限,合法值,private、public-read
+            "ObjectMeta" => [
+                //设置object的元数据,可以设置"Cache-Control","Content-Disposition","Content-Encoding","Content-Length","Content-MD5","Content-Type","Expires"。当设置了Content-Length时，最后上传的为从seek_position开始向后Content-Length个字节的内容。当设置了Content-MD5时，系统会在服务端进行md5校验。
+                "Content-Type" => "binay/ocet-stream"
+                //"Content-Length"=>4
+            ],
+            "UserMeta" => [
+                //可以设置object的用户元数据，需要以x-kss-meta-开头
+                "x-kss-meta-test" => "test"
+            ]
+        ];
+        try {
+            $client->putObjectByFile($args);
+            return $this->app->config->get('dtapp.ksyun.ks3.url') . $object;
+        } catch (Ks3ServiceException $e) {
+            return false;
+        }
+    }
+}

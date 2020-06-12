@@ -22,9 +22,11 @@ use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\aliyun\OssService;
 use DtApp\ThinkLibrary\service\baidu\BosService;
 use DtApp\ThinkLibrary\service\huaweicloud\ObsService;
+use DtApp\ThinkLibrary\service\ksyun\Ks3Service;
 use DtApp\ThinkLibrary\service\qiniu\KodoService;
 use DtApp\ThinkLibrary\service\StorageService;
 use DtApp\ThinkLibrary\service\tencent\CosService;
+use DtApp\ThinkLibrary\service\ucloud\UfileService;
 use DtApp\ThinkLibrary\service\upyun\UssService;
 use Exception;
 use stdClass;
@@ -461,6 +463,66 @@ class WatermarkService extends Service
                             ->upload($yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_play" . ".mp4");
                         // 视频文件
                         $backtrack['yun']['video_info']['playwm'] = UssService::instance()
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
+                        break;
+                    case "ksyun":
+                        // 作者头像
+                        $backtrack['yun']['author_info']['avatar'] = Ks3Service::instance()
+                            ->upload($yun_path . $backtrack['author_info']['uid'] . ".jpeg", $system_path . $backtrack['author_info']['uid'] . ".jpeg");
+                        // 音频头像
+                        $backtrack['yun']['music_info']['avatar'] = Ks3Service::instance()
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".jpeg", $system_path . $backtrack['music_info']['mid'] . ".jpeg");
+                        // 音频文件
+                        if (!empty($backtrack['music_info']['play'])) $backtrack['yun']['music_info']['play'] = Ks3Service::instance()
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
+                        else $backtrack['yun']['music_info']['play'] = '';
+                        // 音频封面
+                        $backtrack['yun']['music_info']['cover'] = Ks3Service::instance()
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
+                        // 视频封面
+                        $backtrack['yun']['video_info']['dynamic'] = Ks3Service::instance()
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
+                        // 视频封面
+                        $backtrack['yun']['video_info']['origin_cover'] = Ks3Service::instance()
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
+                        // 视频封面
+                        $backtrack['yun']['video_info']['cover'] = Ks3Service::instance()
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg");
+                        // 视频文件
+                        $backtrack['yun']['video_info']['play'] = Ks3Service::instance()
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_play" . ".mp4");
+                        // 视频文件
+                        $backtrack['yun']['video_info']['playwm'] = Ks3Service::instance()
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
+                        break;
+                    case "ucloud":
+                        // 作者头像
+                        $backtrack['yun']['author_info']['avatar'] = UfileService::instance()
+                            ->upload($yun_path . $backtrack['author_info']['uid'] . ".jpeg", $system_path . $backtrack['author_info']['uid'] . ".jpeg");
+                        // 音频头像
+                        $backtrack['yun']['music_info']['avatar'] = UfileService::instance()
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".jpeg", $system_path . $backtrack['music_info']['mid'] . ".jpeg");
+                        // 音频文件
+                        if (!empty($backtrack['music_info']['play'])) $backtrack['yun']['music_info']['play'] = UfileService::instance()
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
+                        else $backtrack['yun']['music_info']['play'] = '';
+                        // 音频封面
+                        $backtrack['yun']['music_info']['cover'] = UfileService::instance()
+                            ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
+                        // 视频封面
+                        $backtrack['yun']['video_info']['dynamic'] = UfileService::instance()
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg");
+                        // 视频封面
+                        $backtrack['yun']['video_info']['origin_cover'] = UfileService::instance()
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg");
+                        // 视频封面
+                        $backtrack['yun']['video_info']['cover'] = UfileService::instance()
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg", $system_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg");
+                        // 视频文件
+                        $backtrack['yun']['video_info']['play'] = UfileService::instance()
+                            ->upload($yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_play" . ".mp4");
+                        // 视频文件
+                        $backtrack['yun']['video_info']['playwm'] = UfileService::instance()
                             ->upload($yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
                         break;
                     default:
