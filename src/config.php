@@ -141,7 +141,9 @@ return [
     ],
     // 本地存储
     'storage' => [
-        'path' => ''
+        'path' => '',
+        'domain_name' => '',
+        'domain_list' => []
     ],
     // 又拍云
     'upyun' => [

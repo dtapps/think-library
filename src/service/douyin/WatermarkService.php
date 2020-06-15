@@ -26,7 +26,6 @@ use DtApp\ThinkLibrary\service\ksyun\Ks3Service;
 use DtApp\ThinkLibrary\service\qiniu\KodoService;
 use DtApp\ThinkLibrary\service\StorageService;
 use DtApp\ThinkLibrary\service\tencent\CosService;
-use DtApp\ThinkLibrary\service\ucloud\UfileService;
 use DtApp\ThinkLibrary\service\upyun\UssService;
 use Exception;
 use stdClass;
@@ -282,7 +281,7 @@ class WatermarkService extends Service
                     ->path($this->storagePath)
                     ->getPath();
                 $yun_path = "douyin/" . $backtrack['author_info']['uid'] . '/';
-                // 删除到云存储
+                // 上传到云存储
                 $backtrack['yun']['platform'] = $this->storage;
                 switch ($this->storage) {
                     case "aliyun":
@@ -494,6 +493,30 @@ class WatermarkService extends Service
                         // 视频文件
                         $backtrack['yun']['video_info']['playwm'] = Ks3Service::instance()
                             ->upload($yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
+                        break;
+                    case "storage":
+                        $domain_name = $this->app->config->get('dtapp.storage.domain_name');
+                        $new_yun_path = $this->app->config->get("dtapp.storage.domain_list.{$domain_name}") . "upload/watermark/{$yun_path}";
+                        // 本地存储
+                        // 作者头像
+                        $backtrack['yun']['author_info']['avatar'] = "{$new_yun_path}" . $backtrack['author_info']['uid'] . ".jpeg";
+                        // 音频头像
+                        $backtrack['yun']['music_info']['avatar'] = $new_yun_path . $backtrack['music_info']['mid'] . ".jpeg";
+                        // 音频文件
+                        if (!empty($backtrack['music_info']['play'])) $backtrack['yun']['music_info']['play'] = $new_yun_path . $backtrack['music_info']['mid'] . ".mp3";
+                        else $backtrack['yun']['music_info']['play'] = $new_yun_path;
+                        // 音频封面
+                        $backtrack['yun']['music_info']['cover'] = $new_yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg";
+                        // 视频封面
+                        $backtrack['yun']['video_info']['dynamic'] = $new_yun_path . $backtrack['video_info']['vid'] . "_dynamic" . ".jpeg";
+                        // 视频封面
+                        $backtrack['yun']['video_info']['origin_cover'] = $new_yun_path . $backtrack['video_info']['vid'] . "_origin_cover" . ".jpeg";
+                        // 视频封面
+                        $backtrack['yun']['video_info']['cover'] = $new_yun_path . $backtrack['video_info']['vid'] . "_cover" . ".jpeg";
+                        // 视频文件
+                        $backtrack['yun']['video_info']['play'] = $new_yun_path . $backtrack['video_info']['vid'] . "_play" . ".mp4";
+                        // 视频文件
+                        $backtrack['yun']['video_info']['playwm'] = $new_yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4";
                         break;
                     default:
                         break;
