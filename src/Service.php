@@ -58,6 +58,7 @@ abstract class Service
      */
     public static function instance(...$args)
     {
-        return Container::getInstance()->make(static::class, $args);
+        return Container::getInstance()
+            ->make(static::class, $args);
     }
 }

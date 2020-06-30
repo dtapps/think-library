@@ -27,9 +27,11 @@ use think\Facade;
  * @package think\facade
  * @mixin helper
  *
- * @method helper rand(array $arr) mixed 数组随机返回一个下标
- * @method helper randValue(array $arr) mixed 数组随机返回一个值
- * @method helper split(array $data, $num = 5) array 分隔数组
+ * @method helper rand(array $array) mixed 数组随机返回一个下标
+ * @method helper randValue(array $array) mixed 数组随机返回一个值
+ * @method helper split(array $array, $num = 5) array 分隔数组
+ * @method helper unique(array $array) array 多维数组去重
+ * @method helper sort(array $arrays, string $sort_key, $sort_order = SORT_ASC, $sort_type = SORT_NUMERIC) array 二维数组根据某个键排序
  */
 class Arrays extends Facade
 {
