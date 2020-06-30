@@ -43,8 +43,7 @@
     "qiniu/php-sdk": "^7.2",
     "upyun/sdk": "^3.4",
     "netease/nos-php-sdk": "^1.0",
-    "aws/aws-sdk-php": "^3.142",
-    "liguangchun/qyweixin-grouprobot": "^1.0"
+    "aws/aws-sdk-php": "^3.142"
   },
   "require-dev": {
     "symfony/var-dumper": "^4.2"

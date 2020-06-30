@@ -16,8 +16,6 @@
 
 namespace DtApp\ThinkLibrary\service\wechat;
 
-use DtApp\Notice\QyWeiXin\QyWeXinException;
-use DtApp\Notice\QyWeiXin\Send;
 use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
@@ -52,17 +50,16 @@ class QyService extends Service
      * 发送文本消息
      * @param string $content 消息内容
      * @return bool
-     * @throws DtaException|QyWeXinException
+     * @throws DtaException
      */
     public function text(string $content = '')
     {
         $this->msgType = 'text';
-        if (empty($this->key)) throw new DtaException("请检查KEY");
-        $config = [
-            'key' => $this->key
-        ];
-        $qywx = new Send($config);
-        return $qywx->text($content);
+        return $this->sendMsg([
+            'text' => [
+                'content' => $content,
+            ],
+        ]);
     }
 
     /**
@@ -70,17 +67,15 @@ class QyService extends Service
      * @param string $content 消息内容
      * @return bool
      * @throws DtaException
-     * @throws QyWeXinException
      */
     public function markdown(string $content = '')
     {
         $this->msgType = 'markdown';
-        if (empty($this->key)) throw new DtaException("请检查KEY");
-        $config = [
-            'key' => $this->key
-        ];
-        $qywx = new Send($config);
-        return $qywx->text($content);
+        return $this->sendMsg([
+            'markdown' => [
+                'content' => $content,
+            ],
+        ]);
     }
 
     /**
