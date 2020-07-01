@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
@@ -21,17 +22,16 @@ use think\Facade;
 
 /**
  * 文件门面
- * Class Files
  * @see \DtApp\ThinkLibrary\helper\Files
  * @package DtApp\ThinkLibrary\facade
  * @package think\facade
  * @mixin helper
  *
- * @method helper delete(string $name) bool 删除文件
- * @method helper deletes(string $name) bool 删除文件夹
- * @method helper folderZip(string $name, string $suffix_name = '.png', string $file_name = '*') bool 把文件夹里面的文件打包成zip文件
- * @method helper getFiles(string $path) array|string 获取目录下的所有文件和目录
- * @method helper rmFiles(string $path) bool 删除目录下的文件
+ * @method static bool delete(string $name) 删除文件
+ * @method static bool deletes(string $name) 删除文件夹
+ * @method static bool folderZip(string $name, string $suffix_name = '.png', string $file_name = '*') 把文件夹里面的文件打包成zip文件
+ * @method static string getFiles(string $path) 获取目录下的所有文件和目录
+ * @method static bool rmFiles(string $path) 删除目录下的文件
  */
 class Files extends Facade
 {

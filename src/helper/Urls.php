@@ -19,7 +19,6 @@ namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 网址管理类
- * Class Urls
  * @mixin Urls
  * @package DtApp\ThinkLibrary\helper
  */

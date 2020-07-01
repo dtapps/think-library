@@ -19,7 +19,6 @@ namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 验证管理类
- * Class Pregs
  * @mixin Pregs
  * @package DtApp\ThinkLibrary\helper
  */

@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
@@ -21,14 +22,13 @@ use think\Facade;
 
 /**
  * 返回门面
- * Class Returns
  * @see \DtApp\ThinkLibrary\helper\Returns
  * @package DtApp\ThinkLibrary\Returns
  * @package think\facade
  * @mixin helper
  *
- * @method helper jsonSuccess(array $data = [], string $msg = 'success', int $code = 0, array $ext = []) 返回Json-成功
- * @method helper jsonError(string $msg = 'error', int $code = 1, array $data = [], array $ext = []) 返回Json-错误
+ * @method static jsonSuccess(array $data = [], string $msg = 'success', int $code = 0, array $ext = []) 返回Json-成功
+ * @method static jsonError(string $msg = 'error', int $code = 1, array $data = [], array $ext = []) 返回Json-错误
  */
 class Returns extends Facade
 {

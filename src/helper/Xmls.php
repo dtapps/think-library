@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
@@ -20,7 +21,6 @@ use think\Exception;
 
 /**
  * XML管理类
- * Class Xmls
  * @mixin Xmls
  * @package DtApp\ThinkLibrary\helper
  */

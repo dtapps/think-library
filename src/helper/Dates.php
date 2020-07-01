@@ -18,11 +18,19 @@ namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 日期管理类
- * Class Dates
  * @mixin Dates
  * @package DtApp\ThinkLibrary\helper
  */
 class Dates
 {
-
+    /**
+     * 当前日期
+     * @param string $format 格式
+     * @return false|string
+     */
+    public function current(string $format = "Y-m-d")
+    {
+        date_default_timezone_set('Asia/Shanghai');
+        return date($format);
+    }
 }

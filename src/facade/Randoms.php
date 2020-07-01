@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
@@ -21,13 +22,12 @@ use think\facade;
 
 /**
  * 随机门面
- * Class Randoms
  * @see \DtApp\ThinkLibrary\helper\Randoms
  * @package DtApp\ThinkLibrary\Randoms
  * @package think\facade
  * @mixin helper
  *
- * @method helper generate(int $length = 6, int $type = 1) false|string 生成随机
+ * @method static string generate(int $length = 6, int $type = 1) 生成随机
  */
 class Randoms extends Facade
 {

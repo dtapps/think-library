@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
@@ -21,20 +22,19 @@ use think\Facade;
 
 /**
  * 请求门面
- * Class Requests
  * @see \DtApp\ThinkLibrary\helper\Requests
  * @package DtApp\ThinkLibrary\facade
  * @package think\facade
  * @mixin helper
  *
- * @method helper isEmpty(array $data, array $arr) array|bool 判断输入的参数
- * @method helper isEmptyRet(array $data, array $arr) array 判断输入的参数为空就返回Json错误
- * @method helper isGet() bool 判断是否为GET方式
- * @method helper isPost() bool 判断是否为POST方式
- * @method helper isPut() bool 判断是否为PUT方式
- * @method helper isDelete() bool 判断是否为DELETE方式
- * @method helper isAjax() bool 判断是否为Ajax方式
- * @method helper getWebsiteAddress() string 获取域名地址
+ * @method static array isEmpty(array $data, array $arr) array|bool 判断输入的参数
+ * @method static array isEmptyRet(array $data, array $arr) array 判断输入的参数为空就返回Json错误
+ * @method static bool isGet() 判断是否为GET方式
+ * @method static bool isPost()  判断是否为POST方式
+ * @method static bool isPut() 判断是否为PUT方式
+ * @method static bool isDelete() 判断是否为DELETE方式
+ * @method static bool isAjax() 判断是否为Ajax方式
+ * @method static string getWebsiteAddress() 获取域名地址
  */
 class Requests extends Facade
 {

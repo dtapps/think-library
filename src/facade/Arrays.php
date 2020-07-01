@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
@@ -21,17 +22,16 @@ use think\Facade;
 
 /**
  * 数组门面
- * Class Arrays
  * @see \DtApp\ThinkLibrary\helper\Arrays
  * @package DtApp\ThinkLibrary\facade
  * @package think\facade
  * @mixin helper
  *
- * @method helper rand(array $array) mixed 数组随机返回一个下标
- * @method helper randValue(array $array) mixed 数组随机返回一个值
- * @method helper split(array $array, $num = 5) array 分隔数组
- * @method helper unique(array $array) array 多维数组去重
- * @method helper sort(array $arrays, string $sort_key, $sort_order = SORT_ASC, $sort_type = SORT_NUMERIC) array 二维数组根据某个键排序
+ * @method static mixed rand(array $array) 数组随机返回一个下标
+ * @method static mixed randValue(array $array) mixed 数组随机返回一个值
+ * @method static array split(array $array, $num = 5) 分隔数组
+ * @method static array unique(array $array) 多维数组去重
+ * @method static array sort(array $arrays, string $sort_key, $sort_order = SORT_ASC, $sort_type = SORT_NUMERIC) 二维数组根据某个键排序
  */
 class Arrays extends Facade
 {

@@ -22,7 +22,6 @@ use ZipArchive;
 
 /**
  * 文件管理类
- * Class Files
  * @mixin Files
  * @package DtApp\ThinkLibrary\helper
  */
@@ -96,7 +95,7 @@ class Files
     /**
      * 获取目录下的所有文件和目录
      * @param string $path
-     * @return array|string
+     * @return array
      */
     public function getFiles(string $path): array
     {

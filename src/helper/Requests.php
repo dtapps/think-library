@@ -19,7 +19,7 @@ namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 请求管理类
- * Class Requests
+ * @mixin Requests
  * @package DtApp\ThinkLibrary\helper
  */
 class Requests

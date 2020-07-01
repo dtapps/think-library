@@ -19,7 +19,6 @@ namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 字符串管理类
- * Class Strings
  * @mixin Strings
  * @package DtApp\ThinkLibrary\helper
  */
@@ -30,7 +29,7 @@ class Strings
      * @param string $str 字符串
      * @param int $start_num 开始位置
      * @param int $end_num 多少个
-     * @return bool|false|string
+     * @return string
      */
     public function extractBefore(string $str, int $start_num, int $end_num): string
     {
@@ -40,9 +39,10 @@ class Strings
 
     /**
      * 截取字符串最后n个字符
+     * 截取字符串最后n个字符
      * @param string $str 字符串
      * @param int $num 多少个
-     * @return false|string
+     * @return string
      */
     public function extractRear(string $str, int $num): string
     {

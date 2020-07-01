@@ -13,12 +13,13 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 随机管理类
- * Class Randoms
+ * @mixin Randoms
  * @package DtApp\ThinkLibrary\helper
  */
 class Randoms
@@ -27,7 +28,7 @@ class Randoms
      * 生成随机
      * @param int $length 长度
      * @param int $type 类型，1 纯数字，2 纯小写字母，3 纯大写字母，4 数字和小写字母，5 数字和大写字母，6 大小写字母，7 数字和大小写字母
-     * @return false|string
+     * @return string
      */
     public function generate(int $length = 6, int $type = 1)
     {

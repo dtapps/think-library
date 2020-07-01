@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
@@ -21,11 +22,12 @@ use think\Facade;
 
 /**
  * 日期门面
- * Class Dates
- * @see \DtApp\ThinkLibrary\Date
+ * @see \DtApp\ThinkLibrary\helper\Dates
  * @package DtApp\ThinkLibrary\facade
  * @package think\facade
  * @mixin helper
+ *
+ * @method static string current(string $format = "Y-m-d H:i:s") 当前日期
  */
 class Dates extends Facade
 {

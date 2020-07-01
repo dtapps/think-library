@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
@@ -21,14 +22,13 @@ use think\Facade;
 
 /**
  * XML门面
- * Class Xmls
  * @see \DtApp\ThinkLibrary\helper\Xmls
  * @package DtApp\ThinkLibrary\Xmls
  * @package think\facade
  * @mixin helper
  *
- * @method helper toXml(array $values) string 数组转换为xml
- * @method helper toArray(string $xml) string 将XML转为array
+ * @method static string toXml(array $values) 数组转换为xml
+ * @method static string toArray(string $xml) 将XML转为array
  */
 class Xmls extends Facade
 {

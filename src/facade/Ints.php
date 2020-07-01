@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
@@ -21,14 +22,13 @@ use think\Facade;
 
 /**
  * 数字门面
- * Class Ints
  * @see \DtApp\ThinkLibrary\helper\Ints
  * @package DtApp\ThinkLibrary\Ints
  * @package think\facade
  * @mixin helper
  *
- * @method helper isEvenNumbers(int $num) bool 判断一个数是不是偶数
- * @method helper isOddNumbers(int $num) bool 判断一个数是不是奇数
+ * @method static bool isEvenNumbers(int $num) 判断一个数是不是偶数
+ * @method static bool isOddNumbers(int $num) 判断一个数是不是奇数
  */
 class Ints extends Facade
 {

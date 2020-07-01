@@ -19,7 +19,6 @@ namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 数字管理类
- * Class Ints
  * @mixin Ints
  * @package DtApp\ThinkLibrary\helper
  */

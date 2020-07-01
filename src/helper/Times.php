@@ -13,12 +13,12 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 时间管理类
- * Class Times
  * @mixin Times
  * @package DtApp\ThinkLibrary\helper
  */

@@ -19,7 +19,7 @@ namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 数组管理类
- * Class Arrays
+ * @mixin Arrays
  * @package DtApp\ThinkLibrary\helper
  */
 class Arrays

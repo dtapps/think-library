@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
@@ -21,15 +22,14 @@ use think\Facade;
 
 /**
  * 网址门面
- * Class Urls
  * @see \DtApp\ThinkLibrary\Urls
  * @package DtApp\ThinkLibrary\Urls
  * @package think\facade
  * @mixin helper
  *
- * @method helper lenCode(string $url) string 编码
- * @method helper deCode(string $url) string 解码
- * @method helper toParams(array $data) string 格式化参数格式化成url参数
+ * @method static string lenCode(string $url) 编码
+ * @method static string deCode(string $url) 解码
+ * @method static string toParams(array $data) 格式化参数格式化成url参数
  */
 class Urls extends Facade
 {

@@ -19,7 +19,6 @@ namespace DtApp\ThinkLibrary\helper;
 
 /**
  * 唯一ID管理类
- * Class UnIqIds
  * @mixin UnIqIds
  * @package DtApp\ThinkLibrary\helper
  */

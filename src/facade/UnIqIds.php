@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
@@ -21,15 +22,14 @@ use think\Facade;
 
 /**
  * 唯一ID门面
- * Class UnIqIds
  * @see \DtApp\ThinkLibrary\UnIqIds
  * @package DtApp\ThinkLibrary\UnIqIds
  * @package think\facade
  * @mixin helper
  *
- * @method helper random($size = 10, $type = 1, $prefix = '') string 获取随机字符串编码
- * @method helper date($size = 16, $prefix = '') string 唯一日期编码
- * @method helper number($size = 12, $prefix = '') string 唯一数字编码
+ * @method static string random($size = 10, $type = 1, $prefix = '') 获取随机字符串编码
+ * @method static string date($size = 16, $prefix = '') 唯一日期编码
+ * @method static string number($size = 12, $prefix = '') 唯一数字编码
  */
 class UnIqIds extends Facade
 {

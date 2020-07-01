@@ -13,6 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
+declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
@@ -21,20 +22,19 @@ use think\Facade;
 
 /**
  * 时间门面
- * Class Times
  * @see \DtApp\ThinkLibrary\helper\Times
  * @package DtApp\ThinkLibrary\Times
  * @package think\facade
  * @mixin helper
  *
- * @method helper getData(string $format = "Y-m-d H:i:s") false|string 当前时间
- * @method helper getTime() false|string 当前时间戳
- * @method helper getUDate() false|string 当前时间戳
- * @method helper getTimeDifference(string $end_time, string $start_time) false|string 计算两个时间差
- * @method helper dateToTimestamp(string $date) false|string 将指定日期转换为时间戳
- * @method helper dateRear(string $format = "Y-m-d H:i:s", int $mun = 10) false|string 获取某个时间之后的时间
- * @method helper dateBefore(string $format = "Y-m-d H:i:s", int $mun = 10) false|string 获取某个时间之前的时间
- * @method helper checkIsBetweenTime(string $start, string $end) bool 判断当前的时分是否在指定的时间段内
+ * @method static string getData(string $format = "Y-m-d H:i:s") 当前时间
+ * @method static string getTime() 当前时间戳
+ * @method static string getUDate() 当前时间戳
+ * @method static string getTimeDifference(string $end_time, string $start_time) 计算两个时间差
+ * @method static string dateToTimestamp(string $date) 将指定日期转换为时间戳
+ * @method static string dateRear(string $format = "Y-m-d H:i:s", int $mun = 10) f获取某个时间之后的时间
+ * @method static string dateBefore(string $format = "Y-m-d H:i:s", int $mun = 10) 获取某个时间之前的时间
+ * @method static bool checkIsBetweenTime(string $start, string $end) 判断当前的时分是否在指定的时间段内
  */
 class Times extends Facade
 {
