@@ -100,6 +100,6 @@ class CosService extends Service
                     'Body' => $file)
             );
         }
-        return $this->app->config->get('dtapp.tencent.cos.url') . $object;
+        return $this->app->config->get('dtapp.tencent.cos.url', '') . $object;
     }
 }

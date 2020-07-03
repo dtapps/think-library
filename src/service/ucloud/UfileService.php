@@ -44,6 +44,6 @@ class UfileService extends Service
     {
         list($data, $err) = UCloud_PutFile($this->bucket, $object, $filePath);
         if (($err)) return false;
-        return $this->app->config->get('dtapp.ucloud.ufile.url') . $object;
+        return $this->app->config->get('dtapp.ucloud.ufile.url', '') . $object;
     }
 }

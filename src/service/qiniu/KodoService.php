@@ -82,6 +82,6 @@ class KodoService extends Service
         // 调用 UploadManager 的 putFile 方法进行文件的上传。
         list($ret, $err) = $uploadMgr->putFile($token, $object, $filePath);
         if ($err !== null) return false;
-        else return $this->app->config->get('dtapp.qiniu.kodo.url') . $object;
+        else return $this->app->config->get('dtapp.qiniu.kodo.url', '') . $object;
     }
 }

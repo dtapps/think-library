@@ -77,6 +77,6 @@ class UssService extends Service
         $client = new Upyun($serviceConfig);
         $file = fopen($filePath, 'r');
         $client->write($object, $file);
-        return $this->app->config->get('dtapp.upyun.uss.url') . $object;
+        return $this->app->config->get('dtapp.upyun.uss.url', '') . $object;
     }
 }

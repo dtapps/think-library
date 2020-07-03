@@ -559,4 +559,281 @@ class TbkService extends Service
         foreach ($this->param as $key => $val) if ($key != '' && $val != '') $strParam .= $key . '=' . urlencode($val) . '&';
         return $strParam;
     }
+
+    /**
+     * 获取官方物料API汇总
+     * https://market.m.taobao.com/app/qn/toutiao-new/index-pc.html#/detail/10628875?_k=gpov9a
+     * @return array
+     */
+    public function getMaterialIdList()
+    {
+        return [
+            [
+                'name' => '相似推荐',
+                'list' => [
+                    [
+                        'name' => '相似推荐',
+                        'material_id' => 13256
+                    ]
+                ]
+            ],
+            [
+                'name' => '猜你喜欢',
+                'list' => [
+                    [
+                        'name' => '含全部商品',
+                        'material_id' => 6708
+                    ],
+                    [
+                        'name' => '营销商品库商品（此为具备“私域用户管理-会员运营管理功能”的媒体专用）',
+                        'material_id' => 28017
+                    ]
+                ]
+            ],
+            [
+                'name' => '好券直播',
+                'list' => [
+                    [
+                        'name' => '综合',
+                        'material_id' => 3756
+                    ],
+                    [
+                        'name' => '女装',
+                        'material_id' => 3767
+                    ],
+                    [
+                        'name' => '家居家装',
+                        'material_id' => 3758
+                    ],
+                    [
+                        'name' => '数码家电',
+                        'material_id' => 3759
+                    ],
+                    [
+                        'name' => '鞋包配饰',
+                        'material_id' => 3762
+                    ],
+                    [
+                        'name' => '美妆个护',
+                        'material_id' => 3763
+                    ],
+                    [
+                        'name' => '男装',
+                        'material_id' => 3764
+                    ],
+                    [
+                        'name' => '内衣',
+                        'material_id' => 3765
+                    ],
+                    [
+                        'name' => '母婴',
+                        'material_id' => 3760
+                    ],
+                    [
+                        'name' => '食品',
+                        'material_id' => 3761
+                    ],
+                    [
+                        'name' => '运动户外',
+                        'material_id' => 3766
+                    ]
+                ]
+            ],
+            [
+                'name' => '实时热销榜',
+                'list' => [
+                    [
+                        'name' => '综合',
+                        'material_id' => 28026
+                    ],
+                    [
+                        'name' => '大服饰',
+                        'material_id' => 28029
+                    ],
+                    [
+                        'name' => '大快消',
+                        'material_id' => 28027
+                    ],
+                    [
+                        'name' => '电器美家',
+                        'material_id' => 28028
+                    ]
+                ]
+            ],
+            [
+                'name' => '本地化生活',
+                'list' => [
+                ]
+            ],
+            [
+                'name' => '大额券',
+                'list' => [
+                    [
+                        'name' => '综合',
+                        'material_id' => 27446
+                    ],
+                    [
+                        'name' => '女装',
+                        'material_id' => 27448
+                    ],
+                    [
+                        'name' => '食品',
+                        'material_id' => 27451
+                    ],
+                    [
+                        'name' => '美妆个护',
+                        'material_id' => 27453
+                    ],
+                    [
+                        'name' => '家居家装',
+                        'material_id' => 27798
+                    ],
+                    [
+                        'name' => '母婴',
+                        'material_id' => 27454
+                    ]
+                ]
+            ],
+            [
+                'name' => '高佣榜',
+                'list' => [
+                    [
+                        'name' => '综合',
+                        'material_id' => 13366
+                    ],
+                    [
+                        'name' => '女装',
+                        'material_id' => 13367
+                    ],
+                    [
+                        'name' => '家居家装',
+                        'material_id' => 13368
+                    ],
+                    [
+                        'name' => '数码家电',
+                        'material_id' => 13369
+                    ],
+                    [
+                        'name' => '鞋包配饰',
+                        'material_id' => 13370
+                    ],
+                    [
+                        'name' => '美妆个护',
+                        'material_id' => 13371
+                    ],
+                    [
+                        'name' => '男装',
+                        'material_id' => 13372
+                    ],
+                    [
+                        'name' => '内衣',
+                        'material_id' => 13373
+                    ],
+                    [
+                        'name' => '母婴',
+                        'material_id' => 13374
+                    ],
+                    [
+                        'name' => '食品',
+                        'material_id' => 13375
+                    ],
+                    [
+                        'name' => '运动户外',
+                        'material_id' => 13376
+                    ]
+                ]
+            ],
+            [
+                'name' => '品牌券',
+                'list' => [
+                ]
+            ],
+            [
+                'name' => '猫超优质爆款',
+                'list' => [
+                    [
+                        'name' => '猫超1元购凑单',
+                        'material_id' => 27162
+                    ],
+                    [
+                        'name' => '猫超第二件0元',
+                        'material_id' => 27161
+                    ],
+                    [
+                        'name' => '猫超单件满减包邮',
+                        'material_id' => 27160
+                    ],
+                ]
+            ],
+            [
+                'name' => '聚划算单品爆款',
+                'list' => [
+                    [
+                        'name' => '开团热卖中',
+                        'material_id' => 31371
+                    ],
+                    [
+                        'name' => '预热',
+                        'material_id' => 31370
+                    ],
+                ]
+            ],
+            [
+                'name' => '天天特卖',
+                'list' => [
+                    [
+                        'name' => '开团热卖中',
+                        'material_id' => 31362
+                    ],
+                ]
+            ],
+            [
+                'name' => '母婴主题',
+                'list' => [
+                    [
+                        'name' => '备孕',
+                        'material_id' => 4040
+                    ],
+                    [
+                        'name' => '0至6个月',
+                        'material_id' => 4041
+                    ],
+                    [
+                        'name' => '4至6岁',
+                        'material_id' => 4044
+                    ],
+                    [
+                        'name' => '7至12个月',
+                        'material_id' => 4042
+                    ],
+                    [
+                        'name' => '1至3岁',
+                        'material_id' => 4043
+                    ],
+                    [
+                        'name' => '7至12岁',
+                        'material_id' => 4045
+                    ],
+                ]
+            ],
+            [
+                'name' => '潮流范',
+                'list' => [
+                    [
+                        'name' => '潮流范',
+                        'material_id' => 4093
+                    ],
+                ]
+            ],
+            [
+                'name' => '特惠',
+                'list' => [
+                    [
+                        'name' => '特惠',
+                        'material_id' => 4094
+                    ],
+                ]
+            ],
+        ];
+    }
 }

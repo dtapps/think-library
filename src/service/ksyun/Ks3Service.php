@@ -101,7 +101,7 @@ class Ks3Service extends Service
         ];
         try {
             $client->putObjectByFile($args);
-            return $this->app->config->get('dtapp.ksyun.ks3.url') . $object;
+            return $this->app->config->get('dtapp.ksyun.ks3.url', '') . $object;
         } catch (\Ks3ServiceException $e) {
             return false;
         }
