@@ -561,6 +561,76 @@ class TbkService extends Service
     }
 
     /**
+     * 获取活动物料
+     * @return array[]
+     */
+    public function getActivityMaterialId()
+    {
+        return [
+            [
+                // https://market.m.taobao.com/app/qn/toutiao-new/index-pc.html#/detail/10628646?_k=tcswm1
+                'name' => '口碑',
+                'list' => [
+                    [
+                        'name' => '口碑主会场活动（2.3%佣金起）',
+                        'material_id' => 1583739244161
+                    ],
+                    [
+                        'name' => '生活服务分会场活动（2.3%佣金起）',
+                        'material_id' => 1583739244162
+                    ]
+                ]
+            ],
+            [
+                // https://market.m.taobao.com/app/qn/toutiao-new/index-pc.html#/detail/10628647?_k=hwggf9
+                // https://market.m.taobao.com/app/qn/toutiao-new/index-pc.html#/detail/10630427?_k=sdet4e
+                // https://market.m.taobao.com/app/qn/toutiao-new/index-pc.html#/detail/10630361?_k=nq6zgt
+                'name' => '饿了么',
+                'list' => [
+                    [
+                        'name' => '聚合页（6%佣金起）',
+                        'material_id' => 1571715733668
+                    ],
+                    [
+                        'name' => '新零售（4%佣金起）',
+                        'material_id' => 1585018034441
+                    ],
+                    [
+                        'name' => '餐饮',
+                        'material_id' => 1579491209717
+                    ],
+                ]
+            ],
+            [
+                // https://market.m.taobao.com/app/qn/toutiao-new/index-pc.html#/detail/10634663?_k=zqgq01
+                'name' => '卡券（饭票）',
+                'list' => [
+                    [
+                        'name' => '饿了么卡券（1元以下商品）',
+                        'material_id' => 32469
+                    ],
+                    [
+                        'name' => '饿了么卡券投放全网商品库',
+                        'material_id' => 32470
+                    ],
+                    [
+                        'name' => '饿了么卡券（5折以下）',
+                        'material_id' => 32603
+                    ],
+                    [
+                        'name' => '饿了么头部全国KA商品库',
+                        'material_id' => 32663
+                    ],
+                    [
+                        'name' => '饿了么卡券招商爆品库',
+                        'material_id' => 32738
+                    ],
+                ]
+            ],
+        ];
+    }
+
+    /**
      * 获取官方物料API汇总
      * https://market.m.taobao.com/app/qn/toutiao-new/index-pc.html#/detail/10628875?_k=gpov9a
      * @return array
