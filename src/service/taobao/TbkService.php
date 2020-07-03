@@ -663,6 +663,74 @@ class TbkService extends Service
             [
                 'name' => '本地化生活',
                 'list' => [
+                    [
+                        'name' => '今日爆款（综合类目）',
+                        'material_id' => 30443
+                    ],
+                    [
+                        'name' => '淘票票（电影代金券）',
+                        'material_id' => 19812
+                    ],
+                    [
+                        'name' => '大麦网（演出/演唱会/剧目/会展）',
+                        'material_id' => 25378
+                    ],
+                    [
+                        'name' => '优酷会员（视频年卡）',
+                        'material_id' => 28636
+                    ],
+                    [
+                        'name' => '有声内容（喜马拉雅年卡，儿童节目等）',
+                        'material_id' => 29105
+                    ],
+                    [
+                        'name' => '阿里健康（hpv疫苗预约）',
+                        'material_id' => 25885
+                    ],
+                    [
+                        'name' => '阿里健康（体检）',
+                        'material_id' => 25886
+                    ],
+                    [
+                        'name' => '阿里健康（口腔）',
+                        'material_id' => 25888
+                    ],
+                    [
+                        'name' => '阿里健康（基因检测）',
+                        'material_id' => 25890
+                    ],
+                    [
+                        'name' => '飞猪（签证）',
+                        'material_id' => 26077
+                    ],
+                    [
+                        'name' => '飞猪（酒店）',
+                        'material_id' => 27913
+                    ],
+                    [
+                        'name' => '飞猪（自助餐）',
+                        'material_id' => 27914
+                    ],
+                    [
+                        'name' => '飞猪（门票）',
+                        'material_id' => 19811
+                    ],
+                    [
+                        'name' => '口碑（肯德基/必胜客/麦当劳）',
+                        'material_id' => 19810
+                    ],
+                    [
+                        'name' => '口碑（生活服务）',
+                        'material_id' => 28888
+                    ],
+                    [
+                        'name' => '天猫无忧购（家政服务）',
+                        'material_id' => 19814
+                    ],
+                    [
+                        'name' => '汽车定金（汽车定金）',
+                        'material_id' => 28397
+                    ],
                 ]
             ],
             [
@@ -746,6 +814,50 @@ class TbkService extends Service
             [
                 'name' => '品牌券',
                 'list' => [
+                    [
+                        'name' => '综合',
+                        'material_id' => 3786
+                    ],
+                    [
+                        'name' => '女装',
+                        'material_id' => 3788
+                    ],
+                    [
+                        'name' => '家居家装',
+                        'material_id' => 3792
+                    ],
+                    [
+                        'name' => '数码家电',
+                        'material_id' => 3793
+                    ],
+                    [
+                        'name' => '鞋包配饰',
+                        'material_id' => 3796
+                    ],
+                    [
+                        'name' => '美妆个护',
+                        'material_id' => 3794
+                    ],
+                    [
+                        'name' => '男装',
+                        'material_id' => 3790
+                    ],
+                    [
+                        'name' => '内衣',
+                        'material_id' => 3787
+                    ],
+                    [
+                        'name' => '母婴',
+                        'material_id' => 3789
+                    ],
+                    [
+                        'name' => '食品',
+                        'material_id' => 3791
+                    ],
+                    [
+                        'name' => '运动户外',
+                        'material_id' => 3795
+                    ],
                 ]
             ],
             [
