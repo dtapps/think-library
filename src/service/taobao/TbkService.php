@@ -564,7 +564,7 @@ class TbkService extends Service
      * 获取活动物料
      * @return array[]
      */
-    public function getActivityMaterialId()
+    public function getActivityMaterialIdList()
     {
         return [
             [
