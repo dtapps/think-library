@@ -648,6 +648,19 @@ class TbkService extends Service
                 ]
             ],
             [
+                'name' => '官方推荐',
+                'list' => [
+                    [
+                        'name' => '聚划算满减满折',
+                        'material_id' => 32366
+                    ],
+                    [
+                        'name' => '猫超满减满折',
+                        'material_id' => 27160
+                    ]
+                ]
+            ],
+            [
                 'name' => '猜你喜欢',
                 'list' => [
                     [
