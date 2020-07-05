@@ -1012,6 +1012,15 @@ class TbkService extends Service
                 ]
             ],
             [
+                'name' => '有好货',
+                'list' => [
+                    [
+                        'name' => '有好货',
+                        'material_id' => 4092
+                    ],
+                ]
+            ],
+            [
                 'name' => '潮流范',
                 'list' => [
                     [
