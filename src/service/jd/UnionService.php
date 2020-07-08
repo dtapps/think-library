@@ -377,8 +377,6 @@ class UnionService extends Service
         return $strParam;
     }
 
-
-
     /**
      * 获取频道id
      * @return array[]

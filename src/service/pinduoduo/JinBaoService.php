@@ -509,4 +509,56 @@ class JinBaoService extends Service
         foreach ($this->param as $key => $val) if ($key != '' && $val != '' && !is_array($val)) $strParam .= $key . '=' . urlencode($val) . '&';
         return $strParam;
     }
+
+    /**
+     * 获取频道id
+     * @return array[]
+     */
+    public function getChannelTypeList()
+    {
+        return [
+            [
+                // https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.recommend.get
+                'name' => '商品推荐',
+                'list' => [
+                    [
+                        'name' => '1.9包邮',
+                        'channel_type' => 0
+                    ],
+                    [
+                        'name' => '今日爆款',
+                        'channel_type' => 1
+                    ],
+                    [
+                        'name' => '品牌清仓',
+                        'channel_type' => 2
+                    ],
+                    [
+                        'name' => '相似商品推荐',
+                        'channel_type' => 3
+                    ],
+                    [
+                        'name' => '猜你喜欢',
+                        'channel_type' => 4
+                    ],
+                    [
+                        'name' => '实时热销',
+                        'channel_type' => 5
+                    ],
+                    [
+                        'name' => '实时收益',
+                        'channel_type' => 6
+                    ],
+                    [
+                        'name' => '今日畅销',
+                        'channel_type' => 7
+                    ],
+                    [
+                        'name' => '高佣榜单',
+                        'channel_type' => 8
+                    ],
+                ]
+            ],
+        ];
+    }
 }
