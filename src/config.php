@@ -187,15 +187,4 @@ return [
             'url' => '',
         ]
     ],
-    // UCloud优刻得
-    'ucloud' => [
-        // 云存储
-        'ufile' => [
-            'proxy_suffix' => '',
-            'public_key' => '',
-            'private_key' => '',
-            'bucket' => '',
-            'url' => '',
-        ]
-    ],
 ];
