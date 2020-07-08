@@ -378,7 +378,7 @@ class UnionService extends Service
     }
 
     /**
-     * 获取频道id
+     * 获取频道ID
      * @return array[]
      */
     public function getEliteIdList()

@@ -511,7 +511,7 @@ class JinBaoService extends Service
     }
 
     /**
-     * 获取频道id
+     * 获取频道ID
      * @return array[]
      */
     public function getChannelTypeList()
@@ -556,6 +556,38 @@ class JinBaoService extends Service
                     [
                         'name' => '高佣榜单',
                         'channel_type' => 8
+                    ],
+                ]
+            ],
+        ];
+    }
+
+    /**
+     * 获取频道来源ID
+     * @return array[]
+     */
+    public function getResourceTypeList()
+    {
+        return [
+            [
+                // https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.resource.url.gen
+                'name' => '频道推广',
+                'list' => [
+                    [
+                        'name' => '限时秒杀',
+                        'channel_type' => 4
+                    ],
+                    [
+                        'name' => '充值中心',
+                        'channel_type' => 39997
+                    ],
+                    [
+                        'name' => '转链',
+                        'channel_type' => 39998
+                    ],
+                    [
+                        'name' => '百亿补贴',
+                        'channel_type' => 39996
                     ],
                 ]
             ],
