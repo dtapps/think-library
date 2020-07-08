@@ -575,19 +575,19 @@ class JinBaoService extends Service
                 'list' => [
                     [
                         'name' => '限时秒杀',
-                        'channel_type' => 4
+                        'resource_type' => 4
                     ],
                     [
                         'name' => '充值中心',
-                        'channel_type' => 39997
+                        'resource_type' => 39997
                     ],
                     [
                         'name' => '转链',
-                        'channel_type' => 39998
+                        'resource_type' => 39998
                     ],
                     [
                         'name' => '百亿补贴',
-                        'channel_type' => 39996
+                        'resource_type' => 39996
                     ],
                 ]
             ],
