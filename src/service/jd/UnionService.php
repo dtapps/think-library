@@ -376,4 +376,114 @@ class UnionService extends Service
         foreach ($this->params as $key => $val) if ($key != '' && $val != '') $strParam .= $key . '=' . urlencode($val) . '&';
         return $strParam;
     }
+
+
+
+    /**
+     * 获取频道id
+     * @return array[]
+     */
+    public function getEliteIdList()
+    {
+        return [
+            [
+                // https://union.jd.com/openplatform/api/10417
+                'name' => '京粉精选',
+                'list' => [
+                    [
+                        'name' => '好券商品',
+                        'elite_id' => 1
+                    ],
+                    [
+                        'name' => '超级大卖场',
+                        'elite_id' => 2
+                    ],
+                    [
+                        'name' => '9.9专区',
+                        'elite_id' => 10
+                    ],
+                    [
+                        'name' => '热销爆品',
+                        'elite_id' => 22
+                    ],
+                    [
+                        'name' => '为你推荐',
+                        'elite_id' => 23
+                    ],
+                    [
+                        'name' => '数码家电',
+                        'elite_id' => 24
+                    ],
+                    [
+                        'name' => '超市',
+                        'elite_id' => 25
+                    ],
+                    [
+                        'name' => '母婴玩具',
+                        'elite_id' => 26
+                    ],
+                    [
+                        'name' => '家具日用',
+                        'elite_id' => 27
+                    ],
+                    [
+                        'name' => '美妆穿搭',
+                        'elite_id' => 28
+                    ],
+                    [
+                        'name' => '医药保健',
+                        'elite_id' => 29
+                    ],
+                    [
+                        'name' => '图书文具',
+                        'elite_id' => 30
+                    ],
+                    [
+                        'name' => '今日必推',
+                        'elite_id' => 31
+                    ],
+                    [
+                        'name' => '品牌好货',
+                        'elite_id' => 32
+                    ],
+                    [
+                        'name' => '秒杀商品',
+                        'elite_id' => 33
+                    ],
+                    [
+                        'name' => '拼购商品',
+                        'elite_id' => 34
+                    ],
+                    [
+                        'name' => '高收益',
+                        'elite_id' => 40
+                    ],
+                    [
+                        'name' => '自营热卖榜',
+                        'elite_id' => 41
+                    ],
+                    [
+                        'name' => '新品首发',
+                        'elite_id' => 109
+                    ],
+                    [
+                        'name' => '自营',
+                        'elite_id' => 110
+                    ],
+                    [
+                        'name' => '首购商品',
+                        'elite_id' => 125
+                    ],
+                    [
+                        'name' => '高佣榜单',
+                        'elite_id' => 129
+                    ],
+                    [
+                        'name' => '视频商品',
+                        'elite_id' => 130
+                    ],
+                ]
+            ],
+        ];
+    }
 }
