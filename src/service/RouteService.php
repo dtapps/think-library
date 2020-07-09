@@ -33,10 +33,10 @@ class RouteService extends Service
      */
     public function redirect(string $url, int $status = 302, bool $parameter = false)
     {
-        if ($status === 302) header("Location: {$url}" . $parameter == true ? request()->query() : '');
-        elseif ($status == 301) {
+        if ($status === 302) header("Location: {$url}" . $parameter === true ? request()->query() : '');
+        elseif ($status === 301) {
             header('HTTP/1.1 301 Moved Permanently');
-            header("Location: {$url}" . $parameter == true ? request()->query() : '');
+            header("Location: {$url}" . $parameter === true ? request()->query() : '');
         }
     }
 }
