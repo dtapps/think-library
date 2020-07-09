@@ -176,15 +176,4 @@ return [
             'url' => '',
         ]
     ],
-    // 网易云
-    'netease' => [
-        // 云存储
-        'ks3' => [
-            'access_key_id' => '',
-            'access_key_secret' => '',
-            'endpoint' => '',
-            'bucket' => '',
-            'url' => '',
-        ]
-    ],
 ];

@@ -41,9 +41,7 @@
     "baidubce/bce-sdk-php": "^0.8.22",
     "qcloud/cos-sdk-v5": "^2.0",
     "qiniu/php-sdk": "^7.2",
-    "upyun/sdk": "^3.4",
-    "netease/nos-php-sdk": "^1.0",
-    "aws/aws-sdk-php": "^3.142"
+    "upyun/sdk": "^3.4"
   },
   "require-dev": {
     "symfony/var-dumper": "^4.2"
