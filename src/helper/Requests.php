@@ -135,6 +135,16 @@ class Requests
     }
 
     /**
+     * 判断是否为微信小程序访问
+     * @return bool
+     */
+    public function isWeXinMp(): bool
+    {
+        if (strpos(request()->server('HTTP_USER_AGENT'), 'miniProgram') !== false) return true;
+        return false;
+    }
+
+    /**
      * 判断是否支付宝内置浏览器访问
      * @return bool
      */
