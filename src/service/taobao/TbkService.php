@@ -460,6 +460,61 @@ class TbkService extends Service
     }
 
     /**
+     * 淘宝客-公用-商品关联推荐
+     * https://open.taobao.com/api.htm?docId=24517&docType=2
+     * @return array|mixed
+     */
+    public function itemRecommendGet()
+    {
+        $this->method = 'taobao.tbk.item.recommend.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-公用-店铺关联推荐
+     * https://open.taobao.com/api.htm?docId=24522&docType=2
+     * @return array|mixed
+     */
+    public function shopRecommendGet()
+    {
+        $this->method = 'taobao.tbk.shop.recommend.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-选品库宝贝信息
+     * https://open.taobao.com/api.htm?docId=26619&docType=2
+     * @return array|mixed
+     */
+    public function uaTmFavoritesItemGet()
+    {
+        $this->method = 'taobao.tbk.uatm.favorites.item.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-选品库宝贝列表
+     * https://open.taobao.com/api.htm?docId=26620&docType=2
+     * @return array|mixed
+     */
+    public function uaTmFavoritesGet()
+    {
+        $this->method = 'taobao.tbk.uatm.favorites.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-官方活动转链
+     * https://open.taobao.com/api.htm?docId=41921&docType=2
+     * @return array|mixed
+     */
+    public function scActivityLinkToolGet()
+    {
+        $this->method = 'taobao.tbk.sc.activitylink.toolget';
+        return $this;
+    }
+
+    /**
      * 返回Array
      * @return array|mixed
      * @throws DtaException
