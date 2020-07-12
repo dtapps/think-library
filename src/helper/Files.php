@@ -147,4 +147,26 @@ class Files
         }
         return true;
     }
+
+    /**
+     * 判断文件是否存在
+     * @param string $path
+     * @return bool
+     */
+    public function judgeFile(string $path): bool
+    {
+        if (file_exists($path)) return true;
+        return false;
+    }
+
+    /**
+     * 判断目录是否存在
+     * @param string $path
+     * @return bool
+     */
+    public function judgeContents(string $path): bool
+    {
+        if (is_dir($path)) return true;
+        return false;
+    }
 }

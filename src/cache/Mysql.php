@@ -73,7 +73,8 @@ class Mysql
                 'cache_value' => $cache_value,
                 'cache_expire' => Times::dateRear("Y-m-d H:i:s", $this->cache_expire)
             ]);
-        return $result ? true : false;
+        if (empty($result)) return false;
+        return true;
     }
 
     /**
@@ -107,7 +108,8 @@ class Mysql
         $result = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->delete();
-        return $result ? true : false;
+        if (empty($result)) return false;
+        return true;
     }
 
     /**
@@ -126,7 +128,8 @@ class Mysql
                 'cache_value' => $cache_value,
                 'cache_expire' => Times::dateRear("Y-m-d H:i:s", $this->cache_expire)
             ]);
-        return $result ? true : false;
+        if (empty($result)) return false;
+        return true;
     }
 
     /**
@@ -146,7 +149,8 @@ class Mysql
             ->update([
                 'cache_value' => $cache_value + $int
             ]);
-        return $result ? true : false;
+        if (empty($result)) return false;
+        return true;
     }
 
     /**
@@ -166,6 +170,7 @@ class Mysql
             ->update([
                 'cache_value' => $cache_value - $int
             ]);
-        return $result ? true : false;
+        if (empty($result)) return false;
+        return true;
     }
 }

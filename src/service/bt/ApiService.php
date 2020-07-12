@@ -20,6 +20,7 @@
 namespace DtApp\ThinkLibrary\service\bt;
 
 use DtApp\ThinkLibrary\exception\DtaException;
+use DtApp\ThinkLibrary\facade\Files;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\BtService;
 
@@ -346,14 +347,8 @@ class ApiService extends Service
     public function toArray()
     {
         $this->getHttp();
-        switch ($this->where['type']) {
-            case 'sites':
-                $this->getDataWithOrderOpt();
-                break;
-            default:
-                $this->getDataWithCount();
-                break;
-        }
+        if ($this->where['type'] == 'sites') $this->getDataWithOrderOpt();
+        else $this->getDataWithCount();
         if (empty($this->backtrack)) return [];
         if (is_array($this->backtrack)) return $this->backtrack;
         return json_decode($this->backtrack, true);
@@ -386,7 +381,7 @@ class ApiService extends Service
         //定义cookie保存位置
         $file = app()->getRootPath() . 'runtime/dtapp/bt/cookie/';
         $cookie_file = $file . md5($this->panel) . '.cookie';
-        is_dir($file) or mkdir($file, 0777, true);
+        if (empty(Files::judgeContents($file))) mkdir($file, 0777, true);
         if (!file_exists($cookie_file)) {
             $fp = fopen($cookie_file, 'w+');
             fclose($fp);

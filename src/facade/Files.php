@@ -36,6 +36,8 @@ use think\Facade;
  * @method static bool folderZip(string $name, string $suffix_name = '.png', string $file_name = '*') 把文件夹里面的文件打包成zip文件
  * @method static string getFiles(string $path) 获取目录下的所有文件和目录
  * @method static bool rmFiles(string $path) 删除目录下的文件
+ * @method static bool judgeFile(string $path) 判断文件是否存在
+ * @method static bool judgeContents(string $path) 判断目录是否存在
  */
 class Files extends Facade
 {
