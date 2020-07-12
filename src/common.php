@@ -11,6 +11,13 @@
 // +----------------------------------------------------------------------
 // | gitee 仓库地址 ：https://gitee.com/liguangchun/ThinkLibrary
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
+// | gitlab 仓库地址 ：https://gitlab.com/liguangchun/thinklibrary
+// | aliyun 仓库地址 ：https://code.aliyun.com/liguancghun/ThinkLibrary
+// | coding 仓库地址 ：https://liguangchun-01.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
+// | coding 仓库地址 ：https://aizhineng.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
+// | tencent 仓库地址 ：https://liguangchundt.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
+// | weixin 仓库地址 ：https://git.weixin.qq.com/liguangchun/ThinkLibrary
+// | huaweicloud 仓库地址 ：https://codehub-cn-south-1.devcloud.huaweicloud.com/composer00001/ThinkLibrary.git
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
@@ -25,10 +32,9 @@ use think\db\exception\ModelNotFoundException;
 /**
  * 定义当前版本
  */
-const VERSION = '6.0.78';
+const VERSION = '6.0.79';
 
 if (!function_exists('get_ip_info')) {
-
     /**
      * 获取请求IP信息
      * @param string $ip
@@ -38,12 +44,11 @@ if (!function_exists('get_ip_info')) {
     function get_ip_info($ip = '')
     {
         if (empty($ip)) {
-            if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            if (!isset($_SERVER['HTTP_X_FORWARDED_FOR'])) $ip = $_SERVER['REMOTE_ADDR'];
+            else {
                 //为了兼容百度的CDN，所以转成数组
                 $arr = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
                 $ip = $arr[0];
-            } else {
-                $ip = $_SERVER['REMOTE_ADDR'];
             }
         }
         return QqWryService::instance()->getLocation($ip);
@@ -51,7 +56,6 @@ if (!function_exists('get_ip_info')) {
 }
 
 if (!function_exists('get_ip')) {
-
     /**
      * 获取请求IP
      * @return string

@@ -29,23 +29,27 @@
 
 ### 开发版
 ```text
+
 composer require liguangchun/think-library ^6.x-dev -vvv
 ```
 
 ### 稳定版
 ```text
+
 composer require liguangchun/think-library ^6.0.* -vvv
 ```
 
 ## 更新
 
 ```text
+
 composer update liguangchun/think-library -vvv
 ```
 
 ## 删除
 
 ```text
+
 composer remove liguangchun/think-library -vvv
 ```
 
@@ -64,7 +68,6 @@ dump(SystemService::instance()
 
 ```php
 
-
 use DtApp\ThinkLibrary\service\baidu\LbsYunService;
 
 dump(LbsYunService::instance()
@@ -77,13 +80,11 @@ dump(LbsYunService::instance()
 
 ```php
 
-
 use DtApp\ThinkLibrary\service\amap\AmApService;
 
 dump(AmApService::instance()
         ->key("")
         ->weather());
-
 
 ```
 
@@ -95,34 +96,53 @@ use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\service\douyin\WatermarkService;
 
 try {
-    // 方法一 网址
-    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
-    // 方法一 粘贴
+    // 方法一之网址
+    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')
+->getAll()
+->toArray());
+    // 方法一之粘贴
     dump(WatermarkService::instance()->url('#在抖音，记录美好生活#美丽电白欢迎您 https://v.douyin.com/vPGAdM/ 复制此链接，打开【抖音短视频】，直接观看视频！')->getAll()->toArray());
-    // 方法二 网址
+    // 方法二之网址
     $dy = WatermarkService::instance()->url('https://v.douyin.com/vPafcr/');
     dump($dy->getAll()->toArray());
-    // 方法二 粘贴
+    // 方法二之粘贴
     $dy = WatermarkService::instance()->url('#在抖音，记录美好生活#2020茂名加油，广州加油，武汉加油！中国加油，众志成城！#航拍 #茂名#武汉 #广州 #旅拍 @抖音小助手 https://v.douyin.com/vPafcr/ 复制此链接，打开【抖音短视频】，直接观看视频！');
     dump($dy->getAll()->toArray());
     // 获取全部信息
-    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
+    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')
+->getAll()
+->toArray());
     // 获取原全部信息
-    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getApi()->toArray());
+    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')
+->getApi()
+->toArray());
     // 获取视频信息
-    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getVideoInfo()->toArray());
+    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')
+->getVideoInfo()
+->toArray());
     // 获取音频信息
-    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getMusicInfo()->toArray());
+    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')
+->getMusicInfo()
+->toArray());
     // 获取分享信息
-    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getShareInfo()->toArray());
+    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')
+->getShareInfo()
+->toArray());
     // 获取作者信息
-    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAuthorInfo()->toArray());
+    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')
+->getAuthorInfo()
+->toArray());
     // 返回数组数据方法
-    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toArray());
+    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')
+->getAll()
+->toArray());
     // 返回Object数据方法
-    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')->getAll()->toObject());
+    dump(WatermarkService::instance()->url('https://v.douyin.com/vPGAdM/')
+->getAll()
+->toObject());
 } catch (DtaException $e) {
     // 错误提示
     dump($e->getMessage());
 }
+
 ```

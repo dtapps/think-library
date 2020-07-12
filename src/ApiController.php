@@ -11,6 +11,13 @@
 // +----------------------------------------------------------------------
 // | gitee 仓库地址 ：https://gitee.com/liguangchun/ThinkLibrary
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
+// | gitlab 仓库地址 ：https://gitlab.com/liguangchun/thinklibrary
+// | aliyun 仓库地址 ：https://code.aliyun.com/liguancghun/ThinkLibrary
+// | coding 仓库地址 ：https://liguangchun-01.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
+// | coding 仓库地址 ：https://aizhineng.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
+// | tencent 仓库地址 ：https://liguangchundt.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
+// | weixin 仓库地址 ：https://git.weixin.qq.com/liguangchun/ThinkLibrary
+// | huaweicloud 仓库地址 ：https://codehub-cn-south-1.devcloud.huaweicloud.com/composer00001/ThinkLibrary.git
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
@@ -58,14 +65,14 @@ class ApiController extends stdClass
      */
     protected function initialize()
     {
-        // 指定允许其他域名访问
-        header('Access-Control-Allow-Origin:*');
-        // 响应类型
-        header('Access-Control-Allow-Methods:*');
-        // 响应头设置
-        header('Access-Control-Allow-Headers:*');
-        //允许ajax异步请求带cookie信息
-        header('Access-Control-Allow-Credentials:true');
+//        $origin = $this->request->header('ORIGIN') ?? $this->request->header('HTTP_ORIGIN');
+//        header("Access-Control-Allow-Origin:{$origin}");
+//        header('Access-Control-Request-Method:*');
+//        header('Access-Control-Request-Headers:*');
+//        header('Access-Control-Allow-Methods:*');
+//        header('Access-Control-Allow-Headers:*');
+//        header('Access-Control-Expose-Headers:*');
+//        header('Access-Control-Allow-Credentials:true');
     }
 
     /**
@@ -74,11 +81,11 @@ class ApiController extends stdClass
      * @param mixed $data 返回数据
      * @param integer $code 返回代码
      */
-    public function error($info, $data = '{-null-}', $code = 0)
+    public function error($info, $data = '{-null-}', $code = 1)
     {
         if ($data === '{-null-}') $data = new stdClass();
         throw new HttpResponseException(json([
-            'code' => $code, 'info' => $info, 'timestamp' => time(), 'data' => $data,
+            'code' => $code, 'msg' => $info, 'timestamp' => time(), 'data' => $data,
         ]));
     }
 
@@ -88,11 +95,11 @@ class ApiController extends stdClass
      * @param mixed $data 返回数据
      * @param integer $code 返回代码
      */
-    public function success($info, $data = '{-null-}', $code = 1)
+    public function success($info, $data = '{-null-}', $code = 0)
     {
         if ($data === '{-null-}') $data = new stdClass();
         throw new HttpResponseException(json([
-            'code' => $code, 'info' => $info, 'timestamp' => time(), 'data' => $data,
+            'code' => $code, 'msg' => $info, 'timestamp' => time(), 'data' => $data,
         ]));
     }
 
@@ -116,11 +123,7 @@ class ApiController extends stdClass
     public function callback($name, &$one = [], &$two = [])
     {
         if (is_callable($name)) return call_user_func($name, $this, $one, $two);
-        foreach ([$name, "_{$this->app->request->action()}{$name}"] as $method) {
-            if (method_exists($this, $method) && false === $this->$method($one, $two)) {
-                return false;
-            }
-        }
+        foreach ([$name, "_{$this->app->request->action()}{$name}"] as $method) if (method_exists($this, $method) && false === $this->$method($one, $two)) return false;
         return true;
     }
 }
