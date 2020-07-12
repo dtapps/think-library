@@ -65,29 +65,29 @@ class ApiController extends stdClass
 
     /**
      * 返回失败的操作
-     * @param mixed $info 消息内容
+     * @param mixed $msg 消息内容
      * @param mixed $data 返回数据
      * @param integer $code 返回代码
      */
-    public function error($info, $data = '{-null-}', $code = 1)
+    public function error($msg = 'error', $data = '{-null-}', $code = 1)
     {
         if ($data === '{-null-}') $data = new stdClass();
         throw new HttpResponseException(json([
-            'code' => $code, 'msg' => $info, 'timestamp' => time(), 'data' => $data,
+            'code' => $code, 'msg' => $msg, 'timestamp' => time(), 'data' => $data,
         ]));
     }
 
     /**
      * 返回成功的操作
-     * @param mixed $info 消息内容
+     * @param mixed $msg 消息内容
      * @param mixed $data 返回数据
      * @param integer $code 返回代码
      */
-    public function success($info, $data = '{-null-}', $code = 0)
+    public function success($msg = 'success', $data = '{-null-}', $code = 0)
     {
         if ($data === '{-null-}') $data = new stdClass();
         throw new HttpResponseException(json([
-            'code' => $code, 'msg' => $info, 'timestamp' => time(), 'data' => $data,
+            'code' => $code, 'msg' => $msg, 'timestamp' => time(), 'data' => $data,
         ]));
     }
 
@@ -113,5 +113,84 @@ class ApiController extends stdClass
         if (is_callable($name)) return call_user_func($name, $this, $one, $two);
         foreach ([$name, "_{$this->app->request->action()}{$name}"] as $method) if (method_exists($this, $method) && false === $this->$method($one, $two)) return false;
         return true;
+    }
+
+
+    /**
+     * 验证接口签名
+     * @param $name
+     * @return string
+     */
+    public function _judgeSign($name)
+    {
+        if (empty(request()->header('sign', ''))) $this->error('数据未签名！', 666);
+        // 全部参数
+        $arr = request()->post();
+        $timestamp = request()->get('timestamp', 0);
+        // 判断是否有时间
+        if (empty($timestamp)) $this->error('数据不匹配', 666);
+        $arr['timestamp'] = $timestamp;
+        // 删除sign
+        foreach ($arr as $k => $v) if ('sign' == $k) unset($arr[$k]);
+        // 排序
+        $arr = $this->argSort($arr, $name);
+        // 服务器签名对比
+        $sign = $this->md5Sign($arr);
+        if ($sign != request()->header('sign', '')) $this->error('数据不匹配', 666);
+        // 计算时间差
+        $time = time() - $timestamp;
+        // 判断是不是小于服务器时间
+        if ($time < 0) $this->error('数据不匹配', 666);
+        // 判断是不是超过时间
+        if ($time > 200) $this->error('请重新尝试！');
+        return true;
+    }
+
+    /**
+     * 对数组排序
+     * @param $param
+     * @param string $name
+     * @return mixed 排序后的数组
+     */
+    private function argSort($param, $name)
+    {
+        ksort($param);
+        return $this->createLinkString($param, $name);
+    }
+
+    /**
+     * 把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
+     * @param $para
+     * @param string $name
+     * @return bool|string 拼接完成以后的字符串
+     */
+    private function createLinkString(array $para, string $name)
+    {
+        $string = $this->toParams($para);// 将数组转换成字符串
+        $string = $string . '&key=' . config("dtapp.md5.{$name}");
+        return $string;
+    }
+
+    /**
+     * 生成md5签名字符串
+     * @param $preStr string 需要签名的字符串
+     * @return string 签名结果
+     */
+    private function md5Sign(string $preStr)
+    {
+        return strtoupper(md5($preStr));
+    }
+
+    /**
+     * 格式化参数格式化成url参数
+     * @param array $data
+     * @return string
+     */
+    private function toParams(array $data)
+    {
+        $buff = "";
+        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";
+        $buff = trim($buff, "&");
+        return $buff;
     }
 }
