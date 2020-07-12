@@ -26,69 +26,58 @@
 
 ### 开发版
 ```text
-
 composer require liguangchun/think-library ^6.x-dev -vvv
 ```
 
 ### 稳定版
 ```text
-
 composer require liguangchun/think-library ^6.0.* -vvv
 ```
 
 ## 更新
 
 ```text
-
 composer update liguangchun/think-library -vvv
 ```
 
 ## 删除
 
 ```text
-
 composer remove liguangchun/think-library -vvv
 ```
 
 ## 获取电脑Mac地址服务使用示例
 
 ```php
-
 use DtApp\ThinkLibrary\service\SystemService;
 
 dump(SystemService::instance()
 ->mac());
-
 ```
 
 ## 百度地图服务使用示例
 
 ```php
-
 use DtApp\ThinkLibrary\service\baidu\LbsYunService;
 
 dump(LbsYunService::instance()
         ->ak("")
         ->weather());
-
 ```
 
 ## 高德地图服务使用示例
 
 ```php
-
 use DtApp\ThinkLibrary\service\amap\AmApService;
 
 dump(AmApService::instance()
         ->key("")
         ->weather());
-
 ```
 
 ## 抖音服务使用示例
 
 ```php
-
 use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\service\douyin\WatermarkService;
 
@@ -141,5 +130,4 @@ try {
     // 错误提示
     dump($e->getMessage());
 }
-
 ```
