@@ -22,11 +22,11 @@ use think\exception\HttpResponseException;
 use think\Request;
 
 /**
- * 标准控制器基类
- * Class Controller
+ * 标准Api控制器基类
+ * Class ApiController
  * @package DtApp\ThinkLibrary
  */
-class Controller extends stdClass
+class ApiController extends stdClass
 {
     /**
      * 应用容器
@@ -41,14 +41,14 @@ class Controller extends stdClass
     public $request;
 
     /**
-     * Controller constructor.
+     * ApiController constructor.
      * @param App $app
      */
     public function __construct(App $app)
     {
         $this->app = $app;
         $this->request = $app->request;
-        $this->app->bind('DtApp\ThinkLibrary\Controller', $this);
+        $this->app->bind('DtApp\ThinkLibrary\ApiController', $this);
         if (in_array($this->request->action(), get_class_methods(__CLASS__))) $this->error('Access without permission.');
         $this->initialize();
     }
@@ -58,6 +58,14 @@ class Controller extends stdClass
      */
     protected function initialize()
     {
+        // 指定允许其他域名访问
+        header('Access-Control-Allow-Origin:*');
+        // 响应类型
+        header('Access-Control-Allow-Methods:*');
+        // 响应头设置
+        header('Access-Control-Allow-Headers:*');
+        //允许ajax异步请求带cookie信息
+        header('Access-Control-Allow-Credentials:true');
     }
 
     /**
@@ -70,7 +78,7 @@ class Controller extends stdClass
     {
         if ($data === '{-null-}') $data = new stdClass();
         throw new HttpResponseException(json([
-            'code' => $code, 'info' => $info, 'data' => $data,
+            'code' => $code, 'info' => $info, 'timestamp' => time(), 'data' => $data,
         ]));
     }
 
@@ -84,7 +92,7 @@ class Controller extends stdClass
     {
         if ($data === '{-null-}') $data = new stdClass();
         throw new HttpResponseException(json([
-            'code' => $code, 'info' => $info, 'data' => $data,
+            'code' => $code, 'info' => $info, 'timestamp' => time(), 'data' => $data,
         ]));
     }
 
@@ -96,35 +104,6 @@ class Controller extends stdClass
     public function redirect($url, $code = 301)
     {
         throw new HttpResponseException(redirect($url, $code));
-    }
-
-    /**
-     * 返回视图内容
-     * @param string $tpl 模板名称
-     * @param array $vars 模板变量
-     */
-    public function fetch($tpl = '', $vars = [])
-    {
-        foreach ($this as $name => $value) $vars[$name] = $value;
-        throw new HttpResponseException(view($tpl, $vars));
-    }
-
-    /**
-     * 模板变量赋值
-     * @param mixed $name 要显示的模板变量
-     * @param mixed $value 变量的值
-     * @return $this
-     */
-    public function assign($name, $value = '')
-    {
-        if (is_string($name)) {
-            $this->$name = $value;
-        } elseif (is_array($name)) {
-            foreach ($name as $k => $v) {
-                if (is_string($k)) $this->$k = $v;
-            }
-        }
-        return $this;
     }
 
     /**
