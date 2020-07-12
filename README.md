@@ -8,6 +8,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/liguangchun/think-library/v/unstable)](https://packagist.org/packages/liguangchun/think-library) 
 [![Total Downloads](https://poser.pugx.org/liguangchun/think-library/downloads)](https://packagist.org/packages/liguangchun/think-library) 
 [![License](https://poser.pugx.org/liguangchun/think-library/license)](https://packagist.org/packages/liguangchun/think-library)
+[![Code Health](https://hn.devcloud.huaweicloud.com/codecheck/v1/codecheck/task/codehealth.svg?taskId=1567f5ea332546c3b45f4024cf50f10b)](https://hn.devcloud.huaweicloud.com/codecheck/project/c7ff3e2d65674858bd363cb43ee6c35e/codecheck/task/1567f5ea332546c3b45f4024cf50f10b/detail)
 
 ## 依赖环境
 
@@ -20,10 +21,6 @@
 - Github仓库地址：https://github.com/GC0202/ThinkLibrary
 - 码云仓库地址：https://gitee.com/liguangchun/ThinkLibrary
 - gitlab仓库地址：https://gitlab.com/liguangchun/thinklibrary
-- 阿里云仓库地址：https://code.aliyun.com/liguancghun/ThinkLibrary
-- CODING仓库地址：https://liguangchun-01.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
-- CODING仓库地址：https://aizhineng.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
-- 腾讯云仓库地址：https://liguangchundt.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
 - 微信仓库地址：https://git.weixin.qq.com/liguangchun/ThinkLibrary
 - 华为云仓库地址：https://codehub-cn-south-1.devcloud.huaweicloud.com/composer00001/ThinkLibrary.git
 

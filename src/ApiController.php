@@ -12,10 +12,6 @@
 // | gitee 仓库地址 ：https://gitee.com/liguangchun/ThinkLibrary
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | gitlab 仓库地址 ：https://gitlab.com/liguangchun/thinklibrary
-// | aliyun 仓库地址 ：https://code.aliyun.com/liguancghun/ThinkLibrary
-// | coding 仓库地址 ：https://liguangchun-01.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
-// | coding 仓库地址 ：https://aizhineng.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
-// | tencent 仓库地址 ：https://liguangchundt.coding.net/p/ThinkLibrary/d/ThinkLibrary/git
 // | weixin 仓库地址 ：https://git.weixin.qq.com/liguangchun/ThinkLibrary
 // | huaweicloud 仓库地址 ：https://codehub-cn-south-1.devcloud.huaweicloud.com/composer00001/ThinkLibrary.git
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
@@ -65,14 +61,6 @@ class ApiController extends stdClass
      */
     protected function initialize()
     {
-//        $origin = $this->request->header('ORIGIN') ?? $this->request->header('HTTP_ORIGIN');
-//        header("Access-Control-Allow-Origin:{$origin}");
-//        header('Access-Control-Request-Method:*');
-//        header('Access-Control-Request-Headers:*');
-//        header('Access-Control-Allow-Methods:*');
-//        header('Access-Control-Allow-Headers:*');
-//        header('Access-Control-Expose-Headers:*');
-//        header('Access-Control-Allow-Credentials:true');
     }
 
     /**
