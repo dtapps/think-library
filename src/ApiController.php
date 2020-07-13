@@ -187,7 +187,7 @@ class ApiController extends stdClass
     private function toParams(array $data)
     {
         $buff = "";
-        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";
+        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . urlencode($v) . "&";
         $buff = trim($buff, "&");
         return $buff;
     }
