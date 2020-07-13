@@ -69,9 +69,9 @@ class ApiController extends stdClass
      * @param mixed $data 返回数据
      * @param integer $code 返回代码
      */
-    public function error($msg = 'error', $data = '{-null-}', $code = 1)
+    public function error($msg = 'error', $code = 1, $data = [])
     {
-        if ($data === '{-null-}') $data = new stdClass();
+        if ($data === []) $data = new stdClass();
         throw new HttpResponseException(json([
             'code' => $code, 'msg' => $msg, 'timestamp' => time(), 'data' => $data,
         ]));
@@ -83,9 +83,9 @@ class ApiController extends stdClass
      * @param mixed $data 返回数据
      * @param integer $code 返回代码
      */
-    public function success($msg = 'success', $data = '{-null-}', $code = 0)
+    public function success($data = [], $msg = 'success', $code = 0)
     {
-        if ($data === '{-null-}') $data = new stdClass();
+        if ($data === []) $data = new stdClass();
         throw new HttpResponseException(json([
             'code' => $code, 'msg' => $msg, 'timestamp' => time(), 'data' => $data,
         ]));
