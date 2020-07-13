@@ -128,7 +128,7 @@ class ApiController extends stdClass
         $arr = request()->post();
         $timestamp = request()->get('timestamp', 0);
         // 判断是否有时间
-        if (empty($timestamp)) $this->error('数据不匹配', 666);
+        if (empty($timestamp)) $this->error('数据异常！', 666);
         $arr['timestamp'] = $timestamp;
         // 删除sign
         foreach ($arr as $k => $v) if ('sign' == $k) unset($arr[$k]);
@@ -136,14 +136,12 @@ class ApiController extends stdClass
         $arr = $this->argSort($arr, $name);
         // 服务器签名对比
         $sign = $this->md5Sign($arr);
-        if ($sign != request()->header('sign', '')) $this->error('数据不匹配', 666);
-        // 计算时间差
-        $time = time() - $timestamp;
+        if ($sign != request()->header('sign', '')) $this->error('验证不匹配！', 666);
         // 判断是不是小于服务器时间
-        if ($time < 0) $this->error('数据不匹配', 666);
-        // 判断是不是超过时间
-        if ($time > 200) $this->error('请重新尝试！');
-        return true;
+        $before = strtotime('-2minute');
+        $rear = strtotime('+2minute');
+        if ($timestamp <= $rear && $timestamp >= $before) return true;
+        else  $this->error('已超时，请重新尝试！');
     }
 
     /**
