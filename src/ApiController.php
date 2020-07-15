@@ -206,7 +206,7 @@ class ApiController extends stdClass
      * @param int $timestamp
      * @return bool|string
      */
-    public function encrypt($data, string $name, int $timestamp)
+    private function encrypt($data, string $name, int $timestamp)
     {
         if (!empty(is_array($data))) $data = json_encode($data);
         return urlencode(base64_encode(openssl_encrypt($data, 'AES-128-CBC', config("dtapp.md5.{$name}"), 1, config("dtapp.md5.bcw") . $timestamp)));
