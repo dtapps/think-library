@@ -189,7 +189,6 @@ class ApiController extends stdClass
         return strtoupper(md5($preStr));
     }
 
-
     /**
      * 加密
      * @param $data
