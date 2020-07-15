@@ -144,8 +144,9 @@ class ApiController extends stdClass
      * @param null $default
      * @return mixed
      */
-    public function getAesDecryptData(string $name, $default = null)
+    public function getAesDecryptData(string $name = '', $default = null)
     {
+        if (empty($name)) return $this->aes_decrypt_data;
         if (isset($this->aes_decrypt_data[$name])) {
             return $this->aes_decrypt_data[$name];
         } else return $default;
