@@ -172,15 +172,6 @@ class ApiController extends stdClass
         if (empty($aes_decode)) $this->error('解密失败', 106);
         $data = json_decode($aes_decode, true);
 
-        // 服务器加密
-        $encrypt = $this->encrypt($data, $name, $timestamp);
-
-        // 服务器签名
-        $sign = $this->md5Sign($encrypt);
-
-        // 服务器签名对比
-        if ($sign != $this->request->header('sign', '')) $this->error('验证不匹配！', 107);
-
         // 判断是不是小于服务器时间
         $before = strtotime('-2minute');
         $rear = strtotime('+2minute');
