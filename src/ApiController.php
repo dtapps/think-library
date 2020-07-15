@@ -44,6 +44,12 @@ class ApiController extends stdClass
     public $request;
 
     /**
+     * 解密后数据
+     * @var
+     */
+    private $aes_decrypt_data;
+
+    /**
      * ApiController constructor.
      * @param App $app
      */
@@ -92,6 +98,23 @@ class ApiController extends stdClass
     }
 
     /**
+     * 返回成功的操作
+     * @param mixed $msg 消息内容
+     * @param mixed $data 返回数据
+     * @param integer $code 返回代码
+     */
+    public function aesSuccess($data = [], $msg = 'success', $code = 0, $name = 'sniff_h5')
+    {
+        if ($data === []) $data = new stdClass();
+        $timestamp = time();
+        throw new HttpResponseException(json([
+            'code' => $code, 'msg' => $msg, 'timestamp' => $timestamp, 'data' => [
+                'aes' => $this->encrypt($data, $name, $timestamp)
+            ],
+        ]));
+    }
+
+    /**
      * URL重定向
      * @param string $url 跳转链接
      * @param integer $code 跳转代码
@@ -115,58 +138,54 @@ class ApiController extends stdClass
         return true;
     }
 
+    /**
+     * 获取解密后的数据
+     * @param string $name
+     * @param null $default
+     * @return mixed
+     */
+    public function getAesDecryptData(string $name, $default = null)
+    {
+        if (isset($this->aes_decrypt_data[$name])) {
+            return $this->aes_decrypt_data[$name];
+        } else return $default;
+    }
 
     /**
      * 验证接口签名
-     * @param $name
-     * @return string
+     * @param string $name
      */
-    public function _judgeSign($name)
+    public function _judgeSign($name = 'sniff_h5')
     {
-        if (empty(request()->header('sign', ''))) $this->error('数据未签名！', 666);
-        // 全部参数
-        $arr = request()->post();
-        $timestamp = request()->get('timestamp', 0);
+        if (empty($this->request->header('sign', ''))) $this->error('数据未签名！', 104);
+
+        // 加密的数据参数
+        $aes = $this->request->post('aes');
+        // 获取时间数据
+        $timestamp = $this->request->get('timestamp', 0);
+
         // 判断是否有时间
-        if (empty($timestamp)) $this->error('数据异常！', 666);
-        $arr['timestamp'] = $timestamp;
-        // 删除sign
-        foreach ($arr as $k => $v) if ('sign' == $k) unset($arr[$k]);
-        // 排序
-        $arr = $this->argSort($arr, $name);
+        if (empty($timestamp)) $this->error('数据异常！', 105);
+
+        // 解密
+        $aes_decode = $this->decrypt($aes, $name, $timestamp);
+        if (empty($aes_decode)) $this->error('解密失败', 106);
+        $data = json_decode($aes_decode, true);
+
+        // 服务器加密
+        $encrypt = $this->encrypt($data, $name, $timestamp);
+
+        // 服务器签名
+        $sign = $this->md5Sign($encrypt);
+
         // 服务器签名对比
-        $sign = $this->md5Sign($arr);
-        if ($sign != request()->header('sign', '')) $this->error('验证不匹配！', 666);
+        if ($sign != $this->request->header('sign', '')) $this->error('验证不匹配！', 107);
+
         // 判断是不是小于服务器时间
         $before = strtotime('-2minute');
         $rear = strtotime('+2minute');
-        if ($timestamp <= $rear && $timestamp >= $before) return true;
+        if ($timestamp <= $rear && $timestamp >= $before) $this->aes_decrypt_data = $data;
         else  $this->error('已超时，请重新尝试！');
-    }
-
-    /**
-     * 对数组排序
-     * @param $param
-     * @param string $name
-     * @return mixed 排序后的数组
-     */
-    private function argSort($param, $name)
-    {
-        ksort($param);
-        return $this->createLinkString($param, $name);
-    }
-
-    /**
-     * 把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
-     * @param $para
-     * @param string $name
-     * @return bool|string 拼接完成以后的字符串
-     */
-    private function createLinkString(array $para, string $name)
-    {
-        $string = $this->toParams($para);// 将数组转换成字符串
-        $string = $string . '&key=' . config("dtapp.md5.{$name}");
-        return $string;
     }
 
     /**
@@ -179,16 +198,29 @@ class ApiController extends stdClass
         return strtoupper(md5($preStr));
     }
 
+
     /**
-     * 格式化参数格式化成url参数
-     * @param array $data
-     * @return string
+     * 加密
+     * @param $data
+     * @param string $name
+     * @param int $timestamp
+     * @return bool|string
      */
-    private function toParams(array $data)
+    public function encrypt($data, string $name, int $timestamp)
     {
-        $buff = "";
-        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . urlencode($v) . "&";
-        $buff = trim($buff, "&");
-        return $buff;
+        if (!empty(is_array($data))) $data = json_encode($data);
+        return urlencode(base64_encode(openssl_encrypt($data, 'AES-128-CBC', config("dtapp.md5.{$name}"), 1, config("dtapp.md5.bcw") . $timestamp)));
+    }
+
+    /**
+     * 解密
+     * @param string $data
+     * @param string $name
+     * @param int $timestamp
+     * @return bool|false|string
+     */
+    private function decrypt(string $data, string $name, int $timestamp)
+    {
+        return openssl_decrypt(base64_decode(urldecode($data)), "AES-128-CBC", config("dtapp.md5.{$name}"), true, config("dtapp.md5.bcw") . $timestamp);
     }
 }
