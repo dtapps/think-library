@@ -107,11 +107,19 @@ class BtService extends Service
      */
     public function toArray(bool $is = true)
     {
-        if (empty($this->cookie)) throw new HttpException(404, '请检查cookie内容');
-        if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
+        if (empty($this->cookie)) {
+            throw new HttpException(404, '请检查cookie内容');
+        }
+        if (!extension_loaded("curl")) {
+            throw new HttpException(404, '请开启curl模块！');
+        }
         $this->http();
-        if (empty($is)) return $this->output;
-        if (is_array($this->output)) return $this->output;
+        if (empty($is)) {
+            return $this->output;
+        }
+        if (is_array($this->output)) {
+            return $this->output;
+        }
         return json_decode($this->output, true);
     }
 

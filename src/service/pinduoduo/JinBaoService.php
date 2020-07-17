@@ -441,9 +441,15 @@ class JinBaoService extends Service
     public function toArray()
     {
         //首先检测是否支持curl
-        if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
-        if (empty($this->client_id)) $this->getConfig();
-        if (empty($this->client_id)) throw new DtaException('请检查client_id参数');
+        if (!extension_loaded("curl")) {
+            throw new HttpException(404, '请开启curl模块！');
+        }
+        if (empty($this->client_id)) {
+            $this->getConfig();
+        }
+        if (empty($this->client_id)) {
+            throw new DtaException('请检查client_id参数');
+        }
         $this->param['type'] = $this->type;
         $this->param['client_id'] = $this->client_id;
         $this->param['timestamp'] = time();
@@ -452,22 +458,32 @@ class JinBaoService extends Service
         $this->http();
         if (isset($this->output['error_response'])) {
             // 错误
-            if (is_array($this->output)) return $this->output;
-            if (is_object($this->output)) return $this->object2array($this->output);
+            if (is_array($this->output)) {
+                return $this->output;
+            }
+            if (is_object($this->output)) {
+                return $this->object2array($this->output);
+            }
             return json_decode($this->output, true);
         } else {
             // 正常
             if (is_array($this->output)) {
-                if (isset($this->output["{$this->response}"])) return $this->output["{$this->response}"];
+                if (isset($this->output["{$this->response}"])) {
+                    return $this->output["{$this->response}"];
+                }
                 return $this->output;
             }
             if (is_object($this->output)) {
                 $this->output = $this->object2array($this->output);
-                if (isset($this->output["$this->response"])) return $this->output["$this->response"];
+                if (isset($this->output["$this->response"])) {
+                    return $this->output["$this->response"];
+                }
                 return $this->output;
             }
             $this->output = json_decode($this->output, true);
-            if (isset($this->output["$this->response"])) return $this->output["$this->response"];
+            if (isset($this->output["$this->response"])) {
+                return $this->output["$this->response"];
+            }
             return $this->output;
         }
     }
@@ -480,7 +496,11 @@ class JinBaoService extends Service
     {
         if (is_object($object)) $arr = (array)($object);
         else $arr = &$object;
-        if (is_array($arr)) foreach ($arr as $varName => $varValue) $arr[$varName] = $this->object2array($varValue);
+        if (is_array($arr)) {
+            foreach ($arr as $varName => $varValue) {
+                $arr[$varName] = $this->object2array($varValue);
+            }
+        }
         return $arr;
     }
 
@@ -491,12 +511,19 @@ class JinBaoService extends Service
      */
     private function createSign()
     {
-        if (empty($this->client_secret)) $this->getConfig();
-        if (empty($this->client_secret)) throw new DtaException('请检查client_secret参数');
-
+        if (empty($this->client_secret)) {
+            $this->getConfig();
+        }
+        if (empty($this->client_secret)) {
+            throw new DtaException('请检查client_secret参数}');
+        }
         $sign = $this->client_secret;
         ksort($this->param);
-        foreach ($this->param as $key => $val) if ($key != '' && $val != '') $sign .= $key . $val;
+        foreach ($this->param as $key => $val) {
+            if ($key != '' && $val != '') {
+                $sign .= $key . $val;
+            }
+        }
         $sign .= $this->client_secret;
         $sign = strtoupper(md5($sign));
         return $sign;
@@ -509,7 +536,11 @@ class JinBaoService extends Service
     private function createStrParam()
     {
         $strParam = '';
-        foreach ($this->param as $key => $val) if ($key != '' && $val != '' && !is_array($val)) $strParam .= $key . '=' . urlencode($val) . '&';
+        foreach ($this->param as $key => $val) {
+            if ($key != '' && $val != '' && !is_array($val)) {
+                $strParam .= $key . '=' . urlencode($val) . '&';
+            }
+        }
         return $strParam;
     }
 

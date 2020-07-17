@@ -55,7 +55,9 @@ class BeAryChatService extends Service
             ->url($webhook)
             ->data($data)
             ->toArray();
-        if ($result['code'] !== 0) return true;
+        if ($result['code'] !== 0) {
+            return true;
+        }
         return false;
     }
 }

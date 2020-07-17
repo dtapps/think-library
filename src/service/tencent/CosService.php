@@ -79,9 +79,9 @@ class CosService extends Service
      */
     public function upload(string $object, string $filePath)
     {
-        if (empty($this->secretId)) $this->getConfig();
-        if (empty($this->secretKey)) $this->getConfig();
-        if (empty($this->region)) $this->getConfig();
+        if (empty($this->secretId) || empty($this->secretKey) || empty($this->region)) {
+            $this->getConfig();
+        }
         $cosClient = new Client(
             array(
                 'region' => $this->region,
@@ -95,13 +95,15 @@ class CosService extends Service
         $key = $object;
         $file = fopen($filePath, "rb");
         if ($file) {
-            if (empty($this->bucket)) $this->getConfig();
-            $result = $cosClient->putObject(
-                array(
-                    'Bucket' => $this->bucket,
-                    'Key' => $key,
-                    'Body' => $file)
-            );
+            if (empty($this->bucket)) {
+                $this->getConfig();
+                $result = $cosClient->putObject(
+                    array(
+                        'Bucket' => $this->bucket,
+                        'Key' => $key,
+                        'Body' => $file)
+                );
+            }
         }
         return $this->app->config->get('dtapp.tencent.cos.url', '') . $object;
     }

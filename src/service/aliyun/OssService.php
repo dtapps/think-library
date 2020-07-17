@@ -78,10 +78,9 @@ class OssService extends Service
      */
     public function upload(string $object, string $filePath)
     {
-        if (empty($this->accessKeySecret)) $this->getConfig();
-        if (empty($this->accessKeySecret)) $this->getConfig();
-        if (empty($this->endpoint)) $this->getConfig();
-        if (empty($this->bucket)) $this->getConfig();
+        if (empty($this->accessKeySecret) || empty($this->accessKeySecret) || empty($this->endpoint) || empty($this->bucket)) {
+            $this->getConfig();
+        }
         try {
             $ossClient = new OssClient($this->accessKeyId, $this->accessKeySecret, $this->endpoint);
             $ossClient->uploadFile($this->bucket, $object, $filePath);

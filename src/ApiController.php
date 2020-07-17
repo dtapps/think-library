@@ -58,7 +58,9 @@ class ApiController extends stdClass
         $this->app = $app;
         $this->request = $app->request;
         $this->app->bind('DtApp\ThinkLibrary\ApiController', $this);
-        if (in_array($this->request->action(), get_class_methods(__CLASS__))) $this->error('Access without permission.');
+        if (in_array($this->request->action(), get_class_methods(__CLASS__))) {
+            $this->error('Access without permission.');
+        }
         $this->initialize();
     }
 
@@ -99,9 +101,10 @@ class ApiController extends stdClass
 
     /**
      * 返回成功的操作
-     * @param mixed $msg 消息内容
      * @param mixed $data 返回数据
+     * @param mixed $msg 消息内容
      * @param integer $code 返回代码
+     * @param string $name 参数名
      */
     public function aesSuccess($data = [], $msg = 'success', $code = 0, $name = 'sniff_h5')
     {
@@ -133,8 +136,14 @@ class ApiController extends stdClass
      */
     public function callback($name, &$one = [], &$two = [])
     {
-        if (is_callable($name)) return call_user_func($name, $this, $one, $two);
-        foreach ([$name, "_{$this->app->request->action()}{$name}"] as $method) if (method_exists($this, $method) && false === $this->$method($one, $two)) return false;
+        if (is_callable($name)) {
+            return call_user_func($name, $this, $one, $two);
+        }
+        foreach ([$name, "_{$this->app->request->action()}{$name}"] as $method) {
+            if (method_exists($this, $method) && false === $this->$method($one, $two)) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -146,10 +155,14 @@ class ApiController extends stdClass
      */
     public function getAesDecryptData(string $name = '', $default = null)
     {
-        if (empty($name)) return $this->aes_decrypt_data;
+        if (empty($name)) {
+            return $this->aes_decrypt_data;
+        }
         if (isset($this->aes_decrypt_data[$name])) {
             return $this->aes_decrypt_data[$name];
-        } else return $default;
+        } else {
+            return $default;
+        }
     }
 
     /**
@@ -158,7 +171,9 @@ class ApiController extends stdClass
      */
     public function _judgeSign($name = 'sniff_h5')
     {
-        if (empty($this->request->header('sign', ''))) $this->error('数据未签名！', 104);
+        if (empty($this->request->header('sign', ''))) {
+            $this->error('数据未签名！', 104);
+        }
 
         // 加密的数据参数
         $aes = $this->request->post('aes');
@@ -166,18 +181,25 @@ class ApiController extends stdClass
         $timestamp = $this->request->get('timestamp', 0);
 
         // 判断是否有时间
-        if (empty($timestamp)) $this->error('数据异常！', 105);
+        if (empty($timestamp)) {
+            $this->error('数据异常！', 105);
+        }
 
         // 解密
         $aes_decode = $this->decrypt($aes, $name, $timestamp);
-        if (empty($aes_decode)) $this->error('解密失败', 106);
+        if (empty($aes_decode)) {
+            $this->error('解密失败', 106);
+        }
         $data = json_decode($aes_decode, true);
 
         // 判断是不是小于服务器时间
         $before = strtotime('-2minute');
         $rear = strtotime('+2minute');
-        if ($timestamp <= $rear && $timestamp >= $before) $this->aes_decrypt_data = $data;
-        else  $this->error('已超时，请重新尝试！');
+        if ($timestamp <= $rear && $timestamp >= $before) {
+            $this->aes_decrypt_data = $data;
+        } else {
+            $this->error('已超时，请重新尝试！');
+        }
     }
 
     /**

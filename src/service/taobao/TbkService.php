@@ -21,6 +21,7 @@ namespace DtApp\ThinkLibrary\service\taobao;
 
 use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\facade\Strings;
+use DtApp\ThinkLibrary\facade\Times;
 use DtApp\ThinkLibrary\Service;
 use think\exception\HttpException;
 
@@ -247,7 +248,9 @@ class TbkService extends Service
      */
     public function tpWdCreate()
     {
-        if (isset($this->param['text'])) if (strlen($this->param['text']) < 5) throw new DtaException('请检查text参数长度');
+        if (isset($this->param['text']) && strlen($this->param['text']) < 5) {
+            throw new DtaException('请检查text参数长度');
+        }
         $this->method = 'taobao.tbk.tpwd.create';
         return $this;
     }
@@ -281,7 +284,9 @@ class TbkService extends Service
      */
     public function juTqgGet()
     {
-        if (!isset($this->param['fields'])) $this->param['fields'] = "click_url,pic_url,reserve_price,zk_final_price,total_amount,sold_num,title,category_name,start_time,end_time";
+        if (!isset($this->param['fields'])) {
+            $this->param['fields'] = "click_url,pic_url,reserve_price,zk_final_price,total_amount,sold_num,title,category_name,start_time,end_time";
+        }
         $this->method = 'taobao.tbk.ju.tqg.get';
         return $this;
     }
@@ -385,7 +390,9 @@ class TbkService extends Service
      */
     public function shopGet()
     {
-        if (!isset($this->param['fields'])) $this->param['fields'] = "user_id,shop_title,shop_type,seller_nick,pict_url,shop_url";
+        if (!isset($this->param['fields'])) {
+            $this->param['fields'] = "user_id,shop_title,shop_type,seller_nick,pict_url,shop_url";
+        }
         $this->method = 'taobao.tbk.shop.get';
         return $this;
     }
@@ -446,7 +453,9 @@ class TbkService extends Service
      */
     public function itemConvert()
     {
-        if (!isset($this->param['fields'])) $this->param['fields'] = "num_iid,click_url";
+        if (!isset($this->param['fields'])) {
+            $this->param['fields'] = "num_iid,click_url";
+        }
         $this->method = 'taobao.tbk.item.convert';
         return $this;
     }
@@ -525,34 +534,53 @@ class TbkService extends Service
     public function toArray()
     {
         //首先检测是否支持curl
-        if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
+        if (!extension_loaded("curl")) {
+            throw new HttpException(404, '请开启curl模块！');
+        }
         $this->format = "json";
-        if (empty($this->app_key)) $this->getConfig();
-        if (empty($this->app_key)) throw new DtaException('请检查app_key参数');
-        if (empty($this->method)) throw new DtaException('请检查method参数');
+        if (empty($this->app_key)) {
+            $this->getConfig();
+        }
+        if (empty($this->app_key)) {
+            throw new DtaException('请检查app_key参数');
+        }
+        if (empty($this->method)) {
+            throw new DtaException('请检查method参数');
+        }
         $this->param['app_key'] = $this->app_key;
         $this->param['method'] = $this->method;
         $this->param['format'] = $this->format;
         $this->param['v'] = $this->v;
         $this->param['sign_method'] = $this->sign_method;
-        $this->param['timestamp'] = date('Y-m-d H:i:s');
+        $this->param['timestamp'] = Times::getData();
         $this->http();
         if (isset($this->output['error_response'])) {
             // 错误
-            if (is_array($this->output)) return $this->output;
-            if (is_object($this->output)) $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
+            if (is_array($this->output)) {
+                return $this->output;
+            }
+            if (is_object($this->output)) {
+                $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
+            }
             return json_decode($this->output, true);
         } else {
             // 正常
             $response = substr(Strings::replace('.', '_', $this->method), 7) . "_response";
             if (is_array($this->output)) {
-                if (isset($this->output["$response"])) return $this->output["$response"];
+                if (isset($this->output["$response"])) {
+                    return $this->output["$response"];
+                }
                 return $this->output;
             };
-            if (is_object($this->output)) $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
+            if (is_object($this->output)) {
+                $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
+            }
             $this->output = json_decode($this->output, true);
-            if (isset($this->output["$response"])) return $this->output["$response"];
-            else return $this->output;
+            if (isset($this->output["$response"])) {
+                return $this->output["$response"];
+            } else {
+                return $this->output;
+            }
         }
     }
 
@@ -564,7 +592,9 @@ class TbkService extends Service
     public function toXml()
     {
         //首先检测是否支持curl
-        if (!extension_loaded("curl")) throw new HttpException('请开启curl模块！', E_USER_DEPRECATED);
+        if (!extension_loaded("curl")) {
+            throw new HttpException('请开启curl模块！', E_USER_DEPRECATED);
+        }
         $this->format = "xml";
         $this->http();
         return $this->output;
@@ -582,8 +612,11 @@ class TbkService extends Service
         $strParam = $this->createStrParam();
         $strParam .= 'sign=' . $sign;
         //访问服务
-        if (empty($this->sandbox)) $url = 'http://gw.api.taobao.com/router/rest?' . $strParam;
-        else $url = 'http://gw.api.tbsandbox.com/router/rest?' . $strParam;
+        if (empty($this->sandbox)) {
+            $url = 'http://gw.api.taobao.com/router/rest?' . $strParam;
+        } else {
+            $url = 'http://gw.api.tbsandbox.com/router/rest?' . $strParam;
+        }
         $result = file_get_contents($url);
         $result = json_decode($result, true);
         $this->output = $result;
@@ -596,12 +629,19 @@ class TbkService extends Service
      */
     private function createSign()
     {
-        if (empty($this->app_secret)) $this->getConfig();
-        if (empty($this->app_secret)) throw new DtaException('请检查app_secret参数');
-
+        if (empty($this->app_secret)) {
+            $this->getConfig();
+        }
+        if (empty($this->app_secret)) {
+            throw new DtaException('请检查app_secret参数');
+        }
         $sign = $this->app_secret;
         ksort($this->param);
-        foreach ($this->param as $key => $val) if ($key != '' && $val != '') $sign .= $key . $val;
+        foreach ($this->param as $key => $val) {
+            if ($key != '' && $val != '') {
+                $sign .= $key . $val;
+            }
+        }
         $sign .= $this->app_secret;
         $sign = strtoupper(md5($sign));
         return $sign;
@@ -614,7 +654,11 @@ class TbkService extends Service
     private function createStrParam()
     {
         $strParam = '';
-        foreach ($this->param as $key => $val) if ($key != '' && $val != '') $strParam .= $key . '=' . urlencode($val) . '&';
+        foreach ($this->param as $key => $val) {
+            if ($key != '' && $val != '') {
+                $strParam .= $key . '=' . urlencode($val) . '&';
+            }
+        }
         return $strParam;
     }
 

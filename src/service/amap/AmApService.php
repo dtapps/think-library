@@ -63,8 +63,12 @@ class AmApService extends Service
      */
     public function weather($city = "110101", $extensions = "base")
     {
-        if (empty($this->key)) $this->getConfig();
-        if (empty($this->key)) throw new DtaException('请检查key参数');
+        if (empty($this->key)) {
+            $this->getConfig();
+        }
+        if (empty($this->key)) {
+            throw new DtaException('请检查key参数');
+        }
         $data = http_build_query([
             "city" => $city,
             "extensions" => $extensions,

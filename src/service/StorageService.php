@@ -69,7 +69,9 @@ class StorageService extends Service
      */
     public function save(string $name)
     {
-        if (empty($this->path)) $this->getConfig();
+        if (empty($this->path)) {
+            $this->getConfig();
+        }
         // 判断文件夹是否存在
         is_dir($this->path) or mkdir($this->path, 0777, true);
         $return_content = $this->http_get_data($this->remotely);
@@ -110,8 +112,14 @@ class StorageService extends Service
      */
     public function delete(string $name)
     {
-        if (empty($this->path)) $this->getConfig();
-        if (file_exists($name)) if (unlink($name)) return true;
+        if (empty($this->path)) {
+            $this->getConfig();
+        }
+        if (file_exists($name)) {
+            if (unlink($name)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -124,10 +132,15 @@ class StorageService extends Service
     {
         if (empty($this->path)) $this->getConfig();
         $bytes = filesize($this->path . $name);
-        if ($bytes >= 1073741824) $bytes = round($bytes / 1073741824 * 100) / 100 . 'GB';
-        elseif ($bytes >= 1048576) $bytes = round($bytes / 1048576 * 100) / 100 . 'MB';
-        elseif ($bytes >= 1024) $bytes = round($bytes / 1024 * 100) / 100 . 'KB';
-        else   $bytes = $bytes . 'Bytes';
+        if ($bytes >= 1073741824) {
+            $bytes = round($bytes / 1073741824 * 100) / 100 . 'GB';
+        } elseif ($bytes >= 1048576) {
+            $bytes = round($bytes / 1048576 * 100) / 100 . 'MB';
+        } elseif ($bytes >= 1024) {
+            $bytes = round($bytes / 1024 * 100) / 100 . 'KB';
+        } else {
+            $bytes = $bytes . 'Bytes';
+        }
         return $bytes;
     }
 
@@ -137,7 +150,9 @@ class StorageService extends Service
      */
     public function getPath()
     {
-        if (empty($this->path)) $this->getConfig();
+        if (empty($this->path)) {
+            $this->getConfig();
+        }
         return $this->path;
     }
 }

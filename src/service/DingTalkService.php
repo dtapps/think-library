@@ -76,14 +76,20 @@ class DingTalkService extends Service
      */
     private function sendMsg(array $data)
     {
-        if (empty($this->access_token)) throw new DtaException("请检查access_token");
-        if (empty($data['msgtype'])) $data['msgtype'] = $this->msg_type;
+        if (empty($this->access_token)) {
+            throw new DtaException("请检查access_token");
+        }
+        if (empty($data['msgtype'])) {
+            $data['msgtype'] = $this->msg_type;
+        }
         $result = HttpService::instance()
             ->url("{$this->oapi_url}robot/send?access_token=" . $this->access_token)
             ->data($data)
             ->post()
             ->toArray();
-        if ($result['errcode'] == 0) return $result['errmsg'];
-        throw new HttpException(404,  json_encode($result, JSON_UNESCAPED_UNICODE));
+        if ($result['errcode'] == 0) {
+            return $result['errmsg'];
+        }
+        throw new HttpException(404, json_encode($result, JSON_UNESCAPED_UNICODE));
     }
 }

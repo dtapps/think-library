@@ -20,6 +20,7 @@
 namespace DtApp\ThinkLibrary\service;
 
 use DtApp\ThinkLibrary\Service;
+use Exception;
 
 /**
  * 系统服务
@@ -45,13 +46,23 @@ class SystemService extends Service
         $url_html_suffix = $this->app->config->get('route.url_html_suffix', 'html');
         $pathinfo_depr = $this->app->config->get('route.pathinfo_depr', '/');
         $url_common_param = $this->app->config->get('route.url_common_param', true);
-        if (empty($url)) $url = "{$default_app}/{$default_action}/{$default_controller}";
+        if (empty($url)) {
+            $url = "{$default_app}/{$default_action}/{$default_controller}";
+        }
         if (empty($suffix) && !empty($fillSuffix)) {
-            if (empty($url_common_param)) $location = $this->app->route->buildUrl($url, $vars)->suffix($suffix)->domain($domain)->build();
-            else $location = $this->app->route->buildUrl($url, [])->suffix($suffix)->domain($domain)->build();
-            if (empty($vars)) $location = substr($location . "{$pathinfo_depr}" . $this->arr_to_str($vars, $pathinfo_depr), 0, -1) . ".{$url_html_suffix}";
-            else $location = $location . "{$pathinfo_depr}" . $this->arr_to_str($vars, $pathinfo_depr) . ".{$url_html_suffix}";
-        } else $location = $this->app->route->buildUrl($url, $vars)->suffix($suffix)->domain($domain)->build();
+            if (empty($url_common_param)) {
+                $location = $this->app->route->buildUrl($url, $vars)->suffix($suffix)->domain($domain)->build();
+            } else {
+                $location = $this->app->route->buildUrl($url, [])->suffix($suffix)->domain($domain)->build();
+            }
+            if (empty($vars)) {
+                $location = substr($location . "{$pathinfo_depr}" . $this->arr_to_str($vars, $pathinfo_depr), 0, -1) . ".{$url_html_suffix}";
+            } else {
+                $location = $location . "{$pathinfo_depr}" . $this->arr_to_str($vars, $pathinfo_depr) . ".{$url_html_suffix}";
+            }
+        } else {
+            $location = $this->app->route->buildUrl($url, $vars)->suffix($suffix)->domain($domain)->build();
+        }
         return $location;
     }
 
@@ -64,7 +75,9 @@ class SystemService extends Service
     private function arr_to_str($arr, $glue = "/")
     {
         $t = '';
-        foreach ($arr as $k => $v) $t .= $k . $glue . $v . $glue;
+        foreach ($arr as $k => $v) {
+            $t .= $k . $glue . $v . $glue;
+        }
         $t = substr($t, 0, -1); // 利用字符串截取函数消除最后一个
         return $t;
     }
@@ -149,7 +162,7 @@ class SystemService extends Service
         try {
             $ip_cmd = "ifconfig eth0 | sed -n '/inet addr/p' | awk '{print $2}' | awk -F ':' '{print $2}'";
             return trim(exec($ip_cmd));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return "0.0.0.0";
         }
     }

@@ -56,7 +56,9 @@ class WorkKileService extends Service
             ->url($webhook)
             ->data($data)
             ->toArray();
-        if ($result['code'] == 200) return true;
+        if ($result['code'] == 200) {
+            return true;
+        }
         return false;
     }
 }

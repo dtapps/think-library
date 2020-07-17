@@ -20,6 +20,8 @@
 namespace DtApp\ThinkLibrary\service\ksyun;
 
 use DtApp\ThinkLibrary\Service;
+use Ks3Client;
+use Ks3ServiceException;
 
 /**
  * 金山云对象存储
@@ -76,12 +78,14 @@ class Ks3Service extends Service
      */
     public function upload(string $object, string $filePath)
     {
-        if (empty($this->accessKeyID)) $this->getConfig();
-        if (empty($this->accessKeySecret)) $this->getConfig();
-        if (empty($this->endpoint)) $this->getConfig();
+        if (empty($this->accessKeyID) || empty($this->accessKeySecret) || empty($this->endpoint)) {
+            $this->getConfig();
+        }
         require_once(__DIR__ . "/bin/Ks3Client.class.php");
-        $client = new \Ks3Client($this->accessKeyID, $this->accessKeySecret, $this->endpoint);
-        if (empty($this->bucket)) $this->getConfig();
+        $client = new Ks3Client($this->accessKeyID, $this->accessKeySecret, $this->endpoint);
+        if (empty($this->bucket)) {
+            $this->getConfig();
+        }
         $content = fopen($filePath, "r");
         $args = [
             "Bucket" => $this->bucket,
@@ -105,7 +109,7 @@ class Ks3Service extends Service
         try {
             $client->putObjectByFile($args);
             return $this->app->config->get('dtapp.ksyun.ks3.url', '') . $object;
-        } catch (\Ks3ServiceException $e) {
+        } catch (Ks3ServiceException $e) {
             return false;
         }
     }

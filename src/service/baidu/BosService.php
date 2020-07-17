@@ -79,9 +79,9 @@ class BosService extends Service
      */
     public function upload(string $object, string $filePath)
     {
-        if (empty($this->accessKeyId)) $this->getConfig();
-        if (empty($this->secretAccessKey)) $this->getConfig();
-        if (empty($this->endpoint)) $this->getConfig();
+        if (empty($this->accessKeyId) || empty($this->secretAccessKey) || empty($this->endpoint)) {
+            $this->getConfig();
+        }
         // 设置BosClient的Access Key ID、Secret Access Key和ENDPOINT
         $BOS_TEST_CONFIG = array(
             'credentials' => array(
@@ -92,7 +92,9 @@ class BosService extends Service
         );
         $client = new BosClient($BOS_TEST_CONFIG);
         // 从文件中直接上传Object
-        if (empty($this->bucket)) $this->getConfig();
+        if (empty($this->bucket)) {
+            $this->getConfig();
+        }
         $client->putObjectFromFile($this->bucket, $object, $filePath);
         return $this->app->config->get('dtapp.baidu.bos.url', '') . $object;
     }

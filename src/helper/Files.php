@@ -39,8 +39,14 @@ class Files
      */
     public function delete(string $name): bool
     {
-        if (empty($name)) throw new Exception('请检查需要删除文件夹的名称');
-        if (file_exists($name)) if (unlink($name)) return true;
+        if (empty($name)) {
+            throw new Exception('请检查需要删除文件夹的名称');
+        }
+        if (file_exists($name)) {
+            if (unlink($name)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -58,14 +64,20 @@ class Files
         while ($file = readdir($dh)) {
             if ($file != "." && $file != "..") {
                 $fullpath = $name . "/" . $file;
-                if (!is_dir($fullpath)) unlink($fullpath);
-                else $this->deletes($fullpath);
+                if (!is_dir($fullpath)) {
+                    unlink($fullpath);
+                } else {
+                    $this->deletes($fullpath);
+                }
             }
         }
         closedir($dh);
         //删除当前文件夹：
-        if (rmdir($name)) return true;
-        else return false;
+        if (rmdir($name)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -87,7 +99,9 @@ class Files
             // 打开压缩包
             $zip->open($name, ZipArchive::CREATE);
             //向压缩包中添加文件
-            foreach ($fileList as $file) $zip->addFile($file, basename($file));
+            foreach ($fileList as $file) {
+                $zip->addFile($file, basename($file));
+            }
             //关闭压缩包
             $zip->close();
             return true;
@@ -155,7 +169,9 @@ class Files
      */
     public function judgeFile(string $path): bool
     {
-        if (file_exists($path)) return true;
+        if (file_exists($path)) {
+            return true;
+        }
         return false;
     }
 
@@ -166,7 +182,9 @@ class Files
      */
     public function judgeContents(string $path): bool
     {
-        if (is_dir($path)) return true;
+        if (is_dir($path)) {
+            return true;
+        }
         return false;
     }
 }

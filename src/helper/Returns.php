@@ -41,8 +41,11 @@ class Returns
     {
         date_default_timezone_set('Asia/Shanghai');
         header('Content-Type:application/json; charset=utf-8');
-        if (!empty($ext) && is_array($ext)) throw new HttpResponseException(json(array_merge(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data], $ext)));
-        else throw new HttpResponseException(json(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data]));
+        if (!empty($ext) && is_array($ext)) {
+            throw new HttpResponseException(json(array_merge(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data], $ext)));
+        } else {
+            throw new HttpResponseException(json(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data]));
+        }
     }
 
     /**
@@ -56,7 +59,10 @@ class Returns
     {
         date_default_timezone_set('Asia/Shanghai');
         header('Content-Type:application/json; charset=utf-8');
-        if (!empty($ext) && is_array($ext)) throw new HttpResponseException(json(array_merge(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data], $ext)));
-        else throw new HttpResponseException(json(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data]));
+        if (!empty($ext) && is_array($ext)) {
+            throw new HttpResponseException(json(array_merge(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data], $ext)));
+        } else {
+            throw new HttpResponseException(json(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data]));
+        }
     }
 }

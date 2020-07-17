@@ -64,8 +64,12 @@ class LbsYunService extends Service
      */
     public function weather($district_id = 110100, string $coordtype = "bd09ll", string $location = "")
     {
-        if (empty($this->ak)) $this->getConfig();
-        if (empty($this->ak)) throw new DtaException('请检查ak参数');
+        if (empty($this->ak)) {
+            $this->getConfig();
+        }
+        if (empty($this->ak)) {
+            throw new DtaException('请检查ak参数');
+        }
         $data = http_build_query([
             "district_id" => $district_id,
             "coordtype" => $coordtype,
@@ -91,8 +95,12 @@ class LbsYunService extends Service
      */
     public function weatherAbroad($district_id = 110100, string $coordtype = "bd09ll", string $location = "", string $language = "cn")
     {
-        if (empty($this->ak)) $this->getConfig();
-        if (empty($this->ak)) throw new DtaException('请检查ak参数');
+        if (empty($this->ak)) {
+            $this->getConfig();
+        }
+        if (empty($this->ak)) {
+            throw new DtaException('请检查ak参数');
+        }
         $data = http_build_query([
             "district_id" => $district_id,
             "coordtype" => $coordtype,

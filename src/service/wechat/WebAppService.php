@@ -148,7 +148,9 @@ class WebAppService extends Service
      */
     public function redirectUri(string $redirectUri)
     {
-        if (empty(Pregs::isLink($redirectUri))) throw new DtaException("请检查redirectUri，是否正确");
+        if (empty(Pregs::isLink($redirectUri))) {
+            throw new DtaException("请检查redirectUri，是否正确");
+        }
         $this->redirect_uri = Urls::lenCode($redirectUri);
         return $this;
     }
@@ -161,9 +163,13 @@ class WebAppService extends Service
      */
     public function scope(string $scope)
     {
-        if ($scope === "snsapi_base") $this->scope = $scope;
-        elseif ($scope === "snsapi_userinfo") $this->scope = $scope;
-        else throw new DtaException("请检查scope参数");
+        if ($scope === "snsapi_base") {
+            $this->scope = $scope;
+        } elseif ($scope === "snsapi_userinfo") {
+            $this->scope = $scope;
+        } else {
+            throw new DtaException("请检查scope参数");
+        }
         return $this;
     }
 
@@ -197,8 +203,12 @@ class WebAppService extends Service
      */
     public function oauth2()
     {
-        if (empty($this->app_id)) $this->getConfig();
-        if (strlen($this->state) > 128) throw new DtaException("请检查state参数，最多128字节");
+        if (empty($this->app_id)) {
+            $this->getConfig();
+        }
+        if (strlen($this->state) > 128) {
+            throw new DtaException("请检查state参数，最多128字节");
+        }
         $params = Urls::toParams([
             'appid' => $this->app_id,
             'redirect_uri' => $this->redirect_uri,
@@ -218,10 +228,15 @@ class WebAppService extends Service
      */
     public function accessToken(string $code, bool $is = true)
     {
-        if (empty($this->app_id)) $this->getConfig();
-        if (empty($this->app_secret)) $this->getConfig();
-        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
-        if (empty($this->app_secret)) throw new DtaException('请检查app_secret参数');
+        if (empty($this->app_id) || empty($this->app_secret)) {
+            $this->getConfig();
+        }
+        if (empty($this->app_id)) {
+            throw new DtaException('请检查app_id参数');
+        }
+        if (empty($this->app_secret)) {
+            throw new DtaException('请检查app_secret参数');
+        }
         return HttpService::instance()
             ->url("{$this->api_url}sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
             ->toArray($is);
@@ -236,8 +251,12 @@ class WebAppService extends Service
      */
     public function refreshToken(string $refreshToken, bool $is = true)
     {
-        if (empty($this->app_id)) $this->getConfig();
-        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
+        if (empty($this->app_id)) {
+            $this->getConfig();
+        }
+        if (empty($this->app_id)) {
+            throw new DtaException('请检查app_id参数');
+        }
         $this->grant_type = "refresh_token";
         return HttpService::instance()
             ->url("{$this->api_url}sns/oauth2/refresh_token?appid={$this->app_id}&grant_type={$this->grant_type}&refresh_token={$refreshToken}")
@@ -254,8 +273,9 @@ class WebAppService extends Service
      */
     public function useInfo(string $accessToken, string $openid, $lang = "zh_CN", bool $is = true)
     {
-        if (empty($this->app_id)) $this->getConfig();
-        if (empty($this->app_secret)) $this->getConfig();
+        if (empty($this->app_id) || empty($this->app_secret)) {
+            $this->getConfig();
+        }
         return HttpService::instance()
             ->url("{$this->api_url}sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}")
             ->toArray($is);
@@ -270,8 +290,9 @@ class WebAppService extends Service
      */
     public function auth(string $accessToken, string $openid, bool $is = true)
     {
-        if (empty($this->app_id)) $this->getConfig();
-        if (empty($this->app_secret)) $this->getConfig();
+        if (empty($this->app_id) || empty($this->app_secret)) {
+            $this->getConfig();
+        }
         return HttpService::instance()
             ->url("{$this->api_url}sns/auth?access_token={$accessToken}&openid={$openid}")
             ->toArray($is);
@@ -287,8 +308,12 @@ class WebAppService extends Service
      */
     public function share()
     {
-        if (empty($this->app_id)) $this->getConfig();
-        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
+        if (empty($this->app_id)) {
+            $this->getConfig();
+        }
+        if (empty($this->app_id)) {
+            throw new DtaException('请检查app_id参数');
+        }
         // 获取数据
         $accessToken = $this->getAccessToken();
         if (!isset($accessToken['access_token'])) throw  new DtaException("获取access_token错误，" . $accessToken['errmsg']);
@@ -298,11 +323,15 @@ class WebAppService extends Service
         if (!empty($res['errcode'])) {
             // 获取数据
             $accessToken = $this->getAccessToken();
-            if (!isset($accessToken['access_token'])) throw  new DtaException("获取access_token错误，" . $accessToken['errmsg']);
+            if (!isset($accessToken['access_token'])) {
+                throw  new DtaException("获取access_token错误，" . $accessToken['errmsg']);
+            }
             $res = HttpService::instance()
                 ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
                 ->toArray();
-            if (!empty($res['errcode'])) throw new DtaException('accessToken已过期');
+            if (!empty($res['errcode'])) {
+                throw new DtaException('accessToken已过期');
+            }
         }
         // 注意 URL 一定要动态获取，不能 hardcode.
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
@@ -327,7 +356,9 @@ class WebAppService extends Service
     {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $str = "";
-        for ($i = 0; $i < $length; $i++) $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+        for ($i = 0; $i < $length; $i++) {
+            $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+        }
         return $str;
     }
 
@@ -593,12 +624,18 @@ class WebAppService extends Service
      */
     private function getAccessToken()
     {
-        if (empty($this->cache)) $this->getConfig();
-        if (empty($this->app_id)) $this->getConfig();
-        if (empty($this->app_secret)) $this->getConfig();
-        if (empty($this->cache)) throw new DtaException('请检查cache参数');
-        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
-        if (empty($this->app_secret)) throw new DtaException('请检查app_secret参数');
+        if (empty($this->cache) || empty($this->app_id) || empty($this->app_secret)) {
+            $this->getConfig();
+        }
+        if (empty($this->cache)) {
+            throw new DtaException('请检查cache参数');
+        }
+        if (empty($this->app_id)) {
+            throw new DtaException('请检查app_id参数');
+        }
+        if (empty($this->app_secret)) {
+            throw new DtaException('请检查app_secret参数');
+        }
 
         $this->grant_type = "client_credential";
         if ($this->cache == "file") {
@@ -673,7 +710,9 @@ class WebAppService extends Service
                 $access_token['access_token'] = $accessToken_res['access_token'];
             }
             return $access_token;
-        } else throw new DtaException("驱动方式错误");
+        } else {
+            throw new DtaException("驱动方式错误");
+        }
     }
 
     /**
@@ -724,8 +763,11 @@ class WebAppService extends Service
         // 在字符串接商户支付秘钥
         $stringSignTemp = "{$stringA}&key=" . $this->mch_key;
         //步骤四：MD5或HMAC-SHA256C加密
-        if ($hmacsha256) $str = hash_hmac("sha256", $stringSignTemp, $this->mch_key);
-        else $str = md5($stringSignTemp);
+        if ($hmacsha256) {
+            $str = hash_hmac("sha256", $stringSignTemp, $this->mch_key);
+        } else {
+            $str = md5($stringSignTemp);
+        }
         //符转大写
         return strtoupper($str);
     }

@@ -36,7 +36,11 @@ class Requests
      */
     public function isEmpty(array $data, array $arr): array
     {
-        foreach ($arr as $k => $v) if (empty(isset($data["$v"]) ? $data["$v"] : '')) return [];
+        foreach ($arr as $k => $v) {
+            if (empty(isset($data["$v"]) ? $data["$v"] : '')) {
+                return [];
+            }
+        }
         return $data;
     }
 
@@ -48,7 +52,11 @@ class Requests
      */
     public function isEmptyRet(array $data, array $arr): array
     {
-        foreach ($arr as $k => $v) if (empty(isset($data["$v"]) ? $data["$v"] : '')) \DtApp\ThinkLibrary\facade\Returns::jsonError('请检查参数', 102);
+        foreach ($arr as $k => $v) {
+            if (empty(isset($data["$v"]) ? $data["$v"] : '')) {
+                \DtApp\ThinkLibrary\facade\Returns::jsonError('请检查参数', 102);
+            }
+        }
         return $data;
     }
 
@@ -104,10 +112,14 @@ class Requests
     public function isMobile(): bool
     {
         // 如果有HTTP_X_WAP_PROFILE则一定是移动设备
-        if (isset($_SERVER['HTTP_X_WAP_PROFILE'])) return true;
+        if (isset($_SERVER['HTTP_X_WAP_PROFILE'])) {
+            return true;
+        }
         //如果via信息含有wap则一定是移动设备,部分服务商会屏蔽该信息
         //找不到为flase,否则为true
-        if (isset($_SERVER['HTTP_VIA'])) return stristr(request()->server('HTTP_VIA'), "wap") ? true : false;
+        if (isset($_SERVER['HTTP_VIA'])) {
+            return stristr(request()->server('HTTP_VIA'), "wap") ? true : false;
+        }
         //判断手机发送的客户端标志
         if (isset($_SERVER['HTTP_USER_AGENT'])) {
             $clientkeywords = [
@@ -117,13 +129,17 @@ class Requests
                 'openwave', 'nexusone', 'cldc', 'midp', 'wap', 'mobile', 'alipay'
             ];
             // 从HTTP_USER_AGENT中查找手机浏览器的关键字
-            if (preg_match("/(" . implode('|', $clientkeywords) . ")/i", strtolower(request()->server('HTTP_USER_AGENT')))) return true;
+            if (preg_match("/(" . implode('|', $clientkeywords) . ")/i", strtolower(request()->server('HTTP_USER_AGENT')))) {
+                return true;
+            }
         }
         //协议法，因为有可能不准确，放到最后判断
         if (isset($_SERVER['HTTP_ACCEPT'])) {
             // 如果只支持wml并且不支持html那一定是移动设备
             // 如果支持wml和html但是wml在html之前则是移动设备
-            if ((strpos(request()->server('HTTP_ACCEPT'), 'vnd.wap.wml') !== false) && (strpos(request()->server('HTTP_ACCEPT'), 'text/html') === false || (strpos(request()->server('HTTP_ACCEPT'), 'vnd.wap.wml') < strpos(request()->server('HTTP_ACCEPT'), 'text/html')))) return true;
+            if ((strpos(request()->server('HTTP_ACCEPT'), 'vnd.wap.wml') !== false) && (strpos(request()->server('HTTP_ACCEPT'), 'text/html') === false || (strpos(request()->server('HTTP_ACCEPT'), 'vnd.wap.wml') < strpos(request()->server('HTTP_ACCEPT'), 'text/html')))) {
+                return true;
+            }
         }
         return false;
     }
@@ -134,7 +150,9 @@ class Requests
      */
     public function isWeXin(): bool
     {
-        if (strpos(request()->server('HTTP_USER_AGENT'), 'MicroMessenger') !== false) return true;
+        if (strpos(request()->server('HTTP_USER_AGENT'), 'MicroMessenger') !== false) {
+            return true;
+        }
         return false;
     }
 
@@ -144,7 +162,9 @@ class Requests
      */
     public function isWeXinMp(): bool
     {
-        if (strpos(request()->server('HTTP_USER_AGENT'), 'miniProgram') !== false) return true;
+        if (strpos(request()->server('HTTP_USER_AGENT'), 'miniProgram') !== false) {
+            return true;
+        }
         return false;
     }
 
@@ -154,7 +174,9 @@ class Requests
      */
     public function isAliPay(): bool
     {
-        if (strpos(request()->server('HTTP_USER_AGENT'), 'Alipay') !== false) return true;
+        if (strpos(request()->server('HTTP_USER_AGENT'), 'Alipay') !== false) {
+            return true;
+        }
         return false;
     }
 
@@ -164,7 +186,11 @@ class Requests
      */
     public function isQQ(): bool
     {
-        if (strpos(request()->server('HTTP_USER_AGENT'), 'QQ') !== false) if (strpos(request()->server('HTTP_USER_AGENT'), '_SQ_') !== false) return true;
+        if (strpos(request()->server('HTTP_USER_AGENT'), 'QQ') !== false) {
+            if (strpos(request()->server('HTTP_USER_AGENT'), '_SQ_') !== false) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -175,8 +201,11 @@ class Requests
     public function isQQBrowser(): bool
     {
         if (strpos(request()->server('HTTP_USER_AGENT'), 'QQ') !== false) {
-            if (strpos(request()->server('HTTP_USER_AGENT'), '_SQ_') !== false) return false;
-            else return true;
+            if (strpos(request()->server('HTTP_USER_AGENT'), '_SQ_') !== false) {
+                return false;
+            } else {
+                return true;
+            }
         }
         return false;
     }

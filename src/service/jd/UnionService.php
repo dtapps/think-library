@@ -269,8 +269,12 @@ class UnionService extends Service
      */
     public function goodsJIngFenQuery()
     {
-        if (!isset($this->param['pageIndex'])) $this->param['pageIndex'] = 1;
-        if (!isset($this->param['pageSize'])) $this->param['pageSize'] = 20;
+        if (!isset($this->param['pageIndex'])) {
+            $this->param['pageIndex'] = 1;
+        }
+        if (!isset($this->param['pageSize'])) {
+            $this->param['pageSize'] = 20;
+        }
         $this->method = 'jd.union.open.goods.jingfen.query';
         return $this;
     }
@@ -327,10 +331,18 @@ class UnionService extends Service
     public function toArray()
     {
         //首先检测是否支持curl
-        if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
-        if (empty($this->app_key)) $this->getConfig();
-        if (empty($this->app_key)) throw new DtaException('请检查app_key参数');
-        if (empty($this->method)) throw new DtaException('请检查method参数');
+        if (!extension_loaded("curl")) {
+            throw new HttpException(404, '请开启curl模块！');
+        }
+        if (empty($this->app_key)) {
+            $this->getConfig();
+        }
+        if (empty($this->app_key)) {
+            throw new DtaException('请检查app_key参数');
+        }
+        if (empty($this->method)) {
+            throw new DtaException('请检查method参数');
+        }
         $this->params['method'] = $this->method;
         $this->params['app_key'] = $this->app_key;
         $this->params['timestamp'] = date('Y-m-d H:i:s');
@@ -341,12 +353,20 @@ class UnionService extends Service
         $this->http();
         $response = Strings::replace('.', '_', $this->method) . "_response";
         if (isset($this->output["$response"]['result'])) {
-            if (is_array($this->output["$response"]['result'])) return $this->output["$response"]['result'];
-            if (is_object($this->output["$response"]['result'])) $this->output = json_encode($this->output["$response"]['result'], JSON_UNESCAPED_UNICODE);
+            if (is_array($this->output["$response"]['result'])) {
+                return $this->output["$response"]['result'];
+            }
+            if (is_object($this->output["$response"]['result'])) {
+                $this->output = json_encode($this->output["$response"]['result'], JSON_UNESCAPED_UNICODE);
+            }
             return json_decode($this->output["$response"]['result'], true);
         } else {
-            if (is_array($this->output)) return $this->output;
-            if (is_object($this->output)) $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
+            if (is_array($this->output)) {
+                return $this->output;
+            }
+            if (is_object($this->output)) {
+                $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
+            }
             return json_decode($this->output, true);
         }
     }
@@ -358,12 +378,19 @@ class UnionService extends Service
      */
     private function createSign()
     {
-        if (empty($this->secret_key)) $this->getConfig();
-        if (empty($this->secret_key)) throw new DtaException('请检查secret_key参数');
-
+        if (empty($this->secret_key)) {
+            $this->getConfig();
+        }
+        if (empty($this->secret_key)) {
+            throw new DtaException('请检查secret_key参数');
+        }
         $sign = $this->secret_key;
         ksort($this->params);
-        foreach ($this->params as $key => $val) if ($key != '' && $val != '') $sign .= $key . $val;
+        foreach ($this->params as $key => $val) {
+            if ($key != '' && $val != '') {
+                $sign .= $key . $val;
+            }
+        }
         $sign .= $this->secret_key;
         $sign = strtoupper(md5($sign));
         return $sign;
@@ -376,7 +403,11 @@ class UnionService extends Service
     private function createStrParam()
     {
         $strParam = '';
-        foreach ($this->params as $key => $val) if ($key != '' && $val != '') $strParam .= $key . '=' . urlencode($val) . '&';
+        foreach ($this->params as $key => $val) {
+            if ($key != '' && $val != '') {
+                $strParam .= $key . '=' . urlencode($val) . '&';
+            }
+        }
         return $strParam;
     }
 

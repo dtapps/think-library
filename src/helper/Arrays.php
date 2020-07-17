@@ -59,11 +59,16 @@ class Arrays
         $arrRet = array();
         if (!isset($array) || empty($array)) return $arrRet;
         $iCount = count($array) / $num;
-        if (!is_int($iCount)) $iCount = ceil($iCount);
-        else $iCount += 1;
+        if (!is_int($iCount)) {
+            $iCount = ceil($iCount);
+        } else {
+            $iCount += 1;
+        }
         for ($i = 0; $i < $iCount; ++$i) {
             $arrInfos = array_slice($array, $i * $num, $num);
-            if (empty($arrInfos)) continue;
+            if (empty($arrInfos)) {
+                continue;
+            }
             $arrRet[] = $arrInfos;
             unset($arrInfos);
         }
@@ -78,7 +83,11 @@ class Arrays
     public function unique(array $array)
     {
         $out = array();
-        foreach ($array as $key => $value) if (!in_array($value, $out)) $out[$key] = $value;
+        foreach ($array as $key => $value) {
+            if (!in_array($value, $out)) {
+                $out[$key] = $value;
+            }
+        }
         $out = array_values($out);
         return $out;
     }
@@ -96,10 +105,15 @@ class Arrays
         $key_arrays = array();
         if (is_array($arrays)) {
             foreach ($arrays as $array) {
-                if (is_array($array)) $key_arrays[] = $array[$sort_key];
-                else return [];
+                if (is_array($array)) {
+                    $key_arrays[] = $array[$sort_key];
+                } else {
+                    return [];
+                }
             }
-        } else return [];
+        } else {
+            return [];
+        }
         array_multisort($key_arrays, $sort_order, $sort_type, $arrays);
         return $arrays;
     }

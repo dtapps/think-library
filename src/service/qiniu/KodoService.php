@@ -73,9 +73,9 @@ class KodoService extends Service
      */
     public function upload(string $object, string $filePath)
     {
-        if (empty($this->accessKey)) $this->getConfig();
-        if (empty($this->secretKey)) $this->getConfig();
-        if (empty($this->bucket)) $this->getConfig();
+        if (empty($this->accessKey) || empty($this->secretKey) || empty($this->bucket)) {
+            $this->getConfig();
+        }
         // 初始化签权对象
         $auth = new Auth($this->accessKey, $this->secretKey);
         // 生成上传Token
@@ -84,7 +84,10 @@ class KodoService extends Service
         $uploadMgr = new UploadManager();
         // 调用 UploadManager 的 putFile 方法进行文件的上传。
         list($ret, $err) = $uploadMgr->putFile($token, $object, $filePath);
-        if ($err !== null) return false;
-        else return $this->app->config->get('dtapp.qiniu.kodo.url', '') . $object;
+        if ($err !== null) {
+            return false;
+        } else {
+            return $this->app->config->get('dtapp.qiniu.kodo.url', '') . $object;
+        }
     }
 }

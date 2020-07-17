@@ -332,10 +332,15 @@ class MiniService extends Service
      */
     public function code2Session(string $js_code)
     {
-        if (empty($this->app_id)) $this->getConfig();
-        if (empty($this->app_secret)) $this->getConfig();
-        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
-        if (empty($this->app_secret)) throw new DtaException('请检查app_secret参数');
+        if (empty($this->app_id) || empty($this->app_secret)) {
+            $this->getConfig();
+        }
+        if (empty($this->app_id)) {
+            throw new DtaException('请检查app_id参数');
+        }
+        if (empty($this->app_secret)) {
+            throw new DtaException('请检查app_secret参数');
+        }
         $this->grant_type = "authorization_code";
         $url = "{$this->api_url}sns/jscode2session?appid={$this->app_id}&secret={$this->app_secret}&js_code={$js_code}&grant_type={$this->grant_type}";
         return HttpService::instance()
@@ -354,7 +359,9 @@ class MiniService extends Service
     public function userInfo(string $js_code, string $encrypted_data, string $iv)
     {
         $session = $this->code2Session($js_code);
-        if (!isset($session['openid'])) return false;
+        if (!isset($session['openid'])) {
+            return false;
+        }
         $result = openssl_decrypt(base64_decode($encrypted_data), "AES-128-CBC", base64_decode($session['session_key']), 1, base64_decode($iv));
         return json_decode($result, true);
     }
@@ -370,7 +377,9 @@ class MiniService extends Service
     public function userPhone(string $js_code, string $encrypted_data, string $iv)
     {
         $session = $this->code2Session($js_code);
-        if (!isset($session['openid'])) return false;
+        if (!isset($session['openid'])) {
+            return false;
+        }
         $result = openssl_decrypt(base64_decode($encrypted_data), "AES-128-CBC", base64_decode($session['session_key']), 1, base64_decode($iv));
         return json_decode($result, true);
     }
@@ -413,12 +422,18 @@ class MiniService extends Service
      */
     private function getAccessToken()
     {
-        if (empty($this->cache)) $this->getConfig();
-        if (empty($this->app_id)) $this->getConfig();
-        if (empty($this->app_secret)) $this->getConfig();
-        if (empty($this->cache)) throw new DtaException('请检查cache参数');
-        if (empty($this->app_id)) throw new DtaException('请检查app_id参数');
-        if (empty($this->app_secret)) throw new DtaException('请检查app_secret参数');
+        if (empty($this->cache) || empty($this->app_id) || empty($this->app_secret)) {
+            $this->getConfig();
+        }
+        if (empty($this->cache)) {
+            throw new DtaException('请检查cache参数');
+        }
+        if (empty($this->app_id)) {
+            throw new DtaException('请检查app_id参数');
+        }
+        if (empty($this->app_secret)) {
+            throw new DtaException('请检查app_secret参数');
+        }
         $this->grant_type = "client_credential";
         if ($this->cache == "file") {
             // 文件名
@@ -469,6 +484,8 @@ class MiniService extends Service
                 $access_token['access_token'] = $accessToken_res['access_token'];
             }
             return $access_token;
-        } else throw new DtaException("驱动方式错误");
+        } else {
+            throw new DtaException("驱动方式错误");
+        }
     }
 }

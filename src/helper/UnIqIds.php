@@ -39,11 +39,19 @@ class UnIqIds
     {
         $numbs = '0123456789';
         $chars = 'abcdefghijklmnopqrstuvwxyz';
-        if (intval($type) === 1) $chars = $numbs;
-        if (intval($type) === 2) $chars = "{$chars}";
-        if (intval($type) === 3) $chars = "{$numbs}{$chars}";
+        if (intval($type) === 1) {
+            $chars = $numbs;
+        }
+        if (intval($type) === 2) {
+            $chars = "{$chars}";
+        }
+        if (intval($type) === 3) {
+            $chars = "{$numbs}{$chars}";
+        }
         $string = $prefix . $chars[rand(1, strlen($chars) - 1)];
-        if (isset($chars)) while (strlen($string) < $size) $string .= $chars[rand(0, strlen($chars) - 1)];
+        if (isset($chars)) {
+            while (strlen($string) < $size) $string .= $chars[rand(0, strlen($chars) - 1)];
+        }
         return $string;
     }
 
@@ -55,7 +63,9 @@ class UnIqIds
      */
     public function date($size = 16, $prefix = ''): string
     {
-        if ($size < 14) $size = 14;
+        if ($size < 14) {
+            $size = 14;
+        }
         $string = $prefix . date('Ymd') . (date('H') + date('i')) . date('s');
         while (strlen($string) < $size) $string .= rand(0, 9);
         return $string;
@@ -70,7 +80,9 @@ class UnIqIds
     public function number($size = 12, $prefix = ''): string
     {
         $time = time() . '';
-        if ($size < 10) $size = 10;
+        if ($size < 10) {
+            $size = 10;
+        }
         $string = $prefix . ($time[0] . $time[1]) . substr($time, 2) . rand(0, 9);
         while (strlen($string) < $size) $string .= rand(0, 9);
         return $string;

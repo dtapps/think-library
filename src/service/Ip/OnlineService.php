@@ -102,7 +102,9 @@ class OnlineService extends Service
      */
     public function baidu()
     {
-        if (empty($this->ip)) $this->ip = get_ip();
+        if (empty($this->ip)) {
+            $this->ip = get_ip();
+        }
         $url = "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query={$this->ip}&co=&resource_id=6006&ie=utf8&oe=utf8&cb=json";
         $res = HttpService::instance()
             ->url($url)
@@ -121,7 +123,9 @@ class OnlineService extends Service
     public function pConLine()
     {
         $url = "http://whois.pconline.com.cn/ipJson.jsp?json=true";
-        if (!empty($this->ip)) $url = "http://whois.pconline.com.cn/ipJson.jsp?json=true&ip={$this->ip}";
+        if (!empty($this->ip)) {
+            $url = "http://whois.pconline.com.cn/ipJson.jsp?json=true&ip={$this->ip}";
+        }
         $res = HttpService::instance()
             ->url($url)
             ->toArray(false);
@@ -137,7 +141,9 @@ class OnlineService extends Service
      */
     public function siNa()
     {
-        if (empty($this->ip)) $this->ip = get_ip();
+        if (empty($this->ip)) {
+            $this->ip = get_ip();
+        }
         $url = "http://ip.ws.126.net/ipquery?ip={$this->ip}";
         $res = HttpService::instance()
             ->url($url)
@@ -157,7 +163,9 @@ class OnlineService extends Service
      */
     public function so()
     {
-        if (empty($this->ip)) $this->ip = get_ip();
+        if (empty($this->ip)) {
+            $this->ip = get_ip();
+        }
         $url = "https://open.onebox.so.com/dataApi?type=ip&src=onebox&tpl=0&num=1&query=ip&ip={$this->ip}&url=ip";
         return HttpService::instance()
             ->url($url)
@@ -186,7 +194,9 @@ class OnlineService extends Service
      */
     public function taoBao(string $ip = '')
     {
-        if (empty($this->ip)) $this->ip = get_ip();
+        if (empty($this->ip)) {
+            $this->ip = get_ip();
+        }
         $url = "http://ip.taobao.com/service/getIpInfo.php?ip={$this->ip}";
         return HttpService::instance()
             ->url($url)
@@ -201,11 +211,15 @@ class OnlineService extends Service
      */
     public function aliYun(string $appcode = '')
     {
-        if (empty($this->ip)) $this->ip = get_ip();
+        if (empty($this->ip)) {
+            $this->ip = get_ip();
+        }
         $host = "http://iploc.market.alicloudapi.com";
         $path = "/v3/ip";
         $method = "GET";
-        if (empty($appcode)) throw new DtaException('请检查阿里-阿里云配置信息 appcode');
+        if (empty($appcode)) {
+            throw new DtaException('请检查阿里-阿里云配置信息 appcode');
+        }
         $headers = array();
         array_push($headers, "Authorization:APPCODE " . $appcode);
         $querys = "ip={$this->ip}";

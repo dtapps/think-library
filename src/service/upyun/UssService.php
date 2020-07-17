@@ -73,9 +73,9 @@ class UssService extends Service
      */
     public function upload(string $object, string $filePath)
     {
-        if (empty($this->serviceName)) $this->getConfig();
-        if (empty($this->operatorName)) $this->getConfig();
-        if (empty($this->operatorPassword)) $this->getConfig();
+        if (empty($this->serviceName) || empty($this->operatorName) || empty($this->operatorPassword)) {
+            $this->getConfig();
+        }
         $serviceConfig = new Config($this->serviceName, $this->operatorName, $this->operatorPassword);
         $client = new Upyun($serviceConfig);
         $file = fopen($filePath, 'r');

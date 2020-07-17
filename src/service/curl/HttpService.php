@@ -52,8 +52,11 @@ class HttpService extends Service
      */
     public function data($str)
     {
-        if (is_array($str)) $this->data = json_encode($str, JSON_UNESCAPED_UNICODE);
-        else $this->data = $str;
+        if (is_array($str)) {
+            $this->data = json_encode($str, JSON_UNESCAPED_UNICODE);
+        } else {
+            $this->data = $str;
+        }
         return $this;
     }
 
@@ -142,7 +145,9 @@ class HttpService extends Service
     public function toArray(bool $is = true)
     {
         //首先检测是否支持curl
-        if (!extension_loaded("curl")) throw new HttpException(404, '请开启curl模块！');
+        if (!extension_loaded("curl")) {
+            throw new HttpException(404, '请开启curl模块！');
+        }
         if ($this->method === 'GET') {
             $this->httpGet();
         } else if ($this->method === 'POST') {
@@ -151,9 +156,15 @@ class HttpService extends Service
             $this->httpXml();
         } else if ($this->method === 'FILE') {
             $this->httpFile();
-        } else throw new HttpException(404, '请求方式异常');
-        if (empty($is)) return $this->output;
-        if (is_array($this->output)) return $this->output;
+        } else {
+            throw new HttpException(404, '请求方式异常');
+        }
+        if (empty($is)) {
+            return $this->output;
+        }
+        if (is_array($this->output)) {
+            return $this->output;
+        }
         return json_decode($this->output, true);
     }
 

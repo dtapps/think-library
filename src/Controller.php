@@ -52,7 +52,9 @@ class Controller extends stdClass
         $this->app = $app;
         $this->request = $app->request;
         $this->app->bind('DtApp\ThinkLibrary\Controller', $this);
-        if (in_array($this->request->action(), get_class_methods(__CLASS__))) $this->error('Access without permission.');
+        if (in_array($this->request->action(), get_class_methods(__CLASS__))) {
+            $this->error('Access without permission.');
+        }
         $this->initialize();
     }
 
@@ -139,7 +141,9 @@ class Controller extends stdClass
      */
     public function callback($name, &$one = [], &$two = [])
     {
-        if (is_callable($name)) return call_user_func($name, $this, $one, $two);
+        if (is_callable($name)) {
+            return call_user_func($name, $this, $one, $two);
+        }
         foreach ([$name, "_{$this->app->request->action()}{$name}"] as $method) {
             if (method_exists($this, $method) && false === $this->$method($one, $two)) {
                 return false;

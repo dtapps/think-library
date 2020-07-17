@@ -77,16 +77,18 @@ class ObsService extends Service
      */
     public function upload(string $object, string $filePath)
     {
-        if (empty($this->key)) $this->getConfig();
-        if (empty($this->secret)) $this->getConfig();
-        if (empty($this->endpoint)) $this->getConfig();
+        if (empty($this->key) || empty($this->secret) || empty($this->endpoint)) {
+            $this->getConfig();
+        }
         // 创建ObsClient实例
         $obsClient = new ObsClient([
             'key' => $this->key,
             'secret' => $this->secret,
             'endpoint' => $this->endpoint
         ]);
-        if (empty($this->bucket)) $this->getConfig();
+        if (empty($this->bucket)) {
+            $this->getConfig();
+        }
         $resp = $obsClient->putObject([
             'Bucket' => $this->bucket,
             'Key' => $object,

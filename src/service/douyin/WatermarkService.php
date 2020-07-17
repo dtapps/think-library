@@ -52,12 +52,16 @@ class WatermarkService extends Service
     {
         if (Pregs::isLink($str)) {
             $url = $this->judgeUrl($str);
-            if (empty($url)) throw new DtaException('配置网址内容不正确');
+            if (empty($url)) {
+                throw new DtaException('配置网址内容不正确');
+            }
             $this->url = $url;
         } else {
             preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $str, $match);
             $url = $this->judgeUrl($match[0][0]);
-            if (empty($url)) throw new DtaException('配置网址内容不正确');
+            if (empty($url)) {
+                throw new DtaException('配置网址内容不正确');
+            }
             $this->url = $url;
         }
         $content = $this->getContents($this->url);
@@ -569,9 +573,13 @@ class WatermarkService extends Service
      */
     private function judgeUrl($url)
     {
-        if (strpos($url, 'douyin.com') !== false) return $url;
-        else if (strpos($url, 'iesdouyin.com') !== false) return $url;
-        else return '';
+        if (strpos($url, 'douyin.com') !== false) {
+            return $url;
+        } else if (strpos($url, 'iesdouyin.com') !== false) {
+            return $url;
+        } else {
+            return '';
+        }
     }
 
     /**
@@ -583,9 +591,13 @@ class WatermarkService extends Service
     private function getItemId($content)
     {
         preg_match('/"(?<=itemId:\s\")\d+"/', $content, $matches);
-        if (!isset($matches[0])) throw new DtaException('视频不存在');
+        if (!isset($matches[0])) {
+            throw new DtaException('视频不存在');
+        }
         preg_match("~\"(.*?)\"~", $matches[0], $matches2);
-        if (!isset($matches2[1])) throw new DtaException('视频不存在');
+        if (!isset($matches2[1])) {
+            throw new DtaException('视频不存在');
+        }
         return $matches2[1];
     }
 
@@ -598,10 +610,14 @@ class WatermarkService extends Service
     private function getDyTk($content)
     {
         preg_match("~dytk(.*?)}~", $content, $matches);
-        if (!isset($matches[1])) throw new DtaException('视频不存在');
+        if (!isset($matches[1])) {
+            throw new DtaException('视频不存在');
+        }
         $Dytk = $matches[1];
         preg_match("~\"(.*?)\"~", $Dytk, $matches2);
-        if (!isset($matches2[1])) throw new DtaException('视频不存在');
+        if (!isset($matches2[1])) {
+            throw new DtaException('视频不存在');
+        }
         return $matches2[1];
     }
 
@@ -611,8 +627,12 @@ class WatermarkService extends Service
      */
     public function toArray()
     {
-        if (empty($this->backtrack)) return [];
-        if (is_array($this->backtrack)) return $this->backtrack;
+        if (empty($this->backtrack)) {
+            return [];
+        }
+        if (is_array($this->backtrack)) {
+            return $this->backtrack;
+        }
         return json_decode($this->backtrack, true);
     }
 
@@ -622,10 +642,16 @@ class WatermarkService extends Service
      */
     public function toObject()
     {
-        if (empty($this->backtrack)) return '';
-        if (is_object($this->backtrack)) return $this->backtrack;
+        if (empty($this->backtrack)) {
+            return '';
+        }
+        if (is_object($this->backtrack)) {
+            return $this->backtrack;
+        }
         $obj = new StdClass();
-        foreach ($this->backtrack as $key => $val) $obj->$key = $val;
+        foreach ($this->backtrack as $key => $val) {
+            $obj->$key = $val;
+        }
         return $obj;
     }
 
@@ -637,11 +663,17 @@ class WatermarkService extends Service
     private function cAuthorAvatar($data)
     {
         // 1080x1080
-        if (isset($data['avatar_larger']['url_list'][0])) return $data['avatar_larger']['url_list'][0];
+        if (isset($data['avatar_larger']['url_list'][0])) {
+            return $data['avatar_larger']['url_list'][0];
+        }
         // 720x720
-        if (isset($data['avatar_medium']['url_list'][0])) return $data['avatar_medium']['url_list'][0];
+        if (isset($data['avatar_medium']['url_list'][0])) {
+            return $data['avatar_medium']['url_list'][0];
+        }
         // 100x100
-        if (isset($data['avatar_thumb']['url_list'][0])) return $data['avatar_thumb']['url_list'][0];
+        if (isset($data['avatar_thumb']['url_list'][0])) {
+            return $data['avatar_thumb']['url_list'][0];
+        }
         return '';
     }
 
@@ -653,11 +685,17 @@ class WatermarkService extends Service
     private function cMusicAvatar($data)
     {
         // 1080x1080
-        if (isset($data['cover_hd']['url_list'][0])) return $data['cover_hd']['url_list'][0];
+        if (isset($data['cover_hd']['url_list'][0])) {
+            return $data['cover_hd']['url_list'][0];
+        }
         // 720x720
-        if (isset($data['cover_medium']['url_list'][0])) return $data['cover_medium']['url_list'][0];
+        if (isset($data['cover_medium']['url_list'][0])) {
+            return $data['cover_medium']['url_list'][0];
+        }
         // 100x100
-        if (isset($data['cover_thumb']['url_list'][0])) return $data['cover_thumb']['url_list'][0];
+        if (isset($data['cover_thumb']['url_list'][0])) {
+            return $data['cover_thumb']['url_list'][0];
+        }
         return '';
     }
 
@@ -673,11 +711,17 @@ class WatermarkService extends Service
         $array['origin_cover'] = '';
         $array['cover'] = '';
         // 动态
-        if (isset($data['dynamic_cover']['url_list'][0])) $array['dynamic'] = substr($data['dynamic_cover']['url_list'][0], 0, strpos($data['dynamic_cover']['url_list'][0], '?from='));
+        if (isset($data['dynamic_cover']['url_list'][0])) {
+            $array['dynamic'] = substr($data['dynamic_cover']['url_list'][0], 0, strpos($data['dynamic_cover']['url_list'][0], '?from='));
+        }
         // width封面
-        if (isset($data['origin_cover']['url_list'][0])) $array['origin_cover'] = substr($data['origin_cover']['url_list'][0], 0, strpos($data['origin_cover']['url_list'][0], '?from='));
+        if (isset($data['origin_cover']['url_list'][0])) {
+            $array['origin_cover'] = substr($data['origin_cover']['url_list'][0], 0, strpos($data['origin_cover']['url_list'][0], '?from='));
+        }
         // height封面
-        if (isset($data['cover']['url_list'][0])) $array['cover'] = substr($data['cover']['url_list'][0], 0, strpos($data['cover']['url_list'][0], '?from='));
+        if (isset($data['cover']['url_list'][0])) {
+            $array['cover'] = substr($data['cover']['url_list'][0], 0, strpos($data['cover']['url_list'][0], '?from='));
+        }
         return $array;
     }
 
@@ -689,8 +733,11 @@ class WatermarkService extends Service
      */
     private function cVideoPlayUrl($url, $type)
     {
-        if ($type == 'play') $headers = get_headers(str_replace("/playwm/", "/play/", $url), TRUE);
-        else $headers = get_headers($url, TRUE);
+        if ($type == 'play') {
+            $headers = get_headers(str_replace("/playwm/", "/play/", $url), TRUE);
+        } else {
+            $headers = get_headers($url, TRUE);
+        }
         //输出跳转到的网址
         return $headers['location'];
     }

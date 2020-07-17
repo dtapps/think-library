@@ -148,7 +148,9 @@ class QqWryService extends Service
      */
     public function getLocation(string $ip = '')
     {
-        if (empty($ip)) $ip = get_ip();
+        if (empty($ip)) {
+            $ip = get_ip();
+        }
         if (strpos($ip, 'http://') === 0) {
             $ip = substr($ip, 7);
             $ip = gethostbyname($ip);
@@ -368,12 +370,16 @@ class QqWryService extends Service
      */
     protected function getNormalizedIP($ip)
     {
-        if (!is_string($ip)) return '';
+        if (!is_string($ip)) {
+            return '';
+        }
         if (preg_match('%^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$%', $ip, $match)) {
             $IPParts = array();
             for ($i = 1; $i <= 4; $i++) {
                 $IPPart = (int)$match[$i];
-                if ($IPPart > 255) return '';
+                if ($IPPart > 255) {
+                    return '';
+                }
                 $IPParts[$i] = str_pad(decHex($IPPart), 2, '0', STR_PAD_LEFT);
             }
             return '0000:0000:0000:0000:0000:ffff:' . $IPParts[1] . $IPParts[2] . ':' . $IPParts[3] . $IPParts[4];

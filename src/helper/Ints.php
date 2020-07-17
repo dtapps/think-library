@@ -35,7 +35,9 @@ class Ints
      */
     public function isEvenNumbers(int $num): bool
     {
-        if ($num % 2 == 0) return true;
+        if ($num % 2 == 0) {
+            return true;
+        }
         return false;
     }
 
@@ -46,7 +48,9 @@ class Ints
      */
     public function isOddNumbers(int $num): bool
     {
-        if ($num % 2 == 0) return false;
+        if ($num % 2 == 0) {
+            return false;
+        }
         return true;
     }
 }

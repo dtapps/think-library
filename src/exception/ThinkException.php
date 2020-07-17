@@ -47,10 +47,14 @@ class ThinkException extends Handle
     public function render($request, Throwable $e): Response
     {
         // 参数验证错误
-        if ($e instanceof ValidateException) return json($e->getError(), 422);
+        if ($e instanceof ValidateException) {
+            return json($e->getError(), 422);
+        }
 
         // 请求异常
-        if ($e instanceof HttpException && $request->isAjax()) return response($e->getMessage(), $e->getStatusCode());
+        if ($e instanceof HttpException && $request->isAjax()) {
+            return response($e->getMessage(), $e->getStatusCode());
+        }
 
         $this->show($e->getMessage());
 
@@ -69,34 +73,42 @@ class ThinkException extends Handle
         $nt = config('dtapp.exception.type', '');
         if (!empty($nt) && $nt == 'dingtalk') {
             $access_token = config('dtapp.exception.dingtalk.access_token', '');
-            if (!empty($access_token)) return DingTalkService::instance()
-                ->accessToken($access_token)
-                ->text($msg);
+            if (!empty($access_token)) {
+                return DingTalkService::instance()
+                    ->accessToken($access_token)
+                    ->text($msg);
+            }
         }
         if (!empty($nt) && $nt == 'qyweixin') {
             $key = config('dtapp.exception.qyweixin.key', '');
-            if (!empty($key)) return QyService::instance()
-                ->key($key)
-                ->text($msg);
+            if (!empty($key)) {
+                return QyService::instance()
+                    ->key($key)
+                    ->text($msg);
+            }
         }
         if (!empty($nt) && $nt === 'wechat') {
             $openid = config('dtapp.exception.wechat.openid', '');
             $ip = config('dtapp.exception.wechat.ip', '未配置');
             $seip = get_ip();
             $ipinfo = QqWryService::instance()->getLocation($seip);
-            if (!isset($ipinfo['location_all'])) $ipinfo['location_all'] = '';
-            if (!empty($openid)) return HttpService::instance()
-                ->url("https://api.dtapp.net/v1/wechatmp/tmplmsgWebError/openid/{$openid}")
-                ->post()
-                ->data([
-                    'domain' => request()->domain(),
-                    'url' => request()->url(),
-                    'node' => config('dtapp.exception.wechat.node', ''),
-                    'info' => "ServerIp：" . $ip . "；CdnIp：" . $_SERVER['REMOTE_ADDR'] . "；ClientIp：" . get_ip(),
-                    'ip' => $ipinfo['location_all'],
-                    'error' => base64_encode($msg)
-                ])
-                ->toArray();
+            if (!isset($ipinfo['location_all'])) {
+                $ipinfo['location_all'] = '';
+            }
+            if (!empty($openid)) {
+                return HttpService::instance()
+                    ->url("https://api.dtapp.net/v1/wechatmp/tmplmsgWebError/openid/{$openid}")
+                    ->post()
+                    ->data([
+                        'domain' => request()->domain(),
+                        'url' => request()->url(),
+                        'node' => config('dtapp.exception.wechat.node', ''),
+                        'info' => "ServerIp：" . $ip . "；CdnIp：" . $_SERVER['REMOTE_ADDR'] . "；ClientIp：" . get_ip(),
+                        'ip' => $ipinfo['location_all'],
+                        'error' => base64_encode($msg)
+                    ])
+                    ->toArray();
+            }
         }
         return true;
     }

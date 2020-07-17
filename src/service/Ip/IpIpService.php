@@ -47,7 +47,9 @@ class IpIpService extends Service
     public function __construct(App $app)
     {
         $this->ipPath = config('dtapp.ip_path', '');
-        if (empty($this->ipPath)) throw new DtaException('请检查配置文件是否配置了IP数据库文件存放位置');
+        if (empty($this->ipPath)) {
+            throw new DtaException('请检查配置文件是否配置了IP数据库文件存放位置');
+        }
         $this->reader = new IpIpReader($this->ipPath . 'ipipfree.ipdb');
         parent::__construct($app);
     }
@@ -59,7 +61,9 @@ class IpIpService extends Service
      */
     public function getFind(string $ip = '', string $language = 'CN')
     {
-        if (empty($ip)) $ip = get_ip();
+        if (empty($ip)) {
+            $ip = get_ip();
+        }
         return $this->reader->find($ip, $language);
     }
 
@@ -70,7 +74,9 @@ class IpIpService extends Service
      */
     public function getFindMap(string $ip = '', string $language = 'CN')
     {
-        if (empty($ip)) $ip = get_ip();
+        if (empty($ip)) {
+            $ip = get_ip();
+        }
         return $this->reader->findMap($ip, $language);
     }
 
@@ -81,9 +87,13 @@ class IpIpService extends Service
      */
     public function getFindInfo(string $ip = '', string $language = 'CN')
     {
-        if (empty($ip)) $ip = get_ip();
+        if (empty($ip)) {
+            $ip = get_ip();
+        }
         $map = $this->getFindMap($ip, $language);
-        if (NULL === $map) return NUll;
+        if (NULL === $map) {
+            return NUll;
+        }
         return new IpIpDistrictInfo($map);
     }
 }

@@ -71,8 +71,12 @@ class ApiService extends Service
      */
     public function getCpuIoInfo($type = 'GetCpuIo', $start_time = 0, $end_time = 0)
     {
-        if (empty($start_time)) $start_time = strtotime(date('Y-m-d'));
-        if (empty($end_time)) $end_time = time();
+        if (empty($start_time)) {
+            $start_time = strtotime(date('Y-m-d'));
+        }
+        if (empty($end_time)) {
+            $end_time = time();
+        }
         $this->url = "/ajax?action={$type}&start={$start_time}&end={$end_time}";
         return $this;
     }
@@ -309,10 +313,16 @@ class ApiService extends Service
      */
     private function getDataWithCount()
     {
-        if (empty($this->contents['data'])) $this->contents['data'] = [];
-        if (!is_array($this->contents['data'])) $this->contents['data'] = [];
+        if (empty($this->contents['data'])) {
+            $this->contents['data'] = [];
+        }
+        if (!is_array($this->contents['data'])) {
+            $this->contents['data'] = [];
+        }
         $this->backtrack['data'] = $this->contents;
-        if (empty($this->contents['page'])) $this->contents['page'] = 0;
+        if (empty($this->contents['page'])) {
+            $this->contents['page'] = 0;
+        }
         $this->backtrack['count'] = $this->getCountData($this->contents['page']);
         return $this;
     }
@@ -347,10 +357,17 @@ class ApiService extends Service
     public function toArray()
     {
         $this->getHttp();
-        if ($this->where['type'] == 'sites') $this->getDataWithOrderOpt();
-        else $this->getDataWithCount();
-        if (empty($this->backtrack)) return [];
-        if (is_array($this->backtrack)) return $this->backtrack;
+        if ($this->where['type'] == 'sites') {
+            $this->getDataWithOrderOpt();
+        } else {
+            $this->getDataWithCount();
+        }
+        if (empty($this->backtrack)) {
+            return [];
+        }
+        if (is_array($this->backtrack)) {
+            return $this->backtrack;
+        }
         return json_decode($this->backtrack, true);
     }
 
@@ -362,7 +379,9 @@ class ApiService extends Service
     private function mimes($name): string
     {
         $mimes = include __DIR__ . '/bin/mimes.php';
-        if (isset($mimes[$name])) return '/' . $mimes[$name];
+        if (isset($mimes[$name])) {
+            return '/' . $mimes[$name];
+        }
         return '';
     }
 
@@ -376,18 +395,28 @@ class ApiService extends Service
      */
     protected function HttpPostCookie(string $url, array $data = [], bool $is_json = true)
     {
-        if (empty($this->panel)) $this->getConfig();
-        if (empty($this->panel)) throw new DtaException('请检查panel参数');
+        if (empty($this->panel)) {
+            $this->getConfig();
+        }
+        if (empty($this->panel)) {
+            throw new DtaException('请检查panel参数');
+        }
         //定义cookie保存位置
         $file = app()->getRootPath() . 'runtime/dtapp/bt/cookie/';
         $cookie_file = $file . md5($this->panel) . '.cookie';
-        if (empty(Files::judgeContents($file))) mkdir($file, 0777, true);
+        if (empty(Files::judgeContents($file))) {
+            mkdir($file, 0777, true);
+        }
         if (!file_exists($cookie_file)) {
             $fp = fopen($cookie_file, 'w+');
             fclose($fp);
         }
-        if (empty($this->key)) $this->getConfig();
-        if (empty($this->key)) throw new DtaException('请检查key参数');
+        if (empty($this->key)) {
+            $this->getConfig();
+        }
+        if (empty($this->key)) {
+            throw new DtaException('请检查key参数');
+        }
         return BtService::instance()
             ->panel($this->panel)
             ->key($this->key)
@@ -407,7 +436,9 @@ class ApiService extends Service
         $start = strpos($str, "共");
         $end = strpos($str, "条数据");
         $count = substr($str, $start + 3, $end - $start - 3);
-        if (empty($count)) return 0;
+        if (empty($count)) {
+            return 0;
+        }
         return $count;
     }
 }

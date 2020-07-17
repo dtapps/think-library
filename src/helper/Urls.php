@@ -35,7 +35,9 @@ class Urls
      */
     public function lenCode(string $url): string
     {
-        if (empty($url)) return '';
+        if (empty($url)) {
+            return '';
+        }
         return urlencode($url);
     }
 
@@ -46,7 +48,9 @@ class Urls
      */
     public function deCode(string $url): string
     {
-        if (empty($url)) return '';
+        if (empty($url)) {
+            return '';
+        }
         return urldecode($url);
     }
 
@@ -58,7 +62,11 @@ class Urls
     public function toParams(array $data): string
     {
         $buff = "";
-        foreach ($data as $k => $v) if ($k != "sign" && $v !== "" && !is_array($v)) $buff .= $k . "=" . $v . "&";
+        foreach ($data as $k => $v) {
+            if ($k != "sign" && $v !== "" && !is_array($v)) {
+                $buff .= $k . "=" . $v . "&";
+            }
+        }
         $buff = trim($buff, "&");
         return $buff;
     }

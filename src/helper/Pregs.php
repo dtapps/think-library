@@ -36,7 +36,9 @@ class Pregs
      */
     public function isIphone($mobile): bool
     {
-        if (preg_match('/^[1]([3-9])[0-9]{9}$/', $mobile)) return true;
+        if (preg_match('/^[1]([3-9])[0-9]{9}$/', $mobile)) {
+            return true;
+        }
         return false;
     }
 
@@ -48,7 +50,9 @@ class Pregs
      */
     public function isIphoneAll($mobile): bool
     {
-        if (preg_match('/^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/', $mobile)) return true;
+        if (preg_match('/^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/', $mobile)) {
+            return true;
+        }
         return false;
     }
 
@@ -60,7 +64,9 @@ class Pregs
      */
     public function isTel($tel): bool
     {
-        if (preg_match("/^(\(\d{3,4}\)|\d{3,4}-)?\d{7,8}$/", $tel)) return true;
+        if (preg_match("/^(\(\d{3,4}\)|\d{3,4}-)?\d{7,8}$/", $tel)) {
+            return true;
+        }
         return false;
     }
 
@@ -72,7 +78,9 @@ class Pregs
      */
     public function isIdCard($id): bool
     {
-        if (preg_match("/^\d{15}|\d{18}$/", $id)) return true;
+        if (preg_match("/^\d{15}|\d{18}$/", $id)) {
+            return true;
+        }
         return false;
     }
 
@@ -84,7 +92,9 @@ class Pregs
      */
     public function isDigit($digit): bool
     {
-        if (preg_match("/^\d*$/", $digit)) return true;
+        if (preg_match("/^\d*$/", $digit)) {
+            return true;
+        }
         return false;
     }
 
@@ -96,7 +106,9 @@ class Pregs
      */
     public function isNum($num): bool
     {
-        if (is_numeric($num)) return true;
+        if (is_numeric($num)) {
+            return true;
+        }
         return false;
     }
 
@@ -108,7 +120,9 @@ class Pregs
      */
     public function isStr($str): bool
     {
-        if (preg_match("/^\w+$/", $str)) return true;
+        if (preg_match("/^\w+$/", $str)) {
+            return true;
+        }
         return false;
     }
 
@@ -120,7 +134,9 @@ class Pregs
      */
     public function isPassword($str): bool
     {
-        if (preg_match("/^[a-zA-Z]\w{5,17}$/", $str)) return true;
+        if (preg_match("/^[a-zA-Z]\w{5,17}$/", $str)) {
+            return true;
+        }
         return false;
     }
 
@@ -132,7 +148,9 @@ class Pregs
      */
     public function isChinese($str): bool
     {
-        if (preg_match("/^[\u4e00-\u9fa5],{0,}$/", $str)) return true;
+        if (preg_match("/^[\u4e00-\u9fa5],{0,}$/", $str)) {
+            return true;
+        }
         return false;
     }
 
@@ -144,7 +162,9 @@ class Pregs
      */
     public function isEmail($email): bool
     {
-        if (preg_match("/^\w+[-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/", $email)) return true;
+        if (preg_match("/^\w+[-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/", $email)) {
+            return true;
+        }
         return false;
     }
 
@@ -156,7 +176,9 @@ class Pregs
      */
     public function isLink($url): bool
     {
-        if (preg_match("/http|https:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is", $url)) return true;
+        if (preg_match("/http|https:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is", $url)) {
+            return true;
+        }
         return false;
     }
 
@@ -168,7 +190,9 @@ class Pregs
      */
     public function isQq($qq): bool
     {
-        if (preg_match("/^[1-9][0-9]{4,}$/", $qq)) return true;
+        if (preg_match("/^[1-9][0-9]{4,}$/", $qq)) {
+            return true;
+        }
         return false;
     }
 
@@ -180,7 +204,9 @@ class Pregs
      */
     public function isIp($ip): bool
     {
-        if (preg_match("/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $ip)) return true;
+        if (preg_match("/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $ip)) {
+            return true;
+        }
         return false;
     }
 }

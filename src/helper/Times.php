@@ -125,7 +125,9 @@ class Times
         $assignTime1 = strtotime($start);//获得指定分钟时间戳，00:00
         $assignTime2 = strtotime($end);//获得指定分钟时间戳，01:00
         $result = false;
-        if ($curTime > $assignTime1 && $curTime < $assignTime2) $result = true;
+        if ($curTime > $assignTime1 && $curTime < $assignTime2) {
+            $result = true;
+        }
         return $result;
     }
 }

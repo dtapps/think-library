@@ -37,7 +37,9 @@ class Strings
      */
     public function extractBefore(string $str, int $start_num, int $end_num): string
     {
-        if (strlen($str) < $start_num + $end_num) return $str;
+        if (strlen($str) < $start_num + $end_num) {
+            return $str;
+        }
         return substr($str, $start_num, $end_num);
     }
 
@@ -50,7 +52,9 @@ class Strings
      */
     public function extractRear(string $str, int $num): string
     {
-        if (strlen($str) <= $num) return $str;
+        if (strlen($str) <= $num) {
+            return $str;
+        }
         return substr($str, -$num);
     }
 
@@ -141,10 +145,16 @@ class Strings
     {
         if (strpos($str, $del) !== false) {
             $var = explode($del, $str);
-            foreach ($var as $v) if ($v == $nee) return true;
+            foreach ($var as $v) {
+                if ($v == $nee) {
+                    return true;
+                }
+            }
             return false;
         } else {
-            if ($str == $nee) return true;
+            if ($str == $nee) {
+                return true;
+            }
             return false;
         }
     }

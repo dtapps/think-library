@@ -89,13 +89,19 @@ class QyService extends Service
      */
     private function sendMsg(array $data)
     {
-        if (empty($this->key)) throw new DtaException("请检查KEY");
-        if (empty($data['msgtype'])) $data['msgtype'] = $this->msgType;
+        if (empty($this->key)) {
+            throw new DtaException("请检查KEY");
+        }
+        if (empty($data['msgtype'])) {
+            $data['msgtype'] = $this->msgType;
+        }
         $result = HttpService::instance()
             ->url("{$this->url}cgi-bin/webhook/send?key=" . $this->key)
             ->data($data)
             ->toArray();
-        if ($result['errcode'] == 0) return true;
+        if ($result['errcode'] == 0) {
+            return true;
+        }
         return false;
     }
 }

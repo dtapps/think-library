@@ -28,7 +28,7 @@ use think\db\exception\ModelNotFoundException;
 /**
  * 定义当前版本
  */
-const VERSION = '6.0.85';
+const VERSION = '6.0.86';
 
 if (!function_exists('get_ip_info')) {
     /**
@@ -40,8 +40,9 @@ if (!function_exists('get_ip_info')) {
     function get_ip_info($ip = '')
     {
         if (empty($ip)) {
-            if (!isset($_SERVER['HTTP_X_FORWARDED_FOR'])) $ip = $_SERVER['REMOTE_ADDR'];
-            else {
+            if (!isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                $ip = $_SERVER['REMOTE_ADDR'];
+            } else {
                 //为了兼容百度的CDN，所以转成数组
                 $arr = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
                 $ip = $arr[0];
@@ -62,7 +63,9 @@ if (!function_exists('get_ip')) {
             //为了兼容百度的CDN，所以转成数组
             $arr = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
             return $arr[0];
-        } else return $_SERVER['REMOTE_ADDR'];
+        } else {
+            return $_SERVER['REMOTE_ADDR'];
+        }
     }
 }
 

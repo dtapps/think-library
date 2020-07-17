@@ -38,12 +38,18 @@ class Xmls
      */
     public function toXml(array $values)
     {
-        if (!is_array($values) || count($values) <= 0) throw new Exception('数组数据异常！');
+        if (!is_array($values) || count($values) <= 0) {
+            throw new Exception('数组数据异常！');
+        }
         $xml = "<xml>";
         foreach ($values as $key => $val) {
-            if (is_array($val)) $xml .= "<" . $key . ">" . $this->toXml($val) . "</" . $key . ">";
-            else if (is_numeric($val)) $xml .= "<" . $key . ">" . $val . "</" . $key . ">";
-            else $xml .= "<" . $key . "><![CDATA[" . $val . "]]></" . $key . ">";
+            if (is_array($val)) {
+                $xml .= "<" . $key . ">" . $this->toXml($val) . "</" . $key . ">";
+            } else if (is_numeric($val)) {
+                $xml .= "<" . $key . ">" . $val . "</" . $key . ">";
+            } else {
+                $xml .= "<" . $key . "><![CDATA[" . $val . "]]></" . $key . ">";
+            }
         }
         $xml .= "</xml>";
         return $xml;
@@ -57,7 +63,9 @@ class Xmls
      */
     public function toArray(string $xml)
     {
-        if (!$xml) throw new Exception('xml数据异常！');
+        if (!$xml) {
+            throw new Exception('xml数据异常！');
+        }
         libxml_disable_entity_loader(true);
         return json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
     }
