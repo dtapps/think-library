@@ -246,10 +246,6 @@ class HttpService extends Service
         //初始一个curl会话
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->url);
-        if (!empty($xmlData)) {
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $this->data);
-        }
         //设置超时
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
         if (empty($this->cert)) {

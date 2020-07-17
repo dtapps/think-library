@@ -62,13 +62,22 @@ class QqWryService extends Service
     private $unknown = '未知';
 
     /**
+     * IP数据库文件存放位置
+     * @var mixed
+     */
+    private $ipPath = '';
+
+    /**
      * 构造函数，打开 QQWry.Dat 文件并初始化类中的信息
      * @param App $app
+     * @throws DtaException
      */
     public function __construct(App $app)
     {
+        $this->ipPath = config('dtapp.ip_path', '');
+        if (empty($this->ipPath)) throw new DtaException('请检查配置文件是否配置了IP数据库文件存放位置');
         $this->fp = 0;
-        if (($this->fp = fopen(__DIR__ . '/bin/qqwry.dat', 'rb')) !== false) {
+        if (($this->fp = fopen($this->ipPath . 'qqwry.dat', 'rb')) !== false) {
             $this->firstIp = $this->getLong();
             $this->lastIp = $this->getLong();
             $this->totalIp = ($this->lastIp - $this->firstIp) / 7;
@@ -399,7 +408,7 @@ class QqWryService extends Service
         $district['lng'] = '';
 
         if (!empty($province_name)) {
-            $json_province = json_decode(file_get_contents(__DIR__ . '/bin/province.json'), true);
+            $json_province = json_decode(file_get_contents($this->ipPath . 'province.json'), true);
             foreach ($json_province['rows'] as $key => $value) {
                 if ($value['name'] == $province_name) {
                     $province['name'] = $value['name'];
@@ -410,7 +419,7 @@ class QqWryService extends Service
             }
         }
         if (!empty($city_name)) {
-            $json_city = json_decode(file_get_contents(__DIR__ . '/bin/city.json'), true);
+            $json_city = json_decode(file_get_contents($this->ipPath . 'city.json'), true);
             foreach ($json_city['rows'] as $key => $value) {
                 if ($value['name'] == $city_name) {
                     $city['name'] = $value['name'];
@@ -421,7 +430,7 @@ class QqWryService extends Service
             }
         }
         if (!empty($district_name)) {
-            $json_district = json_decode(file_get_contents(__DIR__ . '/bin/district.json'), true);
+            $json_district = json_decode(file_get_contents($this->ipPath . 'district.json'), true);
             foreach ($json_district['rows'] as $key => $value) {
                 if ($value['name'] == $district_name) {
                     $district['name'] = $value['name'];
