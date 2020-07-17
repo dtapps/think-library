@@ -58,7 +58,9 @@ class Files
      */
     public function deletes(string $name): bool
     {
-        if (empty($name)) throw new Exception('请检查需要删除文件夹的名称');
+        if (empty($name)) {
+            throw new Exception('请检查需要删除文件夹的名称');
+        }
         //先删除目录下的文件：
         $dh = opendir($name);
         while ($file = readdir($dh)) {
@@ -90,7 +92,9 @@ class Files
      */
     public function folderZip(string $name, string $suffix_name = '.png', string $file_name = '*'): bool
     {
-        if (empty($name)) throw new Exception('请检查需要打包的路径名称');
+        if (empty($name)) {
+            throw new Exception('请检查需要打包的路径名称');
+        }
         try {
             // 获取目录下所有某个结尾的文件列表
             $list = glob($name . "{$file_name}.{$suffix_name}");

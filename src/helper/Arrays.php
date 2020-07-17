@@ -57,7 +57,9 @@ class Arrays
     public function split(array $array, $num = 5): array
     {
         $arrRet = array();
-        if (!isset($array) || empty($array)) return $arrRet;
+        if (!isset($array) || empty($array)) {
+            return $arrRet;
+        }
         $iCount = count($array) / $num;
         if (!is_int($iCount)) {
             $iCount = ceil($iCount);

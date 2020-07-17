@@ -249,11 +249,14 @@ class WatermarkService extends Service
                     ->remotely($backtrack['music_info']['avatar'])
                     ->save($backtrack['music_info']['mid'] . ".jpeg");
                 // 音频文件
-                if (!empty($backtrack['music_info']['play'])) $music_info_play = StorageService::instance()
-                    ->path($this->storagePath)
-                    ->remotely($backtrack['music_info']['play'])
-                    ->save($backtrack['music_info']['mid'] . ".mp3");
-                else $music_info_play = ['size' => '0kb'];
+                if (!empty($backtrack['music_info']['play'])) {
+                    $music_info_play = StorageService::instance()
+                        ->path($this->storagePath)
+                        ->remotely($backtrack['music_info']['play'])
+                        ->save($backtrack['music_info']['mid'] . ".mp3");
+                } else {
+                    $music_info_play = ['size' => '0kb'];
+                }
                 // 音频封面
                 $music_info_cover = StorageService::instance()
                     ->path($this->storagePath)
@@ -299,9 +302,12 @@ class WatermarkService extends Service
                         $backtrack['yun']['music_info']['avatar'] = OssService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . ".jpeg", $system_path . $backtrack['music_info']['mid'] . ".jpeg");
                         // 音频文件
-                        if (!empty($backtrack['music_info']['play'])) $backtrack['yun']['music_info']['play'] = OssService::instance()
-                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
-                        else $backtrack['yun']['music_info']['play'] = '';
+                        if (!empty($backtrack['music_info']['play'])) {
+                            $backtrack['yun']['music_info']['play'] = OssService::instance()
+                                ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
+                        } else {
+                            $backtrack['yun']['music_info']['play'] = '';
+                        }
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = OssService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
@@ -329,9 +335,12 @@ class WatermarkService extends Service
                         $backtrack['yun']['music_info']['avatar'] = CosService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . ".jpeg", $system_path . $backtrack['music_info']['mid'] . ".jpeg");
                         // 音频文件
-                        if (!empty($backtrack['music_info']['play'])) $backtrack['yun']['music_info']['play'] = CosService::instance()
-                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
-                        else $backtrack['yun']['music_info']['play'] = '';
+                        if (!empty($backtrack['music_info']['play'])) {
+                            $backtrack['yun']['music_info']['play'] = CosService::instance()
+                                ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
+                        } else {
+                            $backtrack['yun']['music_info']['play'] = '';
+                        }
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = CosService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
@@ -359,9 +368,12 @@ class WatermarkService extends Service
                         $backtrack['yun']['music_info']['avatar'] = ObsService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . ".jpeg", $system_path . $backtrack['music_info']['mid'] . ".jpeg");
                         // 音频文件
-                        if (!empty($backtrack['music_info']['play'])) $backtrack['yun']['music_info']['play'] = ObsService::instance()
-                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
-                        else $backtrack['yun']['music_info']['play'] = '';
+                        if (!empty($backtrack['music_info']['play'])) {
+                            $backtrack['yun']['music_info']['play'] = ObsService::instance()
+                                ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
+                        } else {
+                            $backtrack['yun']['music_info']['play'] = '';
+                        }
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = ObsService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
@@ -389,9 +401,12 @@ class WatermarkService extends Service
                         $backtrack['yun']['music_info']['avatar'] = BosService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . ".jpeg", $system_path . $backtrack['music_info']['mid'] . ".jpeg");
                         // 音频文件
-                        if (!empty($backtrack['music_info']['play'])) $backtrack['yun']['music_info']['play'] = BosService::instance()
-                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
-                        else $backtrack['yun']['music_info']['play'] = '';
+                        if (!empty($backtrack['music_info']['play'])) {
+                            $backtrack['yun']['music_info']['play'] = BosService::instance()
+                                ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
+                        } else {
+                            $backtrack['yun']['music_info']['play'] = '';
+                        }
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = BosService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
@@ -419,9 +434,12 @@ class WatermarkService extends Service
                         $backtrack['yun']['music_info']['avatar'] = KodoService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . ".jpeg", $system_path . $backtrack['music_info']['mid'] . ".jpeg");
                         // 音频文件
-                        if (!empty($backtrack['music_info']['play'])) $backtrack['yun']['music_info']['play'] = KodoService::instance()
-                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
-                        else $backtrack['yun']['music_info']['play'] = '';
+                        if (!empty($backtrack['music_info']['play'])) {
+                            $backtrack['yun']['music_info']['play'] = KodoService::instance()
+                                ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
+                        } else {
+                            $backtrack['yun']['music_info']['play'] = '';
+                        }
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = KodoService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
@@ -449,9 +467,12 @@ class WatermarkService extends Service
                         $backtrack['yun']['music_info']['avatar'] = UssService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . ".jpeg", $system_path . $backtrack['music_info']['mid'] . ".jpeg");
                         // 音频文件
-                        if (!empty($backtrack['music_info']['play'])) $backtrack['yun']['music_info']['play'] = UssService::instance()
-                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
-                        else $backtrack['yun']['music_info']['play'] = '';
+                        if (!empty($backtrack['music_info']['play'])) {
+                            $backtrack['yun']['music_info']['play'] = UssService::instance()
+                                ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
+                        } else {
+                            $backtrack['yun']['music_info']['play'] = '';
+                        }
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = UssService::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
@@ -479,9 +500,12 @@ class WatermarkService extends Service
                         $backtrack['yun']['music_info']['avatar'] = Ks3Service::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . ".jpeg", $system_path . $backtrack['music_info']['mid'] . ".jpeg");
                         // 音频文件
-                        if (!empty($backtrack['music_info']['play'])) $backtrack['yun']['music_info']['play'] = Ks3Service::instance()
-                            ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
-                        else $backtrack['yun']['music_info']['play'] = '';
+                        if (!empty($backtrack['music_info']['play'])) {
+                            $backtrack['yun']['music_info']['play'] = Ks3Service::instance()
+                                ->upload($yun_path . $backtrack['music_info']['mid'] . ".mp3", $system_path . $backtrack['music_info']['mid'] . ".mp3");
+                        } else {
+                            $backtrack['yun']['music_info']['play'] = '';
+                        }
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = Ks3Service::instance()
                             ->upload($yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg", $system_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg");
@@ -510,8 +534,11 @@ class WatermarkService extends Service
                         // 音频头像
                         $backtrack['yun']['music_info']['avatar'] = $new_yun_path . $backtrack['music_info']['mid'] . ".jpeg";
                         // 音频文件
-                        if (!empty($backtrack['music_info']['play'])) $backtrack['yun']['music_info']['play'] = $new_yun_path . $backtrack['music_info']['mid'] . ".mp3";
-                        else $backtrack['yun']['music_info']['play'] = $new_yun_path;
+                        if (!empty($backtrack['music_info']['play'])) {
+                            $backtrack['yun']['music_info']['play'] = $new_yun_path . $backtrack['music_info']['mid'] . ".mp3";
+                        } else {
+                            $backtrack['yun']['music_info']['play'] = $new_yun_path;
+                        }
                         // 音频封面
                         $backtrack['yun']['music_info']['cover'] = $new_yun_path . $backtrack['music_info']['mid'] . "_cover" . ".jpeg";
                         // 视频封面

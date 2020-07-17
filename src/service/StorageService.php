@@ -130,7 +130,9 @@ class StorageService extends Service
      */
     public function bytes(string $name)
     {
-        if (empty($this->path)) $this->getConfig();
+        if (empty($this->path)) {
+            $this->getConfig();
+        }
         $bytes = filesize($this->path . $name);
         if ($bytes >= 1073741824) {
             $bytes = round($bytes / 1073741824 * 100) / 100 . 'GB';

@@ -66,7 +66,7 @@ class Mysql
      */
     public function set($cache_value)
     {
-        if (empty($this->cache_name)) throw new DtaException("名称未配置");
+        $this->judge();
         $result = Db::table($this->table)
             ->insert([
                 'cache_name' => $this->cache_name,
@@ -84,12 +84,11 @@ class Mysql
      * @return string
      * @throws DataNotFoundException
      * @throws DbException
-     * @throws DtaException
-     * @throws ModelNotFoundException
+     * @throws ModelNotFoundException|DtaException
      */
     public function get()
     {
-        if (empty($this->cache_name)) throw new DtaException("名称未配置");
+        $this->judge();
         $cache = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->order('id desc')
@@ -101,12 +100,11 @@ class Mysql
     /**
      * 删除
      * @return int
-     * @throws DbException
-     * @throws DtaException
+     * @throws DbException|DtaException
      */
     public function delete()
     {
-        if (empty($this->cache_name)) throw new DtaException("名称未配置");
+        $this->judge();
         $result = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->delete();
@@ -120,12 +118,11 @@ class Mysql
      * 更新
      * @param $cache_value
      * @return int
-     * @throws DbException
-     * @throws DtaException
+     * @throws DbException|DtaException
      */
     public function update($cache_value)
     {
-        if (empty($this->cache_name)) throw new DtaException("名称未配置");
+        $this->judge();
         $result = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->update([
@@ -144,8 +141,7 @@ class Mysql
      * @return int
      * @throws DataNotFoundException
      * @throws DbException
-     * @throws DtaException
-     * @throws ModelNotFoundException
+     * @throws ModelNotFoundException|DtaException
      */
     public function inc(int $int = 1)
     {
@@ -167,8 +163,7 @@ class Mysql
      * @return int
      * @throws DataNotFoundException
      * @throws DbException
-     * @throws DtaException
-     * @throws ModelNotFoundException
+     * @throws ModelNotFoundException|DtaException
      */
     public function dec(int $int = 1)
     {
@@ -182,5 +177,15 @@ class Mysql
             return false;
         }
         return true;
+    }
+
+    /**
+     * @throws DtaException
+     */
+    private function judge()
+    {
+        if (empty($this->cache_name)) {
+            throw new DtaException("名称未配置");
+        }
     }
 }

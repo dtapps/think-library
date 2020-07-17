@@ -316,7 +316,9 @@ class WebAppService extends Service
         }
         // 获取数据
         $accessToken = $this->getAccessToken();
-        if (!isset($accessToken['access_token'])) throw  new DtaException("获取access_token错误，" . $accessToken['errmsg']);
+        if (!isset($accessToken['access_token'])) {
+            throw  new DtaException("获取access_token错误，" . $accessToken['errmsg']);
+        }
         $res = HttpService::instance()
             ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
             ->toArray();
@@ -643,11 +645,13 @@ class WebAppService extends Service
             $file = "{$this->app->getRootPath()}runtime/{$this->app_id}_access_token.json";
             // 获取数据
             $accessToken = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
-            if (empty($accessToken) || !is_array($accessToken)) $accessToken = [
-                'access_token' => '',
-                'expires_in' => '',
-                'expires_time' => '',
-            ];
+            if (empty($accessToken) || !is_array($accessToken)) {
+                $accessToken = [
+                    'access_token' => '',
+                    'expires_in' => '',
+                    'expires_time' => '',
+                ];
+            }
             if (empty($accessToken['expires_time'])) {
                 // 文件不存在
                 $accessToken_res = HttpService::instance()

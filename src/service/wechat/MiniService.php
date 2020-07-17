@@ -440,11 +440,13 @@ class MiniService extends Service
             $file = "{$this->app->getRootPath()}runtime/{$this->app_id}_access_token.json";
             // 获取数据
             $accessToken = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
-            if (empty($accessToken) || !is_array($accessToken)) $accessToken = [
-                'access_token' => '',
-                'expires_in' => '',
-                'expires_time' => '',
-            ];
+            if (empty($accessToken) || !is_array($accessToken)) {
+                $accessToken = [
+                    'access_token' => '',
+                    'expires_in' => '',
+                    'expires_time' => '',
+                ];
+            }
             if (empty($accessToken['expires_time'])) {
                 $accessToken_res = HttpService::instance()
                     ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")

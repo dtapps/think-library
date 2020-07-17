@@ -494,8 +494,11 @@ class JinBaoService extends Service
      */
     private function object2array(&$object)
     {
-        if (is_object($object)) $arr = (array)($object);
-        else $arr = &$object;
+        if (is_object($object)) {
+            $arr = (array)($object);
+        } else {
+            $arr = &$object;
+        }
         if (is_array($arr)) {
             foreach ($arr as $varName => $varValue) {
                 $arr[$varName] = $this->object2array($varValue);

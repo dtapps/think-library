@@ -126,7 +126,9 @@ class Controller extends stdClass
             $this->$name = $value;
         } elseif (is_array($name)) {
             foreach ($name as $k => $v) {
-                if (is_string($k)) $this->$k = $v;
+                if (is_string($k)) {
+                    $this->$k = $v;
+                }
             }
         }
         return $this;

@@ -69,7 +69,9 @@ class ThinkException extends Handle
      */
     private function show($msg)
     {
-        if (empty($msg)) return true;
+        if (empty($msg)) {
+            return true;
+        }
         $nt = config('dtapp.exception.type', '');
         if (!empty($nt) && $nt == 'dingtalk') {
             $access_token = config('dtapp.exception.dingtalk.access_token', '');

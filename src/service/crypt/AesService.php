@@ -44,7 +44,9 @@ class AesService extends Service
      */
     public function encrypt($data)
     {
-        if (!empty(is_array($data))) $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        if (!empty(is_array($data))) {
+            $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        }
         return urlencode(base64_encode(openssl_encrypt($data, 'AES-128-CBC', $this->key, 1, $this->iv)));
     }
 

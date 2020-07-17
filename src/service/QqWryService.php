@@ -75,7 +75,9 @@ class QqWryService extends Service
     public function __construct(App $app)
     {
         $this->ipPath = config('dtapp.ip_path', '');
-        if (empty($this->ipPath)) throw new DtaException('请检查配置文件是否配置了IP数据库文件存放位置');
+        if (empty($this->ipPath)) {
+            throw new DtaException('请检查配置文件是否配置了IP数据库文件存放位置');
+        }
         $this->fp = 0;
         if (($this->fp = fopen($this->ipPath . 'qqwry.dat', 'rb')) !== false) {
             $this->firstIp = $this->getLong();
@@ -157,7 +159,10 @@ class QqWryService extends Service
         }
         static $locationData = [];
         if (!isset($locationData[$ip])) {
-            if (!$this->fp) throw new DtaException('数据库文件不存在!');            // 如果数据文件没有被正确打开，则直接返回错误
+            if (!$this->fp) {
+                // 如果数据文件没有被正确打开，则直接返回错误
+                throw new DtaException('数据库文件不存在!');
+            }
             $location['ip'] = $ip;   // 将输入的域名转化为IP地址
             $ip = $this->packIp($location['ip']);   // 将输入的IP地址转化为可比较的IP地址
             // 不合法的IP地址会被转化为255.255.255.255
@@ -221,8 +226,12 @@ class QqWryService extends Service
                     break;
             }
             // CZ88.NET表示没有有效信息
-            if (trim($location['all']) == 'CZ88.NET') $location['all'] = $this->unknown;
-            if (trim($location['extend']) == 'CZ88.NET') $location['extend'] = '';
+            if (trim($location['all']) == 'CZ88.NET') {
+                $location['all'] = $this->unknown;
+            }
+            if (trim($location['extend']) == 'CZ88.NET') {
+                $location['extend'] = '';
+            }
             $location['all'] = iconv("gb2312", "UTF-8//IGNORE", $location['all']);
             $location['extend'] = iconv("gb2312", "UTF-8//IGNORE", $location['extend']);
             $location['extend'] = $location['extend'] === null ? '' : $location['extend'];
@@ -359,7 +368,9 @@ class QqWryService extends Service
      */
     public function __destruct()
     {
-        if ($this->fp) fclose($this->fp);
+        if ($this->fp) {
+            fclose($this->fp);
+        }
         $this->fp = 0;
     }
 
