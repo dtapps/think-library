@@ -181,16 +181,6 @@ class ApiController extends stdClass
     }
 
     /**
-     * 生成md5签名字符串
-     * @param $preStr string 需要签名的字符串
-     * @return string 签名结果
-     */
-    private function md5Sign(string $preStr)
-    {
-        return strtoupper(md5($preStr));
-    }
-
-    /**
      * 加密
      * @param $data
      * @param string $name
