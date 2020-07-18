@@ -111,7 +111,7 @@ class ApiController extends stdClass
      */
     public function setAesMd5($name = 'sniff_h5')
     {
-        $value = $this->app->config->get("dtapp.md5.{$name}");
+        $value = config("dtapp.md5.{$name}");
         $this->aes_md5 = $value;
         return $this;
     }
@@ -122,7 +122,7 @@ class ApiController extends stdClass
      */
     private function setAesMd5Iv()
     {
-        $value = $this->app->config->get("dtapp.md5.bcw");
+        $value = config("dtapp.md5.bcw");
         $this->aes_md5_iv = $value;
         return $this;
     }
