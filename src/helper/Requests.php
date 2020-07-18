@@ -234,7 +234,7 @@ class Requests
         $agent = strtolower(request()->server('HTTP_USER_AGENT'));
         $type = 'other';
         if (strpos($agent, 'iphone') || strpos($agent, 'ipad')) {
-            $type = 'mobile';
+            $type = 'ios';
         }
         if (strpos($agent, 'android')) {
             $type = 'android';

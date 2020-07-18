@@ -28,7 +28,7 @@ use think\db\exception\ModelNotFoundException;
 /**
  * 定义当前版本
  */
-const VERSION = '6.0.90';
+const VERSION = '6.0.91';
 
 if (!function_exists('get_ip_info')) {
     /**
