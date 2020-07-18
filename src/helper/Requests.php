@@ -211,6 +211,38 @@ class Requests
     }
 
     /**
+     * 获取客户端类型
+     * @return string
+     */
+    public function getDeviceType()
+    {
+        $agent = strtolower(request()->server('HTTP_USER_AGENT'));
+        if (strpos($agent, 'iphone') || strpos($agent, 'ipad') || strpos($agent, 'android')) {
+            $type = 'mobile';
+        } else {
+            $type = 'computer';
+        }
+        return $type;
+    }
+
+    /**
+     * 获取手机设备类型
+     * @return string
+     */
+    public function getMobileType()
+    {
+        $agent = strtolower(request()->server('HTTP_USER_AGENT'));
+        $type = 'other';
+        if (strpos($agent, 'iphone') || strpos($agent, 'ipad')) {
+            $type = 'mobile';
+        }
+        if (strpos($agent, 'android')) {
+            $type = 'android';
+        }
+        return $type;
+    }
+
+    /**
      * 获取域名地址
      * @return string
      */

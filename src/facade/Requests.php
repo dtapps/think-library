@@ -44,6 +44,8 @@ use think\Facade;
  * @method static bool isAliPay() 判断是否支付宝内置浏览器访问
  * @method static bool isQQ() 判断是否QQ内置浏览器访问
  * @method static bool isQQBrowser() 判断是否QQ浏览器访问
+ * @method static string getDeviceType() 获取客户端类型
+ * @method static string getMobileType() 获取手机设备类型
  * @method static string getWebsiteAddress() 获取域名地址
  */
 class Requests extends Facade

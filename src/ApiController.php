@@ -50,6 +50,13 @@ class ApiController extends stdClass
     private $aes_decrypt_data;
 
     /**
+     * 加密相关的东西
+     * @var string
+     */
+    private $aes_md5 = '';
+    private $aes_md5_iv = '';
+
+    /**
      * ApiController constructor.
      * @param App $app
      */
@@ -98,18 +105,40 @@ class ApiController extends stdClass
     }
 
     /**
+     * key
+     * @param string $name 参数名
+     * @return $this
+     */
+    public function setAesMd5($name = 'sniff_h5')
+    {
+        $value = $this->app->config->get("dtapp.md5.{$name}");
+        $this->aes_md5 = $value;
+        return $this;
+    }
+
+    /**
+     * iv
+     * @return $this
+     */
+    private function setAesMd5Iv()
+    {
+        $value = $this->app->config->get("dtapp.md5.bcw");
+        $this->aes_md5_iv = $value;
+        return $this;
+    }
+
+    /**
      * 返回成功的操作
      * @param mixed $data 返回数据
      * @param mixed $msg 消息内容
      * @param integer $code 返回代码
-     * @param string $name 参数名
      */
-    public function aesSuccess($data = [], $msg = 'success', $code = 0, $name = 'sniff_h5')
+    public function aesSuccess($data = [], $msg = 'success', $code = 0)
     {
         $timestamp = time();
         throw new HttpResponseException(json([
             'code' => $code, 'msg' => $msg, 'timestamp' => $timestamp, 'data' => [
-                'aes' => $this->encrypt($data, $name, $timestamp)
+                'aes' => $this->encrypt($data, $timestamp)
             ],
         ]));
     }
@@ -202,14 +231,21 @@ class ApiController extends stdClass
     /**
      * 加密
      * @param $data
-     * @param string $name
      * @param int $timestamp
      * @return bool|string
      */
-    private function encrypt($data, string $name, int $timestamp)
+    private function encrypt($data, int $timestamp)
     {
-        if (!empty(is_array($data))) $data = json_encode($data);
-        return urlencode(base64_encode(openssl_encrypt($data, 'AES-128-CBC', config("dtapp.md5.{$name}"), 1, config("dtapp.md5.bcw") . $timestamp)));
+        if (empty($this->aes_md5)) {
+            $this->setAesMd5();
+        }
+        if (empty($this->aes_md5_iv)) {
+            $this->setAesMd5Iv();
+        }
+        if (!empty(is_array($data))) {
+            $data = json_encode($data);
+        }
+        return urlencode(base64_encode(openssl_encrypt($data, 'AES-128-CBC', $this->aes_md5, 1, $this->aes_md5_iv . $timestamp)));
     }
 
     /**
@@ -221,6 +257,12 @@ class ApiController extends stdClass
      */
     private function decrypt(string $data, string $name, int $timestamp)
     {
-        return openssl_decrypt(base64_decode(urldecode($data)), "AES-128-CBC", config("dtapp.md5.{$name}"), true, config("dtapp.md5.bcw") . $timestamp);
+        if (empty($this->aes_md5)) {
+            $this->setAesMd5();
+        }
+        if (empty($this->aes_md5_iv)) {
+            $this->setAesMd5Iv();
+        }
+        return openssl_decrypt(base64_decode(urldecode($data)), "AES-128-CBC", $this->aes_md5, true, $this->aes_md5_iv . $timestamp);
     }
 }

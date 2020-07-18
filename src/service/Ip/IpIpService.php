@@ -46,7 +46,7 @@ class IpIpService extends Service
      */
     public function __construct(App $app)
     {
-        $this->ipPath = config('dtapp.ip_path', '');
+        $this->ipPath = $this->app->config->get('dtapp.ip_path', '');
         if (empty($this->ipPath)) {
             throw new DtaException('请检查配置文件是否配置了IP数据库文件存放位置');
         }
