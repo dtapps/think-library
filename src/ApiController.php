@@ -193,9 +193,8 @@ class ApiController extends stdClass
 
     /**
      * 验证接口签名
-     * @param string $name
      */
-    public function _judgeSign($name = 'sniff_h5')
+    public function _judgeSign()
     {
         // 加密的数据参数
         $aes = $this->request->post('aes', '');
@@ -209,7 +208,7 @@ class ApiController extends stdClass
             $this->error('数据异常！', 105);
         }
         // 解密
-        $aes_decode = $this->decrypt($aes, $name, $timestamp);
+        $aes_decode = $this->decrypt($aes, $timestamp);
         if (empty($aes_decode)) {
             $this->error('解密失败', 106);
         }
@@ -247,11 +246,10 @@ class ApiController extends stdClass
     /**
      * 解密
      * @param string $data
-     * @param string $name
      * @param int $timestamp
      * @return bool|false|string
      */
-    private function decrypt(string $data, string $name, int $timestamp)
+    private function decrypt(string $data, int $timestamp)
     {
         if (empty($this->aes_md5)) {
             $this->setAesMd5();
