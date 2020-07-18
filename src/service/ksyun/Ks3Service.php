@@ -63,10 +63,10 @@ class Ks3Service extends Service
      */
     private function getConfig()
     {
-        $this->accessKeyID = $this->app->config->get('dtapp.ksyun.ks3.access_key_iD');
-        $this->accessKeySecret = $this->app->config->get('dtapp.ksyun.ks3.access_key_secret');
-        $this->endpoint = $this->app->config->get('dtapp.ksyun.ks3.endpoint');
-        $this->bucket = $this->app->config->get('dtapp.ksyun.ks3.bucket');
+        $this->accessKeyID = config('dtapp.ksyun.ks3.access_key_iD');
+        $this->accessKeySecret = config('dtapp.ksyun.ks3.access_key_secret');
+        $this->endpoint = config('dtapp.ksyun.ks3.endpoint');
+        $this->bucket = config('dtapp.ksyun.ks3.bucket');
         return $this;
     }
 
@@ -108,7 +108,7 @@ class Ks3Service extends Service
         ];
         try {
             $client->putObjectByFile($args);
-            return $this->app->config->get('dtapp.ksyun.ks3.url', '') . $object;
+            return config('dtapp.ksyun.ks3.url', '') . $object;
         } catch (Ks3ServiceException $e) {
             return false;
         }

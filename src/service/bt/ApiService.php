@@ -57,8 +57,8 @@ class ApiService extends Service
      */
     private function getConfig()
     {
-        $this->key = $this->app->config->get('dtapp.bt.key');
-        $this->panel = $this->app->config->get('dtapp.bt.panel');
+        $this->key = config('dtapp.bt.key');
+        $this->panel = config('dtapp.bt.panel');
         return $this;
     }
 

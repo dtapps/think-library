@@ -58,9 +58,9 @@ class UssService extends Service
      */
     private function getConfig()
     {
-        $this->serviceName = $this->app->config->get('dtapp.upyun.uss.service_name');
-        $this->operatorName = $this->app->config->get('dtapp.upyun.uss.operator_name');
-        $this->operatorPassword = $this->app->config->get('dtapp.upyun.uss.operator_password');
+        $this->serviceName = config('dtapp.upyun.uss.service_name');
+        $this->operatorName = config('dtapp.upyun.uss.operator_name');
+        $this->operatorPassword = config('dtapp.upyun.uss.operator_password');
         return $this;
     }
 
@@ -80,6 +80,6 @@ class UssService extends Service
         $client = new Upyun($serviceConfig);
         $file = fopen($filePath, 'r');
         $client->write($object, $file);
-        return $this->app->config->get('dtapp.upyun.uss.url', '') . $object;
+        return config('dtapp.upyun.uss.url', '') . $object;
     }
 }

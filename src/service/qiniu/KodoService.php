@@ -58,9 +58,9 @@ class KodoService extends Service
      */
     private function getConfig()
     {
-        $this->accessKey = $this->app->config->get('dtapp.qiniu.kodo.access_key');
-        $this->secretKey = $this->app->config->get('dtapp.qiniu.kodo.secret_key');
-        $this->bucket = $this->app->config->get('dtapp.qiniu.kodo.bucket');
+        $this->accessKey = config('dtapp.qiniu.kodo.access_key');
+        $this->secretKey = config('dtapp.qiniu.kodo.secret_key');
+        $this->bucket = config('dtapp.qiniu.kodo.bucket');
         return $this;
     }
 
@@ -87,7 +87,7 @@ class KodoService extends Service
         if ($err !== null) {
             return false;
         } else {
-            return $this->app->config->get('dtapp.qiniu.kodo.url', '') . $object;
+            return config('dtapp.qiniu.kodo.url', '') . $object;
         }
     }
 }

@@ -152,8 +152,8 @@ class JinBaoService extends Service
      */
     private function getConfig()
     {
-        $this->client_id = $this->app->config->get('dtapp.pinduoduo.jinbao.client_id');
-        $this->client_secret = $this->app->config->get('dtapp.pinduoduo.jinbao.client_secret');
+        $this->client_id = config('dtapp.pinduoduo.jinbao.client_id');
+        $this->client_secret = config('dtapp.pinduoduo.jinbao.client_secret');
         return $this;
     }
 

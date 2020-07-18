@@ -40,12 +40,12 @@ class SystemService extends Service
      */
     public function uri($url = '', array $vars = [], $suffix = true, $domain = false, $fillSuffix = false)
     {
-        $default_app = $this->app->config->get('app.default_app', 'index');
-        $default_action = $this->app->config->get('route.default_action', 'index');
-        $default_controller = $this->app->config->get('route.default_controller', 'Index');
-        $url_html_suffix = $this->app->config->get('route.url_html_suffix', 'html');
-        $pathinfo_depr = $this->app->config->get('route.pathinfo_depr', '/');
-        $url_common_param = $this->app->config->get('route.url_common_param', true);
+        $default_app = config('app.default_app', 'index');
+        $default_action = config('route.default_action', 'index');
+        $default_controller = config('route.default_controller', 'Index');
+        $url_html_suffix = config('route.url_html_suffix', 'html');
+        $pathinfo_depr = config('route.pathinfo_depr', '/');
+        $url_common_param = config('route.url_common_param', true);
         if (empty($url)) {
             $url = "{$default_app}/{$default_action}/{$default_controller}";
         }

@@ -63,10 +63,10 @@ class OssService extends Service
      */
     private function getConfig()
     {
-        $this->accessKeyId = $this->app->config->get('dtapp.aliyun.oss.access_key_id');
-        $this->accessKeySecret = $this->app->config->get('dtapp.aliyun.oss.access_key_secret');
-        $this->endpoint = $this->app->config->get('dtapp.aliyun.oss.endpoint');
-        $this->bucket = $this->app->config->get('dtapp.aliyun.oss.bucket');
+        $this->accessKeyId = config('dtapp.aliyun.oss.access_key_id');
+        $this->accessKeySecret = config('dtapp.aliyun.oss.access_key_secret');
+        $this->endpoint = config('dtapp.aliyun.oss.endpoint');
+        $this->bucket = config('dtapp.aliyun.oss.bucket');
         return $this;
     }
 
@@ -84,7 +84,7 @@ class OssService extends Service
         try {
             $ossClient = new OssClient($this->accessKeyId, $this->accessKeySecret, $this->endpoint);
             $ossClient->uploadFile($this->bucket, $object, $filePath);
-            return $this->app->config->get('dtapp.aliyun.oss.url', '') . $object;
+            return config('dtapp.aliyun.oss.url', '') . $object;
         } catch (OssException $e) {
             return $e->getMessage();
         }

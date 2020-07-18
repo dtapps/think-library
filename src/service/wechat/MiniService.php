@@ -81,9 +81,9 @@ class MiniService extends Service
      */
     private function getConfig()
     {
-        $this->cache = $this->app->config->get('dtapp.wechat.mini.cache');
-        $this->app_id = $this->app->config->get('dtapp.wechat.mini.app_id');
-        $this->app_secret = $this->app->config->get('dtapp.wechat.mini.app_secret');
+        $this->cache = config('dtapp.wechat.mini.cache');
+        $this->app_id = config('dtapp.wechat.mini.app_id');
+        $this->app_secret = config('dtapp.wechat.mini.app_secret');
         return $this;
     }
 

@@ -63,10 +63,10 @@ class CosService extends Service
      */
     private function getConfig()
     {
-        $this->secretId = $this->app->config->get('dtapp.tencent.cos.secret_id');
-        $this->secretKey = $this->app->config->get('dtapp.tencent.cos.secret_key');
-        $this->region = $this->app->config->get('dtapp.tencent.cos.region');
-        $this->bucket = $this->app->config->get('dtapp.tencent.cos.bucket');
+        $this->secretId = config('dtapp.tencent.cos.secret_id');
+        $this->secretKey = config('dtapp.tencent.cos.secret_key');
+        $this->region = config('dtapp.tencent.cos.region');
+        $this->bucket = config('dtapp.tencent.cos.bucket');
         return $this;
     }
 
@@ -105,6 +105,6 @@ class CosService extends Service
                 );
             }
         }
-        return $this->app->config->get('dtapp.tencent.cos.url', '') . $object;
+        return config('dtapp.tencent.cos.url', '') . $object;
     }
 }

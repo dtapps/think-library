@@ -197,27 +197,23 @@ class ApiController extends stdClass
      */
     public function _judgeSign($name = 'sniff_h5')
     {
-        if (empty($this->request->header('sign', ''))) {
+        // 加密的数据参数
+        $aes = $this->request->post('aes', '');
+        if (empty($aes)) {
             $this->error('数据未签名！', 104);
         }
-
-        // 加密的数据参数
-        $aes = $this->request->post('aes');
         // 获取时间数据
         $timestamp = $this->request->get('timestamp', 0);
-
         // 判断是否有时间
         if (empty($timestamp)) {
             $this->error('数据异常！', 105);
         }
-
         // 解密
         $aes_decode = $this->decrypt($aes, $name, $timestamp);
         if (empty($aes_decode)) {
             $this->error('解密失败', 106);
         }
         $data = json_decode($aes_decode, true);
-
         // 判断是不是小于服务器时间
         $before = strtotime('-2minute');
         $rear = strtotime('+2minute');

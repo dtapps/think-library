@@ -58,7 +58,7 @@ class StorageService extends Service
      */
     private function getConfig()
     {
-        $this->path = $this->app->config->get('dtapp.storage.path');
+        $this->path = config('dtapp.storage.path');
         return $this;
     }
 

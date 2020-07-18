@@ -63,10 +63,10 @@ class BosService extends Service
      */
     private function getConfig()
     {
-        $this->accessKeyId = $this->app->config->get('dtapp.baidu.bos.access_key_id');
-        $this->secretAccessKey = $this->app->config->get('dtapp.baidu.bos.secret_access_key');
-        $this->endpoint = $this->app->config->get('dtapp.baidu.bos.endpoint');
-        $this->bucket = $this->app->config->get('dtapp.baidu.bos.bucket');
+        $this->accessKeyId = config('dtapp.baidu.bos.access_key_id');
+        $this->secretAccessKey = config('dtapp.baidu.bos.secret_access_key');
+        $this->endpoint = config('dtapp.baidu.bos.endpoint');
+        $this->bucket = config('dtapp.baidu.bos.bucket');
         return $this;
     }
 
@@ -96,6 +96,6 @@ class BosService extends Service
             $this->getConfig();
         }
         $client->putObjectFromFile($this->bucket, $object, $filePath);
-        return $this->app->config->get('dtapp.baidu.bos.url', '') . $object;
+        return config('dtapp.baidu.bos.url', '') . $object;
     }
 }

@@ -526,8 +526,8 @@ class WatermarkService extends Service
                             ->upload($yun_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4", $system_path . $backtrack['video_info']['vid'] . "_playwm" . ".mp4");
                         break;
                     case "storage":
-                        $domain_name = $this->app->config->get('dtapp.storage.domain_name');
-                        $new_yun_path = $this->app->config->get("dtapp.storage.domain_list.{$domain_name}") . "upload/watermark/{$yun_path}";
+                        $domain_name = config('dtapp.storage.domain_name');
+                        $new_yun_path = config("dtapp.storage.domain_list.{$domain_name}") . "upload/watermark/{$yun_path}";
                         // 本地存储
                         // 作者头像
                         $backtrack['yun']['author_info']['avatar'] = "{$new_yun_path}" . $backtrack['author_info']['uid'] . ".jpeg";
