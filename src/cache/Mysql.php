@@ -21,10 +21,9 @@ namespace DtApp\ThinkLibrary\cache;
 
 use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\facade\Times;
-use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
-use think\db\exception\ModelNotFoundException;
 use think\facade\Db;
+use think\Model;
 
 /**
  * 缓存数据库驱动
@@ -73,28 +72,22 @@ class Mysql
                 'cache_value' => $cache_value,
                 'cache_expire' => Times::dateRear("Y-m-d H:i:s", $this->cache_expire)
             ]);
-        if (empty($result)) {
-            return false;
-        }
-        return true;
+        return $result ? true : false;
     }
 
     /**
      * 获取
-     * @return string
-     * @throws DataNotFoundException
-     * @throws DbException
-     * @throws ModelNotFoundException|DtaException
+     * @return array|Model|null
+     * @throws DtaException
      */
     public function get()
     {
         $this->judge();
-        $cache = Db::table($this->table)
+        return Db::table($this->table)
             ->where('cache_name', $this->cache_name)
-            ->order('id desc')
-            ->whereTime('cache_expire', '>', time())
-            ->find();
-        return isset($cache['cache_value']) ? $cache['cache_value'] : '';
+            ->whereTime('cache_expire', '>=', time())
+            ->order('cache_expire desc')
+            ->value('access_token', '');
     }
 
     /**
@@ -108,10 +101,7 @@ class Mysql
         $result = Db::table($this->table)
             ->where('cache_name', $this->cache_name)
             ->delete();
-        if (empty($result)) {
-            return false;
-        }
-        return true;
+        return $result ? true : false;
     }
 
     /**
@@ -129,19 +119,15 @@ class Mysql
                 'cache_value' => $cache_value,
                 'cache_expire' => Times::dateRear("Y-m-d H:i:s", $this->cache_expire)
             ]);
-        if (empty($result)) {
-            return false;
-        }
-        return true;
+        return $result ? true : false;
     }
 
     /**
      * 自增
      * @param int $int
      * @return int
-     * @throws DataNotFoundException
      * @throws DbException
-     * @throws ModelNotFoundException|DtaException
+     * @throws DtaException
      */
     public function inc(int $int = 1)
     {
@@ -151,19 +137,15 @@ class Mysql
             ->update([
                 'cache_value' => $cache_value + $int
             ]);
-        if (empty($result)) {
-            return false;
-        }
-        return true;
+        return $result ? true : false;
     }
 
     /**
      * 自减
      * @param int $int
      * @return int
-     * @throws DataNotFoundException
      * @throws DbException
-     * @throws ModelNotFoundException|DtaException
+     * @throws DtaException
      */
     public function dec(int $int = 1)
     {
@@ -173,10 +155,7 @@ class Mysql
             ->update([
                 'cache_value' => $cache_value - $int
             ]);
-        if (empty($result)) {
-            return false;
-        }
-        return true;
+        return $result ? true : false;
     }
 
     /**
