@@ -148,7 +148,7 @@ class Requests
      * 判断是否微信内置浏览器访问
      * @return bool
      */
-    public function isWeXin(): bool
+    public function isWeiXin(): bool
     {
         if (strpos(request()->server('HTTP_USER_AGENT'), 'MicroMessenger') !== false) {
             return true;
@@ -160,7 +160,7 @@ class Requests
      * 判断是否为微信小程序访问
      * @return bool
      */
-    public function isWeXinMp(): bool
+    public function isWeiXinMp(): bool
     {
         if (strpos(request()->server('HTTP_USER_AGENT'), 'miniProgram') !== false) {
             return true;

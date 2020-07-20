@@ -39,8 +39,8 @@ use think\Facade;
  * @method static bool isDelete() 判断是否为DELETE方式
  * @method static bool isAjax() 判断是否为Ajax方式
  * @method static bool isMobile() 判断是否为移动端访问
- * @method static bool isWeXin() 判断是否微信内置浏览器访问
- * @method static bool isWeXinMp() 判断是否为微信小程序访问
+ * @method static bool isWeiXin() 判断是否微信内置浏览器访问
+ * @method static bool isWeiXinMp() 判断是否为微信小程序访问
  * @method static bool isAliPay() 判断是否支付宝内置浏览器访问
  * @method static bool isQQ() 判断是否QQ内置浏览器访问
  * @method static bool isQQBrowser() 判断是否QQ浏览器访问
