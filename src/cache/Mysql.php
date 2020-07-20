@@ -87,7 +87,7 @@ class Mysql
             ->where('cache_name', $this->cache_name)
             ->whereTime('cache_expire', '>=', time())
             ->order('cache_expire desc')
-            ->value('access_token', '');
+            ->value('cache_value', '');
     }
 
     /**
