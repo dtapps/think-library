@@ -22,9 +22,7 @@ namespace DtApp\ThinkLibrary\service\wechat;
 use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
-use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
-use think\db\exception\ModelNotFoundException;
 
 /**
  * 微信小程序
@@ -92,10 +90,8 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/user-info/auth.getPaidUnionId.html
      * @param string $openid
      * @return bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function getPaidUnionId(string $openid)
     {
@@ -112,10 +108,8 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/qr-code/wxacode.createQRCode.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function createWxaQrCode(array $data = [])
     {
@@ -134,10 +128,8 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/qr-code/wxacode.get.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function getWxaCode(array $data = [])
     {
@@ -156,10 +148,8 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/qr-code/wxacode.getUnlimited.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function getWxaCodeUnLimit(array $data = [])
     {
@@ -178,10 +168,8 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.addTemplate.html
      * @param array $data
      * @return bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function addTemplate(array $data = [])
     {
@@ -199,10 +187,8 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.deleteTemplate.html
      * @param string $priTmplId 要删除的模板id
      * @return bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function deleteTemplate(string $priTmplId)
     {
@@ -222,10 +208,8 @@ class MiniService extends Service
      * 获取小程序账号的类目
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getCategory.html
      * @return bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function getCategory()
     {
@@ -242,10 +226,8 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getPubTemplateKeyWordsById.html
      * @param string $tid 模板标题 id
      * @return bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function getPubTemplateKeyWordsById(string $tid)
     {
@@ -266,10 +248,8 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getPubTemplateTitleList.html
      * @param array $data
      * @return bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function getPubTemplateTitleList(array $data = [])
     {
@@ -286,10 +266,8 @@ class MiniService extends Service
      * 获取当前帐号下的个人模板列表
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getTemplateList.html
      * @return bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function getTemplateList()
     {
@@ -306,10 +284,8 @@ class MiniService extends Service
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.send.html
      * @param array $data
      * @return bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function subscribeMessageSend(array $data = [])
     {
@@ -401,10 +377,8 @@ class MiniService extends Service
      * 获取小程序全局唯一后台接口调用凭据（access_token）
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/access-token/auth.getAccessToken.html
      * @return bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function accessToken()
     {
@@ -415,10 +389,8 @@ class MiniService extends Service
     /**
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     private function getAccessToken()
     {

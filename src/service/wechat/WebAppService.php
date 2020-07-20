@@ -26,9 +26,7 @@ use DtApp\ThinkLibrary\facade\Urls;
 use DtApp\ThinkLibrary\facade\Xmls;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
-use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
-use think\db\exception\ModelNotFoundException;
 
 /**
  * 公众号
@@ -301,10 +299,8 @@ class WebAppService extends Service
     /**
      * 分享
      * @return array
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function share()
     {
@@ -368,10 +364,8 @@ class WebAppService extends Service
      * 生成二维码
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function qrCode(array $data)
     {
@@ -388,10 +382,8 @@ class WebAppService extends Service
      * 发送模板消息
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function messageTemplateSend(array $data = [])
     {
@@ -410,10 +402,8 @@ class WebAppService extends Service
      * @param string $access_token
      * @param array $data
      * @return bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function setIndustry(string $access_token, array $data = [])
     {
@@ -430,10 +420,8 @@ class WebAppService extends Service
      * 将一条长链接转成短链接
      * @param string $long_url
      * @return bool
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function shortUrl(string $long_url)
     {
@@ -454,10 +442,8 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/WiFi_via_WeChat/WiFi_mini_programs.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function fiNihPageSet(array $data = [])
     {
@@ -475,10 +461,8 @@ class WebAppService extends Service
      * 自定义菜单 获取自定义菜单配置
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Getting_Custom_Menu_Configurations.html
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function menuGet()
     {
@@ -495,10 +479,8 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Personalized_menu_interface.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function menuAddConditional(array $data = [])
     {
@@ -517,10 +499,8 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Personalized_menu_interface.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function menuDelConditional(array $data = [])
     {
@@ -539,10 +519,8 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Personalized_menu_interface.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function menuTryMatch(array $data = [])
     {
@@ -560,10 +538,8 @@ class WebAppService extends Service
      * 自定义菜单 删除接口
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Deleting_Custom-Defined_Menu.html
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function menuDelete()
     {
@@ -579,10 +555,8 @@ class WebAppService extends Service
      * 自定义菜单 查询接口
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Querying_Custom_Menus.html
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function getCurrentSelfmenuInfo()
     {
@@ -599,10 +573,8 @@ class WebAppService extends Service
      * https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Creating_Custom-Defined_Menu.html
      * @param array $data
      * @return array|bool|mixed|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     public function menuCreate(array $data = [])
     {
@@ -619,10 +591,8 @@ class WebAppService extends Service
     /**
      * 获取access_token信息
      * @return array|bool|mixed|string|string[]
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     private function getAccessToken()
     {

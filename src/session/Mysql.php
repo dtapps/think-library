@@ -59,6 +59,7 @@ class Mysql implements SessionHandlerInterface
         return (string)Db::table($this->table_name)
             ->where('session_id', $this->config['session_prefix'] . $sessionId)
             ->whereTime('session_expire', '>=', time())
+            ->order('session_expire desc')
             ->value('session_data', '');
     }
 

@@ -21,14 +21,12 @@ use DtApp\ThinkLibrary\cache\Mysql;
 use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\service\QqWryService;
 use DtApp\ThinkLibrary\service\SystemService;
-use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
-use think\db\exception\ModelNotFoundException;
 
 /**
  * 定义当前版本
  */
-const VERSION = '6.0.93';
+const VERSION = '6.0.94';
 
 if (!function_exists('get_ip_info')) {
     /**
@@ -92,10 +90,8 @@ if (!function_exists('dtacache')) {
      * @param array $value
      * @param int $expire
      * @return bool|int|string
-     * @throws DataNotFoundException
      * @throws DbException
      * @throws DtaException
-     * @throws ModelNotFoundException
      */
     function dtacache($name = '', $value = [], $expire = 6000)
     {
