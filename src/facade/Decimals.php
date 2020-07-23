@@ -21,20 +21,22 @@ declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\facade;
 
-use DtApp\ThinkLibrary\helper\Ints as helper;
+use DtApp\ThinkLibrary\helper\Decimals as helper;
 use think\Facade;
 
 /**
- * 整数门面
- * @see \DtApp\ThinkLibrary\helper\Ints
- * @package DtApp\ThinkLibrary\Ints
+ * 小数门面
+ * @see \DtApp\ThinkLibrary\helper\Decimals
+ * @package DtApp\ThinkLibrary\Decimals
  * @package think\facade
  * @mixin helper
  *
- * @method static bool isEvenNumbers(int $num) 判断一个数是不是偶数
- * @method static bool isOddNumbers(int $num) 判断一个数是不是奇数
+ * @method static int intval($num) 直接取整，舍弃小数保留整数
+ * @method static float round($num) 四舍五入取整
+ * @method static false|float ceil($num) 有小数，就在整数的基础上加一
+ * @method static false|float floor($num) 有小数，就取整数位
  */
-class Ints extends Facade
+class Decimals extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
@@ -46,4 +48,3 @@ class Ints extends Facade
         return helper::class;
     }
 }
-

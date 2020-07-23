@@ -22,7 +22,7 @@ declare (strict_types=1);
 namespace DtApp\ThinkLibrary\helper;
 
 /**
- * 数字管理类
+ * 整数管理类
  * @mixin Ints
  * @package DtApp\ThinkLibrary\helper
  */
