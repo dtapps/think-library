@@ -70,4 +70,38 @@ class Urls
         $buff = trim($buff, "&");
         return $buff;
     }
+
+    /**
+     * 判断是否为Url
+     * @param string $url
+     * @return bool
+     */
+    public function isUrl(string $url): bool
+    {
+        $pattern = "#(http|https)://(.*\.)?.*\..*#i";
+        if (preg_match($pattern, $url)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 删除协议
+     * @param string $url
+     * @return string
+     */
+    public function deleteProtocol(string $url): string
+    {
+        if (empty($this->isUrl($url))) {
+            return $url;
+        }
+        if (strpos($url, 'https://') !== false) {
+            return str_replace("https://", "//", $url);
+        }
+        if (strpos($url, 'http://') !== false) {
+            return str_replace("http://", "//", $url);
+        }
+        return $url;
+    }
 }
