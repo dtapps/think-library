@@ -99,27 +99,35 @@ class Times
     }
 
     /**
-     * 在当前时间之前的时间
+     * 在某个时间之前的时间
      * @param string $format 格式
      * @param int $mun 多少秒
+     * @param int $time
      * @return false|string
      */
-    public function dateBefore(string $format = "Y-m-d H:i:s", int $mun = 60)
+    public function dateBefore(string $format = "Y-m-d H:i:s", int $mun = 60, int $time = 0)
     {
         date_default_timezone_set('Asia/Shanghai');
-        return date($format, time() - $mun);
+        if (empty($time)) {
+            $time = time();
+        }
+        return date($format, $time - $mun);
     }
 
     /**
-     * 在当前时间之后的时间
+     * 在某个时间之后的时间
      * @param string $format 格式
      * @param int $mun 多少秒
+     * @param int $time
      * @return false|string
      */
-    public function dateRear(string $format = "Y-m-d H:i:s", int $mun = 60)
+    public function dateRear(string $format = "Y-m-d H:i:s", int $mun = 60, int $time = 0)
     {
         date_default_timezone_set('Asia/Shanghai');
-        return date($format, time() + $mun);
+        if (empty($time)) {
+            $time = time();
+        }
+        return date($format, $time + $mun);
     }
 
 
