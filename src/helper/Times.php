@@ -71,7 +71,7 @@ class Times
     {
         date_default_timezone_set('Asia/Shanghai');
         $end_time = strtotime($end_time);
-        $start_time = $start_time == '' ? strtotime(self::getData('Y-m-d H:i:s')) : strtotime($start_time);
+        $start_time = $start_time == '' ? time() : strtotime($start_time);
         return $end_time - $start_time;
     }
 
@@ -87,27 +87,39 @@ class Times
     }
 
     /**
-     * 获取某个时间之后的时间
-     * @param string $format 格式
-     * @param int $mun 多少分钟
+     * 将指定时间戳转换为日期
+     * @param string $format
+     * @param int $time
      * @return false|string
      */
-    public function dateRear(string $format = "Y-m-d H:i:s", int $mun = 10)
+    public function timestampToDate(int $time, string $format = "Y-m-d H:i:s")
     {
         date_default_timezone_set('Asia/Shanghai');
-        return date($format, strtotime(self::getData()) + $mun);
+        return date($format, $time);
     }
 
     /**
-     * 获取某个时间之前的时间
+     * 在当前时间之前的时间
      * @param string $format 格式
-     * @param int $mun 多少分钟
+     * @param int $mun 多少秒
      * @return false|string
      */
-    public function dateBefore(string $format = "Y-m-d H:i:s", int $mun = 10)
+    public function dateBefore(string $format = "Y-m-d H:i:s", int $mun = 60)
     {
         date_default_timezone_set('Asia/Shanghai');
-        return date($format, strtotime(self::getData()) - $mun);
+        return date($format, time() - $mun);
+    }
+
+    /**
+     * 在当前时间之后的时间
+     * @param string $format 格式
+     * @param int $mun 多少秒
+     * @return false|string
+     */
+    public function dateRear(string $format = "Y-m-d H:i:s", int $mun = 60)
+    {
+        date_default_timezone_set('Asia/Shanghai');
+        return date($format, time() + $mun);
     }
 
 

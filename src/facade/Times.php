@@ -36,8 +36,9 @@ use think\Facade;
  * @method static string getUDate() 当前时间戳
  * @method static string getTimeDifference(string $end_time, string $start_time) 计算两个时间差
  * @method static string dateToTimestamp(string $date) 将指定日期转换为时间戳
- * @method static string dateRear(string $format = "Y-m-d H:i:s", int $mun = 10) f获取某个时间之后的时间
- * @method static string dateBefore(string $format = "Y-m-d H:i:s", int $mun = 10) 获取某个时间之前的时间
+ * @method static string timestampToDate(int $time, string $format = "Y-m-d H:i:s") 将指定时间戳转换为日期
+ * @method static string dateRear(string $format = "Y-m-d H:i:s", int $mun = 10) 在当前时间之后的时间
+ * @method static string dateBefore(string $format = "Y-m-d H:i:s", int $mun = 10) 在当前时间之前的时间
  * @method static bool checkIsBetweenTime(string $start, string $end) 判断当前的时分是否在指定的时间段内
  */
 class Times extends Facade
