@@ -153,7 +153,7 @@ class TbkService extends Service
 
     /**
      * 订单查询 - 淘宝客-推广者-所有订单查询
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=40173&docType=2
+     * https://open.taobao.com/api.htm?spm=a219a.7386797.0.0.263c669aWmp4ds&source=search&docId=43328&docType=2
      * @return $this
      */
     public function orderDetailsGet()
@@ -176,7 +176,7 @@ class TbkService extends Service
 
     /**
      * 处罚订单 - 淘宝客-推广者-处罚订单查询
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=42050&docType=2
+     * https://open.taobao.com/api.htm?spm=a219a.7386797.0.0.120a669amFgNIC&source=search&docId=40121&docType=2
      * @return array|mixed
      */
     public function dgPunishOrderGet()
