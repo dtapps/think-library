@@ -21,6 +21,7 @@ declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
+use DtApp\ThinkLibrary\exception\DtaException;
 use think\Exception;
 
 /**
@@ -34,12 +35,13 @@ class Xmls
      * 数组转换为xml
      * @param array $values 数组
      * @return string
+     * @throws DtaException
      * @throws Exception
      */
     public function toXml(array $values)
     {
         if (!is_array($values) || count($values) <= 0) {
-            throw new Exception('数组数据异常！');
+            throw new DtaException('数组数据异常！');
         }
         $xml = "<xml>";
         foreach ($values as $key => $val) {
@@ -59,12 +61,12 @@ class Xmls
      * 将XML转为array
      * @param string $xml
      * @return mixed
-     * @throws Exception
+     * @throws DtaException
      */
     public function toArray(string $xml)
     {
         if (!$xml) {
-            throw new Exception('xml数据异常！');
+            throw new DtaException('xml数据异常！');
         }
         libxml_disable_entity_loader(true);
         return json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);

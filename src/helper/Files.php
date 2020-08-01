@@ -21,6 +21,7 @@ declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
+use DtApp\ThinkLibrary\exception\DtaException;
 use think\Exception;
 use ZipArchive;
 
@@ -35,12 +36,12 @@ class Files
      * 删除文件
      * @param string $name 路径
      * @return bool
-     * @throws Exception
+     * @throws DtaException
      */
     public function delete(string $name): bool
     {
         if (empty($name)) {
-            throw new Exception('请检查需要删除文件夹的名称');
+            throw new DtaException('请检查需要删除文件夹的名称');
         }
         if (file_exists($name)) {
             if (unlink($name)) {
@@ -54,12 +55,13 @@ class Files
      * 删除文件夹
      * @param string $name 路径
      * @return bool
+     * @throws DtaException
      * @throws Exception
      */
     public function deletes(string $name): bool
     {
         if (empty($name)) {
-            throw new Exception('请检查需要删除文件夹的名称');
+            throw new DtaException('请检查需要删除文件夹的名称');
         }
         //先删除目录下的文件：
         $dh = opendir($name);
@@ -88,12 +90,12 @@ class Files
      * @param string $suffix_name 需要打包的后缀名，默认.png
      * @param string $file_name 文件名，默认全部名
      * @return bool
-     * @throws Exception
+     * @throws DtaException
      */
     public function folderZip(string $name, string $suffix_name = '.png', string $file_name = '*'): bool
     {
         if (empty($name)) {
-            throw new Exception('请检查需要打包的路径名称');
+            throw new DtaException('请检查需要打包的路径名称');
         }
         try {
             // 获取目录下所有某个结尾的文件列表
@@ -109,7 +111,7 @@ class Files
             //关闭压缩包
             $zip->close();
             return true;
-        } catch (\Exception $e) {
+        } catch (\DtaException $e) {
             return false;
         }
     }
