@@ -170,7 +170,7 @@ class Strings
     }
 
     /**
-     * 删除空格
+     * 字符串删除空格
      * @param $str
      * @return string|string[]
      */

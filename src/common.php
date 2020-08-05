@@ -26,7 +26,7 @@ use think\db\exception\DbException;
 /**
  * 定义当前版本
  */
-const VERSION = '6.0.101';
+const VERSION = '6.0.102';
 
 if (!function_exists('get_ip_info')) {
     /**

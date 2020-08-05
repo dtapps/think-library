@@ -119,4 +119,24 @@ class Arrays
         array_multisort($key_arrays, $sort_order, $sort_type, $arrays);
         return $arrays;
     }
+
+    /**
+     * 数组删除空格
+     * @param array $arr
+     * @return array
+     */
+    public function trimArray(array $arr)
+    {
+        if (!is_array($arr)) {
+            return $arr;
+        }
+        foreach ($arr as $key => $value) {
+            if (is_array($value)) {
+                $arr[$key] = $this->TrimArray($value);
+            } else {
+                $arr[$key] = \DtApp\ThinkLibrary\facade\Strings::trimAll(trim($value));
+            }
+        }
+        return $arr;
+    }
 }
