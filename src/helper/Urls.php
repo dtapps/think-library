@@ -104,4 +104,16 @@ class Urls
         }
         return $url;
     }
+
+    /**
+     * 获取URL文件格式
+     * @param string $url
+     * @return mixed|string
+     */
+    public function retrieve(string $url)
+    {
+        $path = parse_url($url);
+        $str = explode('.', $path['path']);
+        return $str[1];
+    }
 }

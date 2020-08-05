@@ -36,6 +36,7 @@ use think\Facade;
  * @method static string toParams(array $data) 格式化参数格式化成url参数
  * @method static bool isUrl(string $url) 判断是否为Url
  * @method static string deleteProtocol(string $url) 删除协议
+ * @method static string retrieve(string $url) 获取URL文件格式
  */
 class Urls extends Facade
 {
