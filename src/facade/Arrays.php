@@ -36,7 +36,7 @@ use think\Facade;
  * @method static array split(array $array, $num = 5) 分隔数组
  * @method static array unique(array $array) 多维数组去重
  * @method static array sort(array $arrays, string $sort_key, $sort_order = SORT_ASC, $sort_type = SORT_NUMERIC) 二维数组根据某个键排序
- * @method static string trimArray(array $arr) 数组删除空格
+ * @method static array trimArray(array $arr) 数组删除空格
  */
 class Arrays extends Facade
 {
