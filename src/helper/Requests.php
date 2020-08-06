@@ -54,7 +54,7 @@ class Requests
     {
         foreach ($arr as $k => $v) {
             if (empty(isset($data["$v"]) ? $data["$v"] : '')) {
-                \DtApp\ThinkLibrary\facade\Returns::jsonError('请检查参数', 102);
+                (new Returns)->jsonError('请检查参数', 102);
             }
         }
         return $data;

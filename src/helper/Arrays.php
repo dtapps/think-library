@@ -134,7 +134,7 @@ class Arrays
             if (is_array($value)) {
                 $arr[$key] = $this->TrimArray($value);
             } else {
-                $arr[$key] = \DtApp\ThinkLibrary\facade\Strings::trimAll(trim($value));
+                $arr[$key] = (new Strings)->trimAll(trim($value));
             }
         }
         return $arr;
