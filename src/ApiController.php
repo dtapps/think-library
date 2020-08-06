@@ -87,7 +87,10 @@ class ApiController extends stdClass
     public function error($msg = 'error', $code = 1, $data = [])
     {
         throw new HttpResponseException(json([
-            'code' => $code, 'msg' => $msg, 'timestamp' => time(), 'data' => $data,
+            'code' => $code,
+            'msg' => $msg,
+            'timestamp' => time(),
+            'data' => $data,
         ]));
     }
 
@@ -100,7 +103,10 @@ class ApiController extends stdClass
     public function success($data = [], $msg = 'success', $code = 0)
     {
         throw new HttpResponseException(json([
-            'code' => $code, 'msg' => $msg, 'timestamp' => time(), 'data' => $data,
+            'code' => $code,
+            'msg' => $msg,
+            'timestamp' => time(),
+            'data' => $data,
         ]));
     }
 
@@ -137,7 +143,10 @@ class ApiController extends stdClass
     {
         $timestamp = time();
         throw new HttpResponseException(json([
-            'code' => $code, 'msg' => $msg, 'timestamp' => $timestamp, 'data' => [
+            'code' => $code,
+            'msg' => $msg,
+            'timestamp' => $timestamp,
+            'data' => [
                 'aes' => $this->encrypt($data, $timestamp)
             ],
         ]));

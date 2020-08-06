@@ -73,7 +73,9 @@ class Controller extends stdClass
      */
     public function error($info, $data = '{-null-}', $code = 0)
     {
-        if ($data === '{-null-}') $data = new stdClass();
+        if ($data === '{-null-}') {
+            $data = new stdClass();
+        }
         throw new HttpResponseException(json([
             'code' => $code, 'info' => $info, 'data' => $data,
         ]));
@@ -87,7 +89,9 @@ class Controller extends stdClass
      */
     public function success($info, $data = '{-null-}', $code = 1)
     {
-        if ($data === '{-null-}') $data = new stdClass();
+        if ($data === '{-null-}') {
+            $data = new stdClass();
+        }
         throw new HttpResponseException(json([
             'code' => $code, 'info' => $info, 'data' => $data,
         ]));
@@ -110,7 +114,9 @@ class Controller extends stdClass
      */
     public function fetch($tpl = '', $vars = [])
     {
-        foreach ($this as $name => $value) $vars[$name] = $value;
+        foreach ($this as $name => $value) {
+            $vars[$name] = $value;
+        }
         throw new HttpResponseException(view($tpl, $vars));
     }
 

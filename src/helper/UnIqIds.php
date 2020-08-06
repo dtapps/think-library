@@ -50,7 +50,9 @@ class UnIqIds
         }
         $string = $prefix . $chars[rand(1, strlen($chars) - 1)];
         if (isset($chars)) {
-            while (strlen($string) < $size) $string .= $chars[rand(0, strlen($chars) - 1)];
+            while (strlen($string) < $size) {
+                $string .= $chars[rand(0, strlen($chars) - 1)];
+            }
         }
         return $string;
     }
@@ -67,7 +69,9 @@ class UnIqIds
             $size = 14;
         }
         $string = $prefix . date('Ymd') . (date('H') + date('i')) . date('s');
-        while (strlen($string) < $size) $string .= rand(0, 9);
+        while (strlen($string) < $size) {
+            $string .= rand(0, 9);
+        }
         return $string;
     }
 
@@ -84,7 +88,9 @@ class UnIqIds
             $size = 10;
         }
         $string = $prefix . ($time[0] . $time[1]) . substr($time, 2) . rand(0, 9);
-        while (strlen($string) < $size) $string .= rand(0, 9);
+        while (strlen($string) < $size) {
+            $string .= rand(0, 9);
+        }
         return $string;
     }
 }
