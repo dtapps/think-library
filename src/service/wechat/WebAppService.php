@@ -774,7 +774,6 @@ class WebAppService extends Service
             $error = curl_errno($ch);
             curl_close($ch);
             return "curl error, error code " . $error;
-            //throw new WxPayException("curl出错，错误码:$error");
         }
     }
 }
