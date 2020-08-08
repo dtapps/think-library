@@ -23,7 +23,6 @@ use DtApp\ThinkLibrary\facade\Times;
 use think\contract\SessionHandlerInterface;
 use think\facade\Db;
 
-
 /**
  * Session保存在MySQL驱动
  * Class Mysql
