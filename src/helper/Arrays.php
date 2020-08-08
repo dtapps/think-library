@@ -134,9 +134,21 @@ class Arrays
             if (is_array($value)) {
                 $arr[$key] = $this->TrimArray($value);
             } else {
-                $arr[$key] = (new Strings)->trimAll(trim($value));
+                $arr[$key] = $this->trimAll(trim($value));
             }
         }
         return $arr;
+    }
+
+    /**
+     * 字符串删除空格
+     * @param $str
+     * @return string|string[]
+     */
+    private function trimAll($str)
+    {
+        $oldchar = array(" ", "　", "\t", "\n", "\r");
+        $newchar = array("", "", "", "", "");
+        return str_replace($oldchar, $newchar, $str);
     }
 }
