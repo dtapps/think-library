@@ -134,7 +134,7 @@ class Arrays
             if (is_array($value)) {
                 $arr[$key] = $this->TrimArray($value);
             } else {
-                $arr[$key] = $this->trimAll(trim($value));
+                $arr[$key] = $this->trimAll($value);
             }
         }
         return $arr;
