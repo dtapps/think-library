@@ -21,10 +21,8 @@ namespace DtApp\ThinkLibrary\session;
 
 use DtApp\ThinkLibrary\facade\Times;
 use think\contract\SessionHandlerInterface;
-use think\db\exception\DataNotFoundException;
-use think\db\exception\DbException;
-use think\db\exception\ModelNotFoundException;
 use think\facade\Db;
+
 
 /**
  * Session保存在MySQL驱动
@@ -67,7 +65,7 @@ class Mysql implements SessionHandlerInterface
      * delete方法是在销毁会话的时候执行（调用Session::destroy()方法）。
      * @param string $sessionId
      * @return bool
-     * @throws DbException
+     * @throws \think\db\exception\DbException
      */
     public function delete(string $sessionId): bool
     {
@@ -82,9 +80,9 @@ class Mysql implements SessionHandlerInterface
      * @param string $sessionId
      * @param string $data
      * @return bool
-     * @throws DataNotFoundException
-     * @throws DbException
-     * @throws ModelNotFoundException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
      */
     public function write(string $sessionId, string $data): bool
     {

@@ -22,7 +22,6 @@ declare (strict_types=1);
 namespace DtApp\ThinkLibrary\helper;
 
 use DtApp\ThinkLibrary\exception\DtaException;
-use think\Exception;
 
 /**
  * XML管理类
@@ -36,7 +35,6 @@ class Xmls
      * @param array $values 数组
      * @return string
      * @throws DtaException
-     * @throws Exception
      */
     public function toXml(array $values)
     {

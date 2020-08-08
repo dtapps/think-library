@@ -21,9 +21,7 @@ namespace DtApp\ThinkLibrary\cache;
 
 use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\facade\Times;
-use think\db\exception\DbException;
 use think\facade\Db;
-use think\Model;
 
 /**
  * 缓存数据库驱动
@@ -60,7 +58,7 @@ class Mysql
     /**
      * 设置
      * @param $cache_value
-     * @return int|string
+     * @return bool
      * @throws DtaException
      */
     public function set($cache_value)
@@ -77,7 +75,7 @@ class Mysql
 
     /**
      * 获取
-     * @return array|Model|null
+     * @return mixed
      * @throws DtaException
      */
     public function get()
@@ -92,8 +90,9 @@ class Mysql
 
     /**
      * 删除
-     * @return int
-     * @throws DbException|DtaException
+     * @return bool
+     * @throws DtaException
+     * @throws \think\db\exception\DbException
      */
     public function delete()
     {
@@ -107,8 +106,9 @@ class Mysql
     /**
      * 更新
      * @param $cache_value
-     * @return int
-     * @throws DbException|DtaException
+     * @return bool
+     * @throws DtaException
+     * @throws \think\db\exception\DbException
      */
     public function update($cache_value)
     {
@@ -125,9 +125,9 @@ class Mysql
     /**
      * 自增
      * @param int $int
-     * @return int
-     * @throws DbException
+     * @return bool
      * @throws DtaException
+     * @throws \think\db\exception\DbException
      */
     public function inc(int $int = 1)
     {
@@ -143,9 +143,9 @@ class Mysql
     /**
      * 自减
      * @param int $int
-     * @return int
-     * @throws DbException
+     * @return bool
      * @throws DtaException
+     * @throws \think\db\exception\DbException
      */
     public function dec(int $int = 1)
     {
