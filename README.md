@@ -24,7 +24,6 @@
 
 - Github仓库地址：https://github.com/GC0202/ThinkLibrary
 - 码云仓库地址：https://gitee.com/liguangchun/ThinkLibrary
-- gitlab仓库地址：https://gitlab.com/liguangchun/thinklibrary
 - 微信仓库地址：https://git.weixin.qq.com/liguangchun/ThinkLibrary
 - 华为云仓库地址：https://codehub-cn-south-1.devcloud.huaweicloud.com/composer00001/ThinkLibrary.git
 
