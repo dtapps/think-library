@@ -96,8 +96,8 @@ class ObsService extends Service
         ]);
         if (isset($resp['RequestId'])) {
             return config('dtapp.huaweicloud.obs.url', '') . $object;
-        } else {
-            return false;
         }
+
+        return false;
     }
 }

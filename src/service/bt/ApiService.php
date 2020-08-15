@@ -404,8 +404,8 @@ class ApiService extends Service
         //定义cookie保存位置
         $file = app()->getRootPath() . 'runtime/dtapp/bt/cookie/';
         $cookie_file = $file . md5($this->panel) . '.cookie';
-        if (empty(Files::judgeContents($file))) {
-            mkdir($file, 0777, true);
+        if (empty(Files::judgeContents($file)) && !mkdir($file, 0777, true) && !is_dir($file)) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $file));
         }
         if (!file_exists($cookie_file)) {
             $fp = fopen($cookie_file, 'w+');

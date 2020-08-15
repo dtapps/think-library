@@ -79,9 +79,9 @@ class Files
         //删除当前文件夹：
         if (rmdir($name)) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -97,23 +97,18 @@ class Files
         if (empty($name)) {
             throw new DtaException('请检查需要打包的路径名称');
         }
-        try {
-            // 获取目录下所有某个结尾的文件列表
-            $list = glob($name . "{$file_name}.{$suffix_name}");
-            $fileList = $list;
-            $zip = new ZipArchive();
-            // 打开压缩包
-            $zip->open($name, ZipArchive::CREATE);
-            //向压缩包中添加文件
-            foreach ($fileList as $file) {
-                $zip->addFile($file, basename($file));
-            }
-            //关闭压缩包
-            $zip->close();
-            return true;
-        } catch (\DtaException $e) {
-            return false;
+        $list = glob($name . "{$file_name}.{$suffix_name}");
+        $fileList = $list;
+        $zip = new ZipArchive();
+        // 打开压缩包
+        $zip->open($name, ZipArchive::CREATE);
+        //向压缩包中添加文件
+        foreach ($fileList as $file) {
+            $zip->addFile($file, basename($file));
         }
+        //关闭压缩包
+        $zip->close();
+        return true;
     }
 
     /**
@@ -139,9 +134,9 @@ class Files
             }
             $file->close();
             return $files;
-        } else {
-            return [];
         }
+
+        return [];
     }
 
     /**
@@ -154,15 +149,17 @@ class Files
         $files = $this->getFiles($path);
         if (!is_array($files)) {
             return false;
-        } elseif (empty($files)) {
+        }
+
+        if (empty($files)) {
             return false;
-        } else {
-            foreach ($files as $item => $file) {
-                if (is_dir($file)) {
-                    rmdir($file);
-                } elseif (is_file($file)) {
-                    unlink($file);
-                }
+        }
+
+        foreach ($files as $item => $file) {
+            if (is_dir($file)) {
+                rmdir($file);
+            } elseif (is_file($file)) {
+                unlink($file);
             }
         }
         return true;

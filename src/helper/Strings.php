@@ -65,72 +65,7 @@ class Strings
      */
     public function filter(string $str): string
     {
-        $str = str_replace('`', '', $str);
-        $str = str_replace('·', '', $str);
-        $str = str_replace('~', '', $str);
-        $str = str_replace('!', '', $str);
-        $str = str_replace('！', '', $str);
-        $str = str_replace('@', '', $str);
-        $str = str_replace('#', '', $str);
-        $str = str_replace('$', '', $str);
-        $str = str_replace('￥', '', $str);
-        $str = str_replace('%', '', $str);
-        $str = str_replace('^', '', $str);
-        $str = str_replace('……', '', $str);
-        $str = str_replace('&', '', $str);
-        $str = str_replace('*', '', $str);
-        $str = str_replace('(', '', $str);
-        $str = str_replace(')', '', $str);
-        $str = str_replace('（', '', $str);
-        $str = str_replace('）', '', $str);
-        $str = str_replace('-', '', $str);
-        $str = str_replace('_', '', $str);
-        $str = str_replace('——', '', $str);
-        $str = str_replace('+', '', $str);
-        $str = str_replace('=', '', $str);
-        $str = str_replace('|', '', $str);
-        $str = str_replace('\\', '', $str);
-        $str = str_replace('[', '', $str);
-        $str = str_replace(']', '', $str);
-        $str = str_replace('【', '', $str);
-        $str = str_replace('】', '', $str);
-        $str = str_replace('{', '', $str);
-        $str = str_replace('}', '', $str);
-        $str = str_replace(';', '', $str);
-        $str = str_replace('；', '', $str);
-        $str = str_replace(':', '', $str);
-        $str = str_replace('：', '', $str);
-        $str = str_replace('\'', '', $str);
-        $str = str_replace('"', '', $str);
-        $str = str_replace('“', '', $str);
-        $str = str_replace('”', '', $str);
-        $str = str_replace(',', '', $str);
-        $str = str_replace('，', '', $str);
-        $str = str_replace('<', '', $str);
-        $str = str_replace('>', '', $str);
-        $str = str_replace('《', '', $str);
-        $str = str_replace('》', '', $str);
-        $str = str_replace('.', '', $str);
-        $str = str_replace('。', '', $str);
-        $str = str_replace('/', '', $str);
-        $str = str_replace('、', '', $str);
-        $str = str_replace('?', '', $str);
-        $str = str_replace('？', '', $str);
-        $str = str_replace('╮', '', $str);
-        $str = str_replace('(', '', $str);
-        $str = str_replace(')', '', $str);
-        $str = str_replace('r', '', $str);
-        $str = str_replace('ぷ', '', $str);
-        $str = str_replace('〆', '', $str);
-        $str = str_replace('ゞ', '', $str);
-        $str = str_replace('ヤ', '', $str);
-        $str = str_replace('ゼ', '', $str);
-        $str = str_replace('ǎ', '', $str);
-        $str = str_replace('ǎ', '', $str);
-        $str = str_replace('〆', '', $str);
-        $str = str_replace('む', '', $str);
-        $str = str_replace('§', '', $str);
-        $str = str_replace('上门', '', $str);
+        $str = str_replace(array('`', '·', '~', '!', '！', '@', '#', '$', '￥', '%', '^', '……', '&', '*', '(', ')', '（', '）', '-', '_', '——', '+', '=', '|', '\\', '[', ']', '【', '】', '{', '}', ';', '；', ':', '：', '\'', '"', '“', '”', ',', '，', '<', '>', '《', '》', '.', '。', '/', '、', '?', '？', '╮', '(', ')', 'r', 'ぷ', '〆', 'ゞ', 'ヤ', 'ゼ', 'ǎ', 'ǎ', '〆', 'む', '§', '上门'), '', $str);
         return trim($str);
     }
 
@@ -151,12 +86,9 @@ class Strings
                 }
             }
             return false;
-        } else {
-            if ($str == $nee) {
-                return true;
-            }
-            return false;
         }
+
+        return $str == $nee;
     }
 
     /**

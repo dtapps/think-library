@@ -94,16 +94,14 @@ class CosService extends Service
         );
         $key = $object;
         $file = fopen($filePath, "rb");
-        if ($file) {
-            if (empty($this->bucket)) {
-                $this->getConfig();
-                $result = $cosClient->putObject(
-                    array(
-                        'Bucket' => $this->bucket,
-                        'Key' => $key,
-                        'Body' => $file)
-                );
-            }
+        if ($file && empty($this->bucket)) {
+            $this->getConfig();
+            $result = $cosClient->putObject(
+                array(
+                    'Bucket' => $this->bucket,
+                    'Key' => $key,
+                    'Body' => $file)
+            );
         }
         return config('dtapp.tencent.cos.url', '') . $object;
     }

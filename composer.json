@@ -34,8 +34,6 @@
     "ext-dom": "*",
     "topthink/framework": "^6.0.0",
     "topthink/think-orm": "^2.0",
-    "topthink/think-view": "^1.0",
-    "topthink/think-multi-app": "^1.0",
     "aliyuncs/oss-sdk-php": "^2.3",
     "obs/esdk-obs-php": "^3.19",
     "baidubce/bce-sdk-php": "^0.8.22",

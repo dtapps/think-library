@@ -64,7 +64,7 @@ class Arrays
         if (!is_int($iCount)) {
             $iCount = ceil($iCount);
         } else {
-            $iCount += 1;
+            ++$iCount;
         }
         for ($i = 0; $i < $iCount; ++$i) {
             $arrInfos = array_slice($array, $i * $num, $num);
@@ -86,7 +86,7 @@ class Arrays
     {
         $out = array();
         foreach ($array as $key => $value) {
-            if (!in_array($value, $out)) {
+            if (!in_array($value, $out, true)) {
                 $out[$key] = $value;
             }
         }

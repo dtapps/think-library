@@ -332,7 +332,7 @@ class WebAppService extends Service
             }
         }
         // 注意 URL 一定要动态获取，不能 hardcode.
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
         $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $timestamp = time();
         $nonceStr = $this->createNonceStr();
@@ -355,7 +355,7 @@ class WebAppService extends Service
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $str = "";
         for ($i = 0; $i < $length; $i++) {
-            $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+            $str .= $chars[random_int(0, strlen($chars) - 1)];
         }
         return $str;
     }
@@ -667,12 +667,15 @@ class WebAppService extends Service
             if (!empty($cache_mysql_value)) {
                 $access_token['access_token'] = $cache_mysql_value;
             } else {
+                // 获取远程Token
                 $accessToken_res = HttpService::instance()
                     ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
+                // 保存到数据库
                 dtacache($file, $accessToken_res['access_token'], 6000);
                 $access_token['access_token'] = $accessToken_res['access_token'];
             }
+            // 判断token是否可以使用
             $judge = HttpService::instance()
                 ->url("{$this->api_url}cgi-bin/getcallbackip?access_token={$access_token['access_token']}")
                 ->toArray();

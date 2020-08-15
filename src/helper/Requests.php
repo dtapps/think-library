@@ -37,7 +37,7 @@ class Requests
     public function isEmpty(array $data, array $arr): array
     {
         foreach ($arr as $k => $v) {
-            if (empty(isset($data["$v"]) ? $data["$v"] : '')) {
+            if (empty($data[(string)$v] ?? '')) {
                 return [];
             }
         }
@@ -53,7 +53,7 @@ class Requests
     public function isEmptyRet(array $data, array $arr): array
     {
         foreach ($arr as $k => $v) {
-            if (empty(isset($data["$v"]) ? $data["$v"] : '')) {
+            if (empty($data[(string)$v] ?? '')) {
                 (new Returns)->jsonError('请检查参数', 102);
             }
         }
@@ -118,7 +118,7 @@ class Requests
         //如果via信息含有wap则一定是移动设备,部分服务商会屏蔽该信息
         //找不到为flase,否则为true
         if (isset($_SERVER['HTTP_VIA'])) {
-            return stristr(request()->server('HTTP_VIA'), "wap") ? true : false;
+            return stripos(request()->server('HTTP_VIA'), "wap") !== false;
         }
         //判断手机发送的客户端标志
         if (isset($_SERVER['HTTP_USER_AGENT'])) {
@@ -150,10 +150,7 @@ class Requests
      */
     public function isWeiXin(): bool
     {
-        if (strpos(request()->server('HTTP_USER_AGENT'), 'MicroMessenger') !== false) {
-            return true;
-        }
-        return false;
+        return strpos(request()->server('HTTP_USER_AGENT'), 'MicroMessenger') !== false;
     }
 
     /**
@@ -162,10 +159,7 @@ class Requests
      */
     public function isWeiXinMp(): bool
     {
-        if (strpos(request()->server('HTTP_USER_AGENT'), 'miniProgram') !== false) {
-            return true;
-        }
-        return false;
+        return strpos(request()->server('HTTP_USER_AGENT'), 'miniProgram') !== false;
     }
 
     /**
@@ -174,10 +168,7 @@ class Requests
      */
     public function isAliPay(): bool
     {
-        if (strpos(request()->server('HTTP_USER_AGENT'), 'Alipay') !== false) {
-            return true;
-        }
-        return false;
+        return strpos(request()->server('HTTP_USER_AGENT'), 'Alipay') !== false;
     }
 
     /**
@@ -186,12 +177,7 @@ class Requests
      */
     public function isQQ(): bool
     {
-        if (strpos(request()->server('HTTP_USER_AGENT'), 'QQ') !== false) {
-            if (strpos(request()->server('HTTP_USER_AGENT'), '_SQ_') !== false) {
-                return true;
-            }
-        }
-        return false;
+        return (strpos(request()->server('HTTP_USER_AGENT'), 'QQ') !== false) && strpos(request()->server('HTTP_USER_AGENT'), '_SQ_') !== false;
     }
 
     /**
@@ -201,11 +187,7 @@ class Requests
     public function isQQBrowser(): bool
     {
         if (strpos(request()->server('HTTP_USER_AGENT'), 'QQ') !== false) {
-            if (strpos(request()->server('HTTP_USER_AGENT'), '_SQ_') !== false) {
-                return false;
-            } else {
-                return true;
-            }
+            return !(strpos(request()->server('HTTP_USER_AGENT'), '_SQ_') !== false);
         }
         return false;
     }

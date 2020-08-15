@@ -81,9 +81,9 @@ class Urls
         $pattern = "#(http|https)://(.*\.)?.*\..*#i";
         if (preg_match($pattern, $url)) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

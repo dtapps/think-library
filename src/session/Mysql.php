@@ -99,15 +99,15 @@ class Mysql implements SessionHandlerInterface
             $result = Db::table($this->table_name)
                 ->insert($params);
             return $result ? true : false;
-        } else {
-            $params = [
-                'session_expire' => Times::dateRear("Y-m-d H:i:s", $this->config['session_expire']),
-                'session_data' => $data
-            ];
-            $result = Db::table($this->table_name)
-                ->where('id', $get['id'])
-                ->update($params);
-            return $result ? true : false;
         }
+
+        $params = [
+            'session_expire' => Times::dateRear("Y-m-d H:i:s", $this->config['session_expire']),
+            'session_data' => $data
+        ];
+        $result = Db::table($this->table_name)
+            ->where('id', $get['id'])
+            ->update($params);
+        return $result ? true : false;
     }
 }

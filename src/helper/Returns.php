@@ -30,6 +30,12 @@ use think\exception\HttpResponseException;
  */
 class Returns
 {
+    public function __construct()
+    {
+        date_default_timezone_set('Asia/Shanghai');
+        header('Content-Type:application/json; charset=utf-8');
+    }
+
     /**
      * 返回Json-成功
      * @param array $data 数据
@@ -39,13 +45,21 @@ class Returns
      */
     public function jsonSuccess(array $data = [], string $msg = 'success', int $code = 0, array $ext = [])
     {
-        date_default_timezone_set('Asia/Shanghai');
-        header('Content-Type:application/json; charset=utf-8');
         if (!empty($ext) && is_array($ext)) {
-            throw new HttpResponseException(json(array_merge(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data], $ext)));
-        } else {
-            throw new HttpResponseException(json(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data]));
+            throw new HttpResponseException(json(array_merge([
+                'code' => $code,
+                'msg' => $msg,
+                'time' => time(),
+                'data' => $data
+            ], $ext)));
         }
+
+        throw new HttpResponseException(json([
+            'code' => $code,
+            'msg' => $msg,
+            'time' => time(),
+            'data' => $data
+        ]));
     }
 
     /**
@@ -57,12 +71,20 @@ class Returns
      */
     public function jsonError(string $msg = 'error', int $code = 1, array $data = [], array $ext = [])
     {
-        date_default_timezone_set('Asia/Shanghai');
-        header('Content-Type:application/json; charset=utf-8');
         if (!empty($ext) && is_array($ext)) {
-            throw new HttpResponseException(json(array_merge(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data], $ext)));
-        } else {
-            throw new HttpResponseException(json(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => $data]));
+            throw new HttpResponseException(json(array_merge([
+                'code' => $code,
+                'msg' => $msg,
+                'time' => time(),
+                'data' => $data
+            ], $ext)));
         }
+
+        throw new HttpResponseException(json([
+            'code' => $code,
+            'msg' => $msg,
+            'time' => time(),
+            'data' => $data
+        ]));
     }
 }

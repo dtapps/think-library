@@ -21,6 +21,8 @@ declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
+use Exception;
+
 /**
  * 唯一ID管理类
  * @mixin UnIqIds
@@ -34,24 +36,25 @@ class UnIqIds
      * @param integer $type 字符串类型(1纯数字,2纯字母,3数字字母)
      * @param string $prefix 编码前缀
      * @return string
+     * @throws Exception
      */
     public function random($size = 10, $type = 1, $prefix = ''): string
     {
         $numbs = '0123456789';
         $chars = 'abcdefghijklmnopqrstuvwxyz';
-        if (intval($type) === 1) {
+        if ((int)$type === 1) {
             $chars = $numbs;
         }
-        if (intval($type) === 2) {
+        if ((int)$type === 2) {
             $chars = "{$chars}";
         }
-        if (intval($type) === 3) {
+        if ((int)$type === 3) {
             $chars = "{$numbs}{$chars}";
         }
-        $string = $prefix . $chars[rand(1, strlen($chars) - 1)];
+        $string = $prefix . $chars[random_int(1, strlen($chars) - 1)];
         if (isset($chars)) {
             while (strlen($string) < $size) {
-                $string .= $chars[rand(0, strlen($chars) - 1)];
+                $string .= $chars[random_int(0, strlen($chars) - 1)];
             }
         }
         return $string;
@@ -62,6 +65,7 @@ class UnIqIds
      * @param integer $size
      * @param string $prefix
      * @return string
+     * @throws Exception
      */
     public function date($size = 16, $prefix = ''): string
     {
@@ -70,7 +74,7 @@ class UnIqIds
         }
         $string = $prefix . date('Ymd') . (date('H') + date('i')) . date('s');
         while (strlen($string) < $size) {
-            $string .= rand(0, 9);
+            $string .= random_int(0, 9);
         }
         return $string;
     }
@@ -80,6 +84,7 @@ class UnIqIds
      * @param integer $size
      * @param string $prefix
      * @return string
+     * @throws Exception
      */
     public function number($size = 12, $prefix = ''): string
     {
@@ -87,9 +92,9 @@ class UnIqIds
         if ($size < 10) {
             $size = 10;
         }
-        $string = $prefix . ($time[0] . $time[1]) . substr($time, 2) . rand(0, 9);
+        $string = $prefix . ($time[0] . $time[1]) . substr($time, 2) . random_int(0, 9);
         while (strlen($string) < $size) {
-            $string .= rand(0, 9);
+            $string .= random_int(0, 9);
         }
         return $string;
     }

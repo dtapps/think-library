@@ -21,6 +21,8 @@ declare (strict_types=1);
 
 namespace DtApp\ThinkLibrary\helper;
 
+use Exception;
+
 /**
  * 随机管理类
  * @mixin Randoms
@@ -33,6 +35,7 @@ class Randoms
      * @param int $length 长度
      * @param int $type 类型，1 纯数字，2 纯小写字母，3 纯大写字母，4 数字和小写字母，5 数字和大写字母，6 大小写字母，7 数字和大小写字母
      * @return string
+     * @throws Exception
      */
     public function generate(int $length = 6, int $type = 1)
     {
@@ -61,30 +64,30 @@ class Randoms
         $str = '';
         // 生成字符串
         for ($i = 0; $i < $length; $i++) {
-            $str .= $charset[mt_rand(0, count($charset) - 1)];
+            $str .= $charset[random_int(0, count($charset) - 1)];
             // 验证规则
             if ($type == 4 && strlen($str) >= 2) {
                 if (!preg_match('/\d+/', $str) || !preg_match('/[a-z]+/', $str)) {
                     $str = substr($str, 0, -1);
-                    $i = $i - 1;
+                    --$i;
                 }
             }
             if ($type == 5 && strlen($str) >= 2) {
                 if (!preg_match('/\d+/', $str) || !preg_match('/[A-Z]+/', $str)) {
                     $str = substr($str, 0, -1);
-                    $i = $i - 1;
+                    --$i;
                 }
             }
             if ($type == 6 && strlen($str) >= 2) {
                 if (!preg_match('/[a-z]+/', $str) || !preg_match('/[A-Z]+/', $str)) {
                     $str = substr($str, 0, -1);
-                    $i = $i - 1;
+                    --$i;
                 }
             }
             if ($type == 7 && strlen($str) >= 3) {
                 if (!preg_match('/\d+/', $str) || !preg_match('/[a-z]+/', $str) || !preg_match('/[A-Z]+/', $str)) {
                     $str = substr($str, 0, -2);
-                    $i = $i - 2;
+                    $i -= 2;
                 }
             }
         }

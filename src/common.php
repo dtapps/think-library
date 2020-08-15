@@ -21,12 +21,11 @@ use DtApp\ThinkLibrary\cache\Mysql;
 use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\service\QqWryService;
 use DtApp\ThinkLibrary\service\SystemService;
-use think\db\exception\DbException;
 
 /**
  * 定义当前版本
  */
-const VERSION = '6.0.106';
+const VERSION = '6.0.107';
 
 if (!function_exists('get_ip_info')) {
     /**
@@ -61,9 +60,8 @@ if (!function_exists('get_ip')) {
             //为了兼容百度的CDN，所以转成数组
             $arr = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
             return $arr[0];
-        } else {
-            return $_SERVER['REMOTE_ADDR'];
         }
+        return $_SERVER['REMOTE_ADDR'];
     }
 }
 
@@ -90,8 +88,8 @@ if (!function_exists('dtacache')) {
      * @param array $value
      * @param int $expire
      * @return bool|int|string
-     * @throws DbException
      * @throws DtaException
+     * @throws \think\db\exception\DbException
      */
     function dtacache($name = '', $value = [], $expire = 6000)
     {
@@ -99,19 +97,20 @@ if (!function_exists('dtacache')) {
         if (empty($value)) {
             return $myc->name($name)
                 ->get();
-        } else {
-            if (empty($myc->name($name)
-                ->get())) {
-                $myc->name($name)
-                    ->expire($expire)
-                    ->set($value);
-            } else {
-                $myc->name($name)
-                    ->expire($expire)
-                    ->update($value);
-            }
-            return $myc->name($name)
-                ->get();
         }
+
+        $judge = $myc->name($name)
+            ->get();
+        if (empty($judge)) {
+            $myc->name($name)
+                ->expire($expire)
+                ->set($value);
+        } else {
+            $myc->name($name)
+                ->expire($expire)
+                ->update($value);
+        }
+        return $myc->name($name)
+            ->get();
     }
 }
