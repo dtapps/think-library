@@ -18,7 +18,7 @@
 
 1. PHP7.1 版本及以上
 
-## 安装
+## 托管
 
 - 国外仓库地址：[https://github.com/GC0202/ThinkLibrary](https://github.com/GC0202/ThinkLibrary)
 - 国内仓库地址：[https://gitee.com/liguangchun/ThinkLibrary](https://gitee.com/liguangchun/ThinkLibrary)
