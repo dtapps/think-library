@@ -1,4 +1,4 @@
-<img align="right" width="100" src="https://cdn-oss.dtapp.net/04/999e9f2f06d396968eacc10ce9bc8a.png" alt="dtApp Logo"/>
+<img align="right" width="100" src="https://kodo-cdn.dtapp.net/04/999e9f2f06d396968eacc10ce9bc8a.png" alt="www.dtapp.net"/>
 
 <h1 align="left"><a href="https://www.dtapp.net/">ThinkPHP6扩展包</a></h1>
 
@@ -20,12 +20,9 @@
 
 ## 安装
 
-部分代码来自互联网，若有异议可以联系作者进行删除。
-
-- Github仓库地址：https://github.com/GC0202/ThinkLibrary
-- 码云仓库地址：https://gitee.com/liguangchun/ThinkLibrary
-- 微信仓库地址：https://git.weixin.qq.com/liguangchun/ThinkLibrary
-- 华为云仓库地址：https://codehub-cn-south-1.devcloud.huaweicloud.com/composer00001/ThinkLibrary.git
+- 国外仓库地址：[https://github.com/GC0202/ThinkLibrary](https://github.com/GC0202/ThinkLibrary)
+- 国内仓库地址：[https://gitee.com/liguangchun/ThinkLibrary](https://gitee.com/liguangchun/ThinkLibrary)
+- Packagist 地址：[https://packagist.org/packages/liguangchun/think-library](https://packagist.org/packages/liguangchun/think-library)
 
 ### 开发版
 ```text
