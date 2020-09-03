@@ -646,10 +646,19 @@ class WebAppService extends Service
                 file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
                 $accessToken = $accessToken_res;
             }
-            $judge = HttpService::instance()
-                ->url("{$this->api_url}cgi-bin/getcallbackip?access_token={$accessToken['access_token']}")
-                ->toArray();
-            if (!isset($judge['ip_list'])) {
+            if (isset($accessToken['access_token'])) {
+                $judge = HttpService::instance()
+                    ->url("{$this->api_url}cgi-bin/getcallbackip?access_token={$accessToken['access_token']}")
+                    ->toArray();
+                if (!isset($judge['ip_list'])) {
+                    $accessToken_res = HttpService::instance()
+                        ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                        ->toArray();
+                    $accessToken_res['expires_time'] = time() + 6000;
+                    file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
+                    $accessToken = $accessToken_res;
+                }
+            } else {
                 $accessToken_res = HttpService::instance()
                     ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
@@ -658,7 +667,9 @@ class WebAppService extends Service
                 $accessToken = $accessToken_res;
             }
             return $accessToken;
-        } else if ($this->cache == "mysql") {
+        }
+
+        if ($this->cache == "mysql") {
             $access_token = [];
             // 文件名
             $file = "{$this->app_id}_access_token";
@@ -687,9 +698,9 @@ class WebAppService extends Service
                 $access_token['access_token'] = $accessToken_res['access_token'];
             }
             return $access_token;
-        } else {
-            throw new DtaException("驱动方式错误");
         }
+
+        throw new DtaException("驱动方式错误");
     }
 
     /**
@@ -773,10 +784,10 @@ class WebAppService extends Service
         if ($data) {
             curl_close($ch);
             return $data;
-        } else {
-            $error = curl_errno($ch);
-            curl_close($ch);
-            return "curl error, error code " . $error;
         }
+
+        $error = curl_errno($ch);
+        curl_close($ch);
+        return "curl error, error code " . $error;
     }
 }
