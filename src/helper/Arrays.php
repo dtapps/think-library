@@ -86,7 +86,7 @@ class Arrays
     {
         $out = array();
         foreach ($array as $key => $value) {
-            if (!in_array($value, $out, true)) {
+            if (!in_array($value, $out)) {
                 $out[$key] = $value;
             }
         }

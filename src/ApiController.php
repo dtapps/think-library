@@ -65,7 +65,7 @@ class ApiController extends stdClass
         $this->app = $app;
         $this->request = $app->request;
         $this->app->bind('DtApp\ThinkLibrary\ApiController', $this);
-        if (in_array($this->request->action(), get_class_methods(__CLASS__), true)) {
+        if (in_array($this->request->action(), get_class_methods(__CLASS__))) {
             $this->error('Access without permission.');
         }
         $this->initialize();
