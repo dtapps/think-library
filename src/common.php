@@ -25,7 +25,7 @@ use DtApp\ThinkLibrary\service\SystemService;
 /**
  * 定义当前版本
  */
-const VERSION = '6.0.109';
+const VERSION = '6.0.110';
 
 if (!function_exists('get_ip_info')) {
     /**

@@ -40,7 +40,7 @@ class JinBaoService extends Service
      * API接口名称
      * @var string
      */
-    private $type = '', $response = '';
+    private $type = '';
 
     /**
      * 开放平台分配的clientId
@@ -160,276 +160,319 @@ class JinBaoService extends Service
     /**
      * 获取商品信息 - 多多进宝商品查询
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.search
-     * @return array|mixed
+     * @return $this
      */
     public function goodsSearch()
     {
         $this->type = 'pdd.ddk.goods.search';
-        $this->response = 'goods_search_response';
         return $this;
     }
 
     /**
      * 新增推广位 - 创建多多进宝推广位
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.pid.generate
-     * @return array|mixed
+     * @return $this
      */
     public function goodsPidGenerate()
     {
         $this->type = 'pdd.ddk.goods.pid.generate';
-        $this->response = 'p_id_generate_response';
         return $this;
     }
 
     /**
      * 管理推广位 - 查询已经生成的推广位信息
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.pid.query
-     * @return array|mixed
+     * @return $this
      */
     public function goodsPidQuery()
     {
         $this->type = 'pdd.ddk.goods.pid.query';
-        $this->response = 'p_id_query_response';
         return $this;
     }
 
     /**
      * CPS订单数据 - 查询订单详情
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.order.detail.get
-     * @return array|mixed
+     * @return $this
      */
     public function orderDetailGet()
     {
         $this->type = 'pdd.ddk.order.detail.get';
-        $this->response = 'order_detail_response';
         return $this;
     }
 
     /**
      * CPS订单数据 - 最后更新时间段增量同步推广订单信息
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.order.list.increment.get
-     * @return array|mixed
+     * @return $this
      */
     public function orderListIncrementGet()
     {
         $this->type = 'pdd.ddk.order.list.increment.get';
-        $this->response = 'order_list_get_response';
         return $this;
     }
 
     /**
      * CPS订单数据 - 用时间段查询推广订单接口
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.order.list.range.get
-     * @return array|mixed
+     * @return $this
      */
     public function orderListRangeGet()
     {
         $this->type = 'pdd.ddk.order.list.range.get';
-        $this->response = 'order_list_get_response';
         return $this;
     }
 
     /**
      * CPA效果数据 - 查询CPA数据
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.finance.cpa.query
-     * @return array|mixed
+     * @return $this
      */
     public function financeCpaQuery()
     {
         $this->type = 'pdd.ddk.finance.cpa.query';
-        $this->response = 'finance_cpa_query_response';
         return $this;
     }
 
     /**
      * 单品推广- 多多进宝推广链接生成
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.promotion.url.generate
-     * @return array|mixed
+     * @return $this
      */
     public function goodsPromotionUrlGenerate()
     {
         $this->type = 'pdd.ddk.goods.promotion.url.generate';
-        $this->response = 'goods_promotion_url_generate_response';
         return $this;
     }
 
     /**
      * 单品推广- 多多客生成单品推广小程序二维码url
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.weapp.qrcode.url.gen
-     * @return array|mixed
+     * @return $this
      */
     public function weAppQrcodeUrlGen()
     {
         $this->type = 'pdd.ddk.weapp.qrcode.url.gen';
-        $this->response = 'weapp_qrcode_generate_response';
         return $this;
     }
 
     /**
      * 单品推广- 多多进宝转链接口
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.zs.unit.url.gen
-     * @return array|mixed
+     * @return $this
      */
     public function goodsZsUitUrlGen()
     {
         $this->type = 'pdd.ddk.goods.zs.unit.url.gen';
-        $this->response = 'goods_zs_unit_generate_response';
         return $this;
     }
 
     /**
      * 活动转链 - 生成多多进宝频道推广
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.resource.url.gen
-     * @return array|mixed
+     * @return $this
      */
     public function resourceUrlGen()
     {
         $this->type = 'pdd.ddk.resource.url.gen';
-        $this->response = 'resource_url_response';
         return $this;
     }
 
     /**
      * 活动转链 - 多多进宝主题推广链接生成
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.theme.prom.url.generate
-     * @return array|mixed
+     * @return $this
      */
     public function themePromUrlGenerate()
     {
         $this->type = 'pdd.ddk.theme.prom.url.generate';
-        $this->response = 'theme_promotion_url_generate_response';
         return $this;
     }
 
     /**
      * 店铺推广 - 多多客生成店铺推广链接
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.mall.url.gen
-     * @return array|mixed
+     * @return $this
      */
     public function mallUrlGen()
     {
         $this->type = 'pdd.ddk.mall.url.gen';
-        $this->response = 'mall_coupon_generate_url_response';
         return $this;
     }
 
     /**
      * 营销工具 - 生成营销工具推广链接
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.rp.prom.url.generate
-     * @return array|mixed
+     * @return $this
      */
     public function rpPromUrlGenerate()
     {
         $this->type = 'pdd.ddk.rp.prom.url.generate';
-        $this->response = 'rp_promotion_url_generate_response';
         return $this;
     }
 
     /**
      * 获取商品信息 - 多多进宝商品详情查询
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.detail
-     * @return array|mixed
+     * @return $this
      */
     public function goodsDetail()
     {
         $this->type = 'pdd.ddk.goods.detail';
-        $this->response = 'goods_detail_response';
         return $this;
     }
 
     /**
      * 获取商品信息 - 查询商品的推广计划
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.unit.query
-     * @return array|mixed
+     * @return $this
      */
     public function goodsUnitQuery()
     {
         $this->type = 'pdd.ddk.goods.unit.query';
-        $this->response = 'ddk_goods_unit_query_response';
         return $this;
     }
 
     /**
      * 商品&店铺检索 - 获取商品基本信息接口
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.basic.info.get
-     * @return array|mixed
+     * @return $this
      */
     public function goodsBasicInfoGet()
     {
         $this->type = 'pdd.ddk.goods.basic.info.get';
-        $this->response = 'goods_basic_detail_response';
         return $this;
     }
 
     /**
      * 商品&店铺检索 - 查询优惠券信息
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.coupon.info.query
-     * @return array|mixed
+     * @return $this
      */
     public function couponInfoQuery()
     {
         $this->type = 'pdd.ddk.coupon.info.query';
-        $this->response = 'ddk_coupon_info_query_response';
         return $this;
     }
 
     /**
      * 商品&店铺检索 - 查询店铺商品
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.mall.goods.list.get
-     * @return array|mixed
+     * @return $this
      */
     public function goodsListGet()
     {
         $this->type = 'pdd.ddk.mall.goods.list.get';
-        $this->response = 'goods_info_list_response';
         return $this;
     }
 
     /**
      * 多多客获取爆款排行商品接口
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.top.goods.list.query
-     * @return array|mixed
+     * @return $this
      */
     public function topGoodsListQuery()
     {
         $this->type = 'pdd.ddk.top.goods.list.query';
-        $this->response = 'top_goods_list_get_response';
         return $this;
     }
 
     /**
      * 爆品推荐 - 多多进宝商品推荐API
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.recommend.get
-     * @return array|mixed
+     * @return $this
      */
     public function goodsRecommendGet()
     {
         $this->type = 'pdd.ddk.goods.recommend.get';
-        $this->response = 'goods_basic_detail_response';
         return $this;
     }
 
     /**
      * 爆品推荐 - 多多进宝主题列表查询
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.theme.list.get
-     * @return array|mixed
+     * @return $this
      */
     public function themeListGet()
     {
         $this->type = 'pdd.ddk.theme.list.get';
-        $this->response = 'theme_list_get_response';
         return $this;
     }
 
     /**
      * 活动选品库 - 多多进宝主题商品查询
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.theme.goods.search
-     * @return array|mixed
+     * @return $this
      */
     public function themeGoodsSearch()
     {
         $this->type = 'pdd.ddk.theme.goods.search';
-        $this->response = 'theme_list_get_response';
+        return $this;
+    }
+
+    /**
+     * 生成商城-频道推广链接
+     * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.cms.prom.url.
+     * @return $this
+     */
+    public function cmsPromUrlGenerate()
+    {
+        $this->type = 'pdd.ddk.cms.prom.url.generate';
+        return $this;
+    }
+
+    /**
+     * 查询直播间详情
+     * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.live.detail
+     * @return $this
+     */
+    public function liveDetail()
+    {
+        $this->type = 'pdd.ddk.live.detail';
+        return $this;
+    }
+
+    /**
+     * 查询直播间列表
+     * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.live.list
+     * @return $this
+     */
+    public function liveList()
+    {
+        $this->type = 'pdd.ddk.live.list';
+        return $this;
+    }
+
+    /**
+     * 生成直播间推广链接
+     * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.live.url.gen
+     * @return $this
+     */
+    public function liveUrlGen()
+    {
+        $this->type = 'pdd.ddk.live.url.gen';
+        return $this;
+    }
+
+    /**
+     * 多多客生成转盘抽免单url
+     * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.lottery.url.gen
+     * @return $this
+     */
+    public function lotteryUrlGen()
+    {
+        $this->type = 'pdd.ddk.lottery.url.gen';
+        return $this;
+    }
+
+    /**
+     * 查询是否绑定备案
+     * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.member.authority.query
+     * @return $this
+     */
+    public function memberAuthorityQuery()
+    {
+        $this->type = 'pdd.ddk.member.authority.query';
         return $this;
     }
 
@@ -465,27 +508,17 @@ class JinBaoService extends Service
                 return $this->object2array($this->output);
             }
             return json_decode($this->output, true);
-        } else {
-            // 正常
-            if (is_array($this->output)) {
-                if (isset($this->output["{$this->response}"])) {
-                    return $this->output["{$this->response}"];
-                }
-                return $this->output;
-            }
-            if (is_object($this->output)) {
-                $this->output = $this->object2array($this->output);
-                if (isset($this->output["$this->response"])) {
-                    return $this->output["$this->response"];
-                }
-                return $this->output;
-            }
-            $this->output = json_decode($this->output, true);
-            if (isset($this->output["$this->response"])) {
-                return $this->output["$this->response"];
-            }
+        }
+        // 正常
+        if (is_array($this->output)) {
             return $this->output;
         }
+        if (is_object($this->output)) {
+            $this->output = $this->object2array($this->output);
+            return $this->output;
+        }
+        $this->output = json_decode($this->output, true);
+        return $this->output;
     }
 
     /**
