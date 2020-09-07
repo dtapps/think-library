@@ -115,7 +115,7 @@ class ApiController extends stdClass
      * @param string $name 参数名
      * @return $this
      */
-    public function setAesMd5($name = 'sniff_h5')
+    public function setAesMd5($name = 'sniff_h5'): self
     {
         $value = config("dtapp.md5.{$name}");
         $this->aes_md5 = $value;
@@ -126,7 +126,7 @@ class ApiController extends stdClass
      * iv
      * @return $this
      */
-    private function setAesMd5Iv()
+    private function setAesMd5Iv(): self
     {
         $value = config("dtapp.md5.bcw");
         $this->aes_md5_iv = $value;
@@ -169,7 +169,7 @@ class ApiController extends stdClass
      * @param mixed $two 回调引用参数2
      * @return boolean
      */
-    public function callback($name, &$one = [], &$two = [])
+    public function callback($name, &$one = [], &$two = []): bool
     {
         if (is_callable($name)) {
             return call_user_func($name, $this, $one, $two);

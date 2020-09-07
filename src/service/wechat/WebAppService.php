@@ -109,7 +109,7 @@ class WebAppService extends Service
      * @param string $appId
      * @return $this
      */
-    public function appId(string $appId)
+    public function appId(string $appId): self
     {
         $this->app_id = $appId;
         return $this;
@@ -120,7 +120,7 @@ class WebAppService extends Service
      * @param string $appSecret
      * @return $this
      */
-    public function appSecret(string $appSecret)
+    public function appSecret(string $appSecret): self
     {
         $this->app_secret = $appSecret;
         return $this;
@@ -130,7 +130,7 @@ class WebAppService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->cache = config('dtapp.wechat.webapp.cache');
         $this->app_id = config('dtapp.wechat.webapp.app_id');
@@ -159,7 +159,7 @@ class WebAppService extends Service
      * @return $this
      * @throws DtaException
      */
-    public function scope(string $scope)
+    public function scope(string $scope): self
     {
         if ($scope === "snsapi_base") {
             $this->scope = $scope;
@@ -176,7 +176,7 @@ class WebAppService extends Service
      * @param string $state
      * @return $this
      */
-    public function state(string $state)
+    public function state(string $state): self
     {
         $this->state = $state;
         return $this;
@@ -187,7 +187,7 @@ class WebAppService extends Service
      * @param string $cache
      * @return $this
      */
-    public function cache(string $cache)
+    public function cache(string $cache): self
     {
         $this->cache = $cache;
         return $this;
@@ -298,11 +298,12 @@ class WebAppService extends Service
 
     /**
      * 分享
+     * @param string $url
      * @return array
      * @throws DbException
      * @throws DtaException
      */
-    public function share()
+    public function share($url = '')
     {
         if (empty($this->app_id)) {
             $this->getConfig();
@@ -331,9 +332,11 @@ class WebAppService extends Service
                 throw new DtaException('accessToken已过期');
             }
         }
-        // 注意 URL 一定要动态获取，不能 hardcode.
-        $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        if (empty($url)) {
+            // 注意 URL 一定要动态获取，不能 hardcode.
+            $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] === 443) ? "https://" : "http://";
+            $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        }
         $timestamp = time();
         $nonceStr = $this->createNonceStr();
         // 获得jsapi_ticket之后，就可以生成JS-SDK权限验证的签名了。
@@ -350,6 +353,11 @@ class WebAppService extends Service
         ];
     }
 
+    /**
+     * @param int $length
+     * @return string
+     * @throws \Exception
+     */
     private function createNonceStr($length = 16)
     {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -610,7 +618,7 @@ class WebAppService extends Service
         }
 
         $this->grant_type = "client_credential";
-        if ($this->cache == "file") {
+        if ($this->cache === "file") {
             // 文件名
             $file = "{$this->app->getRootPath()}runtime/{$this->app_id}_access_token.json";
             // 获取数据
@@ -669,7 +677,7 @@ class WebAppService extends Service
             return $accessToken;
         }
 
-        if ($this->cache == "mysql") {
+        if ($this->cache === "mysql") {
             $access_token = [];
             // 文件名
             $file = "{$this->app_id}_access_token";
