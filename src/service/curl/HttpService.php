@@ -29,9 +29,24 @@ use think\exception\HttpException;
  */
 class HttpService extends Service
 {
+    /**
+     * @var
+     */
     private $url, $data, $cert, $output;
+
+    /**
+     * @var int
+     */
     private $timeout = 60;
+
+    /**
+     * @var string
+     */
     private $method = 'GET';
+
+    /**
+     * @var string
+     */
     private $headers = 'application/json;charset=utf-8';
 
     /**
@@ -39,7 +54,7 @@ class HttpService extends Service
      * @param string $str
      * @return $this
      */
-    public function url(string $str)
+    public function url(string $str): self
     {
         $this->url = $str;
         return $this;
@@ -50,7 +65,7 @@ class HttpService extends Service
      * @param $str
      * @return $this
      */
-    public function data($str)
+    public function data($str): self
     {
         if (is_array($str)) {
             $this->data = json_encode($str, JSON_UNESCAPED_UNICODE);
@@ -65,7 +80,7 @@ class HttpService extends Service
      * @param $str
      * @return $this
      */
-    public function headers(string $str)
+    public function headers(string $str): self
     {
         $this->headers = $str;
         return $this;
@@ -76,7 +91,7 @@ class HttpService extends Service
      * @param int $int
      * @return $this
      */
-    public function timeout(int $int)
+    public function timeout(int $int): self
     {
         $this->timeout = $int;
         return $this;
@@ -88,7 +103,7 @@ class HttpService extends Service
      * @param string $sslKeyPath
      * @return $this
      */
-    public function cert(string $sslCertPath, string $sslKeyPath)
+    public function cert(string $sslCertPath, string $sslKeyPath): self
     {
         $this->cert = [
             'key' => $sslKeyPath,
@@ -101,7 +116,7 @@ class HttpService extends Service
      * GET请求方式
      * @return $this
      */
-    public function get()
+    public function get(): self
     {
         $this->method = 'GET';
         return $this;
@@ -111,7 +126,7 @@ class HttpService extends Service
      * POST请求方式
      * @return $this
      */
-    public function post()
+    public function post(): self
     {
         $this->method = 'POST';
         return $this;
@@ -121,7 +136,7 @@ class HttpService extends Service
      * XML请求方式
      * @return $this
      */
-    public function xml()
+    public function xml(): self
     {
         $this->method = 'XML';
         return $this;
@@ -131,7 +146,7 @@ class HttpService extends Service
      * XML请求方式
      * @return $this
      */
-    public function file()
+    public function file(): self
     {
         $this->method = 'FILE';
         return $this;
@@ -266,11 +281,9 @@ class HttpService extends Service
             curl_setopt($ch, CURLOPT_SSLKEYTYPE, 'PEM');
             curl_setopt($ch, CURLOPT_SSLCERT, $this->cert['cert']);
             curl_setopt($ch, CURLOPT_SSLKEY, $this->cert['key']);
-        } else {
-            if (substr($this->url, 0, 5) == 'https') {
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 信任任何证书
-                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); // 检查证书中是否设置域名
-            }
+        } else if (strpos($this->url, 'https') === 0) {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 信任任何证书
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); // 检查证书中是否设置域名
         }
         if (!empty($this->headers)) {
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('content-type: ' . $this->headers));

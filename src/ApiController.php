@@ -53,8 +53,7 @@ class ApiController extends stdClass
      * 加密相关的东西
      * @var string
      */
-    private $aes_md5 = '';
-    private $aes_md5_iv = '';
+    private $aes_md5, $aes_md5_iv = '';
 
     /**
      * ApiController constructor.
@@ -84,7 +83,7 @@ class ApiController extends stdClass
      * @param mixed $data 返回数据
      * @param integer $code 返回代码
      */
-    public function error($msg = 'error', $code = 1, $data = [])
+    public function error($msg = 'error', $code = 1, $data = []): void
     {
         throw new HttpResponseException(json([
             'code' => $code,
@@ -100,7 +99,7 @@ class ApiController extends stdClass
      * @param mixed $data 返回数据
      * @param integer $code 返回代码
      */
-    public function success($data = [], $msg = 'success', $code = 0)
+    public function success($data = [], $msg = 'success', $code = 0): void
     {
         throw new HttpResponseException(json([
             'code' => $code,
@@ -157,7 +156,7 @@ class ApiController extends stdClass
      * @param string $url 跳转链接
      * @param integer $code 跳转代码
      */
-    public function redirect($url, $code = 301)
+    public function redirect($url, $code = 301): void
     {
         throw new HttpResponseException(redirect($url, $code));
     }
@@ -172,7 +171,7 @@ class ApiController extends stdClass
     public function callback($name, &$one = [], &$two = []): bool
     {
         if (is_callable($name)) {
-            return call_user_func($name, $this, $one, $two);
+            return $name($this, $one, $two);
         }
         foreach ([$name, "_{$this->app->request->action()}{$name}"] as $method) {
             if (method_exists($this, $method) && false === $this->$method($one, $two)) {

@@ -30,8 +30,19 @@ use think\exception\HttpException;
  */
 class BtService extends Service
 {
+    /**
+     * @var
+     */
     private $url, $key, $panel, $output, $cookie;
+
+    /**
+     * @var array
+     */
     private $data = [];
+
+    /**
+     * @var int
+     */
     private $timeout = 60;
 
     /**
@@ -39,7 +50,7 @@ class BtService extends Service
      * @param string $str
      * @return $this
      */
-    public function key(string $str)
+    public function key(string $str): self
     {
         $this->key = $str;
         return $this;
@@ -50,7 +61,7 @@ class BtService extends Service
      * @param string $str
      * @return $this
      */
-    public function panel(string $str)
+    public function panel(string $str): self
     {
         $this->panel = $str;
         return $this;
@@ -61,7 +72,7 @@ class BtService extends Service
      * @param string $str
      * @return $this
      */
-    public function url(string $str)
+    public function url(string $str): self
     {
         $this->url = $str;
         return $this;
@@ -72,7 +83,7 @@ class BtService extends Service
      * @param string $str
      * @return $this
      */
-    public function cookie(string $str)
+    public function cookie(string $str): self
     {
         $this->cookie = $str;
         return $this;
@@ -83,7 +94,7 @@ class BtService extends Service
      * @param int $int
      * @return $this
      */
-    public function timeout(int $int)
+    public function timeout(int $int): self
     {
         $this->timeout = $int;
         return $this;
@@ -94,7 +105,7 @@ class BtService extends Service
      * @param array $array
      * @return $this
      */
-    public function data(array $array)
+    public function data(array $array): self
     {
         $this->data = $array;
         return $this;
@@ -127,7 +138,7 @@ class BtService extends Service
      * 发起请求
      * @return $this
      */
-    private function http()
+    private function http(): self
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->panel . $this->url);
@@ -150,7 +161,7 @@ class BtService extends Service
      * 构造带有签名的关联数组
      * @return array
      */
-    private function getKeyData()
+    private function getKeyData(): array
     {
         $time = time();
         return array(

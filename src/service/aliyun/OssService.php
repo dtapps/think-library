@@ -31,27 +31,46 @@ use OSS\OssClient;
  */
 class OssService extends Service
 {
+    /**
+     * @var
+     */
     private $accessKeyId, $accessKeySecret, $endpoint, $bucket;
 
+    /**
+     * @param string $accessKeyId
+     * @return $this
+     */
     public function accessKeyId(string $accessKeyId)
     {
         $this->accessKeyId = $accessKeyId;
         return $this;
     }
 
+    /**
+     * @param string $accessKeySecret
+     * @return $this
+     */
     public function accessKeySecret(string $accessKeySecret)
     {
         $this->accessKeySecret = $accessKeySecret;
         return $this;
     }
 
-    public function endpoint(string $endpoint)
+    /**
+     * @param string $endpoint
+     * @return $this
+     */
+    public function endpoint(string $endpoint): self
     {
         $this->endpoint = $endpoint;
         return $this;
     }
 
-    public function bucket(string $bucket)
+    /**
+     * @param string $bucket
+     * @return $this
+     */
+    public function bucket(string $bucket): self
     {
         $this->bucket = $bucket;
         return $this;
@@ -61,7 +80,7 @@ class OssService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->accessKeyId = config('dtapp.aliyun.oss.access_key_id');
         $this->accessKeySecret = config('dtapp.aliyun.oss.access_key_secret');

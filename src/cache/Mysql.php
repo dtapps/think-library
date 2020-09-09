@@ -38,7 +38,7 @@ class Mysql
      * @param string $cache_name
      * @return $this
      */
-    public function name(string $cache_name)
+    public function name(string $cache_name): self
     {
         $this->cache_name = $cache_name;
         return $this;
@@ -49,7 +49,7 @@ class Mysql
      * @param int $cache_expire
      * @return $this
      */
-    public function expire(int $cache_expire)
+    public function expire(int $cache_expire): self
     {
         $this->cache_expire = $cache_expire;
         return $this;
@@ -61,7 +61,7 @@ class Mysql
      * @return bool
      * @throws DtaException
      */
-    public function set($cache_value)
+    public function set($cache_value): bool
     {
         $this->judge();
         $result = Db::table($this->table)
@@ -94,7 +94,7 @@ class Mysql
      * @throws DtaException
      * @throws \think\db\exception\DbException
      */
-    public function delete()
+    public function delete(): bool
     {
         $this->judge();
         $result = Db::table($this->table)
@@ -110,7 +110,7 @@ class Mysql
      * @throws DtaException
      * @throws \think\db\exception\DbException
      */
-    public function update($cache_value)
+    public function update($cache_value): bool
     {
         $this->judge();
         $result = Db::table($this->table)
@@ -129,7 +129,7 @@ class Mysql
      * @throws DtaException
      * @throws \think\db\exception\DbException
      */
-    public function inc(int $int = 1)
+    public function inc(int $int = 1): bool
     {
         $cache_value = (int)$this->get();
         $result = Db::table($this->table)
@@ -147,7 +147,7 @@ class Mysql
      * @throws DtaException
      * @throws \think\db\exception\DbException
      */
-    public function dec(int $int = 1)
+    public function dec(int $int = 1): bool
     {
         $cache_value = (int)$this->get();
         $result = Db::table($this->table)
@@ -161,7 +161,7 @@ class Mysql
     /**
      * @throws DtaException
      */
-    private function judge()
+    private function judge(): void
     {
         if (empty($this->cache_name)) {
             throw new DtaException("名称未配置");

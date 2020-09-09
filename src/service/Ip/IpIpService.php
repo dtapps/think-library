@@ -31,13 +31,16 @@ use think\App;
  */
 class IpIpService extends Service
 {
-    public $reader = null;
+    /**
+     * @var IpIpReader|null
+     */
+    public $reader;
 
     /**
      * IP数据库文件存放位置
      * @var mixed
      */
-    private $ipPath = '';
+    private $ipPath;
 
     /**
      * IpIpService constructor.

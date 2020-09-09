@@ -36,7 +36,7 @@ class WorkKileService extends Service
      * @param string $content 消息内容
      * @return bool 发送结果
      */
-    public function text(string $webhook, string $user, string $content)
+    public function text(string $webhook, string $user, string $content): bool
     {
         return $this->sendMsg($webhook, [
             'user' => $user,
@@ -50,15 +50,12 @@ class WorkKileService extends Service
      * @param array $data 消息内容数组
      * @return bool 发送结果
      */
-    private function sendMsg(string $webhook, array $data)
+    private function sendMsg(string $webhook, array $data): bool
     {
         $result = HttpService::instance()
             ->url($webhook)
             ->data($data)
             ->toArray();
-        if ($result['code'] == 200) {
-            return true;
-        }
-        return false;
+        return $result['code'] === 200;
     }
 }

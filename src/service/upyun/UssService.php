@@ -32,20 +32,35 @@ use Upyun\Upyun;
  */
 class UssService extends Service
 {
+    /**
+     * @var
+     */
     private $serviceName, $operatorName, $operatorPassword;
 
+    /**
+     * @param string $serviceName
+     * @return $this
+     */
     public function serviceName(string $serviceName)
     {
         $this->serviceName = $serviceName;
         return $this;
     }
 
+    /**
+     * @param string $operatorName
+     * @return $this
+     */
     public function operatorName(string $operatorName)
     {
         $this->operatorName = $operatorName;
         return $this;
     }
 
+    /**
+     * @param string $operatorPassword
+     * @return $this
+     */
     public function operatorPassword(string $operatorPassword)
     {
         $this->operatorPassword = $operatorPassword;
@@ -56,7 +71,7 @@ class UssService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->serviceName = config('dtapp.upyun.uss.service_name');
         $this->operatorName = config('dtapp.upyun.uss.operator_name');
@@ -71,7 +86,7 @@ class UssService extends Service
      * @return bool
      * @throws Exception
      */
-    public function upload(string $object, string $filePath)
+    public function upload(string $object, string $filePath): bool
     {
         if (empty($this->serviceName) || empty($this->operatorName) || empty($this->operatorPassword)) {
             $this->getConfig();

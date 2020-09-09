@@ -31,27 +31,46 @@ use Ks3ServiceException;
  */
 class Ks3Service extends Service
 {
+    /**
+     * @var
+     */
     private $accessKeyID, $accessKeySecret, $endpoint, $bucket;
 
+    /**
+     * @param string $accessKeyID
+     * @return $this
+     */
     public function accessKeyID(string $accessKeyID)
     {
         $this->accessKeyID = $accessKeyID;
         return $this;
     }
 
+    /**
+     * @param string $accessKeySecret
+     * @return $this
+     */
     public function accessKeySecret(string $accessKeySecret)
     {
         $this->accessKeySecret = $accessKeySecret;
         return $this;
     }
 
-    public function endpoint(string $endpoint)
+    /**
+     * @param string $endpoint
+     * @return $this
+     */
+    public function endpoint(string $endpoint): self
     {
         $this->endpoint = $endpoint;
         return $this;
     }
 
-    public function bucket(string $bucket)
+    /**
+     * @param string $bucket
+     * @return $this
+     */
+    public function bucket(string $bucket): self
     {
         $this->bucket = $bucket;
         return $this;
@@ -61,7 +80,7 @@ class Ks3Service extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->accessKeyID = config('dtapp.ksyun.ks3.access_key_iD');
         $this->accessKeySecret = config('dtapp.ksyun.ks3.access_key_secret');
@@ -86,7 +105,7 @@ class Ks3Service extends Service
         if (empty($this->bucket)) {
             $this->getConfig();
         }
-        $content = fopen($filePath, "r");
+        $content = fopen($filePath, 'rb');
         $args = [
             "Bucket" => $this->bucket,
             "Key" => $object,

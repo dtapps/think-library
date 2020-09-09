@@ -82,7 +82,7 @@ class Arrays
      * @param array $array
      * @return array
      */
-    public function unique(array $array)
+    public function unique(array $array): array
     {
         $out = array();
         foreach ($array as $key => $value) {
@@ -102,7 +102,7 @@ class Arrays
      * @param int $sort_type
      * @return array
      */
-    public function sort(array $arrays, string $sort_key, $sort_order = SORT_ASC, $sort_type = SORT_NUMERIC)
+    public function sort(array $arrays, string $sort_key, $sort_order = SORT_ASC, $sort_type = SORT_NUMERIC): array
     {
         $key_arrays = array();
         if (is_array($arrays)) {

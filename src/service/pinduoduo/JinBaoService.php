@@ -43,22 +43,10 @@ class JinBaoService extends Service
     private $type = '';
 
     /**
-     * 开放平台分配的clientId
+     * 开放平台分配的
      * @var string
      */
-    private $client_id = '';
-
-    /**
-     * 开放平台分配的clientSecret
-     * @var string
-     */
-    private $client_secret = '';
-
-    /**
-     * 通过code获取的access_token(无需授权的接口，该字段不参与sign签名运算)
-     * @var string
-     */
-    private $access_token = '';
+    private $client_id, $client_secret = '';
 
     /**
      * 响应格式，即返回数据的格式，JSON或者XML（二选一），默认JSON，注意是大写
@@ -87,7 +75,7 @@ class JinBaoService extends Service
     /*
      * 配置开放平台分配的clientId
      */
-    public function clientId(string $clientId)
+    public function clientId(string $clientId): self
     {
         $this->client_id = $clientId;
         return $this;
@@ -98,7 +86,7 @@ class JinBaoService extends Service
      * @param string $clientSecret
      * @return $this
      */
-    public function clientSecret(string $clientSecret)
+    public function clientSecret(string $clientSecret): self
     {
         $this->client_secret = $clientSecret;
         return $this;
@@ -109,7 +97,7 @@ class JinBaoService extends Service
      * @param string $dataType
      * @return $this
      */
-    public function dataType(string $dataType)
+    public function dataType(string $dataType): self
     {
         $this->data_type = $dataType;
         return $this;
@@ -120,7 +108,7 @@ class JinBaoService extends Service
      * @param array $param
      * @return $this
      */
-    public function param(array $param)
+    public function param(array $param): self
     {
         $this->param = $param;
         return $this;
@@ -128,10 +116,10 @@ class JinBaoService extends Service
 
     /**
      * 网络请求
-     * @return JinBaoService
+     * @return $this
      * @throws DtaException
      */
-    private function http()
+    private function http(): self
     {
         //生成签名
         $sign = $this->createSign();
@@ -150,7 +138,7 @@ class JinBaoService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->client_id = config('dtapp.pinduoduo.jinbao.client_id');
         $this->client_secret = config('dtapp.pinduoduo.jinbao.client_secret');
@@ -162,7 +150,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.search
      * @return $this
      */
-    public function goodsSearch()
+    public function goodsSearch(): self
     {
         $this->type = 'pdd.ddk.goods.search';
         return $this;
@@ -173,7 +161,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.pid.generate
      * @return $this
      */
-    public function goodsPidGenerate()
+    public function goodsPidGenerate(): self
     {
         $this->type = 'pdd.ddk.goods.pid.generate';
         return $this;
@@ -184,7 +172,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.pid.query
      * @return $this
      */
-    public function goodsPidQuery()
+    public function goodsPidQuery(): self
     {
         $this->type = 'pdd.ddk.goods.pid.query';
         return $this;
@@ -195,7 +183,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.order.detail.get
      * @return $this
      */
-    public function orderDetailGet()
+    public function orderDetailGet(): self
     {
         $this->type = 'pdd.ddk.order.detail.get';
         return $this;
@@ -206,7 +194,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.order.list.increment.get
      * @return $this
      */
-    public function orderListIncrementGet()
+    public function orderListIncrementGet(): self
     {
         $this->type = 'pdd.ddk.order.list.increment.get';
         return $this;
@@ -217,7 +205,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.order.list.range.get
      * @return $this
      */
-    public function orderListRangeGet()
+    public function orderListRangeGet(): self
     {
         $this->type = 'pdd.ddk.order.list.range.get';
         return $this;
@@ -228,7 +216,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.finance.cpa.query
      * @return $this
      */
-    public function financeCpaQuery()
+    public function financeCpaQuery(): self
     {
         $this->type = 'pdd.ddk.finance.cpa.query';
         return $this;
@@ -239,7 +227,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.promotion.url.generate
      * @return $this
      */
-    public function goodsPromotionUrlGenerate()
+    public function goodsPromotionUrlGenerate(): self
     {
         $this->type = 'pdd.ddk.goods.promotion.url.generate';
         return $this;
@@ -250,7 +238,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.weapp.qrcode.url.gen
      * @return $this
      */
-    public function weAppQrcodeUrlGen()
+    public function weAppQrcodeUrlGen(): self
     {
         $this->type = 'pdd.ddk.weapp.qrcode.url.gen';
         return $this;
@@ -261,7 +249,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.zs.unit.url.gen
      * @return $this
      */
-    public function goodsZsUitUrlGen()
+    public function goodsZsUitUrlGen(): self
     {
         $this->type = 'pdd.ddk.goods.zs.unit.url.gen';
         return $this;
@@ -272,7 +260,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.resource.url.gen
      * @return $this
      */
-    public function resourceUrlGen()
+    public function resourceUrlGen(): self
     {
         $this->type = 'pdd.ddk.resource.url.gen';
         return $this;
@@ -283,7 +271,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.theme.prom.url.generate
      * @return $this
      */
-    public function themePromUrlGenerate()
+    public function themePromUrlGenerate(): self
     {
         $this->type = 'pdd.ddk.theme.prom.url.generate';
         return $this;
@@ -294,7 +282,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.mall.url.gen
      * @return $this
      */
-    public function mallUrlGen()
+    public function mallUrlGen(): self
     {
         $this->type = 'pdd.ddk.mall.url.gen';
         return $this;
@@ -305,7 +293,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.rp.prom.url.generate
      * @return $this
      */
-    public function rpPromUrlGenerate()
+    public function rpPromUrlGenerate(): self
     {
         $this->type = 'pdd.ddk.rp.prom.url.generate';
         return $this;
@@ -316,7 +304,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.detail
      * @return $this
      */
-    public function goodsDetail()
+    public function goodsDetail(): self
     {
         $this->type = 'pdd.ddk.goods.detail';
         return $this;
@@ -327,7 +315,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.unit.query
      * @return $this
      */
-    public function goodsUnitQuery()
+    public function goodsUnitQuery(): self
     {
         $this->type = 'pdd.ddk.goods.unit.query';
         return $this;
@@ -338,7 +326,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.basic.info.get
      * @return $this
      */
-    public function goodsBasicInfoGet()
+    public function goodsBasicInfoGet(): self
     {
         $this->type = 'pdd.ddk.goods.basic.info.get';
         return $this;
@@ -349,7 +337,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.coupon.info.query
      * @return $this
      */
-    public function couponInfoQuery()
+    public function couponInfoQuery(): self
     {
         $this->type = 'pdd.ddk.coupon.info.query';
         return $this;
@@ -360,7 +348,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.mall.goods.list.get
      * @return $this
      */
-    public function goodsListGet()
+    public function goodsListGet(): self
     {
         $this->type = 'pdd.ddk.mall.goods.list.get';
         return $this;
@@ -371,7 +359,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.top.goods.list.query
      * @return $this
      */
-    public function topGoodsListQuery()
+    public function topGoodsListQuery(): self
     {
         $this->type = 'pdd.ddk.top.goods.list.query';
         return $this;
@@ -382,7 +370,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.goods.recommend.get
      * @return $this
      */
-    public function goodsRecommendGet()
+    public function goodsRecommendGet(): self
     {
         $this->type = 'pdd.ddk.goods.recommend.get';
         return $this;
@@ -393,7 +381,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.theme.list.get
      * @return $this
      */
-    public function themeListGet()
+    public function themeListGet(): self
     {
         $this->type = 'pdd.ddk.theme.list.get';
         return $this;
@@ -404,7 +392,7 @@ class JinBaoService extends Service
      * https://jinbao.pinduoduo.com/third-party/api-detail?apiName=pdd.ddk.theme.goods.search
      * @return $this
      */
-    public function themeGoodsSearch()
+    public function themeGoodsSearch(): self
     {
         $this->type = 'pdd.ddk.theme.goods.search';
         return $this;
@@ -415,7 +403,7 @@ class JinBaoService extends Service
      * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.cms.prom.url.
      * @return $this
      */
-    public function cmsPromUrlGenerate()
+    public function cmsPromUrlGenerate(): self
     {
         $this->type = 'pdd.ddk.cms.prom.url.generate';
         return $this;
@@ -426,7 +414,7 @@ class JinBaoService extends Service
      * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.live.detail
      * @return $this
      */
-    public function liveDetail()
+    public function liveDetail(): self
     {
         $this->type = 'pdd.ddk.live.detail';
         return $this;
@@ -437,7 +425,7 @@ class JinBaoService extends Service
      * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.live.list
      * @return $this
      */
-    public function liveList()
+    public function liveList(): self
     {
         $this->type = 'pdd.ddk.live.list';
         return $this;
@@ -448,7 +436,7 @@ class JinBaoService extends Service
      * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.live.url.gen
      * @return $this
      */
-    public function liveUrlGen()
+    public function liveUrlGen(): self
     {
         $this->type = 'pdd.ddk.live.url.gen';
         return $this;
@@ -459,7 +447,7 @@ class JinBaoService extends Service
      * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.lottery.url.gen
      * @return $this
      */
-    public function lotteryUrlGen()
+    public function lotteryUrlGen(): self
     {
         $this->type = 'pdd.ddk.lottery.url.gen';
         return $this;
@@ -470,7 +458,7 @@ class JinBaoService extends Service
      * https://open.pinduoduo.com/application/document/api?id=pdd.ddk.member.authority.query
      * @return $this
      */
-    public function memberAuthorityQuery()
+    public function memberAuthorityQuery(): self
     {
         $this->type = 'pdd.ddk.member.authority.query';
         return $this;
@@ -525,7 +513,7 @@ class JinBaoService extends Service
      * @param $object
      * @return array
      */
-    private function object2array(&$object)
+    private function object2array(&$object): array
     {
         if (is_object($object)) {
             $arr = (array)($object);
@@ -545,7 +533,7 @@ class JinBaoService extends Service
      * @return string
      * @throws DtaException
      */
-    private function createSign()
+    private function createSign(): string
     {
         if (empty($this->client_secret)) {
             $this->getConfig();
@@ -556,7 +544,7 @@ class JinBaoService extends Service
         $sign = $this->client_secret;
         ksort($this->param);
         foreach ($this->param as $key => $val) {
-            if ($key != '' && $val != '') {
+            if ($key !== '' && $val !== '') {
                 $sign .= $key . $val;
             }
         }
@@ -569,11 +557,11 @@ class JinBaoService extends Service
      * 组参
      * @return string
      */
-    private function createStrParam()
+    private function createStrParam(): string
     {
         $strParam = '';
         foreach ($this->param as $key => $val) {
-            if ($key != '' && $val != '' && !is_array($val)) {
+            if ($key !== '' && $val !== '' && !is_array($val)) {
                 $strParam .= $key . '=' . urlencode($val) . '&';
             }
         }
@@ -584,7 +572,7 @@ class JinBaoService extends Service
      * 获取频道ID
      * @return array[]
      */
-    public function getChannelTypeList()
+    public function getChannelTypeList(): array
     {
         return [
             [
@@ -636,7 +624,7 @@ class JinBaoService extends Service
      * 获取频道来源ID
      * @return array[]
      */
-    public function getResourceTypeList()
+    public function getResourceTypeList(): array
     {
         return [
             [

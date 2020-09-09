@@ -31,26 +31,45 @@ use Exception;
  */
 class BosService extends Service
 {
+    /**
+     * @var
+     */
     private $accessKeyId, $secretAccessKey, $endpoint, $bucket;
 
+    /**
+     * @param string $accessKeyId
+     * @return $this
+     */
     public function accessKeyId(string $accessKeyId)
     {
         $this->accessKeyId = $accessKeyId;
         return $this;
     }
 
+    /**
+     * @param string $secretAccessKey
+     * @return $this
+     */
     public function secretAccessKey(string $secretAccessKey)
     {
         $this->secretAccessKey = $secretAccessKey;
         return $this;
     }
 
+    /**
+     * @param string $endpoint
+     * @return $this
+     */
     public function endpoint(string $endpoint)
     {
         $this->endpoint = $endpoint;
         return $this;
     }
 
+    /**
+     * @param string $bucket
+     * @return $this
+     */
     public function bucket(string $bucket)
     {
         $this->bucket = $bucket;
@@ -61,7 +80,7 @@ class BosService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->accessKeyId = config('dtapp.baidu.bos.access_key_id');
         $this->secretAccessKey = config('dtapp.baidu.bos.secret_access_key');
@@ -77,7 +96,7 @@ class BosService extends Service
      * @return bool
      * @throws Exception
      */
-    public function upload(string $object, string $filePath)
+    public function upload(string $object, string $filePath): bool
     {
         if (empty($this->accessKeyId) || empty($this->secretAccessKey) || empty($this->endpoint)) {
             $this->getConfig();

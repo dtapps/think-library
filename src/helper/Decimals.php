@@ -33,9 +33,9 @@ class Decimals
      * @param $num
      * @return int
      */
-    public function intval($num)
+    public function intval($num): int
     {
-        return intval($num);
+        return (int)$num;
     }
 
     /**

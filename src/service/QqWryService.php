@@ -226,15 +226,15 @@ class QqWryService extends Service
                     break;
             }
             // CZ88.NET表示没有有效信息
-            if (trim($location['all']) == 'CZ88.NET') {
+            if (trim($location['all']) === 'CZ88.NET') {
                 $location['all'] = $this->unknown;
             }
-            if (trim($location['extend']) == 'CZ88.NET') {
+            if (trim($location['extend']) === 'CZ88.NET') {
                 $location['extend'] = '';
             }
             $location['all'] = iconv("gb2312", "UTF-8//IGNORE", $location['all']);
             $location['extend'] = iconv("gb2312", "UTF-8//IGNORE", $location['extend']);
-            $location['extend'] = $location['extend'] === null ? '' : $location['extend'];
+            $location['extend'] = $location['extend'] ?? '';
             $parseData = $this->parseLocation($location['all']);
             $location['state'] = $parseData[0];
             $location['city'] = $parseData[1];

@@ -53,7 +53,7 @@ class MapService extends Service
      * @param $str
      * @return $this
      */
-    public function key(string $str)
+    public function key(string $str): self
     {
         $this->key = $str;
         return $this;
@@ -64,7 +64,7 @@ class MapService extends Service
      * @param $str
      * @return $this
      */
-    public function ak(string $str)
+    public function ak(string $str): self
     {
         $this->ak = $str;
         return $this;
@@ -75,7 +75,7 @@ class MapService extends Service
      * @param string $str
      * @return $this
      */
-    public function ip(string $str)
+    public function ip(string $str): self
     {
         $this->ip = $str;
         return $this;

@@ -32,21 +32,36 @@ use Qiniu\Storage\UploadManager;
  */
 class KodoService extends Service
 {
+    /**
+     * @var
+     */
     private $accessKey, $secretKey, $bucket;
 
-    public function accessKey(string $accessKey)
+    /**
+     * @param string $accessKey
+     * @return $this
+     */
+    public function accessKey(string $accessKey): self
     {
         $this->accessKey = $accessKey;
         return $this;
     }
 
-    public function secretKey(string $secretKey)
+    /**
+     * @param string $secretKey
+     * @return $this
+     */
+    public function secretKey(string $secretKey): self
     {
         $this->secretKey = $secretKey;
         return $this;
     }
 
-    public function bucket(string $bucket)
+    /**
+     * @param string $bucket
+     * @return $this
+     */
+    public function bucket(string $bucket): self
     {
         $this->bucket = $bucket;
         return $this;
@@ -56,7 +71,7 @@ class KodoService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->accessKey = config('dtapp.qiniu.kodo.access_key');
         $this->secretKey = config('dtapp.qiniu.kodo.secret_key');
@@ -71,7 +86,7 @@ class KodoService extends Service
      * @return bool
      * @throws Exception
      */
-    public function upload(string $object, string $filePath)
+    public function upload(string $object, string $filePath): bool
     {
         if (empty($this->accessKey) || empty($this->secretKey) || empty($this->bucket)) {
             $this->getConfig();

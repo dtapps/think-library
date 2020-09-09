@@ -23,14 +23,25 @@ use DtApp\ThinkLibrary\Service;
 
 class AesService extends Service
 {
+    /**
+     * @var
+     */
     private $key, $iv;
 
-    public function key($str)
+    /**
+     * @param $str
+     * @return $this
+     */
+    public function key($str): self
     {
         $this->key = $str;
         return $this;
     }
 
+    /**
+     * @param $str
+     * @return $this
+     */
     public function iv($str)
     {
         $this->iv = $str;

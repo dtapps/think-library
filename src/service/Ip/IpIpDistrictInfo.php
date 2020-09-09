@@ -21,15 +21,15 @@ namespace DtApp\ThinkLibrary\service\Ip;
 
 class IpIpDistrictInfo
 {
-    public $country_name = '';
-    public $region_name = '';
-    public $city_name = '';
-    public $district_name = '';
-    public $china_admin_code = '';
-    public $covering_radius = '';
-    public $longitude = '';
-    public $latitude = '';
+    /**
+     * @var
+     */
+    public $country_name , $region_name, $city_name , $district_name , $china_admin_code, $covering_radius,$longitude , $latitude = '';
 
+    /**
+     * IpIpDistrictInfo constructor.
+     * @param array $data
+     */
     public function __construct(array $data)
     {
         foreach ($data AS $field => $value) {
@@ -37,6 +37,10 @@ class IpIpDistrictInfo
         }
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function __get($name)
     {
         return $this->{$name};

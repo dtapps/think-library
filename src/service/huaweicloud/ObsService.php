@@ -30,27 +30,46 @@ use Obs\ObsClient;
  */
 class ObsService extends Service
 {
+    /**
+     * @var
+     */
     private $key, $secret, $endpoint, $bucket;
 
-    public function key(string $key)
+    /**
+     * @param string $key
+     * @return $this
+     */
+    public function key(string $key): self
     {
         $this->key = $key;
         return $this;
     }
 
-    public function secret(string $secret)
+    /**
+     * @param string $secret
+     * @return $this
+     */
+    public function secret(string $secret): self
     {
         $this->secret = $secret;
         return $this;
     }
 
-    public function endpoint(string $endpoint)
+    /**
+     * @param string $endpoint
+     * @return $this
+     */
+    public function endpoint(string $endpoint): self
     {
         $this->endpoint = $endpoint;
         return $this;
     }
 
-    public function bucket(string $bucket)
+    /**
+     * @param string $bucket
+     * @return $this
+     */
+    public function bucket(string $bucket): self
     {
         $this->bucket = $bucket;
         return $this;
@@ -60,7 +79,7 @@ class ObsService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->key = config('dtapp.huaweicloud.obs.key');
         $this->secret = config('dtapp.huaweicloud.obs.secret');
@@ -75,7 +94,7 @@ class ObsService extends Service
      * @param $filePath
      * @return bool
      */
-    public function upload(string $object, string $filePath)
+    public function upload(string $object, string $filePath): bool
     {
         if (empty($this->key) || empty($this->secret) || empty($this->endpoint)) {
             $this->getConfig();

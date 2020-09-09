@@ -107,7 +107,7 @@ class UnionService extends Service
      * @param string $secretKey
      * @return $this
      */
-    public function secretKey(string $secretKey)
+    public function secretKey(string $secretKey): self
     {
         $this->secret_key = $secretKey;
         return $this;
@@ -129,7 +129,7 @@ class UnionService extends Service
      * @param array $param
      * @return $this
      */
-    public function param(array $param)
+    public function param(array $param): self
     {
         $this->param = $param;
         return $this;
@@ -139,7 +139,7 @@ class UnionService extends Service
      * 网络请求
      * @throws DtaException
      */
-    private function http()
+    private function http(): void
     {
         //生成签名
         $sign = $this->createSign();
@@ -156,7 +156,7 @@ class UnionService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->app_key = config('dtapp.jd.union.app_key');
         $this->secret_key = config('dtapp.jd.union.secret_key');
@@ -166,7 +166,7 @@ class UnionService extends Service
     /**
      * 网站/APP获取推广链接接口
      * https://union.jd.com/openplatform/api/10421
-     * @return array|mixed
+     * @return $this
      */
     public function promotionCommonGet()
     {
@@ -177,7 +177,7 @@ class UnionService extends Service
     /**
      * 社交媒体获取推广链接接口【申请】
      * https://union.jd.com/openplatform/api/10424
-     * @return array|mixed
+     * @return $this
      */
     public function promotionBySubUnionIdGet()
     {
@@ -188,7 +188,7 @@ class UnionService extends Service
     /**
      * 工具商获取推广链接接口【申请】
      * https://union.jd.com/openplatform/api/10425
-     * @return array|mixed
+     * @return $this
      */
     public function promotionByUnionIdGet()
     {
@@ -199,7 +199,7 @@ class UnionService extends Service
     /**
      * 订单行查询接口
      * https://union.jd.com/openplatform/api/12707
-     * @return array|mixed
+     * @return $this
      */
     public function orderRowQuery()
     {
@@ -210,7 +210,7 @@ class UnionService extends Service
     /**
      * 奖励订单查询接口【申请】
      * https://union.jd.com/openplatform/api/11781
-     * @return array|mixed
+     * @return $this
      */
     public function orderBonusQuery()
     {
@@ -221,7 +221,7 @@ class UnionService extends Service
     /**
      * 创建推广位【申请】
      * https://union.jd.com/openplatform/api/10429
-     * @return array|mixed
+     * @return $this
      */
     public function positionCreate()
     {
@@ -232,7 +232,7 @@ class UnionService extends Service
     /**
      * 查询推广位【申请】
      * https://union.jd.com/openplatform/api/10428
-     * @return array|mixed
+     * @return $this
      */
     public function positionQuery()
     {
@@ -243,7 +243,7 @@ class UnionService extends Service
     /**
      * 获取PID【申请】
      * https://union.jd.com/openplatform/api/10430
-     * @return array|mixed
+     * @return $this
      */
     public function userPidGet()
     {
@@ -254,7 +254,7 @@ class UnionService extends Service
     /**
      * 关键词商品查询接口【申请】
      * https://union.jd.com/openplatform/api/10421
-     * @return array|mixed
+     * @return $this
      */
     public function goodsQuery()
     {
@@ -265,7 +265,7 @@ class UnionService extends Service
     /**
      * 京粉精选商品查询接口
      * https://union.jd.com/openplatform/api/10417
-     * @return array|mixed
+     * @return $this
      */
     public function goodsJIngFenQuery()
     {
@@ -282,7 +282,7 @@ class UnionService extends Service
     /**
      * 根据skuid查询商品信息接口
      * https://union.jd.com/openplatform/api/10422
-     * @return array|mixed
+     * @return $this
      */
     public function goodsPromotionGoodsInfoQuery()
     {
@@ -293,7 +293,7 @@ class UnionService extends Service
     /**
      * 礼金创建【申请】
      * https://union.jd.com/openplatform/api/12246
-     * @return array|mixed
+     * @return $this
      */
     public function couponGiftGet()
     {
@@ -304,7 +304,7 @@ class UnionService extends Service
     /**
      * 礼金停止【申请】
      * https://union.jd.com/openplatform/api/12240
-     * @return array|mixed
+     * @return $this
      */
     public function couponGiftStop()
     {
@@ -315,7 +315,7 @@ class UnionService extends Service
     /**
      * 礼金效果数据
      * https://union.jd.com/openplatform/api/12248
-     * @return array|mixed
+     * @return $this
      */
     public function statisticsGifTCouponQuery()
     {
@@ -352,23 +352,23 @@ class UnionService extends Service
         $this->params['param_json'] = json_encode($this->param, JSON_UNESCAPED_UNICODE);
         $this->http();
         $response = Strings::replace('.', '_', $this->method) . "_response";
-        if (isset($this->output["$response"]['result'])) {
-            if (is_array($this->output["$response"]['result'])) {
-                return $this->output["$response"]['result'];
+        if (isset($this->output[$response]['result'])) {
+            if (is_array($this->output[$response]['result'])) {
+                return $this->output[$response]['result'];
             }
-            if (is_object($this->output["$response"]['result'])) {
-                $this->output = json_encode($this->output["$response"]['result'], JSON_UNESCAPED_UNICODE);
+            if (is_object($this->output[$response]['result'])) {
+                $this->output = json_encode($this->output[$response]['result'], JSON_UNESCAPED_UNICODE);
             }
-            return json_decode($this->output["$response"]['result'], true);
-        } else {
-            if (is_array($this->output)) {
-                return $this->output;
-            }
-            if (is_object($this->output)) {
-                $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
-            }
-            return json_decode($this->output, true);
+            return json_decode($this->output[$response]['result'], true);
         }
+
+        if (is_array($this->output)) {
+            return $this->output;
+        }
+        if (is_object($this->output)) {
+            $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
+        }
+        return json_decode($this->output, true);
     }
 
     /**
@@ -376,7 +376,7 @@ class UnionService extends Service
      * @return string
      * @throws DtaException
      */
-    private function createSign()
+    private function createSign(): string
     {
         if (empty($this->secret_key)) {
             $this->getConfig();
@@ -387,7 +387,7 @@ class UnionService extends Service
         $sign = $this->secret_key;
         ksort($this->params);
         foreach ($this->params as $key => $val) {
-            if ($key != '' && $val != '') {
+            if ($key !== '' && $val !== '') {
                 $sign .= $key . $val;
             }
         }
@@ -400,11 +400,11 @@ class UnionService extends Service
      * 组参
      * @return string
      */
-    private function createStrParam()
+    private function createStrParam(): string
     {
         $strParam = '';
         foreach ($this->params as $key => $val) {
-            if ($key != '' && $val != '') {
+            if ($key !== '' && $val !== '') {
                 $strParam .= $key . '=' . urlencode($val) . '&';
             }
         }
@@ -415,7 +415,7 @@ class UnionService extends Service
      * 获取频道ID
      * @return array[]
      */
-    public function getEliteIdList()
+    public function getEliteIdList(): array
     {
         return [
             [

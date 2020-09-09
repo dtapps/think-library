@@ -71,7 +71,7 @@ class Controller extends stdClass
      * @param mixed $data 返回数据
      * @param integer $code 返回代码
      */
-    public function error($info, $data = '{-null-}', $code = 0)
+    public function error($info, $data = '{-null-}', $code = 0): void
     {
         if ($data === '{-null-}') {
             $data = new stdClass();
@@ -87,7 +87,7 @@ class Controller extends stdClass
      * @param mixed $data 返回数据
      * @param integer $code 返回代码
      */
-    public function success($info, $data = '{-null-}', $code = 1)
+    public function success($info, $data = '{-null-}', $code = 1): void
     {
         if ($data === '{-null-}') {
             $data = new stdClass();
@@ -102,7 +102,7 @@ class Controller extends stdClass
      * @param string $url 跳转链接
      * @param integer $code 跳转代码
      */
-    public function redirect($url, $code = 301)
+    public function redirect($url, $code = 301): void
     {
         throw new HttpResponseException(redirect($url, $code));
     }
@@ -112,7 +112,7 @@ class Controller extends stdClass
      * @param string $tpl 模板名称
      * @param array $vars 模板变量
      */
-    public function fetch($tpl = '', $vars = [])
+    public function fetch($tpl = '', $vars = []): void
     {
         foreach ($this as $name => $value) {
             $vars[$name] = $value;
@@ -126,7 +126,7 @@ class Controller extends stdClass
      * @param mixed $value 变量的值
      * @return $this
      */
-    public function assign($name, $value = '')
+    public function assign($name, $value = ''): self
     {
         if (is_string($name)) {
             $this->$name = $value;
@@ -147,10 +147,10 @@ class Controller extends stdClass
      * @param mixed $two 回调引用参数2
      * @return boolean
      */
-    public function callback($name, &$one = [], &$two = [])
+    public function callback($name, &$one = [], &$two = []): bool
     {
         if (is_callable($name)) {
-            return call_user_func($name, $this, $one, $two);
+            return $name($this, $one, $two);
         }
         foreach ([$name, "_{$this->app->request->action()}{$name}"] as $method) {
             if (method_exists($this, $method) && false === $this->$method($one, $two)) {

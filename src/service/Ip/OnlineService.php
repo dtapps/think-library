@@ -41,7 +41,7 @@ class OnlineService extends Service
      * @param string $str
      * @return $this
      */
-    public function ip(string $str)
+    public function ip(string $str): self
     {
         $this->ip = $str;
         return $this;
@@ -151,8 +151,7 @@ class OnlineService extends Service
         $res = iconv('gbk', 'utf-8', $res);
         $res = substr($res, strpos($res, "{"));
         $res = substr($res, 0, -2);
-        $res = str_replace("city", '"city"', $res);
-        $res = str_replace("province", '"province"', $res);
+        $res = str_replace(array("city", "province"), array('"city"', '"province"'), $res);
         $res = json_decode($res, true);
         return $res;
     }
@@ -221,7 +220,7 @@ class OnlineService extends Service
             throw new DtaException('请检查阿里-阿里云配置信息 appcode');
         }
         $headers = array();
-        array_push($headers, "Authorization:APPCODE " . $appcode);
+        $headers[] = "Authorization:APPCODE " . $appcode;
         $querys = "ip={$this->ip}";
         $bodys = "";
         $url = $host . $path . "?" . $querys;

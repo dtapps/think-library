@@ -35,15 +35,18 @@ class QyService extends Service
      * @var string
      */
     private $msgType = 'text';
+
+    /**
+     * @var
+     */
     private $key;
-    private $url = 'https://qyapi.weixin.qq.com/';
 
     /**
      * 配置Key
      * @param string $str
      * @return $this
      */
-    public function key(string $str)
+    public function key(string $str): self
     {
         $this->key = $str;
         return $this;
@@ -55,7 +58,7 @@ class QyService extends Service
      * @return bool
      * @throws DtaException
      */
-    public function text(string $content = '')
+    public function text(string $content = ''): bool
     {
         $this->msgType = 'text';
         return $this->sendMsg([
@@ -87,7 +90,7 @@ class QyService extends Service
      * @return bool
      * @throws DtaException
      */
-    private function sendMsg(array $data)
+    private function sendMsg(array $data): bool
     {
         if (empty($this->key)) {
             throw new DtaException("请检查KEY");
@@ -96,12 +99,9 @@ class QyService extends Service
             $data['msgtype'] = $this->msgType;
         }
         $result = HttpService::instance()
-            ->url("{$this->url}cgi-bin/webhook/send?key=" . $this->key)
+            ->url("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=" . $this->key)
             ->data($data)
             ->toArray();
-        if ($result['errcode'] == 0) {
-            return true;
-        }
-        return false;
+        return $result['errcode'] === 0;
     }
 }

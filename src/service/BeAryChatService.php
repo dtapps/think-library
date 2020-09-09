@@ -35,7 +35,7 @@ class BeAryChatService extends Service
      * @param string $content 消息内容
      * @return bool 发送结果
      */
-    public function text(string $webhook, string $content)
+    public function text(string $webhook, string $content): bool
     {
         return $this->sendMsg($webhook, [
             'text' => $content
@@ -48,16 +48,13 @@ class BeAryChatService extends Service
      * @param array $data 消息内容数组
      * @return bool 发送结果
      */
-    private function sendMsg(string $webhook, array $data)
+    private function sendMsg(string $webhook, array $data): bool
     {
 
         $result = HttpService::instance()
             ->url($webhook)
             ->data($data)
             ->toArray();
-        if ($result['code'] !== 0) {
-            return true;
-        }
-        return false;
+        return $result['code'] !== 0;
     }
 }

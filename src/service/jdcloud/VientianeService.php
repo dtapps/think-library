@@ -30,16 +30,17 @@ use DtApp\ThinkLibrary\service\curl\HttpService;
  */
 class VientianeService extends Service
 {
-    private $url = "https://way.jd.com/";
-
-    private $param, $app_key;
+    /**
+     * @var
+     */
+    private $url, $param, $app_key;
 
     /**
      * 您申请的appkey
      * @param string $appKey
      * @return $this
      */
-    public function appKey(string $appKey)
+    public function appKey(string $appKey): self
     {
         $this->app_key = $appKey;
         return $this;
@@ -50,7 +51,7 @@ class VientianeService extends Service
      * @param array $param
      * @return $this
      */
-    public function param(array $param)
+    public function param(array $param): self
     {
         $this->param = $param;
         return $this;
@@ -63,7 +64,7 @@ class VientianeService extends Service
      */
     public function pm25Cities()
     {
-        $this->url = "{$this->url}pm25/cities";
+        $this->url = "https://way.jd.com/pm25/cities";
         return $this->http();
     }
 
@@ -73,7 +74,7 @@ class VientianeService extends Service
      */
     public function heFreeWeather()
     {
-        $this->url = "{$this->url}he/freeweather";
+        $this->url = "https://way.jd.com/he/freeweather";
         return $this->http();
     }
 
@@ -83,7 +84,7 @@ class VientianeService extends Service
      */
     public function jiSuApiWeather()
     {
-        $this->url = "{$this->url}jisuapi/weather";
+        $this->url = "https://way.jd.com/jisuapi/weather";
         return $this->http();
     }
 
@@ -93,7 +94,7 @@ class VientianeService extends Service
      */
     public function jiSuApiSearch()
     {
-        $this->url = "{$this->url}jisuapi/search";
+        $this->url = "https://way.jd.com/jisuapi/search";
         return $this->http();
     }
 
@@ -103,7 +104,7 @@ class VientianeService extends Service
      */
     public function rtBaSiaIpAreaDict()
     {
-        $this->url = "{$this->url}RTBAsia/ip_area_dict";
+        $this->url = "https://way.jd.com/RTBAsia/ip_area_dict";
         return $this->http();
     }
 

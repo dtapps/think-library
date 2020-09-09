@@ -39,22 +39,16 @@ class TbkService extends Service
     private $sandbox = false;
 
     /**
-     * TOP分配给应用的AppKey
+     * TOP分配给应用的
      * @var string
      */
-    private $app_key = "";
-
-    /**
-     * TOP分配给应用的AppSecret
-     * @var string
-     */
-    private $app_secret = "";
+    private $app_key, $app_secret = "";
 
     /**
      * API接口名称
      * @var string
      */
-    private $method = '', $response = '';
+    private $method = '';
 
     /**
      * 签名的摘要算法
@@ -90,7 +84,7 @@ class TbkService extends Service
      * 是否为沙箱
      * @return $this
      */
-    public function sandbox()
+    public function sandbox(): self
     {
         $this->sandbox = true;
         return $this;
@@ -101,7 +95,7 @@ class TbkService extends Service
      * @param string $appKey
      * @return $this
      */
-    public function appKey(string $appKey)
+    public function appKey(string $appKey): self
     {
         $this->app_key = $appKey;
         return $this;
@@ -112,7 +106,7 @@ class TbkService extends Service
      * @param string $appSecret
      * @return $this
      */
-    public function appSecret(string $appSecret)
+    public function appSecret(string $appSecret): self
     {
         $this->app_secret = $appSecret;
         return $this;
@@ -123,7 +117,7 @@ class TbkService extends Service
      * @param string $signMethod
      * @return $this
      */
-    public function signMethod(string $signMethod)
+    public function signMethod(string $signMethod): self
     {
         $this->sign_method = $signMethod;
         return $this;
@@ -134,7 +128,7 @@ class TbkService extends Service
      * @param array $param
      * @return $this
      */
-    public function param(array $param)
+    public function param(array $param): self
     {
         $this->param = $param;
         return $this;
@@ -144,7 +138,7 @@ class TbkService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->app_key = config('dtapp.taobao.tbk.app_key');
         $this->app_secret = config('dtapp.taobao.tbk.app_secret');
@@ -156,7 +150,7 @@ class TbkService extends Service
      * https://open.taobao.com/api.htm?spm=a219a.7386797.0.0.263c669aWmp4ds&source=search&docId=43328&docType=2
      * @return $this
      */
-    public function orderDetailsGet()
+    public function orderDetailsGet(): self
     {
         $this->method = 'taobao.tbk.order.details.get';
         return $this;
@@ -165,9 +159,9 @@ class TbkService extends Service
     /**
      * 订单查询 - 淘宝客-推广者-维权退款订单查询
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=40173&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function relationRefund()
+    public function relationRefund(): self
     {
         $this->method = 'taobao.tbk.relation.refund';
         return $this;
@@ -177,9 +171,9 @@ class TbkService extends Service
     /**
      * 处罚订单 - 淘宝客-推广者-处罚订单查询
      * https://open.taobao.com/api.htm?spm=a219a.7386797.0.0.120a669amFgNIC&source=search&docId=40121&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function dgPunishOrderGet()
+    public function dgPunishOrderGet(): self
     {
         $this->method = 'taobao.tbk.dg.punish.order.get';
         return $this;
@@ -188,9 +182,9 @@ class TbkService extends Service
     /**
      * 拉新订单&效果 - 淘宝客-推广者-新用户订单明细查询
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=33892&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function DgNewUserOrderGet()
+    public function DgNewUserOrderGet(): self
     {
         $this->method = 'taobao.tbk.dg.newuser.order.get';
         return $this;
@@ -199,9 +193,9 @@ class TbkService extends Service
     /**
      * 拉新订单&效果 - 淘宝客-推广者-拉新活动对应数据查询
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=36836&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function dgNewUserOrderSum()
+    public function dgNewUserOrderSum(): self
     {
         $this->method = 'taobao.tbk.dg.newuser.order.sum';
         return $this;
@@ -210,9 +204,9 @@ class TbkService extends Service
     /**
      * 超级红包发放个数 - 淘宝客-推广者-查询超级红包发放个数
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=47593&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function dgVegasSendReport()
+    public function dgVegasSendReport(): self
     {
         $this->method = 'taobao.tbk.dg.vegas.send.report';
         return $this;
@@ -221,9 +215,9 @@ class TbkService extends Service
     /**
      * 活动转链(更新版) - 淘宝客-推广者-官方活动信息获取
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=48340&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function activityInfoGet()
+    public function activityInfoGet(): self
     {
         $this->method = 'taobao.tbk.activity.info.get';
         return $this;
@@ -232,9 +226,9 @@ class TbkService extends Service
     /**
      * 活动转链 - 淘宝客-推广者-官方活动转链
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=41918&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function activityLinkGet()
+    public function activityLinkGet(): self
     {
         $this->method = 'taobao.tbk.activitylink.get';
         return $this;
@@ -243,10 +237,10 @@ class TbkService extends Service
     /**
      * 淘口令 - 淘宝客-公用-淘口令生成
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=31127&docType=2
-     * @return array|mixed
+     * @return $this
      * @throws DtaException
      */
-    public function tpWdCreate()
+    public function tpWdCreate(): self
     {
         if (isset($this->param['text']) && strlen($this->param['text']) < 5) {
             throw new DtaException('请检查text参数长度');
@@ -258,9 +252,9 @@ class TbkService extends Service
     /**
      * 长短链 - 淘宝客-公用-长链转短链
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=27832&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function spreadGet()
+    public function spreadGet(): self
     {
         $this->method = 'taobao.tbk.spread.get';
         return $this;
@@ -269,9 +263,9 @@ class TbkService extends Service
     /**
      * 聚划算商品搜索接口
      * https://open.taobao.com/api.htm?docId=28762&docType=2&scopeId=16517
-     * @return array|mixed
+     * @return $this
      */
-    public function itemsSearch()
+    public function itemsSearch(): self
     {
         $this->method = 'taobao.ju.items.search';
         return $this;
@@ -280,9 +274,9 @@ class TbkService extends Service
     /**
      * 淘抢购api
      * https://open.taobao.com/api.htm?docId=27543&docType=2&scopeId=16517
-     * @return array|mixed
+     * @return $this
      */
-    public function juTqgGet()
+    public function juTqgGet(): self
     {
         if (!isset($this->param['fields'])) {
             $this->param['fields'] = "click_url,pic_url,reserve_price,zk_final_price,total_amount,sold_num,title,category_name,start_time,end_time";
@@ -294,9 +288,9 @@ class TbkService extends Service
     /**
      * 淘礼金 - 淘宝客-推广者-淘礼金创建
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=40173&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function dgVegasTljCreate()
+    public function dgVegasTljCreate(): self
     {
         $this->method = 'taobao.tbk.dg.vegas.tlj.create';
         return $this;
@@ -305,9 +299,9 @@ class TbkService extends Service
     /**
      * 淘礼金 - 淘宝客-推广者-淘礼金发放及使用报表
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=43317&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function dgVegasTljInstanceReport()
+    public function dgVegasTljInstanceReport(): self
     {
         $this->method = 'taobao.tbk.dg.vegas.tlj.instance.report';
         return $this;
@@ -316,9 +310,9 @@ class TbkService extends Service
     /**
      * 私域用户管理 - 淘宝客-公用-私域用户邀请码生成
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=38046&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function scInvIteCodeGet()
+    public function scInvIteCodeGet(): self
     {
         $this->method = 'taobao.tbk.sc.invitecode.get';
         return $this;
@@ -327,9 +321,9 @@ class TbkService extends Service
     /**
      * 私域用户管理 - 淘宝客-公用-私域用户备案信息查询
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=37989&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function scPublisherInfoGet()
+    public function scPublisherInfoGet(): self
     {
         $this->method = 'taobao.tbk.sc.publisher.info.get';
         return $this;
@@ -338,9 +332,9 @@ class TbkService extends Service
     /**
      * 私域用户管理 - 淘宝客-公用-私域用户备案
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=37988&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function scPublisherInfoSave()
+    public function scPublisherInfoSave(): self
     {
         $this->method = 'taobao.tbk.sc.publisher.info.save';
         return $this;
@@ -350,9 +344,9 @@ class TbkService extends Service
      * 商品详情&券详情查询 - 淘宝客-公用-淘宝客商品详情查询(简版)
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=24518&docType=2
      * https://open.alimama.com/#!/function?id=25
-     * @return array|mixed
+     * @return $this
      */
-    public function itemInfoGet()
+    public function itemInfoGet(): self
     {
         $this->method = 'taobao.tbk.item.info.get';
         return $this;
@@ -362,9 +356,9 @@ class TbkService extends Service
      * 商品详情&券详情查询 - 淘宝客-公用-阿里妈妈推广券详情查询
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=31106&docType=2
      * https://open.alimama.com/#!/function?id=25
-     * @return array|mixed
+     * @return $this
      */
-    public function couponGet()
+    public function couponGet(): self
     {
         $this->method = 'taobao.tbk.coupon.get';
         return $this;
@@ -374,9 +368,9 @@ class TbkService extends Service
      * 商品/店铺搜索 - 淘宝客-推广者-物料搜索
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=35896&docType=2
      * https://open.alimama.com/#!/function?id=27
-     * @return array|mixed
+     * @return $this
      */
-    public function dgMaterialOptional()
+    public function dgMaterialOptional(): self
     {
         $this->method = 'taobao.tbk.dg.material.optional';
         return $this;
@@ -386,9 +380,9 @@ class TbkService extends Service
      * 商品/店铺搜索 - 淘宝客-推广者-店铺搜索
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=24521&docType=2
      * https://open.alimama.com/#!/function?id=27
-     * @return array|mixed
+     * @return $this
      */
-    public function shopGet()
+    public function shopGet(): self
     {
         if (!isset($this->param['fields'])) {
             $this->param['fields'] = "user_id,shop_title,shop_type,seller_nick,pict_url,shop_url";
@@ -402,9 +396,9 @@ class TbkService extends Service
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=33947&docType=2
      * http://wsd.591hufu.com/taokelianmeng/424.html
      * https://open.alimama.com/#!/function?id=28
-     * @return array|mixed
+     * @return $this
      */
-    public function dgOpTiUsMaterial()
+    public function dgOpTiUsMaterial(): self
     {
         $this->method = 'taobao.tbk.dg.optimus.material';
         return $this;
@@ -414,9 +408,9 @@ class TbkService extends Service
      * 图文内容 - 淘宝客-推广者-图文内容输出
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=31137&docType=2
      * https://open.alimama.com/#!/function?id=30
-     * @return array|mixed
+     * @return $this
      */
-    public function contentGet()
+    public function contentGet(): self
     {
         $this->method = 'taobao.tbk.content.get';
         return $this;
@@ -426,9 +420,9 @@ class TbkService extends Service
      * 图文内容 - 淘宝客-推广者-图文内容效果数据
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=37130&docType=2
      * https://open.alimama.com/#!/function?id=30
-     * @return array|mixed
+     * @return $this
      */
-    public function contentEffectGet()
+    public function contentEffectGet(): self
     {
         $this->method = 'taobao.tbk.content.effect.get';
         return $this;
@@ -438,9 +432,9 @@ class TbkService extends Service
     /**
      * 图文内容 - 淘宝客-推广者-商品出词
      * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=37538&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function itemWordGet()
+    public function itemWordGet(): self
     {
         $this->method = 'taobao.tbk.item.word.get';
         return $this;
@@ -449,9 +443,9 @@ class TbkService extends Service
     /**
      * 淘宝客-推广者-商品链接转换
      * https://open.taobao.com/api.htm?docId=24516&docType=2&scopeId=11653
-     * @return array|mixed
+     * @return $this
      */
-    public function itemConvert()
+    public function itemConvert(): self
     {
         if (!isset($this->param['fields'])) {
             $this->param['fields'] = "num_iid,click_url";
@@ -463,9 +457,9 @@ class TbkService extends Service
     /**
      * 淘宝客-公用-链接解析出商品id
      * https://open.taobao.com/api.htm?docId=28156&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function itemClickExtract()
+    public function itemClickExtract(): self
     {
         $this->method = 'taobao.tbk.item.click.extract';
         return $this;
@@ -474,9 +468,9 @@ class TbkService extends Service
     /**
      * 淘宝客-公用-商品关联推荐
      * https://open.taobao.com/api.htm?docId=24517&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function itemRecommendGet()
+    public function itemRecommendGet(): self
     {
         $this->method = 'taobao.tbk.item.recommend.get';
         return $this;
@@ -485,9 +479,9 @@ class TbkService extends Service
     /**
      * 淘宝客-公用-店铺关联推荐
      * https://open.taobao.com/api.htm?docId=24522&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function shopRecommendGet()
+    public function shopRecommendGet(): self
     {
         $this->method = 'taobao.tbk.shop.recommend.get';
         return $this;
@@ -496,9 +490,9 @@ class TbkService extends Service
     /**
      * 淘宝客-推广者-选品库宝贝信息
      * https://open.taobao.com/api.htm?docId=26619&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function uaTmFavoritesItemGet()
+    public function uaTmFavoritesItemGet(): self
     {
         $this->method = 'taobao.tbk.uatm.favorites.item.get';
         return $this;
@@ -507,9 +501,9 @@ class TbkService extends Service
     /**
      * 淘宝客-推广者-选品库宝贝列表
      * https://open.taobao.com/api.htm?docId=26620&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function uaTmFavoritesGet()
+    public function uaTmFavoritesGet(): self
     {
         $this->method = 'taobao.tbk.uatm.favorites.get';
         return $this;
@@ -518,9 +512,9 @@ class TbkService extends Service
     /**
      * 淘宝客-服务商-官方活动转链
      * https://open.taobao.com/api.htm?docId=41921&docType=2
-     * @return array|mixed
+     * @return $this
      */
-    public function scActivityLinkToolGet()
+    public function scActivityLinkToolGet(): self
     {
         $this->method = 'taobao.tbk.sc.activitylink.toolget';
         return $this;
@@ -563,25 +557,17 @@ class TbkService extends Service
                 $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
             }
             return json_decode($this->output, true);
-        } else {
-            // 正常
-            $response = substr(Strings::replace('.', '_', $this->method), 7) . "_response";
-            if (is_array($this->output)) {
-                if (isset($this->output["$response"])) {
-                    return $this->output["$response"];
-                }
-                return $this->output;
-            };
-            if (is_object($this->output)) {
-                $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
-            }
-            $this->output = json_decode($this->output, true);
-            if (isset($this->output["$response"])) {
-                return $this->output["$response"];
-            } else {
-                return $this->output;
-            }
         }
+
+        // 正常
+        if (is_array($this->output)) {
+            return $this->output;
+        };
+        if (is_object($this->output)) {
+            $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
+        }
+        $this->output = json_decode($this->output, true);
+        return $this->output;
     }
 
     /**
@@ -604,7 +590,7 @@ class TbkService extends Service
      * 网络请求
      * @throws DtaException
      */
-    private function http()
+    private function http(): void
     {
         //生成签名
         $sign = $this->createSign();
@@ -627,7 +613,7 @@ class TbkService extends Service
      * @return string
      * @throws DtaException
      */
-    private function createSign()
+    private function createSign(): string
     {
         if (empty($this->app_secret)) {
             $this->getConfig();
@@ -638,7 +624,7 @@ class TbkService extends Service
         $sign = $this->app_secret;
         ksort($this->param);
         foreach ($this->param as $key => $val) {
-            if ($key != '' && $val != '') {
+            if ($key !== '' && $val !== '') {
                 $sign .= $key . $val;
             }
         }
@@ -651,11 +637,11 @@ class TbkService extends Service
      * 组参
      * @return string
      */
-    private function createStrParam()
+    private function createStrParam(): string
     {
         $strParam = '';
         foreach ($this->param as $key => $val) {
-            if ($key != '' && $val != '') {
+            if ($key !== '' && $val !== '') {
                 $strParam .= $key . '=' . urlencode($val) . '&';
             }
         }
@@ -666,7 +652,7 @@ class TbkService extends Service
      * 获取活动物料
      * @return array[]
      */
-    public function getActivityMaterialIdList()
+    public function getActivityMaterialIdList(): array
     {
         return [
             [
@@ -737,7 +723,7 @@ class TbkService extends Service
      * https://market.m.taobao.com/app/qn/toutiao-new/index-pc.html#/detail/10628875?_k=gpov9a
      * @return array
      */
-    public function getMaterialIdList()
+    public function getMaterialIdList(): array
     {
         return [
             [

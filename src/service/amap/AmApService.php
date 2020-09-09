@@ -31,12 +31,25 @@ use DtApp\ThinkLibrary\service\curl\HttpService;
  */
 class AmApService extends Service
 {
+    /**
+     * @var string
+     */
     private $url = "https://restapi.amap.com/v3/";
 
+    /**
+     * @var string
+     */
     private $key = "";
 
+    /**
+     * @var string
+     */
     private $output = "JSON";
 
+    /**
+     * @param string $key
+     * @return $this
+     */
     public function key(string $key)
     {
         $this->key = $key;
@@ -47,7 +60,7 @@ class AmApService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->key = config('dtapp.amap.key');
         return $this;

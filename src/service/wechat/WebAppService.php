@@ -35,9 +35,6 @@ use think\db\exception\DbException;
  */
 class WebAppService extends Service
 {
-    private $open_url = "https://open.weixin.qq.com/";
-    private $api_url = "https://api.weixin.qq.com/";
-
     /**
      * 公众号的唯一标识
      * @var
@@ -61,8 +58,20 @@ class WebAppService extends Service
      * @var string
      */
     private $response_type = 'code';
+
+    /**
+     * @var string
+     */
     private $scope = "snsapi_base";
+
+    /**
+     * @var string
+     */
     private $state = "";
+
+    /**
+     * @var string
+     */
     private $grant_type = "authorization_code";
 
     /**
@@ -214,7 +223,7 @@ class WebAppService extends Service
             'scope' => $this->scope,
             'state' => $this->state
         ]);
-        return header("Location:{$this->open_url}connect/oauth2/authorize?$params#wechat_redirect");
+        return header("Location:https://open.weixin.qq.com/connect/oauth2/authorize?$params#wechat_redirect");
     }
 
     /**
@@ -236,7 +245,7 @@ class WebAppService extends Service
             throw new DtaException('请检查app_secret参数');
         }
         return HttpService::instance()
-            ->url("{$this->api_url}sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
+            ->url("https://api.weixin.qq.com/sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type={$this->grant_type}")
             ->toArray($is);
     }
 
@@ -257,7 +266,7 @@ class WebAppService extends Service
         }
         $this->grant_type = "refresh_token";
         return HttpService::instance()
-            ->url("{$this->api_url}sns/oauth2/refresh_token?appid={$this->app_id}&grant_type={$this->grant_type}&refresh_token={$refreshToken}")
+            ->url("https://api.weixin.qq.com/sns/oauth2/refresh_token?appid={$this->app_id}&grant_type={$this->grant_type}&refresh_token={$refreshToken}")
             ->toArray($is);
     }
 
@@ -275,7 +284,7 @@ class WebAppService extends Service
             $this->getConfig();
         }
         return HttpService::instance()
-            ->url("{$this->api_url}sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}")
+            ->url("https://api.weixin.qq.com/sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}")
             ->toArray($is);
     }
 
@@ -292,7 +301,7 @@ class WebAppService extends Service
             $this->getConfig();
         }
         return HttpService::instance()
-            ->url("{$this->api_url}sns/auth?access_token={$accessToken}&openid={$openid}")
+            ->url("https://api.weixin.qq.com/sns/auth?access_token={$accessToken}&openid={$openid}")
             ->toArray($is);
     }
 
@@ -302,6 +311,7 @@ class WebAppService extends Service
      * @return array
      * @throws DbException
      * @throws DtaException
+     * @throws \Exception
      */
     public function share($url = '')
     {
@@ -317,7 +327,7 @@ class WebAppService extends Service
             throw  new DtaException("获取access_token错误，" . $accessToken['errmsg']);
         }
         $res = HttpService::instance()
-            ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
+            ->url("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
             ->toArray();
         if (!empty($res['errcode'])) {
             // 获取数据
@@ -326,7 +336,7 @@ class WebAppService extends Service
                 throw  new DtaException("获取access_token错误，" . $accessToken['errmsg']);
             }
             $res = HttpService::instance()
-                ->url("{$this->api_url}cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
+                ->url("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$accessToken['access_token']}&type=jsapi")
                 ->toArray();
             if (!empty($res['errcode'])) {
                 throw new DtaException('accessToken已过期');
@@ -358,7 +368,7 @@ class WebAppService extends Service
      * @return string
      * @throws \Exception
      */
-    private function createNonceStr($length = 16)
+    private function createNonceStr($length = 16): string
     {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $str = "";
@@ -380,7 +390,7 @@ class WebAppService extends Service
         // 获取数据
         $accessToken = $this->getAccessToken();
         return HttpService::instance()
-            ->url("{$this->api_url}cgi-bin/qrcode/create?access_token={$accessToken['access_token']}")
+            ->url("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={$accessToken['access_token']}")
             ->data($data)
             ->post()
             ->toArray();
@@ -397,7 +407,7 @@ class WebAppService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/message/template/send?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data($data)
@@ -417,7 +427,7 @@ class WebAppService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/template/api_set_industry?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/template/api_set_industry?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data($data)
@@ -435,7 +445,7 @@ class WebAppService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/shorturl?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/shorturl?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data([
@@ -457,7 +467,7 @@ class WebAppService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}bizwifi/finishpage/set?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/bizwifi/finishpage/set?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->post()
@@ -476,7 +486,7 @@ class WebAppService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/menu/get?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->toArray();
@@ -494,7 +504,7 @@ class WebAppService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/menu/addconditional?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->post()
@@ -514,7 +524,7 @@ class WebAppService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/menu/delconditional?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/menu/delconditional?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->post()
@@ -534,7 +544,7 @@ class WebAppService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/menu/trymatch?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/menu/trymatch?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->post()
@@ -553,7 +563,7 @@ class WebAppService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/menu/delete?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->toArray();
@@ -570,7 +580,7 @@ class WebAppService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/get_current_selfmenu_info?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/get_current_selfmenu_info?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->toArray();
@@ -588,7 +598,7 @@ class WebAppService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/menu/create?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->post()
@@ -633,7 +643,7 @@ class WebAppService extends Service
             if (empty($accessToken['expires_time'])) {
                 // 文件不存在
                 $accessToken_res = HttpService::instance()
-                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->url("https://api.weixin.qq.com/cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
                 $accessToken_res['expires_time'] = time() + 6000;
                 file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
@@ -641,14 +651,14 @@ class WebAppService extends Service
             } else if (!isset($accessToken['access_token'])) {
                 // 内容不存在
                 $accessToken_res = HttpService::instance()
-                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->url("https://api.weixin.qq.com/cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
                 $accessToken_res['expires_time'] = time() + 6000;
                 file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
                 $accessToken = $accessToken_res;
             } else if ($accessToken['expires_time'] <= time()) {
                 $accessToken_res = HttpService::instance()
-                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->url("https://api.weixin.qq.com/cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
                 $accessToken_res['expires_time'] = time() + 6000;
                 file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
@@ -656,11 +666,11 @@ class WebAppService extends Service
             }
             if (isset($accessToken['access_token'])) {
                 $judge = HttpService::instance()
-                    ->url("{$this->api_url}cgi-bin/getcallbackip?access_token={$accessToken['access_token']}")
+                    ->url("https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token={$accessToken['access_token']}")
                     ->toArray();
                 if (!isset($judge['ip_list'])) {
                     $accessToken_res = HttpService::instance()
-                        ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                        ->url("https://api.weixin.qq.com/cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                         ->toArray();
                     $accessToken_res['expires_time'] = time() + 6000;
                     file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
@@ -668,7 +678,7 @@ class WebAppService extends Service
                 }
             } else {
                 $accessToken_res = HttpService::instance()
-                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->url("https://api.weixin.qq.com/cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
                 $accessToken_res['expires_time'] = time() + 6000;
                 file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
@@ -688,7 +698,7 @@ class WebAppService extends Service
             } else {
                 // 获取远程Token
                 $accessToken_res = HttpService::instance()
-                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->url("https://api.weixin.qq.com/cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
                 // 保存到数据库
                 dtacache($file, $accessToken_res['access_token'], 6000);
@@ -696,11 +706,11 @@ class WebAppService extends Service
             }
             // 判断token是否可以使用
             $judge = HttpService::instance()
-                ->url("{$this->api_url}cgi-bin/getcallbackip?access_token={$access_token['access_token']}")
+                ->url("https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token={$access_token['access_token']}")
                 ->toArray();
             if (!isset($judge['ip_list'])) {
                 $accessToken_res = HttpService::instance()
-                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->url("https://api.weixin.qq.com/cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
                 dtacache($file, $accessToken_res['access_token'], 6000);
                 $access_token['access_token'] = $accessToken_res['access_token'];
@@ -750,7 +760,7 @@ class WebAppService extends Service
      * @param bool $hmacsha256 是否使用 HMAC-SHA256算法，否则使用MD5
      * @return string
      */
-    private function paySign(array $array, bool $hmacsha256 = true)
+    private function paySign(array $array, bool $hmacsha256 = true): string
     {
         // 排序
         ksort($array);
@@ -768,6 +778,10 @@ class WebAppService extends Service
         return strtoupper($str);
     }
 
+    /**
+     * @param $xml
+     * @return bool|string
+     */
     private function postXmlCurl($xml)
     {
         $ch = curl_init();

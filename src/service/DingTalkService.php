@@ -37,8 +37,14 @@ class DingTalkService extends Service
      */
     private $msg_type = 'text';
 
+    /**
+     * @var
+     */
     private $access_token;
 
+    /**
+     * @var string
+     */
     private $oapi_url = "https://oapi.dingtalk.com/";
 
     /**
@@ -46,7 +52,7 @@ class DingTalkService extends Service
      * @param string $str
      * @return $this
      */
-    public function accessToken(string $str)
+    public function accessToken(string $str): self
     {
         $this->access_token = $str;
         return $this;
@@ -58,7 +64,7 @@ class DingTalkService extends Service
      * @return bool    发送结果
      * @throws DtaException
      */
-    public function text(string $content)
+    public function text(string $content): bool
     {
         $this->msg_type = 'text';
         return $this->sendMsg([
@@ -74,7 +80,7 @@ class DingTalkService extends Service
      * @return bool 发送结果
      * @throws DtaException
      */
-    private function sendMsg(array $data)
+    private function sendMsg(array $data): bool
     {
         if (empty($this->access_token)) {
             throw new DtaException("请检查access_token");

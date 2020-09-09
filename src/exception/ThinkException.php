@@ -67,13 +67,13 @@ class ThinkException extends Handle
      * @return bool
      * @throws DtaException
      */
-    private function show($msg)
+    private function show($msg): bool
     {
         if (empty($msg)) {
             return true;
         }
         $nt = config('dtapp.exception.type', '');
-        if (!empty($nt) && $nt == 'dingtalk') {
+        if (!empty($nt) && $nt === 'dingtalk') {
             $access_token = config('dtapp.exception.dingtalk.access_token', '');
             if (!empty($access_token)) {
                 return DingTalkService::instance()
@@ -81,7 +81,7 @@ class ThinkException extends Handle
                     ->text($msg);
             }
         }
-        if (!empty($nt) && $nt == 'qyweixin') {
+        if (!empty($nt) && $nt === 'qyweixin') {
             $key = config('dtapp.exception.qyweixin.key', '');
             if (!empty($key)) {
                 return QyService::instance()

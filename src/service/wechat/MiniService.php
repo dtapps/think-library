@@ -31,9 +31,13 @@ use think\db\exception\DbException;
  */
 class MiniService extends Service
 {
-    private $api_url = "https://api.weixin.qq.com/";
-
+    /**
+     * @var
+     */
     private $app_id, $app_secret;
+    /**
+     * @var string
+     */
     private $grant_type = "client_credential";
 
     /**
@@ -67,7 +71,7 @@ class MiniService extends Service
      * @param string $cache
      * @return $this
      */
-    public function cache(string $cache)
+    public function cache(string $cache): self
     {
         $this->cache = $cache;
         return $this;
@@ -77,7 +81,7 @@ class MiniService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->cache = config('dtapp.wechat.mini.cache');
         $this->app_id = config('dtapp.wechat.mini.app_id');
@@ -97,7 +101,7 @@ class MiniService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}wxa/getpaidunionid?access_token={$accessToken['access_token']}&openid={$openid}";
+        $url = "https://api.weixin.qq.com/wxa/getpaidunionid?access_token={$accessToken['access_token']}&openid={$openid}";
         return HttpService::instance()
             ->url($url)
             ->toArray();
@@ -115,7 +119,7 @@ class MiniService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/wxaapp/createwxaqrcode?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data($data)
@@ -135,7 +139,7 @@ class MiniService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}wxa/getwxacode?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/wxa/getwxacode?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data($data)
@@ -155,7 +159,7 @@ class MiniService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}wxa/getwxacodeunlimit?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data($data)
@@ -175,7 +179,7 @@ class MiniService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}wxaapi/newtmpl/addtemplate?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/addtemplate?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data($data)
@@ -194,7 +198,7 @@ class MiniService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}wxaapi/newtmpl/deltemplate?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/deltemplate?access_token={$accessToken['access_token']}";
         $data = [
             'priTmplId' => $priTmplId
         ];
@@ -215,7 +219,7 @@ class MiniService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}wxaapi/newtmpl/getcategory?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getcategory?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->toArray();
@@ -233,7 +237,7 @@ class MiniService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}wxaapi/newtmpl/getpubtemplatekeywords?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatekeywords?access_token={$accessToken['access_token']}";
         $data = [
             'tid' => $tid
         ];
@@ -255,7 +259,7 @@ class MiniService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}wxaapi/newtmpl/getpubtemplatetitles?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatetitles?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data($data)
@@ -273,7 +277,7 @@ class MiniService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}wxaapi/newtmpl/gettemplate?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/wxaapi/newtmpl/gettemplate?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->toArray();
@@ -291,7 +295,7 @@ class MiniService extends Service
     {
         // 获取数据
         $accessToken = $this->getAccessToken();
-        $url = "{$this->api_url}cgi-bin/message/subscribe/send?access_token={$accessToken['access_token']}";
+        $url = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data($data)
@@ -318,7 +322,7 @@ class MiniService extends Service
             throw new DtaException('请检查app_secret参数');
         }
         $this->grant_type = "authorization_code";
-        $url = "{$this->api_url}sns/jscode2session?appid={$this->app_id}&secret={$this->app_secret}&js_code={$js_code}&grant_type={$this->grant_type}";
+        $url = "https://api.weixin.qq.com/sns/jscode2session?appid={$this->app_id}&secret={$this->app_secret}&js_code={$js_code}&grant_type={$this->grant_type}";
         return HttpService::instance()
             ->url($url)
             ->toArray();
@@ -407,7 +411,7 @@ class MiniService extends Service
             throw new DtaException('请检查app_secret参数');
         }
         $this->grant_type = "client_credential";
-        if ($this->cache == "file") {
+        if ($this->cache === "file") {
             // 文件名
             $file = "{$this->app->getRootPath()}runtime/{$this->app_id}_access_token.json";
             // 获取数据
@@ -421,28 +425,30 @@ class MiniService extends Service
             }
             if (empty($accessToken['expires_time'])) {
                 $accessToken_res = HttpService::instance()
-                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->url("https://api.weixin.qq.com/cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
                 $accessToken_res['expires_time'] = time() + 6000;
                 file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
                 $accessToken = $accessToken_res;
             } else if (!isset($accessToken['access_token'])) {
                 $accessToken_res = HttpService::instance()
-                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->url("https://api.weixin.qq.com/cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
                 $accessToken_res['expires_time'] = time() + 6000;
                 file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
                 $accessToken = $accessToken_res;
             } else if ($accessToken['expires_time'] <= time()) {
                 $accessToken_res = HttpService::instance()
-                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->url("https://api.weixin.qq.com/cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
                 $accessToken_res['expires_time'] = time() + 6000;
                 file_put_contents($file, json_encode($accessToken_res, JSON_UNESCAPED_UNICODE));
                 $accessToken = $accessToken_res;
             }
             return $accessToken;
-        } else if ($this->cache == "mysql") {
+        }
+
+        if ($this->cache === "mysql") {
             $access_token = [];
             // 文件名
             $file = "{$this->app_id}_access_token";
@@ -452,14 +458,14 @@ class MiniService extends Service
                 $access_token['access_token'] = $cache_mysql_value;
             } else {
                 $accessToken_res = HttpService::instance()
-                    ->url("{$this->api_url}cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
+                    ->url("https://api.weixin.qq.com/cgi-bin/token?grant_type={$this->grant_type}&appid={$this->app_id}&secret={$this->app_secret}")
                     ->toArray();
                 dtacache($file, $accessToken_res['access_token'], 6000);
                 $access_token['access_token'] = $accessToken_res['access_token'];
             }
             return $access_token;
-        } else {
-            throw new DtaException("驱动方式错误");
         }
+
+        throw new DtaException("驱动方式错误");
     }
 }

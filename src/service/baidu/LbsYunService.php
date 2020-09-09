@@ -31,13 +31,26 @@ use DtApp\ThinkLibrary\service\curl\HttpService;
  */
 class LbsYunService extends Service
 {
+    /**
+     * @var string
+     */
     private $url = "http://api.map.baidu.com/";
 
+    /**
+     * @var string
+     */
     private $ak = "";
 
+    /**
+     * @var string
+     */
     private $output = "json";
 
-    public function ak(string $ak)
+    /**
+     * @param string $ak
+     * @return $this
+     */
+    public function ak(string $ak): self
     {
         $this->ak = $ak;
         return $this;
@@ -47,7 +60,7 @@ class LbsYunService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->ak = config('dtapp.baidu.lbs.ak');
         return $this;

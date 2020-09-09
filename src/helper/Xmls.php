@@ -36,7 +36,7 @@ class Xmls
      * @return string
      * @throws DtaException
      */
-    public function toXml(array $values)
+    public function toXml(array $values): string
     {
         if (!is_array($values) || count($values) <= 0) {
             throw new DtaException('数组数据异常！');

@@ -40,6 +40,9 @@ use stdClass;
  */
 class WatermarkService extends Service
 {
+    /**
+     * @var
+     */
     private $url, $apiUrl, $itemId, $dytk, $contents, $backtrack, $storage, $storagePath;
 
     /**
@@ -76,7 +79,7 @@ class WatermarkService extends Service
      * @param string $path
      * @return $this
      */
-    public function storage(string $type, string $path)
+    public function storage(string $type, string $path): self
     {
         $this->storage = $type;
         $this->storagePath = $path;
@@ -132,7 +135,7 @@ class WatermarkService extends Service
      * 获取音乐信息
      * @return string
      */
-    public function getMusicInfo()
+    public function getMusicInfo(): string
     {
         $this->getApi();
         $data = json_decode($this->contents, true);
@@ -185,7 +188,7 @@ class WatermarkService extends Service
      * 获取接口全部信息
      * @return $this
      */
-    public function getApi()
+    public function getApi(): self
     {
         $this->apiUrl = "https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids={$this->itemId}&dytk={$this->dytk}";
         $this->contents = $this->getContents($this->apiUrl);
@@ -217,13 +220,13 @@ class WatermarkService extends Service
             $backtrack['share_info']['title'] = $item_list['share_info']['share_title'];
             $backtrack['share_info']['url'] = $item_list['share_url'];
             // 音乐信息
-            $backtrack['music_info']['id'] = isset($item_list['music']['id']) ? $item_list['music']['id'] : '';
-            $backtrack['music_info']['mid'] = isset($item_list['music']['mid']) ? $item_list['music']['mid'] : '';
-            $backtrack['music_info']['title'] = isset($item_list['music']['title']) ? $item_list['music']['title'] : '';
-            $backtrack['music_info']['author'] = isset($item_list['music']['author']) ? $item_list['music']['author'] : '';
+            $backtrack['music_info']['id'] = $item_list['music']['id'] ?? '';
+            $backtrack['music_info']['mid'] = $item_list['music']['mid'] ?? '';
+            $backtrack['music_info']['title'] = $item_list['music']['title'] ?? '';
+            $backtrack['music_info']['author'] = $item_list['music']['author'] ?? '';
             $backtrack['music_info']['avatar'] = isset($item_list['music']) ? $this->cMusicAvatar($item_list['music']) : '';
-            $backtrack['music_info']['play'] = isset($item_list['music']['play_url']['uri']) ? $item_list['music']['play_url']['uri'] : '';
-            $backtrack['music_info']['cover'] = isset($item_list['music']['cover_large']['url_list'][0]) ? $item_list['music']['cover_large']['url_list'][0] : '';
+            $backtrack['music_info']['play'] = $item_list['music']['play_url']['uri'] ?? '';
+            $backtrack['music_info']['cover'] = $item_list['music']['cover_large']['url_list'][0] ?? '';
             // 视频信息
             $backtrack['video_info']['vid'] = $item_list['video']['vid'];
             $backtrack['video_info']['desc'] = $item_list['desc'];
@@ -235,7 +238,7 @@ class WatermarkService extends Service
             $backtrack['video_info']['cover'] = $cVideoAvatar['cover'];
             $backtrack['video_info']['play'] = $this->cVideoPlayUrl($item_list['video']['play_addr']['url_list'][0], 'play');
             $backtrack['video_info']['playwm'] = $this->cVideoPlayUrl($item_list['video']['play_addr']['url_list'][0], 'playwm');
-            $this->storagePath = $this->storagePath . $backtrack['author_info']['uid'] . "/";
+            $this->storagePath .= $backtrack['author_info']['uid'] . "/";
             if (!empty($this->storage)) {
                 // 保存文件
                 // 作者头像
@@ -530,7 +533,7 @@ class WatermarkService extends Service
                         $new_yun_path = config("dtapp.storage.domain_list.{$domain_name}") . "upload/watermark/{$yun_path}";
                         // 本地存储
                         // 作者头像
-                        $backtrack['yun']['author_info']['avatar'] = "{$new_yun_path}" . $backtrack['author_info']['uid'] . ".jpeg";
+                        $backtrack['yun']['author_info']['avatar'] = ($new_yun_path) . $backtrack['author_info']['uid'] . ".jpeg";
                         // 音频头像
                         $backtrack['yun']['music_info']['avatar'] = $new_yun_path . $backtrack['music_info']['mid'] . ".jpeg";
                         // 音频文件
@@ -602,11 +605,13 @@ class WatermarkService extends Service
     {
         if (strpos($url, 'douyin.com') !== false) {
             return $url;
-        } else if (strpos($url, 'iesdouyin.com') !== false) {
-            return $url;
-        } else {
-            return '';
         }
+
+        if (strpos($url, 'iesdouyin.com') !== false) {
+            return $url;
+        }
+
+        return '';
     }
 
     /**
@@ -687,21 +692,10 @@ class WatermarkService extends Service
      * @param $data
      * @return string
      */
-    private function cAuthorAvatar($data)
+    private function cAuthorAvatar($data): string
     {
         // 1080x1080
-        if (isset($data['avatar_larger']['url_list'][0])) {
-            return $data['avatar_larger']['url_list'][0];
-        }
-        // 720x720
-        if (isset($data['avatar_medium']['url_list'][0])) {
-            return $data['avatar_medium']['url_list'][0];
-        }
-        // 100x100
-        if (isset($data['avatar_thumb']['url_list'][0])) {
-            return $data['avatar_thumb']['url_list'][0];
-        }
-        return '';
+        return $data['avatar_larger']['url_list'][0] ?? $data['avatar_medium']['url_list'][0] ?? $data['avatar_thumb']['url_list'][0] ?? '';
     }
 
     /**
@@ -709,21 +703,10 @@ class WatermarkService extends Service
      * @param $data
      * @return string
      */
-    private function cMusicAvatar($data)
+    private function cMusicAvatar($data): string
     {
         // 1080x1080
-        if (isset($data['cover_hd']['url_list'][0])) {
-            return $data['cover_hd']['url_list'][0];
-        }
-        // 720x720
-        if (isset($data['cover_medium']['url_list'][0])) {
-            return $data['cover_medium']['url_list'][0];
-        }
-        // 100x100
-        if (isset($data['cover_thumb']['url_list'][0])) {
-            return $data['cover_thumb']['url_list'][0];
-        }
-        return '';
+        return $data['cover_hd']['url_list'][0] ?? $data['cover_medium']['url_list'][0] ?? $data['cover_thumb']['url_list'][0] ?? '';
     }
 
     /**
@@ -731,7 +714,7 @@ class WatermarkService extends Service
      * @param $data
      * @return array
      */
-    private function cVideoAvatar($data)
+    private function cVideoAvatar($data): array
     {
         $array = [];
         $array['dynamic'] = '';
@@ -760,7 +743,7 @@ class WatermarkService extends Service
      */
     private function cVideoPlayUrl($url, $type)
     {
-        if ($type == 'play') {
+        if ($type === 'play') {
             $headers = get_headers(str_replace("/playwm/", "/play/", $url), TRUE);
         } else {
             $headers = get_headers($url, TRUE);

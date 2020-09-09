@@ -28,6 +28,9 @@ use DtApp\ThinkLibrary\Service;
  */
 class StorageService extends Service
 {
+    /**
+     * @var string
+     */
     private $path = '', $remotely = '';
 
     /**
@@ -35,7 +38,7 @@ class StorageService extends Service
      * @param string $path
      * @return $this
      */
-    public function path(string $path)
+    public function path(string $path): self
     {
         $this->path = $path;
         return $this;
@@ -46,7 +49,7 @@ class StorageService extends Service
      * @param string $remotely
      * @return $this
      */
-    public function remotely(string $remotely)
+    public function remotely(string $remotely): self
     {
         $this->remotely = $remotely;
         return $this;
@@ -56,7 +59,7 @@ class StorageService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->path = config('dtapp.storage.path');
         return $this;
@@ -67,13 +70,13 @@ class StorageService extends Service
      * @param string $name 保存的文件名
      * @return array
      */
-    public function save(string $name)
+    public function save(string $name): array
     {
         if (empty($this->path)) {
             $this->getConfig();
         }
         // 判断文件夹是否存在
-        is_dir($this->path) or mkdir($this->path, 0777, true);
+        is_dir($this->path) || mkdir($concurrentDirectory = $this->path, 0777, true) || is_dir($concurrentDirectory);
         $return_content = $this->http_get_data($this->remotely);
         $fp = @fopen("{$this->path}{$name}", "a"); //将文件绑定到流
         fwrite($fp, $return_content); //写入文件
@@ -99,8 +102,7 @@ class StorageService extends Service
         curl_setopt($ch, CURLOPT_URL, $url);
         ob_start();
         curl_exec($ch);
-        $return_content = ob_get_contents();
-        ob_end_clean();
+        $return_content = ob_get_clean();
         $return_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         return $return_content;
     }
@@ -141,7 +143,7 @@ class StorageService extends Service
         } elseif ($bytes >= 1024) {
             $bytes = round($bytes / 1024 * 100) / 100 . 'KB';
         } else {
-            $bytes = $bytes . 'Bytes';
+            $bytes .= 'Bytes';
         }
         return $bytes;
     }
@@ -150,7 +152,7 @@ class StorageService extends Service
      * 获取文件路径
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         if (empty($this->path)) {
             $this->getConfig();

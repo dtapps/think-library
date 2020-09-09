@@ -69,7 +69,7 @@ class Returns
      * @param array $data 数据
      * @param array $ext 扩展字段
      */
-    public function jsonError(string $msg = 'error', int $code = 1, array $data = [], array $ext = [])
+    public function jsonError(string $msg = 'error', int $code = 1, array $data = [], array $ext = []): void
     {
         if (!empty($ext) && is_array($ext)) {
             throw new HttpResponseException(json(array_merge([

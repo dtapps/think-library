@@ -81,14 +81,14 @@ class Strings
         if (strpos($str, $del) !== false) {
             $var = explode($del, $str);
             foreach ($var as $v) {
-                if ($v == $nee) {
+                if ($v === $nee) {
                     return true;
                 }
             }
             return false;
         }
 
-        return $str == $nee;
+        return $str === $nee;
     }
 
     /**

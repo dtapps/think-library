@@ -58,7 +58,7 @@ class Times
         date_default_timezone_set('Asia/Shanghai');
         $msec = 0;
         list($msec, $sec) = explode(' ', microtime());
-        return (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);
+        return (float)sprintf('%.0f', ((float)$msec + (float)$sec) * 1000);
     }
 
     /**
@@ -71,7 +71,7 @@ class Times
     {
         date_default_timezone_set('Asia/Shanghai');
         $end_time = strtotime($end_time);
-        $start_time = $start_time == '' ? time() : strtotime($start_time);
+        $start_time = $start_time === '' ? time() : strtotime($start_time);
         return $end_time - $start_time;
     }
 

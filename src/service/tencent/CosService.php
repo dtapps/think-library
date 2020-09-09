@@ -31,27 +31,46 @@ use Qcloud\Cos\Client;
  */
 class CosService extends Service
 {
+    /**
+     * @var
+     */
     private $secretId, $secretKey, $region, $bucket;
 
-    public function secretId(string $secretId)
+    /**
+     * @param string $secretId
+     * @return $this
+     */
+    public function secretId(string $secretId): self
     {
         $this->secretId = $secretId;
         return $this;
     }
 
-    public function secretKey(string $secretKey)
+    /**
+     * @param string $secretKey
+     * @return $this
+     */
+    public function secretKey(string $secretKey): self
     {
         $this->secretKey = $secretKey;
         return $this;
     }
 
-    public function region(string $region)
+    /**
+     * @param string $region
+     * @return $this
+     */
+    public function region(string $region): self
     {
         $this->region = $region;
         return $this;
     }
 
-    public function bucket(string $bucket)
+    /**
+     * @param string $bucket
+     * @return $this
+     */
+    public function bucket(string $bucket): self
     {
         $this->bucket = $bucket;
         return $this;
@@ -61,7 +80,7 @@ class CosService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->secretId = config('dtapp.tencent.cos.secret_id');
         $this->secretKey = config('dtapp.tencent.cos.secret_key');
@@ -77,31 +96,28 @@ class CosService extends Service
      * @return bool
      * @throws Exception
      */
-    public function upload(string $object, string $filePath)
+    public function upload(string $object, string $filePath): bool
     {
         if (empty($this->secretId) || empty($this->secretKey) || empty($this->region)) {
             $this->getConfig();
         }
-        $cosClient = new Client(
-            array(
-                'region' => $this->region,
-                'schema' => 'http', //协议头部，默认为http
-                'credentials' => array(
-                    'secretId' => $this->secretId,
-                    'secretKey' => $this->secretKey
-                )
-            )
-        );
+        $cosClient = new Client([
+            'region' => $this->region,
+            'schema' => 'http', //协议头部，默认为http
+            'credentials' => [
+                'secretId' => $this->secretId,
+                'secretKey' => $this->secretKey
+            ]
+        ]);
         $key = $object;
         $file = fopen($filePath, "rb");
         if ($file && empty($this->bucket)) {
             $this->getConfig();
-            $result = $cosClient->putObject(
-                array(
-                    'Bucket' => $this->bucket,
-                    'Key' => $key,
-                    'Body' => $file)
-            );
+            $cosClient->putObject([
+                'Bucket' => $this->bucket,
+                'Key' => $key,
+                'Body' => $file
+            ]);
         }
         return config('dtapp.tencent.cos.url', '') . $object;
     }

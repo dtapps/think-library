@@ -28,6 +28,9 @@ use Exception;
  */
 class DtaException extends Exception
 {
+    /**
+     * @return string
+     */
     public function errorMessage()
     {
         return $this->getMessage();

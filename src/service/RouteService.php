@@ -34,18 +34,18 @@ class RouteService extends Service
      * @param int $status
      * @param bool $parameter
      */
-    public function redirect(string $url = '', int $status = 302, bool $parameter = false)
+    public function redirect(string $url = '', int $status = 302, bool $parameter = false): void
     {
         if (empty($url)) {
             $url = request()->scheme() . "://" . request()->host();
         }
         $param = http_build_query(request()->param());
-        if ($status == 301) {
+        if ($status === 301) {
             header('HTTP/1.1 301 Moved Permanently');
         }
         if (empty($parameter)) {
             header("Location: {$url}");
-        } elseif (empty($parameter) == false && empty($param) == true) {
+        } elseif (empty($parameter) === false && empty($param) === true) {
             header("Location: {$url}");
         } else {
             header("Location: {$url}?{$param}");

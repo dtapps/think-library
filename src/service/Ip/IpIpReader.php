@@ -25,17 +25,17 @@ use InvalidArgumentException;
 
 class IpIpReader
 {
-    const IPV4 = 1;
-    const IPV6 = 2;
+    public const IPV4 = 1;
+    public const IPV6 = 2;
 
-    private $file = NULL;
+    private $file;
     private $fileSize = 0;
     private $nodeCount = 0;
     private $nodeOffset = 0;
 
     private $meta = [];
 
-    private $database = '';
+    private $database;
 
     /**
      * Reader constructor.
@@ -49,7 +49,10 @@ class IpIpReader
         $this->init();
     }
 
-    private function init()
+    /**
+     * @throws Exception
+     */
+    private function init(): void
     {
         if (is_readable($this->database) === FALSE) {
             throw new InvalidArgumentException("The IP Database file \"{$this->database}\" does not exist or is not readable.");
@@ -73,7 +76,7 @@ class IpIpReader
         }
 
         $fileSize = 4 + $metaLength + $this->meta['total_size'];
-        if ($fileSize != $this->fileSize) {
+        if ($fileSize !== $this->fileSize) {
             throw  new Exception('IP Database size error.');
         }
 
@@ -86,7 +89,7 @@ class IpIpReader
      * @param string $language
      * @return array|NULL
      */
-    public function find($ip, $language)
+    public function find($ip, $language): ?array
     {
         if (is_resource($this->file) === FALSE) {
             throw new BadMethodCallException('IPIP DB closed.');
@@ -102,7 +105,9 @@ class IpIpReader
 
         if (strpos($ip, '.') !== FALSE && !$this->supportV4()) {
             throw new InvalidArgumentException("The Database not support IPv4 address.");
-        } elseif (strpos($ip, ':') !== FALSE && !$this->supportV6()) {
+        }
+
+        if (strpos($ip, ':') !== FALSE && !$this->supportV6()) {
             throw new InvalidArgumentException("The Database not support IPv6 address.");
         }
 
@@ -123,6 +128,11 @@ class IpIpReader
         return NULL;
     }
 
+    /**
+     * @param $ip
+     * @param $language
+     * @return array|false|null
+     */
     public function findMap($ip, $language)
     {
         $array = $this->find($ip, $language);
@@ -133,7 +143,14 @@ class IpIpReader
         return array_combine($this->meta['fields'], $array);
     }
 
+    /**
+     * @var int
+     */
     private $v4offset = 0;
+
+    /**
+     * @var array
+     */
     private $v6offsetCache = [];
 
     /**
@@ -141,7 +158,7 @@ class IpIpReader
      * @return int
      * @throws Exception
      */
-    private function findNode($ip)
+    private function findNode($ip): int
     {
         $binary = inet_pton($ip);
         $bitCount = strlen($binary) * 8; // 32 | 128
@@ -186,7 +203,9 @@ class IpIpReader
 
         if ($node === $this->nodeCount) {
             return 0;
-        } elseif ($node > $this->nodeCount) {
+        }
+
+        if ($node > $this->nodeCount) {
             return $node;
         }
 
@@ -224,7 +243,10 @@ class IpIpReader
         return $this->read($this->file, $resolved, $size);
     }
 
-    public function close()
+    /**
+     *
+     */
+    public function close(): void
     {
         if (is_resource($this->file) === TRUE) {
             fclose($this->file);
@@ -254,16 +276,25 @@ class IpIpReader
         return '';
     }
 
-    public function supportV6()
+    /**
+     * @return bool
+     */
+    public function supportV6(): bool
     {
         return ($this->meta['ip_version'] & self::IPV6) === self::IPV6;
     }
 
-    public function supportV4()
+    /**
+     * @return bool
+     */
+    public function supportV4(): bool
     {
         return ($this->meta['ip_version'] & self::IPV4) === self::IPV4;
     }
 
+    /**
+     * @return array
+     */
     public function getMeta()
     {
         return $this->meta;

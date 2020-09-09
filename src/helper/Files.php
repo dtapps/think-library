@@ -66,7 +66,7 @@ class Files
         //先删除目录下的文件：
         $dh = opendir($name);
         while ($file = readdir($dh)) {
-            if ($file != "." && $file != "..") {
+            if ($file !== "." && $file !== "..") {
                 $fullpath = $name . "/" . $file;
                 if (!is_dir($fullpath)) {
                     unlink($fullpath);

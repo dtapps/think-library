@@ -38,7 +38,7 @@ class SystemService extends Service
      * @param boolean|string $fillSuffix 补上后缀
      * @return string
      */
-    public function uri($url = '', array $vars = [], $suffix = true, $domain = false, $fillSuffix = false)
+    public function uri($url = '', array $vars = [], $suffix = true, $domain = false, $fillSuffix = false): string
     {
         $default_app = config('app.default_app', 'index');
         $default_action = config('route.default_action', 'index');
@@ -56,9 +56,9 @@ class SystemService extends Service
                 $location = $this->app->route->buildUrl($url, [])->suffix($suffix)->domain($domain)->build();
             }
             if (empty($vars)) {
-                $location = substr($location . "{$pathinfo_depr}" . $this->arr_to_str($vars, $pathinfo_depr), 0, -1) . ".{$url_html_suffix}";
+                $location = substr($location . ($pathinfo_depr) . $this->arr_to_str($vars, $pathinfo_depr), 0, -1) . ".{$url_html_suffix}";
             } else {
-                $location = $location . "{$pathinfo_depr}" . $this->arr_to_str($vars, $pathinfo_depr) . ".{$url_html_suffix}";
+                $location .= ($pathinfo_depr) . $this->arr_to_str($vars, $pathinfo_depr) . ".{$url_html_suffix}";
             }
         } else {
             $location = $this->app->route->buildUrl($url, $vars)->suffix($suffix)->domain($domain)->build();
@@ -82,6 +82,9 @@ class SystemService extends Service
         return $t;
     }
 
+    /**
+     * @var array
+     */
     private $result = [];
 
     /**
@@ -97,11 +100,9 @@ class SystemService extends Service
     public function mac()
     {
         switch (strtolower(PHP_OS)) {
-            case 'unix':
-                break;
             case "solaris":
-                break;
             case "aix":
+            case 'unix':
                 break;
             case "linux":
                 $this->getLinux();
@@ -136,21 +137,21 @@ class SystemService extends Service
      * Windows系统
      * @return array
      */
-    private function getWindows()
+    private function getWindows(): array
     {
         @exec("ipconfig /all", $this->result);
         if ($this->result) {
             return $this->result;
-        } else {
-            $ipconfig = $_SERVER["WINDIR"] . "\system32\ipconfig.exe";
-            if (is_file($ipconfig)) {
-                @exec($ipconfig . " /all", $this->result);
-                return $this->result;
-            } else {
-                @exec($_SERVER["WINDIR"] . "\system\ipconfig.exe /all", $this->result);
-                return $this->result;
-            }
         }
+
+        $ipconfig = $_SERVER["WINDIR"] . "\system32\ipconfig.exe";
+        if (is_file($ipconfig)) {
+            @exec($ipconfig . " /all", $this->result);
+            return $this->result;
+        }
+
+        @exec($_SERVER["WINDIR"] . "\system\ipconfig.exe /all", $this->result);
+        return $this->result;
     }
 
     /**

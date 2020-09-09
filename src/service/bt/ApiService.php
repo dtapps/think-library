@@ -32,19 +32,50 @@ use DtApp\ThinkLibrary\service\curl\BtService;
  */
 class ApiService extends Service
 {
+    /**
+     * @var string
+     */
     private $url = '';
+
+    /**
+     * @var int
+     */
     private $page = 1;
+
+    /**
+     * @var int
+     */
     private $limit = 15;
+
+    /**
+     * @var string
+     */
     private $order = 'id desc';
+
+    /**
+     * @var array
+     */
     private $where = [];
+
+    /**
+     * @var
+     */
     private $contents, $backtrack, $key, $panel;
 
-    public function key(string $key)
+    /**
+     * @param string $key
+     * @return $this
+     */
+    public function key(string $key): self
     {
         $this->key = $key;
         return $this;
     }
 
+    /**
+     * @param string $panel
+     * @return $this
+     */
     public function panel(string $panel)
     {
         $this->panel = $panel;
@@ -55,7 +86,7 @@ class ApiService extends Service
      * 获取配置信息
      * @return $this
      */
-    private function getConfig()
+    private function getConfig(): self
     {
         $this->key = config('dtapp.bt.key');
         $this->panel = config('dtapp.bt.panel');
@@ -87,7 +118,7 @@ class ApiService extends Service
      */
     public function getSites()
     {
-        $this->url = $this->mimes('GetDataList');
+        $this->url = "crontab?action=GetDataList";
         $this->where['type'] = 'sites';
         return $this;
     }
@@ -98,7 +129,7 @@ class ApiService extends Service
      */
     public function getDatabases()
     {
-        $this->url = $this->mimes('getData');
+        $this->url = 'data?action=getData';
         $this->where['tojs'] = 'database.get_list';
         $this->where['table'] = 'databases';
         $this->where['limit'] = $this->limit;
@@ -113,7 +144,7 @@ class ApiService extends Service
      */
     public function getFirewalls()
     {
-        $this->url = $this->mimes('getData');
+        $this->url = 'data?action=getData';
         $this->where['tojs'] = 'firewall.get_list';
         $this->where['table'] = 'firewall';
         $this->where['limit'] = $this->limit;
@@ -128,7 +159,7 @@ class ApiService extends Service
      */
     public function getLogs()
     {
-        $this->url = $this->mimes('getData');
+        $this->url = 'data?action=getData';
         $this->where['tojs'] = 'firewall.get_log_list';
         $this->where['table'] = 'logs';
         $this->where['limit'] = $this->limit;
@@ -143,7 +174,7 @@ class ApiService extends Service
      */
     public function getNews()
     {
-        $this->url = $this->mimes('get_settings');
+        $this->url = 'config?action=get_settings';
         return $this;
     }
 
@@ -153,7 +184,7 @@ class ApiService extends Service
      */
     public function getCronTabs()
     {
-        $this->url = $this->mimes('getData');
+        $this->url = 'data?action=getData';
         $this->where['tojs'] = 'site.get_list';
         $this->where['table'] = 'sites';
         $this->where['limit'] = $this->limit;
@@ -168,7 +199,7 @@ class ApiService extends Service
      */
     public function getTypes()
     {
-        $this->url = $this->mimes('get_site_types');
+        $this->url = 'site?action=get_site_types';
         return $this;
     }
 
@@ -178,7 +209,7 @@ class ApiService extends Service
      */
     public function getSoFts()
     {
-        $this->url = $this->mimes('get_soft_list');
+        $this->url = 'plugin?action=get_soft_list';
         $this->where['p'] = $this->page;
         $this->where['tojs'] = 'soft.get_list';
         return $this;
@@ -190,7 +221,7 @@ class ApiService extends Service
      */
     public function getDiskInfo()
     {
-        $this->url = $this->mimes('GetDiskInfo');
+        $this->url = 'system?action=GetDiskInfo';
         return $this;
     }
 
@@ -200,7 +231,7 @@ class ApiService extends Service
      */
     public function getSystemTotal()
     {
-        $this->url = $this->mimes('GetSystemTotal');
+        $this->url = 'system?action=GetSystemTotal';
         return $this;
     }
 
@@ -210,7 +241,7 @@ class ApiService extends Service
      */
     public function getUserInfo()
     {
-        $this->url = $this->mimes('GetUserInfo');
+        $this->url = 'ssl?action=GetUserInfo';
         return $this;
     }
 
@@ -220,7 +251,7 @@ class ApiService extends Service
      */
     public function getNetWork()
     {
-        $this->url = $this->mimes('GetNetWork');
+        $this->url = 'system?action=GetNetWork';
         return $this;
     }
 
@@ -230,7 +261,7 @@ class ApiService extends Service
      */
     public function getPlugin()
     {
-        $this->url = $this->mimes('get_index_list');
+        $this->url = 'plugin?action=get_index_list';
         return $this;
     }
 
@@ -240,7 +271,7 @@ class ApiService extends Service
      */
     public function getSoft()
     {
-        $this->url = $this->mimes('get_soft_list');
+        $this->url = 'plugin?action=get_soft_list';
         return $this;
     }
 
@@ -250,16 +281,16 @@ class ApiService extends Service
      */
     public function getUpdatePanel()
     {
-        $this->url = $this->mimes('UpdatePanel');
+        $this->url = 'ajax?action=UpdatePanel';
         return $this;
     }
 
     /**
      * 当前页码
      * @param int $is
-     * @return ApiService
+     * @return $this
      */
-    public function page(int $is = 1)
+    public function page(int $is = 1): self
     {
         $this->page = $is;
         return $this;
@@ -268,9 +299,9 @@ class ApiService extends Service
     /**
      * 返回数量
      * @param int $is
-     * @return ApiService
+     * @return $this
      */
-    public function limit(int $is = 15)
+    public function limit(int $is = 15): self
     {
         $this->limit = $is;
         return $this;
@@ -281,7 +312,7 @@ class ApiService extends Service
      * @param string $ss
      * @return $this
      */
-    public function order(string $ss = 'id desc')
+    public function order(string $ss = 'id desc'): self
     {
         $this->order = $ss;
         return $this;
@@ -292,7 +323,7 @@ class ApiService extends Service
      * @param array $array
      * @return ApiService
      */
-    public function where($array = [])
+    public function where($array = []): ApiService
     {
         $this->where = $array;
         return $this;
@@ -300,8 +331,9 @@ class ApiService extends Service
 
     /**
      * 获取数据和总数
+     * @return $this
      */
-    private function getDataWithOrderOpt()
+    private function getDataWithOrderOpt(): self
     {
         $this->backtrack['data'] = $this->contents['data'];
         $this->backtrack['orderOpt'] = $this->contents['orderOpt'];
@@ -310,8 +342,9 @@ class ApiService extends Service
 
     /**
      * 获取数据和总数
+     * @return $this
      */
-    private function getDataWithCount()
+    private function getDataWithCount(): self
     {
         if (empty($this->contents['data'])) {
             $this->contents['data'] = [];
@@ -342,7 +375,7 @@ class ApiService extends Service
      * @return $this
      * @throws DtaException
      */
-    private function getHttp()
+    private function getHttp(): self
     {
         //请求面板接口
         $this->contents = $this->HttpPostCookie($this->url, $this->where);
@@ -357,7 +390,7 @@ class ApiService extends Service
     public function toArray()
     {
         $this->getHttp();
-        if ($this->where['type'] == 'sites') {
+        if ($this->where['type'] === 'sites') {
             $this->getDataWithOrderOpt();
         } else {
             $this->getDataWithCount();
@@ -369,20 +402,6 @@ class ApiService extends Service
             return $this->backtrack;
         }
         return json_decode($this->backtrack, true);
-    }
-
-    /**
-     * 获取文件的信息
-     * @param $name
-     * @return string
-     */
-    private function mimes($name): string
-    {
-        $mimes = include __DIR__ . '/bin/mimes.php';
-        if (isset($mimes[$name])) {
-            return '/' . $mimes[$name];
-        }
-        return '';
     }
 
     /**
@@ -408,7 +427,7 @@ class ApiService extends Service
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $file));
         }
         if (!file_exists($cookie_file)) {
-            $fp = fopen($cookie_file, 'w+');
+            $fp = fopen($cookie_file, 'wb+');
             fclose($fp);
         }
         if (empty($this->key)) {

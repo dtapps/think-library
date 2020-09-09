@@ -46,7 +46,7 @@ class UnIqIds
             $chars = $numbs;
         }
         if ((int)$type === 2) {
-            $chars = "{$chars}";
+            $chars = ($chars);
         }
         if ((int)$type === 3) {
             $chars = "{$numbs}{$chars}";
