@@ -65,7 +65,7 @@ class QqWryService extends Service
      * IP数据库文件存放位置
      * @var mixed
      */
-    private $ipPath = '';
+    private $ipPath;
 
     /**
      * 构造函数，打开 QQWry.Dat 文件并初始化类中的信息
