@@ -13,7 +13,7 @@
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
-
+//sx();
 function sx()
 {
     $a = [
@@ -32,7 +32,7 @@ function sx()
     ];
     $n = 2005;
     $res[$n] = $a;
-    for ($i = 1; $i <= 14; $i++) {
+    for ($i = 1; $i <= 15; $i++) {
         array_unshift($a, array_pop($a));
         $res[$n + $i] = $a;
     }
@@ -43,26 +43,27 @@ function sx()
 
 }
 
+//rq();
 function rq()
 {
     $ia = 1;
-    $ya = 2004;
+    $ya = 2019;
 
     $array = array();
     // 循环年份
-    for ($i = 0; $i <= 14; $i++) {
+    for ($i = 0; $i <= 0; $i++) {
         $ya = ++$ya;
         // 循环月份
+        $day = 0;
         for ($ii = 1; $ii <= 12; $ii++) {
             $j = date("t", strtotime("$ya-$ii")); //获取当前月份天数
             $start_time = strtotime(date("$ya-$ii-01"));  //获取本月第一天时间戳
             for ($iii = 0; $iii < $j; $iii++) {
-                // 判断星期几
-                $weekarray = ["日", "一", "二", "三", "四", "五", "六"];
-                $week = $weekarray[date('w', $start_time + $iii * 86400)]; //每隔一天赋值给数组
-                if ($week === "一" || $week === "三" || $week === "五") {
+                $day++;
+                if ($day <= 230) {
+                    // 赋值给数组
                     $array[$ya][] = date('Y-m-d', $start_time + $iii * 86400);
-                } // 赋值给数组
+                }
             }
         }
     }
@@ -91,6 +92,7 @@ function uni($number, $ary)
     return $final;
 }
 
+//mun();
 /**
  * 开奖数字
  */
@@ -112,6 +114,7 @@ function mun()
     fclose($fp);
 }
 
+//cx();
 /**
  * 开奖生肖
  */
@@ -133,6 +136,7 @@ function cx()
     fclose($fp);
 }
 
+//cxFb();
 /**
  * 开奖生肖
  */
@@ -262,6 +266,7 @@ function clCx($k)
     }
 }
 
+kj();
 function kj()
 {
     $json_string_rq = file_get_contents('cp_log_rq.json');
@@ -348,18 +353,14 @@ function judgeSingDual($numbers)
 
 function getSizeInfo($str)
 {
-    if ($str <= 0 || $str >= 49) {
-        return '';
-    }
     $name = "小";
     if ($str >= 01 && $str <= 24) {
         return $name;
     }
     $name = "大";
-    if ($str >= 25 && $str <= 48) {
+    if ($str >= 25 && $str <= 49) {
         return $name;
     }
-    return false;
 }
 
 function getWorldInfo($str)
@@ -375,8 +376,6 @@ function getWorldInfo($str)
     if (in_array((string)$str, $ground_data, true)) {
         return $name;
     }
-
-    return false;
 }
 
 function getGenderInfo($str)
@@ -392,8 +391,6 @@ function getGenderInfo($str)
     if (in_array((string)$str, $female_data, true)) {
         return $name;
     }
-
-    return false;
 }
 
 function getKayeInfo($str)
@@ -408,15 +405,10 @@ function getKayeInfo($str)
     if (in_array((string)$str, $livestock_data, true)) {
         return $name;
     }
-    return false;
 }
 
 function getFiveElementsInfo($str)
 {
-    if ($str <= 0 || $str > 49) {
-        return '';
-    }
-
     $name = "土";
     $earth_data = ['01', '02', '21', '22', '29', '30', '39', '40', '43', '44'];
     if (in_array((string)$str, $earth_data, true)) {
@@ -442,19 +434,14 @@ function getFiveElementsInfo($str)
     }
 
     $name = "木";
-    $wood_data = ['09', '10', '17', '18', '31', '32', '47', '48'];
+    $wood_data = ['09', '10', '17', '18', '31', '32', '47', '48', '49'];
     if (in_array((string)$str, $wood_data, true)) {
         return $name;
     }
-    return '';
 }
 
 function getWaveInfo($str)
 {
-    if ($str <= 0 || $str > 49) {
-        return '';
-    }
-
     $name = "红";
     $red_data = ['01', '02', '07', '08', '12', '13', '18', '19', '23', '24', '29', '30', '34', '35', '40', '45', '46'];
     if (in_array((string)$str, $red_data, true)) {
@@ -472,6 +459,4 @@ function getWaveInfo($str)
     if (in_array((string)$str, $green_data, true)) {
         return $name;
     }
-
-    return '';
 }
