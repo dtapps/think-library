@@ -562,7 +562,7 @@ class TbkService extends Service
         // 正常
         if (is_array($this->output)) {
             return $this->output;
-        };
+        }
         if (is_object($this->output)) {
             $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
         }

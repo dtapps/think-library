@@ -34,11 +34,6 @@ class LbsYunService extends Service
     /**
      * @var string
      */
-    private $url = "http://api.map.baidu.com/";
-
-    /**
-     * @var string
-     */
     private $ak = "";
 
     /**
@@ -92,7 +87,7 @@ class LbsYunService extends Service
             "output" => $this->output,
         ]);
         return HttpService::instance()
-            ->url("{$this->url}weather/v1/?{$data}")
+            ->url("http://api.map.baidu.com/weather/v1/?{$data}")
             ->toArray();
     }
 
@@ -124,7 +119,7 @@ class LbsYunService extends Service
             "output" => $this->output,
         ]);
         return HttpService::instance()
-            ->url("{$this->url}weather_abroad/v1/?{$data}")
+            ->url("http://api.map.baidu.com/weather_abroad/v1/?{$data}")
             ->toArray();
     }
 }
