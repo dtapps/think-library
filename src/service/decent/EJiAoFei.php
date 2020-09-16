@@ -83,33 +83,29 @@ class EJiAoFei extends Service
     }
 
     /**
-     * 请求参数
-     * @param array $param
-     * @return $this
-     */
-    public function param(array $param): self
-    {
-        $this->param = $param;
-        return $this;
-    }
-
-    /**
      * 话费充值
+     * @param string $orderid 用户提交的订单号    用户提交的订单号，最长32位（用户保证其唯一性）
+     * @param int $face 充值面值    以元为单位，包含10、20、30、50、100、200、300、500 移动联通电信
+     * @param string $account 手机号码    需要充值的手机号码
+     * @param int $amount 购买数量    只能为1
      * @return $this
      */
-    public function chongZhi(): self
+    public function chongZhi(string $orderid, int $face, string $account, int $amount = 1): self
     {
         $this->method = 'chongzhi_jkorders';
+        $this->param = "userid={$this->userid}&pwd={$this->pwd}&orderid={$orderid}&account={$account}&face={$face}&amount={$amount}";
         return $this;
     }
 
     /**
      * 通用查询
+     * @param string $orderid 用户提交的订单号    用户提交的订单号，最长32位（用户保证其唯一性）
      * @return $this
      */
-    public function query(): self
+    public function query(string $orderid): self
     {
         $this->method = 'query_jkorders';
+        $this->param = "userid={$this->userid}&pwd={$this->pwd}&orderid={$orderid}";
         return $this;
     }
 
@@ -120,16 +116,24 @@ class EJiAoFei extends Service
     public function money(): self
     {
         $this->method = 'money_jkuser';
+        $this->param = "userid={$this->userid}&pwd={$this->pwd}";
         return $this;
     }
 
     /**
      * 腾讯充值
+     * @param string $orderid 用户提交的订单号    用户提交的订单号，最长32位（用户保证其唯一性）
+     * @param string $account QQ号    需要充值的QQ号
+     * @param int $productid 产品id    可以通过queryTXproduct查询
+     * @param int $amount 购买数量
+     * @param string $ip 充值QQ号ip    可以为空
+     * @param string $times 时间戳    格式：yyyyMMddhhmmss
      * @return $this
      */
-    public function txchongzhi(): self
+    public function txchongzhi(string $orderid, string $account, int $productid, int $amount, string $ip, string $times): self
     {
         $this->method = 'txchongzhi';
+        $this->param = "userid={$this->userid}&pwd={$this->pwd}&orderid={$orderid}&account={$account}&productid={$productid}&amount={$amount}&ip={$ip}&times={$times}";
         return $this;
     }
 
@@ -140,26 +144,37 @@ class EJiAoFei extends Service
     public function queryTXproduct(): self
     {
         $this->method = 'queryTXproduct';
+        $this->param = "userid={$this->userid}&pwd={$this->pwd}";
         return $this;
     }
 
     /**
      * 流量充值
+     * @param string $orderid 用户提交的订单号    用户提交的订单号，最长32位（用户保证其唯一性）
+     * @param string $account 充值手机号    需要充值的手机号
+     * @param int $gprs 充值流量值    单位：MB（具体流量值请咨询商务）
+     * @param int $area 充值流量范围    0 全国流量，1 省内流量
+     * @param int $effecttime 生效日期    0 即时生效，1次日生效，2 次月生效
+     * @param int $validity 流量有效期    传入月数，0为当月有效
+     * @param string $times 时间戳    格式：yyyyMMddhhmmss
      * @return $this
      */
-    public function gprsChongzhiAdvance(): self
+    public function gprsChongzhiAdvance(string $orderid, string $account, int $gprs, int $area, int $effecttime, int $validity, string $times): self
     {
         $this->method = 'queryTXproduct';
+        $this->param = "userid={$this->userid}&pwd={$this->pwd}&orderid={$orderid}&account={$account}&gprs={$gprs}&area={$area}&effecttime={$effecttime}&validity={$validity}&times={$times}";
         return $this;
     }
 
     /**
      * 会员订单成本价查询
+     * @param string $orderid 用户订单号    用户提交订单号
      * @return $this
      */
-    public function checkCost(): self
+    public function checkCost(string $orderid): self
     {
         $this->method = 'checkCost';
+        $this->param = "userid={$this->userid}&pwd={$this->pwd}&orderid={$orderid}";
         return $this;
     }
 
@@ -179,7 +194,7 @@ class EJiAoFei extends Service
         // 正常
         if (is_array($this->output)) {
             return $this->output;
-        };
+        }
         if (is_object($this->output)) {
             $this->output = json_encode($this->output, JSON_UNESCAPED_UNICODE);
         }
@@ -189,16 +204,14 @@ class EJiAoFei extends Service
 
     /**
      * 网络请求
-     * @throws DtaException
      */
     private function http(): void
     {
         //生成签名
         $sign = $this->createSign();
         //组织参数
-        $strParam = $this->createStrParam();
-        $strParam .= '&userkey=' . $sign;
-        $url = "http://" . $this->api . "/" . $this->method . ".do?{$strParam}";
+        $this->param .= '&userkey=' . $sign;
+        $url = "http://" . $this->api . "/" . $this->method . ".do?{$this->param}";
         $result = file_get_contents($url);
         $result = Xmls::toArray($result);
         $this->output = $result;
@@ -207,45 +220,12 @@ class EJiAoFei extends Service
     /**
      * 签名
      * @return string
-     * @throws DtaException
      */
     private function createSign(): string
     {
-        if (empty($this->key)) {
-            throw new DtaException('请检查key参数');
-        }
-        if (empty($this->userid)) {
-            throw new DtaException('请检查userid参数');
-        }
-        if (empty($this->pwd)) {
-            throw new DtaException('请检查pwd参数');
-        }
-        $this->param['userid'] = $this->userid;
-        $this->param['pwd'] = $this->pwd;
-        $sign = "userid{$this->userid}pwd{$this->pwd}";
-        ksort($this->param);
-        foreach ($this->param as $key => $val) {
-            if ($key !== '' && $val !== '') {
-                $sign .= $key . $val;
-            }
-        }
+        $sign = str_replace(array("&", "="), array("", ""), $this->param);
         $sign .= $this->key;
         $sign = strtoupper(md5($sign));
         return $sign;
-    }
-
-    /**
-     * 组参
-     * @return string
-     */
-    private function createStrParam(): string
-    {
-        $strParam = '';
-        foreach ($this->param as $key => $val) {
-            if ($key !== '' && $val !== '') {
-                $strParam .= $key . '=' . urlencode($val) . '&';
-            }
-        }
-        return substr($strParam, 0, -1);
     }
 }
