@@ -161,7 +161,7 @@ class EJiAoFei extends Service
      */
     public function gprsChongzhiAdvance(string $orderid, string $account, int $gprs, int $area, int $effecttime, int $validity, string $times): self
     {
-        $this->method = 'queryTXproduct';
+        $this->method = 'gprsChongzhiAdvance';
         $this->param = "userid={$this->userid}&pwd={$this->pwd}&orderid={$orderid}&account={$account}&gprs={$gprs}&area={$area}&effecttime={$effecttime}&validity={$validity}&times={$times}";
         return $this;
     }

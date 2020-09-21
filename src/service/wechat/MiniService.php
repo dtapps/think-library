@@ -378,6 +378,231 @@ class MiniService extends Service
     }
 
     /**
+     * 【小程序直播】直播间管理接口 - 创建直播间
+     * https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/studio-api.html#1
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function broadcastRoomCreate(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxaapi/broadcast/room/create?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 【小程序直播】直播间管理接口 - 获取直播间列表
+     * https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/studio-api.html#2
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function broadcastGetLiveInfos(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxa/business/getliveinfo?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 【小程序直播】直播间管理接口 - 获取直播间回放
+     * https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/studio-api.html#3
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function broadcastGetLiveInfo(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxa/business/getliveinfo?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 【小程序直播】直播间管理接口 - 直播间导入商品
+     * https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/studio-api.html#4
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function broadcastRoomAddGoods(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxaapi/broadcast/room/addgoods?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 【小程序直播】直播商品管理接口 - 商品添加并提审
+     * https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/commodity-api.html#1
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function broadcastGoodsAdd(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/add?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 【小程序直播】直播商品管理接口 - 撤回审核
+     * https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/commodity-api.html#2
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function broadcastGoodsResetAudit(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/resetaudit?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+
+    /**
+     * 【小程序直播】直播商品管理接口 - 重新提交审核
+     * https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/commodity-api.html#3
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function broadcastGoodsAudit(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/audit?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+
+    /**
+     * 【小程序直播】直播商品管理接口 - 删除商品
+     * https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/commodity-api.html#4
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function broadcastGoodsDelete(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/delete?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+
+    /**
+     * 【小程序直播】直播商品管理接口 - 更新商品
+     * https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/commodity-api.html#5
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function broadcastGoodsUpdate(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/update?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+
+    /**
+     * 【小程序直播】直播商品管理接口 - 获取商品状态
+     * https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/commodity-api.html#6
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function broadcastGetGoodsWarehouse(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxa/business/getgoodswarehouse?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+
+    /**
+     * 【小程序直播】直播商品管理接口 - 获取商品列表
+     * https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/commodity-api.html#7
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function broadcastGoodsGetAppRoved(array $data = [])
+    {
+        // 获取数据
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/getapproved?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
      * 获取小程序全局唯一后台接口调用凭据（access_token）
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/access-token/auth.getAccessToken.html
      * @return bool|mixed|string
