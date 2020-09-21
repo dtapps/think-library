@@ -99,7 +99,6 @@ class MiniService extends Service
      */
     public function getPaidUnionId(string $openid)
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxa/getpaidunionid?access_token={$accessToken['access_token']}&openid={$openid}";
         return HttpService::instance()
@@ -117,7 +116,6 @@ class MiniService extends Service
      */
     public function createWxaQrCode(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -137,7 +135,6 @@ class MiniService extends Service
      */
     public function getWxaCode(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxa/getwxacode?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -157,7 +154,6 @@ class MiniService extends Service
      */
     public function getWxaCodeUnLimit(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -177,7 +173,6 @@ class MiniService extends Service
      */
     public function addTemplate(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/newtmpl/addtemplate?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -196,7 +191,6 @@ class MiniService extends Service
      */
     public function deleteTemplate(string $priTmplId)
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/newtmpl/deltemplate?access_token={$accessToken['access_token']}";
         $data = [
@@ -217,7 +211,6 @@ class MiniService extends Service
      */
     public function getCategory()
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getcategory?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -235,7 +228,6 @@ class MiniService extends Service
      */
     public function getPubTemplateKeyWordsById(string $tid)
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatekeywords?access_token={$accessToken['access_token']}";
         $data = [
@@ -257,7 +249,6 @@ class MiniService extends Service
      */
     public function getPubTemplateTitleList(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatetitles?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -275,7 +266,6 @@ class MiniService extends Service
      */
     public function getTemplateList()
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/newtmpl/gettemplate?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -293,7 +283,6 @@ class MiniService extends Service
      */
     public function subscribeMessageSend(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -387,7 +376,6 @@ class MiniService extends Service
      */
     public function broadcastRoomCreate(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/broadcast/room/create?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -407,7 +395,6 @@ class MiniService extends Service
      */
     public function broadcastGetLiveInfos(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxa/business/getliveinfo?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -427,7 +414,6 @@ class MiniService extends Service
      */
     public function broadcastGetLiveInfo(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxa/business/getliveinfo?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -447,7 +433,6 @@ class MiniService extends Service
      */
     public function broadcastRoomAddGoods(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/broadcast/room/addgoods?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -467,7 +452,6 @@ class MiniService extends Service
      */
     public function broadcastGoodsAdd(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/add?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -487,7 +471,6 @@ class MiniService extends Service
      */
     public function broadcastGoodsResetAudit(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/resetaudit?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -496,7 +479,6 @@ class MiniService extends Service
             ->post()
             ->toArray();
     }
-
 
     /**
      * 【小程序直播】直播商品管理接口 - 重新提交审核
@@ -508,7 +490,6 @@ class MiniService extends Service
      */
     public function broadcastGoodsAudit(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/audit?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -517,7 +498,6 @@ class MiniService extends Service
             ->post()
             ->toArray();
     }
-
 
     /**
      * 【小程序直播】直播商品管理接口 - 删除商品
@@ -529,7 +509,6 @@ class MiniService extends Service
      */
     public function broadcastGoodsDelete(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/delete?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -538,7 +517,6 @@ class MiniService extends Service
             ->post()
             ->toArray();
     }
-
 
     /**
      * 【小程序直播】直播商品管理接口 - 更新商品
@@ -550,7 +528,6 @@ class MiniService extends Service
      */
     public function broadcastGoodsUpdate(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/update?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -559,7 +536,6 @@ class MiniService extends Service
             ->post()
             ->toArray();
     }
-
 
     /**
      * 【小程序直播】直播商品管理接口 - 获取商品状态
@@ -571,7 +547,6 @@ class MiniService extends Service
      */
     public function broadcastGetGoodsWarehouse(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxa/business/getgoodswarehouse?access_token={$accessToken['access_token']}";
         return HttpService::instance()
@@ -580,7 +555,6 @@ class MiniService extends Service
             ->post()
             ->toArray();
     }
-
 
     /**
      * 【小程序直播】直播商品管理接口 - 获取商品列表
@@ -592,9 +566,141 @@ class MiniService extends Service
      */
     public function broadcastGoodsGetAppRoved(array $data = [])
     {
-        // 获取数据
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/getapproved?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 数据分析 - 获取用户访问小程序日留存
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/data-analysis/visit-retain/analysis.getDailyRetain.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function analysisGetDailyRetain(array $data = [])
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/datacube/getweanalysisappiddailyretaininfo?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 数据分析 - 获取用户访问小程序月留存
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/data-analysis/visit-retain/analysis.getMonthlyRetain.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function analysisGetMonthlyRetain(array $data = [])
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/datacube/getweanalysisappidmonthlyretaininfo?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 数据分析 - 获取用户访问小程序周留存
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/data-analysis/visit-retain/analysis.getWeeklyRetain.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function analysisGetWeeklyRetain(array $data = [])
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/datacube/getweanalysisappidweeklyretaininfo?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 数据分析 - 获取用户访问小程序数据概况
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/data-analysis/analysis.getDailySummary.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function analysisGetDailySummary(array $data = [])
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/datacube/getweanalysisappiddailysummarytrend?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 数据分析 - 获取小程序新增或活跃用户的画像分布数据。时间范围支持昨天、最近7天、最近30天。其中，新增用户数为时间范围内首次访问小程序的去重用户数，活跃用户数为时间范围内访问过小程序的去重用户数
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/data-analysis/analysis.getUserPortrait.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function analysisGetUserPortrait(array $data = [])
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/datacube/getweanalysisappiduserportrait?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 数据分析 - 获取用户访问小程序数据概况
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/data-analysis/analysis.getVisitDistribution.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function analysisGetVisitDistribution(array $data = [])
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/datacube/getweanalysisappidvisitdistribution?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 数据分析 - 访问页面。目前只提供按 page_visit_pv 排序的 top200
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/data-analysis/analysis.getVisitPage.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function analysisGetVisitPage(array $data = [])
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/datacube/getweanalysisappidvisitpage?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data($data)
@@ -611,7 +717,6 @@ class MiniService extends Service
      */
     public function accessToken()
     {
-        // 获取数据
         return $this->getAccessToken();
     }
 
