@@ -96,7 +96,7 @@ class UnionService extends Service
      * @param string $appKey
      * @return $this
      */
-    public function appKey(string $appKey)
+    public function appKey(string $appKey): self
     {
         $this->app_key = $appKey;
         return $this;
@@ -118,7 +118,7 @@ class UnionService extends Service
      * @param string $accessToken
      * @return $this
      */
-    public function accessToken(string $accessToken)
+    public function accessToken(string $accessToken): self
     {
         $this->access_token = $accessToken;
         return $this;
@@ -168,7 +168,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/10421
      * @return $this
      */
-    public function promotionCommonGet()
+    public function promotionCommonGet(): self
     {
         $this->method = 'jd.union.open.promotion.common.get';
         return $this;
@@ -179,7 +179,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/10424
      * @return $this
      */
-    public function promotionBySubUnionIdGet()
+    public function promotionBySubUnionIdGet(): self
     {
         $this->method = 'jd.union.open.promotion.bysubunionid.get';
         return $this;
@@ -190,7 +190,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/10425
      * @return $this
      */
-    public function promotionByUnionIdGet()
+    public function promotionByUnionIdGet(): self
     {
         $this->method = 'jd.union.open.promotion.byunionid.get';
         return $this;
@@ -201,7 +201,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/12707
      * @return $this
      */
-    public function orderRowQuery()
+    public function orderRowQuery(): self
     {
         $this->method = 'jd.union.open.order.row.query';
         return $this;
@@ -212,7 +212,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/11781
      * @return $this
      */
-    public function orderBonusQuery()
+    public function orderBonusQuery(): self
     {
         $this->method = 'jd.union.open.order.bonus.query';
         return $this;
@@ -223,7 +223,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/10429
      * @return $this
      */
-    public function positionCreate()
+    public function positionCreate(): self
     {
         $this->method = 'jd.union.open.position.create';
         return $this;
@@ -234,7 +234,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/10428
      * @return $this
      */
-    public function positionQuery()
+    public function positionQuery(): self
     {
         $this->method = 'jd.union.open.position.query';
         return $this;
@@ -245,7 +245,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/10430
      * @return $this
      */
-    public function userPidGet()
+    public function userPidGet(): self
     {
         $this->method = 'jd.union.open.user.pid.get';
         return $this;
@@ -256,7 +256,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/10421
      * @return $this
      */
-    public function goodsQuery()
+    public function goodsQuery(): self
     {
         $this->method = 'jd.union.open.goods.query';
         return $this;
@@ -267,7 +267,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/10417
      * @return $this
      */
-    public function goodsJIngFenQuery()
+    public function goodsJIngFenQuery(): self
     {
         if (!isset($this->param['pageIndex'])) {
             $this->param['pageIndex'] = 1;
@@ -284,7 +284,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/10422
      * @return $this
      */
-    public function goodsPromotionGoodsInfoQuery()
+    public function goodsPromotionGoodsInfoQuery(): self
     {
         $this->method = 'jd.union.open.goods.promotiongoodsinfo.query';
         return $this;
@@ -295,7 +295,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/12246
      * @return $this
      */
-    public function couponGiftGet()
+    public function couponGiftGet(): self
     {
         $this->method = 'jd.union.open.coupon.gift.get';
         return $this;
@@ -306,7 +306,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/12240
      * @return $this
      */
-    public function couponGiftStop()
+    public function couponGiftStop(): self
     {
         $this->method = 'jd.union.open.coupon.gift.stop';
         return $this;
@@ -317,7 +317,7 @@ class UnionService extends Service
      * https://union.jd.com/openplatform/api/12248
      * @return $this
      */
-    public function statisticsGifTCouponQuery()
+    public function statisticsGifTCouponQuery(): self
     {
         $this->method = 'jd.union.open.statistics.giftcoupon.query';
         return $this;

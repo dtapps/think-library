@@ -465,6 +465,17 @@ class JinBaoService extends Service
     }
 
     /**
+     * 查询商品标签列表
+     * https://open.pinduoduo.com/application/document/api?id=pdd.goods.opt.get
+     * @return $this
+     */
+    public function goodsOptGet(): self
+    {
+        $this->type = 'pdd.goods.opt.get';
+        return $this;
+    }
+
+    /**
      * 返回数组数据
      * @return array|mixed
      * @throws DtaException
