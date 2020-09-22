@@ -293,6 +293,25 @@ class MiniService extends Service
     }
 
     /**
+     * 统一服务消息 - 下发小程序和公众号统一的服务消息
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/uniform-message/uniformMessage.send.html
+     * @param array $data
+     * @return bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function uniformMessageSend(array $data = [])
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
      * 登录凭证校验
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html
      * @param string $js_code
@@ -701,6 +720,85 @@ class MiniService extends Service
     {
         $accessToken = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/datacube/getweanalysisappidvisitpage?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 客服消息 - 获取客服消息内的临时素材。即下载临时的多媒体文件。目前小程序仅支持下载图片文件。
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/customer-message/customerServiceMessage.getTempMedia.html
+     * @param string $media_id
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function customerServiceMessageGetTempMedia(string $media_id = '')
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/media/get";
+        return HttpService::instance()
+            ->url($url)
+            ->data([
+                'access_token' => $accessToken['access_token'],
+                'media_id' => $media_id
+            ])
+            ->get()
+            ->toArray();
+    }
+
+    /**
+     * 客服消息 - 发送客服消息给用户。详细规则见 发送客服消息
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/customer-message/customerServiceMessage.send.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function customerServiceMessageSend(array $data = [])
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 客服消息 - 下发客服当前输入状态给用户。详见 客服消息输入状态
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/customer-message/customerServiceMessage.setTyping.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function customerServiceMessageSetTyping(array $data = [])
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/message/custom/typing?access_token={$accessToken['access_token']}";
+        return HttpService::instance()
+            ->url($url)
+            ->data($data)
+            ->post()
+            ->toArray();
+    }
+
+    /**
+     * 客服消息 - 把媒体文件上传到微信服务器。目前仅支持图片。用于发送客服消息或被动回复用户消息
+     * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/customer-message/customerServiceMessage.uploadTempMedia.html
+     * @param array $data
+     * @return array|bool|mixed|string
+     * @throws DbException
+     * @throws DtaException
+     */
+    public function customerServiceMessageUploadTempMedia(array $data = [])
+    {
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token={$accessToken['access_token']}";
         return HttpService::instance()
             ->url($url)
             ->data($data)
