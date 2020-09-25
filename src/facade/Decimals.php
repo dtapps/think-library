@@ -35,6 +35,7 @@ use think\Facade;
  * @method static float round($num) 四舍五入取整
  * @method static false|float ceil($num) 有小数，就在整数的基础上加一
  * @method static false|float floor($num) 有小数，就取整数位
+ * @method static bool judge($num) 判断是不是小数
  */
 class Decimals extends Facade
 {

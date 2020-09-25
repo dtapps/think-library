@@ -146,8 +146,7 @@ class TbkService extends Service
     }
 
     /**
-     * 订单查询 - 淘宝客-推广者-所有订单查询
-     * https://open.taobao.com/api.htm?spm=a219a.7386797.0.0.263c669aWmp4ds&source=search&docId=43328&docType=2
+     * 淘宝客-推广者-所有订单查询
      * @return $this
      */
     public function orderDetailsGet(): self
@@ -157,8 +156,57 @@ class TbkService extends Service
     }
 
     /**
-     * 订单查询 - 淘宝客-推广者-维权退款订单查询
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=40173&docType=2
+     * 淘宝客-服务商-所有订单查询
+     * @return $this
+     */
+    public function scOrderDetailsGet(): self
+    {
+        $this->method = 'taobao.tbk.sc.order.details.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-淘口令解析&转链
+     * @return $this
+     */
+    public function scTpwdConvert(): self
+    {
+        $this->method = 'taobao.tbk.sc.tpwd.convert';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-维权退款订单查询
+     * @return $this
+     */
+    public function scRelationRefund(): self
+    {
+        $this->method = 'taobao.tbk.sc.relation.refund';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-店铺链接转换
+     * @return $this
+     */
+    public function scShopConvert(): self
+    {
+        $this->method = 'taobao.tbk.sc.shop.convert';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-官办找福利页
+     * @return $this
+     */
+    public function jzfConvert(): self
+    {
+        $this->method = 'taobao.tbk.jzf.convert';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-维权退款订单查询
      * @return $this
      */
     public function relationRefund(): self
@@ -167,10 +215,28 @@ class TbkService extends Service
         return $this;
     }
 
+    /**
+     * 淘宝客-服务商-淘礼金创建
+     * @return $this
+     */
+    public function scVegasTljCreate(): self
+    {
+        $this->method = 'taobao.tbk.sc.vegas.tlj.create';
+        return $this;
+    }
 
     /**
-     * 处罚订单 - 淘宝客-推广者-处罚订单查询
-     * https://open.taobao.com/api.htm?spm=a219a.7386797.0.0.120a669amFgNIC&source=search&docId=40121&docType=2
+     * 淘宝客商品展示规则获取
+     * @return $this
+     */
+    public function itemRuleGet(): self
+    {
+        $this->method = 'qimen.taobao.tbk.item.rule.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-处罚订单查询
      * @return $this
      */
     public function dgPunishOrderGet(): self
@@ -180,19 +246,37 @@ class TbkService extends Service
     }
 
     /**
-     * 拉新订单&效果 - 淘宝客-推广者-新用户订单明细查询
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=33892&docType=2
+     * 淘宝客-公用-淘口令解析出原链接
      * @return $this
      */
-    public function DgNewUserOrderGet(): self
+    public function tpwdParse(): self
+    {
+        $this->method = 'taobao.tbk.tpwd.parse';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-新用户订单明细查询
+     * @return $this
+     */
+    public function dgNewUserOrderGet(): self
     {
         $this->method = 'taobao.tbk.dg.newuser.order.get';
         return $this;
     }
 
     /**
-     * 拉新订单&效果 - 淘宝客-推广者-拉新活动对应数据查询
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=36836&docType=2
+     * 淘宝客-服务商-新用户订单明细查询
+     * @return $this
+     */
+    public function scNewuserOrderGet(): self
+    {
+        $this->method = 'taobao.tbk.sc.newuser.order.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-拉新活动对应数据查询
      * @return $this
      */
     public function dgNewUserOrderSum(): self
@@ -213,8 +297,7 @@ class TbkService extends Service
     }
 
     /**
-     * 活动转链(更新版) - 淘宝客-推广者-官方活动信息获取
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=48340&docType=2
+     * 淘宝客-推广者-官方活动转链
      * @return $this
      */
     public function activityInfoGet(): self
@@ -224,8 +307,27 @@ class TbkService extends Service
     }
 
     /**
-     * 活动转链 - 淘宝客-推广者-官方活动转链
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=41918&docType=2
+     * 淘宝客-服务商-官方活动转链
+     * @return $this
+     */
+    public function scActivityInfoGet(): self
+    {
+        $this->method = 'taobao.tbk.sc.activity.info.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-联盟口令生成
+     * @return $this
+     */
+    public function textTpwdCreate(): self
+    {
+        $this->method = 'taobao.tbk.text.tpwd.create';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-官方活动转链(2020.9.30下线)
      * @return $this
      */
     public function activityLinkGet(): self
@@ -235,23 +337,17 @@ class TbkService extends Service
     }
 
     /**
-     * 淘口令 - 淘宝客-公用-淘口令生成
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=31127&docType=2
+     * 淘宝客-公用-淘口令生成
      * @return $this
-     * @throws DtaException
      */
     public function tpWdCreate(): self
     {
-        if (isset($this->param['text']) && strlen($this->param['text']) < 5) {
-            throw new DtaException('请检查text参数长度');
-        }
         $this->method = 'taobao.tbk.tpwd.create';
         return $this;
     }
 
     /**
-     * 长短链 - 淘宝客-公用-长链转短链
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=27832&docType=2
+     * 淘宝客-公用-长链转短链
      * @return $this
      */
     public function spreadGet(): self
@@ -272,22 +368,17 @@ class TbkService extends Service
     }
 
     /**
-     * 淘抢购api
-     * https://open.taobao.com/api.htm?docId=27543&docType=2&scopeId=16517
+     * 淘抢购api(2020.9.30下线)
      * @return $this
      */
     public function juTqgGet(): self
     {
-        if (!isset($this->param['fields'])) {
-            $this->param['fields'] = "click_url,pic_url,reserve_price,zk_final_price,total_amount,sold_num,title,category_name,start_time,end_time";
-        }
         $this->method = 'taobao.tbk.ju.tqg.get';
         return $this;
     }
 
     /**
-     * 淘礼金 - 淘宝客-推广者-淘礼金创建
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=40173&docType=2
+     * 淘宝客-推广者-淘礼金创建
      * @return $this
      */
     public function dgVegasTljCreate(): self
@@ -297,8 +388,17 @@ class TbkService extends Service
     }
 
     /**
-     * 淘礼金 - 淘宝客-推广者-淘礼金发放及使用报表
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=43317&docType=2
+     * 淘宝客-推广者-轻店铺淘口令解析
+     * @return $this
+     */
+    public function lightshopTbpswdParse(): self
+    {
+        $this->method = 'taobao.tbk.lightshop.tbpswd.parse';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-淘礼金发放及使用报表
      * @return $this
      */
     public function dgVegasTljInstanceReport(): self
@@ -308,8 +408,57 @@ class TbkService extends Service
     }
 
     /**
-     * 私域用户管理 - 淘宝客-公用-私域用户邀请码生成
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=38046&docType=2
+     * 淘宝客-服务商-手淘群发单
+     * @return $this
+     */
+    public function scGroupchatMessageSend(): self
+    {
+        $this->method = 'taobao.tbk.sc.groupchat.message.send';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-手淘群创建
+     * @return $this
+     */
+    public function scGroupchatCreate(): self
+    {
+        $this->method = 'taobao.tbk.sc.groupchat.create';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-手淘群查询
+     * @return $this
+     */
+    public function scGroupchatGet(): self
+    {
+        $this->method = 'taobao.tbk.sc.groupchat.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-公用-手淘注册用户判定
+     * @return $this
+     */
+    public function tbinfoGet(): self
+    {
+        $this->method = 'taobao.tbk.tbinfo.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-公用-pid校验
+     * @return $this
+     */
+    public function tbkinfoGet(): self
+    {
+        $this->method = 'taobao.tbk.tbkinfo.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-公用-私域用户邀请码生成
      * @return $this
      */
     public function scInvIteCodeGet(): self
@@ -319,8 +468,7 @@ class TbkService extends Service
     }
 
     /**
-     * 私域用户管理 - 淘宝客-公用-私域用户备案信息查询
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=37989&docType=2
+     * 淘宝客-公用-私域用户备案信息查询
      * @return $this
      */
     public function scPublisherInfoGet(): self
@@ -330,8 +478,7 @@ class TbkService extends Service
     }
 
     /**
-     * 私域用户管理 - 淘宝客-公用-私域用户备案
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.210524ad2gvyOW&docId=37988&docType=2
+     * 淘宝客-公用-私域用户备案
      * @return $this
      */
     public function scPublisherInfoSave(): self
@@ -341,9 +488,7 @@ class TbkService extends Service
     }
 
     /**
-     * 商品详情&券详情查询 - 淘宝客-公用-淘宝客商品详情查询(简版)
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=24518&docType=2
-     * https://open.alimama.com/#!/function?id=25
+     * 淘宝客-公用-淘宝客商品详情查询(简版)
      * @return $this
      */
     public function itemInfoGet(): self
@@ -353,9 +498,7 @@ class TbkService extends Service
     }
 
     /**
-     * 商品详情&券详情查询 - 淘宝客-公用-阿里妈妈推广券详情查询
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=31106&docType=2
-     * https://open.alimama.com/#!/function?id=25
+     * 淘宝客-公用-阿里妈妈推广券详情查询
      * @return $this
      */
     public function couponGet(): self
@@ -365,9 +508,7 @@ class TbkService extends Service
     }
 
     /**
-     * 商品/店铺搜索 - 淘宝客-推广者-物料搜索
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=35896&docType=2
-     * https://open.alimama.com/#!/function?id=27
+     * 淘宝客-推广者-物料搜索
      * @return $this
      */
     public function dgMaterialOptional(): self
@@ -377,25 +518,17 @@ class TbkService extends Service
     }
 
     /**
-     * 商品/店铺搜索 - 淘宝客-推广者-店铺搜索
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=24521&docType=2
-     * https://open.alimama.com/#!/function?id=27
+     * 淘宝客-推广者-店铺搜索
      * @return $this
      */
     public function shopGet(): self
     {
-        if (!isset($this->param['fields'])) {
-            $this->param['fields'] = "user_id,shop_title,shop_type,seller_nick,pict_url,shop_url";
-        }
         $this->method = 'taobao.tbk.shop.get';
         return $this;
     }
 
     /**
-     * 商品库/榜单精选 - 淘宝客-推广者-物料精选
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=33947&docType=2
-     * http://wsd.591hufu.com/taokelianmeng/424.html
-     * https://open.alimama.com/#!/function?id=28
+     * 淘宝客-推广者-物料精选
      * @return $this
      */
     public function dgOpTiUsMaterial(): self
@@ -405,9 +538,7 @@ class TbkService extends Service
     }
 
     /**
-     * 图文内容 - 淘宝客-推广者-图文内容输出
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=31137&docType=2
-     * https://open.alimama.com/#!/function?id=30
+     * 淘宝客-推广者-图文内容输出(2020.9.30下线)
      * @return $this
      */
     public function contentGet(): self
@@ -417,9 +548,7 @@ class TbkService extends Service
     }
 
     /**
-     * 图文内容 - 淘宝客-推广者-图文内容效果数据
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=37130&docType=2
-     * https://open.alimama.com/#!/function?id=30
+     * 淘宝客-推广者-图文内容效果数据(2020.9.30下线)
      * @return $this
      */
     public function contentEffectGet(): self
@@ -430,8 +559,7 @@ class TbkService extends Service
 
 
     /**
-     * 图文内容 - 淘宝客-推广者-商品出词
-     * https://open.taobao.com/api.htm?spm=a2e0r.13193907.0.0.178c24advNRYpp&docId=37538&docType=2
+     * 淘宝客-推广者-商品出词
      * @return $this
      */
     public function itemWordGet(): self
@@ -442,21 +570,16 @@ class TbkService extends Service
 
     /**
      * 淘宝客-推广者-商品链接转换
-     * https://open.taobao.com/api.htm?docId=24516&docType=2&scopeId=11653
      * @return $this
      */
     public function itemConvert(): self
     {
-        if (!isset($this->param['fields'])) {
-            $this->param['fields'] = "num_iid,click_url";
-        }
         $this->method = 'taobao.tbk.item.convert';
         return $this;
     }
 
     /**
      * 淘宝客-公用-链接解析出商品id
-     * https://open.taobao.com/api.htm?docId=28156&docType=2
      * @return $this
      */
     public function itemClickExtract(): self
@@ -466,8 +589,7 @@ class TbkService extends Service
     }
 
     /**
-     * 淘宝客-公用-商品关联推荐
-     * https://open.taobao.com/api.htm?docId=24517&docType=2
+     * 淘宝客-公用-商品关联推荐(2020.9.30下线)
      * @return $this
      */
     public function itemRecommendGet(): self
@@ -478,7 +600,6 @@ class TbkService extends Service
 
     /**
      * 淘宝客-公用-店铺关联推荐
-     * https://open.taobao.com/api.htm?docId=24522&docType=2
      * @return $this
      */
     public function shopRecommendGet(): self
@@ -488,8 +609,7 @@ class TbkService extends Service
     }
 
     /**
-     * 淘宝客-推广者-选品库宝贝信息
-     * https://open.taobao.com/api.htm?docId=26619&docType=2
+     * 淘宝客-推广者-选品库宝贝信息(2020.9.30下线)
      * @return $this
      */
     public function uaTmFavoritesItemGet(): self
@@ -499,8 +619,7 @@ class TbkService extends Service
     }
 
     /**
-     * 淘宝客-推广者-选品库宝贝列表
-     * https://open.taobao.com/api.htm?docId=26620&docType=2
+     * 淘宝客-推广者-选品库宝贝列表(2020.9.30下线)
      * @return $this
      */
     public function uaTmFavoritesGet(): self
@@ -510,13 +629,212 @@ class TbkService extends Service
     }
 
     /**
-     * 淘宝客-服务商-官方活动转链
-     * https://open.taobao.com/api.htm?docId=41921&docType=2
+     * 淘宝客-服务商-官方活动转链(2020.9.30下线)
      * @return $this
      */
     public function scActivityLinkToolGet(): self
     {
         $this->method = 'taobao.tbk.sc.activitylink.toolget';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-处罚订单查询
+     * @return $this
+     */
+    public function scPunishOrderGet(): self
+    {
+        $this->method = 'taobao.tbk.sc.punish.order.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-创建推广位
+     * @return $this
+     */
+    public function adZoneCreate(): self
+    {
+        $this->method = 'taobao.tbk.adzone.create';
+        return $this;
+    }
+
+    /**
+     * 淘宝客文本淘口令
+     * @return $this
+     */
+    public function tpwdMixCreate(): self
+    {
+        $this->method = 'taobao.tbk.tpwd.mix.create';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-b2c平台用户行为跟踪服务商
+     * @return $this
+     */
+    public function traceBtocAddtrace(): self
+    {
+        $this->method = 'taobao.tbk.trace.btoc.addtrace';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-登陆信息跟踪服务商
+     * @return $this
+     */
+    public function traceLogininfoAdd(): self
+    {
+        $this->method = 'taobao.tbk.trace.logininfo.add';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-用户行为跟踪服务商
+     * @return $this
+     */
+    public function traceShopitemAddtrace(): self
+    {
+        $this->method = 'taobao.tbk.trace.shopitem.addtrace';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-商品三方分成链接转换
+     * @return $this
+     */
+    public function itemShareConvert(): self
+    {
+        $this->method = 'taobao.tbk.item.share.convert';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-店铺链接转换
+     * @return $this
+     */
+    public function shopConvert(): self
+    {
+        $this->method = 'taobao.tbk.shop.convert';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-店铺三方分成链接转换
+     * @return $this
+     */
+    public function shopShareConvert(): self
+    {
+        $this->method = 'taobao.tbk.shop.share.convert';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-返利商家授权查询
+     * @return $this
+     */
+    public function rebateAuthGet(): self
+    {
+        $this->method = 'taobao.tbk.rebate.auth.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-返利订单查询
+     * @return $this
+     */
+    public function rebateOrderGet(): self
+    {
+        $this->method = 'taobao.tbk.rebate.order.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-根据宝贝id批量查询优惠券
+     * @return $this
+     */
+    public function itemidCouponGet(): self
+    {
+        $this->method = 'taobao.tbk.itemid.coupon.get';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-保护门槛
+     * @return $this
+     */
+    public function dataReport(): self
+    {
+        $this->method = 'taobao.tbk.data.report';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-单品券高效转链
+     * @return $this
+     */
+    public function couponConvert(): self
+    {
+        $this->method = 'taobao.tbk.coupon.convert';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-淘口令解析&三方分成转链
+     * @return $this
+     */
+    public function tpwdShareConvert(): self
+    {
+        $this->method = 'taobao.tbk.tpwd.share.convert';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-推广者-淘口令解析&转链
+     * @return $this
+     */
+    public function tpwdConvert(): self
+    {
+        $this->method = 'taobao.tbk.tpwd.convert';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-创建推广者位
+     * @return $this
+     */
+    public function scAdzoneCreate(): self
+    {
+        $this->method = 'taobao.tbk.sc.adzone.create';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-物料精选
+     * @return $this
+     */
+    public function scOptimusMaterial(): self
+    {
+        $this->method = 'taobao.tbk.sc.optimus.material';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-物料搜索
+     * @return $this
+     */
+    public function scMaterialOptional(): self
+    {
+        $this->method = 'taobao.tbk.sc.material.optional';
+        return $this;
+    }
+
+    /**
+     * 淘宝客-服务商-拉新活动数据查询
+     * @return $this
+     */
+    public function scNewuserOrderSum(): self
+    {
+        $this->method = 'taobao.tbk.sc.newuser.order.sum';
         return $this;
     }
 

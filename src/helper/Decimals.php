@@ -67,4 +67,18 @@ class Decimals
     {
         return floor($num);
     }
+
+    /**
+     * 判断是不是小数
+     * @param $num
+     * @return bool
+     */
+    public function judge($num): bool
+    {
+        if (is_int($num)) {
+            return false;
+        }
+
+        return true;
+    }
 }
