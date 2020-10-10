@@ -137,7 +137,6 @@ try {
 ```php
 use DtApp\ThinkLibrary\service\QqWryService;
 
-// 配置存放的数据库的路径，查看项目目录下的config.dtapp.php文件，参数名： 'ip_path'
 // 获取IP信息
 dump(QqWryService::instance()
         ->getLocation());
