@@ -32,7 +32,7 @@ use think\Facade;
  * @mixin helper
  *
  * @method static int intval($num) 直接取整，舍弃小数保留整数
- * @method static float round($num) 四舍五入取整
+ * @method static float round($num, $bl = 0) 四舍五入
  * @method static false|float ceil($num) 有小数，就在整数的基础上加一
  * @method static false|float floor($num) 有小数，就取整数位
  * @method static bool judge($num) 判断是不是小数

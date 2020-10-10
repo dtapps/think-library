@@ -35,6 +35,7 @@ class MiniService extends Service
      * @var
      */
     private $app_id, $app_secret;
+
     /**
      * @var string
      */

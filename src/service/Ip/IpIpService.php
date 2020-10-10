@@ -19,7 +19,6 @@
 
 namespace DtApp\ThinkLibrary\service\Ip;
 
-use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use Exception;
 use think\App;
@@ -37,23 +36,13 @@ class IpIpService extends Service
     public $reader;
 
     /**
-     * IP数据库文件存放位置
-     * @var mixed
-     */
-    private $ipPath;
-
-    /**
      * IpIpService constructor.
      * @param App $app
      * @throws Exception
      */
     public function __construct(App $app)
     {
-        $this->ipPath = config('dtapp.ip_path', '');
-        if (empty($this->ipPath)) {
-            throw new DtaException('请检查配置文件是否配置了IP数据库文件存放位置');
-        }
-        $this->reader = new IpIpReader($this->ipPath . 'ipipfree.ipdb');
+        $this->reader = new IpIpReader(__DIR__ . '../bin/ipipfree.ipdb');
         parent::__construct($app);
     }
 

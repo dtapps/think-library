@@ -41,11 +41,12 @@ class Decimals
     /**
      * 四舍五入取整
      * @param $num
+     * @param int $bl
      * @return float
      */
-    public function round($num)
+    public function round($num, $bl = 0): float
     {
-        return round($num);
+        return round($num, $bl);
     }
 
     /**
