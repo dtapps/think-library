@@ -476,6 +476,18 @@ class JinBaoService extends Service
     }
 
     /**
+     * 自定义接口
+     * @param string $type
+     * @return $this
+     */
+    public function setMethod($type = ''): self
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+
+    /**
      * 返回数组数据
      * @return array|mixed
      * @throws DtaException

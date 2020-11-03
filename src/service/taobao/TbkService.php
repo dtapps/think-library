@@ -839,6 +839,17 @@ class TbkService extends Service
     }
 
     /**
+     * 自定义接口
+     * @param string $method
+     * @return $this
+     */
+    public function setMethod($method = ''): self
+    {
+        $this->method = $method;
+        return $this;
+    }
+
+    /**
      * 返回Array
      * @return array|mixed
      * @throws DtaException

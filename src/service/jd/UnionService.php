@@ -324,6 +324,17 @@ class UnionService extends Service
     }
 
     /**
+     * 自定义接口
+     * @param string $method
+     * @return $this
+     */
+    public function setMethod($method = ''): self
+    {
+        $this->method = $method;
+        return $this;
+    }
+
+    /**
      * 返回数组数据
      * @return array|mixed
      * @throws DtaException
