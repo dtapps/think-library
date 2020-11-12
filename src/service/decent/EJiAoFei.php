@@ -93,7 +93,7 @@ class EJiAoFei extends Service
     public function chongZhi(string $orderid, int $face, string $account, int $amount = 1): self
     {
         $this->method = 'chongzhi_jkorders';
-        $this->param = "userid={$this->userid}&pwd={$this->pwd}&orderid={$orderid}&account={$account}&face={$face}&amount={$amount}";
+        $this->param = "userid={$this->userid}&pwd={$this->pwd}&orderid={$orderid}&face={$face}&account={$account}&amount={$amount}";
         return $this;
     }
 
