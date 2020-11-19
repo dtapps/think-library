@@ -81,6 +81,23 @@ class TbkService extends Service
     private $output;
 
     /**
+     * 安全协议
+     * @var string
+     */
+    private $protocol = 'http';
+
+    /**
+     * 设置安全协议
+     * @param string $protocol
+     * @return $this
+     */
+    public function setProtocol($protocol = 'http'): self
+    {
+        $this->protocol = $protocol;
+        return $this;
+    }
+
+    /**
      * 是否为沙箱
      * @return $this
      */
@@ -927,10 +944,19 @@ class TbkService extends Service
         $strParam = $this->createStrParam();
         $strParam .= 'sign=' . $sign;
         //访问服务
-        if (empty($this->sandbox)) {
-            $url = 'http://gw.api.taobao.com/router/rest?' . $strParam;
-        } else {
-            $url = 'http://gw.api.tbsandbox.com/router/rest?' . $strParam;
+        if ($this->protocol === 'http') {
+            if (empty($this->sandbox)) {
+                $url = 'http://gw.api.taobao.com/router/rest?' . $strParam;
+            } else {
+                $url = 'http://gw.api.tbsandbox.com/router/rest?' . $strParam;
+            }
+        }
+        if ($this->protocol === 'https') {
+            if (empty($this->sandbox)) {
+                $url = 'https://eco.taobao.com/router/rest?' . $strParam;
+            } else {
+                $url = 'https://gw.api.tbsandbox.com/router/rest?' . $strParam;
+            }
         }
         $result = file_get_contents($url);
         $result = json_decode($result, true);
