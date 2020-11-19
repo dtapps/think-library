@@ -47,7 +47,8 @@
   },
   "autoload": {
     "files": [
-      "src/common.php"
+      "src/common.php",
+      "src/service/taobao/bin/TopSdk.php"
     ],
     "psr-4": {
       "DtApp\\ThinkLibrary\\": "src"
