@@ -103,7 +103,7 @@ class CosService extends Service
         }
         $cosClient = new Client([
             'region' => $this->region,
-            'schema' => 'http', //协议头部，默认为http
+            'schema' => 'https',
             'credentials' => [
                 'secretId' => $this->secretId,
                 'secretKey' => $this->secretKey
@@ -113,7 +113,7 @@ class CosService extends Service
         $file = fopen($filePath, "rb");
         if ($file && empty($this->bucket)) {
             $this->getConfig();
-            $cosClient->putObject([
+            $result = $cosClient->putObject([
                 'Bucket' => $this->bucket,
                 'Key' => $key,
                 'Body' => $file

@@ -151,4 +151,20 @@ class Arrays
         $newchar = array("", "", "", "", "");
         return str_replace($oldchar, $newchar, $str);
     }
+
+    /**
+     * 把json字符串或json对象转json数组
+     * @param $output
+     * @return array
+     */
+    public function toArray($output): array
+    {
+        if (is_array($output)) {
+            return $output;
+        }
+        if (is_object($output)) {
+            $output = json_encode($output, JSON_UNESCAPED_UNICODE);
+        }
+        return json_decode($output, true);
+    }
 }

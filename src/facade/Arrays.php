@@ -37,6 +37,7 @@ use think\Facade;
  * @method static array unique(array $array) 多维数组去重
  * @method static array sort(array $arrays, string $sort_key, $sort_order = SORT_ASC, $sort_type = SORT_NUMERIC) 二维数组根据某个键排序
  * @method static array trimArray(array $arr) 数组删除空格
+ * @method static array toArray($output) 把json字符串或json对象转json数组
  */
 class Arrays extends Facade
 {
