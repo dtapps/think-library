@@ -19,7 +19,6 @@
 
 namespace DtApp\ThinkLibrary\service\amap;
 
-use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\Service;
 use DtApp\ThinkLibrary\service\curl\HttpService;
 
@@ -50,19 +49,9 @@ class AmApService extends Service
      * @param string $key
      * @return $this
      */
-    public function key(string $key)
+    public function key(string $key): self
     {
         $this->key = $key;
-        return $this;
-    }
-
-    /**
-     * 获取配置信息
-     * @return $this
-     */
-    private function getConfig(): self
-    {
-        $this->key = config('dtapp.amap.key');
         return $this;
     }
 
@@ -72,16 +61,9 @@ class AmApService extends Service
      * @param string $city
      * @param string $extensions
      * @return array|bool|mixed|string
-     * @throws DtaException
      */
     public function weather($city = "110101", $extensions = "base")
     {
-        if (empty($this->key)) {
-            $this->getConfig();
-        }
-        if (empty($this->key)) {
-            throw new DtaException('请检查key参数');
-        }
         $data = http_build_query([
             "city" => $city,
             "extensions" => $extensions,
@@ -90,6 +72,44 @@ class AmApService extends Service
         ]);
         return HttpService::instance()
             ->url("{$this->url}weather/weatherInfo?{$data}")
+            ->toArray();
+    }
+
+    /**
+     * 地理编码
+     * https://lbs.amap.com/api/webservice/guide/api/georegeo#geo
+     * @param $address
+     * @param string $city
+     * @return array|bool|mixed|string
+     */
+    public function gCoderGeo($address, $city = '')
+    {
+        $data = http_build_query([
+            "city" => $city,
+            "address" => $address,
+            "key" => $this->key,
+            "output" => $this->output,
+        ]);
+        return HttpService::instance()
+            ->url("{$this->url}geocode/geo?{$data}")
+            ->toArray();
+    }
+
+    /**
+     * 逆地理编码
+     * https://lbs.amap.com/api/webservice/guide/api/georegeo#regeo
+     * @param $location
+     * @return array|bool|mixed|string
+     */
+    public function gCoderReGeo($location)
+    {
+        $data = http_build_query([
+            "location" => $location,
+            "key" => $this->key,
+            "output" => $this->output,
+        ]);
+        return HttpService::instance()
+            ->url("{$this->url}geocode/regeo?{$data}")
             ->toArray();
     }
 }

@@ -77,33 +77,15 @@ class OssService extends Service
     }
 
     /**
-     * 获取配置信息
-     * @return $this
+     * @param string $object
+     * @param string $filePath
+     * @return string|null
      */
-    private function getConfig(): self
+    public function upload(string $object, string $filePath): ?string
     {
-        $this->accessKeyId = config('dtapp.aliyun.oss.access_key_id');
-        $this->accessKeySecret = config('dtapp.aliyun.oss.access_key_secret');
-        $this->endpoint = config('dtapp.aliyun.oss.endpoint');
-        $this->bucket = config('dtapp.aliyun.oss.bucket');
-        return $this;
-    }
-
-    /**
-     * 上传文件
-     * @param $object
-     * @param $filePath
-     * @return bool|string
-     */
-    public function upload(string $object, string $filePath)
-    {
-        if (empty($this->accessKeySecret) || empty($this->accessKeySecret) || empty($this->endpoint) || empty($this->bucket)) {
-            $this->getConfig();
-        }
         try {
             $ossClient = new OssClient($this->accessKeyId, $this->accessKeySecret, $this->endpoint);
-            $ossClient->uploadFile($this->bucket, $object, $filePath);
-            return config('dtapp.aliyun.oss.url', '') . $object;
+            return $ossClient->uploadFile($this->bucket, $object, $filePath);
         } catch (OssException $e) {
             return $e->getMessage();
         }

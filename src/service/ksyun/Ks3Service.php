@@ -77,34 +77,26 @@ class Ks3Service extends Service
     }
 
     /**
-     * 获取配置信息
-     * @return $this
-     */
-    private function getConfig(): self
-    {
-        $this->accessKeyID = config('dtapp.ksyun.ks3.access_key_iD');
-        $this->accessKeySecret = config('dtapp.ksyun.ks3.access_key_secret');
-        $this->endpoint = config('dtapp.ksyun.ks3.endpoint');
-        $this->bucket = config('dtapp.ksyun.ks3.bucket');
-        return $this;
-    }
-
-    /**
-     * 上传文件
      * @param string $object
      * @param string $filePath
-     * @return bool|string
+     * @return bool
      */
-    public function upload(string $object, string $filePath)
+    public function upload(string $object, string $filePath): ?bool
     {
-        if (empty($this->accessKeyID) || empty($this->accessKeySecret) || empty($this->endpoint)) {
-            $this->getConfig();
-        }
+        //是否使用VHOST
+        define("KS3_API_VHOST", FALSE);
+        //是否开启日志(写入日志文件)
+        define("KS3_API_LOG", FALSE);
+        //是否显示日志(直接输出日志)
+        define("KS3_API_DISPLAY_LOG", FALSE);
+        //定义日志目录(默认是该项目log下)
+        define("KS3_API_LOG_PATH", "");
+        //是否使用HTTPS
+        define("KS3_API_USE_HTTPS", FALSE);
+        //是否开启curl debug模式
+        define("KS3_API_DEBUG_MODE", FALSE);
         require_once(__DIR__ . "/bin/Ks3Client.class.php");
         $client = new Ks3Client($this->accessKeyID, $this->accessKeySecret, $this->endpoint);
-        if (empty($this->bucket)) {
-            $this->getConfig();
-        }
         $content = fopen($filePath, 'rb');
         $args = [
             "Bucket" => $this->bucket,
@@ -126,8 +118,7 @@ class Ks3Service extends Service
             ]
         ];
         try {
-            $client->putObjectByFile($args);
-            return config('dtapp.ksyun.ks3.url', '') . $object;
+            return $client->putObjectByFile($args);
         } catch (Ks3ServiceException $e) {
             return false;
         }

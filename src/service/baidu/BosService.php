@@ -77,30 +77,13 @@ class BosService extends Service
     }
 
     /**
-     * 获取配置信息
-     * @return $this
-     */
-    private function getConfig(): self
-    {
-        $this->accessKeyId = config('dtapp.baidu.bos.access_key_id');
-        $this->secretAccessKey = config('dtapp.baidu.bos.secret_access_key');
-        $this->endpoint = config('dtapp.baidu.bos.endpoint');
-        $this->bucket = config('dtapp.baidu.bos.bucket');
-        return $this;
-    }
-
-    /**
-     * 上传文件
-     * @param $object
-     * @param $filePath
-     * @return bool
+     * @param string $object
+     * @param string $filePath
+     * @return mixed
      * @throws Exception
      */
-    public function upload(string $object, string $filePath): bool
+    public function upload(string $object, string $filePath)
     {
-        if (empty($this->accessKeyId) || empty($this->secretAccessKey) || empty($this->endpoint)) {
-            $this->getConfig();
-        }
         // 设置BosClient的Access Key ID、Secret Access Key和ENDPOINT
         $BOS_TEST_CONFIG = array(
             'credentials' => array(
@@ -111,10 +94,6 @@ class BosService extends Service
         );
         $client = new BosClient($BOS_TEST_CONFIG);
         // 从文件中直接上传Object
-        if (empty($this->bucket)) {
-            $this->getConfig();
-        }
-        $client->putObjectFromFile($this->bucket, $object, $filePath);
-        return config('dtapp.baidu.bos.url', '') . $object;
+        return $client->putObjectFromFile($this->bucket, $object, $filePath);
     }
 }

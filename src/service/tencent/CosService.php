@@ -20,7 +20,6 @@
 namespace DtApp\ThinkLibrary\service\tencent;
 
 use DtApp\ThinkLibrary\Service;
-use Exception;
 use Qcloud\Cos\Client;
 
 /**
@@ -77,30 +76,12 @@ class CosService extends Service
     }
 
     /**
-     * 获取配置信息
-     * @return $this
-     */
-    private function getConfig(): self
-    {
-        $this->secretId = config('dtapp.tencent.cos.secret_id');
-        $this->secretKey = config('dtapp.tencent.cos.secret_key');
-        $this->region = config('dtapp.tencent.cos.region');
-        $this->bucket = config('dtapp.tencent.cos.bucket');
-        return $this;
-    }
-
-    /**
-     * 上传文件
-     * @param $object
-     * @param $filePath
+     * @param string $object
+     * @param string $filePath
      * @return bool
-     * @throws Exception
      */
     public function upload(string $object, string $filePath): bool
     {
-        if (empty($this->secretId) || empty($this->secretKey) || empty($this->region)) {
-            $this->getConfig();
-        }
         $cosClient = new Client([
             'region' => $this->region,
             'schema' => 'https',
@@ -111,14 +92,14 @@ class CosService extends Service
         ]);
         $key = $object;
         $file = fopen($filePath, "rb");
-        if ($file && empty($this->bucket)) {
-            $this->getConfig();
-            $result = $cosClient->putObject([
+        if ($file) {
+            return $cosClient->putObject([
                 'Bucket' => $this->bucket,
                 'Key' => $key,
                 'Body' => $file
             ]);
         }
-        return config('dtapp.tencent.cos.url', '') . $object;
+
+        return false;
     }
 }

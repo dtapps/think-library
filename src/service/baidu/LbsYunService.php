@@ -52,16 +52,6 @@ class LbsYunService extends Service
     }
 
     /**
-     * 获取配置信息
-     * @return $this
-     */
-    private function getConfig(): self
-    {
-        $this->ak = config('dtapp.baidu.lbs.ak');
-        return $this;
-    }
-
-    /**
      * 国内天气查询
      * http://lbsyun.baidu.com/index.php?title=webapi/weather
      * @param int $district_id
@@ -72,9 +62,6 @@ class LbsYunService extends Service
      */
     public function weather($district_id = 110100, string $coordtype = "bd09ll", string $location = "")
     {
-        if (empty($this->ak)) {
-            $this->getConfig();
-        }
         if (empty($this->ak)) {
             throw new DtaException('请检查ak参数');
         }
@@ -103,9 +90,6 @@ class LbsYunService extends Service
      */
     public function weatherAbroad($district_id = 110100, string $coordtype = "bd09ll", string $location = "", string $language = "cn")
     {
-        if (empty($this->ak)) {
-            $this->getConfig();
-        }
         if (empty($this->ak)) {
             throw new DtaException('请检查ak参数');
         }

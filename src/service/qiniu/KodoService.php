@@ -68,29 +68,13 @@ class KodoService extends Service
     }
 
     /**
-     * 获取配置信息
-     * @return $this
-     */
-    private function getConfig(): self
-    {
-        $this->accessKey = config('dtapp.qiniu.kodo.access_key');
-        $this->secretKey = config('dtapp.qiniu.kodo.secret_key');
-        $this->bucket = config('dtapp.qiniu.kodo.bucket');
-        return $this;
-    }
-
-    /**
-     * 上传文件
-     * @param $object
-     * @param $filePath
-     * @return bool
+     * @param string $object
+     * @param string $filePath
+     * @return bool|mixed
      * @throws Exception
      */
-    public function upload(string $object, string $filePath): bool
+    public function upload(string $object, string $filePath)
     {
-        if (empty($this->accessKey) || empty($this->secretKey) || empty($this->bucket)) {
-            $this->getConfig();
-        }
         // 初始化签权对象
         $auth = new Auth($this->accessKey, $this->secretKey);
         // 生成上传Token
@@ -103,6 +87,7 @@ class KodoService extends Service
             return false;
         }
 
-        return config('dtapp.qiniu.kodo.url', '') . $object;
+        return $ret;
+
     }
 }

@@ -68,33 +68,16 @@ class UssService extends Service
     }
 
     /**
-     * 获取配置信息
-     * @return $this
-     */
-    private function getConfig(): self
-    {
-        $this->serviceName = config('dtapp.upyun.uss.service_name');
-        $this->operatorName = config('dtapp.upyun.uss.operator_name');
-        $this->operatorPassword = config('dtapp.upyun.uss.operator_password');
-        return $this;
-    }
-
-    /**
-     * 上传文件
      * @param string $object
      * @param string $filePath
-     * @return bool
+     * @return array|bool
      * @throws Exception
      */
-    public function upload(string $object, string $filePath): bool
+    public function upload(string $object, string $filePath)
     {
-        if (empty($this->serviceName) || empty($this->operatorName) || empty($this->operatorPassword)) {
-            $this->getConfig();
-        }
         $serviceConfig = new Config($this->serviceName, $this->operatorName, $this->operatorPassword);
         $client = new Upyun($serviceConfig);
         $file = fopen($filePath, 'r');
-        $client->write($object, $file);
-        return config('dtapp.upyun.uss.url', '') . $object;
+        return  $client->write($object, $file);
     }
 }

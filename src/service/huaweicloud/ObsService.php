@@ -76,45 +76,25 @@ class ObsService extends Service
     }
 
     /**
-     * 获取配置信息
-     * @return $this
+     * @param string $object
+     * @param string $filePath
+     * @return bool|\Obs\Internal\Common\Model
      */
-    private function getConfig(): self
+    public function upload(string $object, string $filePath)
     {
-        $this->key = config('dtapp.huaweicloud.obs.key');
-        $this->secret = config('dtapp.huaweicloud.obs.secret');
-        $this->endpoint = config('dtapp.huaweicloud.obs.endpoint');
-        $this->bucket = config('dtapp.huaweicloud.obs.bucket');
-        return $this;
-    }
-
-    /**
-     * 上传到华为云
-     * @param $object
-     * @param $filePath
-     * @return bool
-     */
-    public function upload(string $object, string $filePath): bool
-    {
-        if (empty($this->key) || empty($this->secret) || empty($this->endpoint)) {
-            $this->getConfig();
-        }
         // 创建ObsClient实例
         $obsClient = new ObsClient([
             'key' => $this->key,
             'secret' => $this->secret,
             'endpoint' => $this->endpoint
         ]);
-        if (empty($this->bucket)) {
-            $this->getConfig();
-        }
         $resp = $obsClient->putObject([
             'Bucket' => $this->bucket,
             'Key' => $object,
             'SourceFile' => $filePath  // localfile为待上传的本地文件路径，需要指定到具体的文件名
         ]);
         if (isset($resp['RequestId'])) {
-            return config('dtapp.huaweicloud.obs.url', '') . $object;
+            return $resp;
         }
 
         return false;
