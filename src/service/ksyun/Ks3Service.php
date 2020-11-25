@@ -83,18 +83,6 @@ class Ks3Service extends Service
      */
     public function upload(string $object, string $filePath): ?bool
     {
-        //是否使用VHOST
-        define("KS3_API_VHOST", FALSE);
-        //是否开启日志(写入日志文件)
-        define("KS3_API_LOG", FALSE);
-        //是否显示日志(直接输出日志)
-        define("KS3_API_DISPLAY_LOG", FALSE);
-        //定义日志目录(默认是该项目log下)
-        define("KS3_API_LOG_PATH", "");
-        //是否使用HTTPS
-        define("KS3_API_USE_HTTPS", FALSE);
-        //是否开启curl debug模式
-        define("KS3_API_DEBUG_MODE", FALSE);
         require_once(__DIR__ . "/bin/Ks3Client.class.php");
         $client = new Ks3Client($this->accessKeyID, $this->accessKeySecret, $this->endpoint);
         $content = fopen($filePath, 'rb');

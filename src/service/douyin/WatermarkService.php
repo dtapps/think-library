@@ -51,7 +51,7 @@ class WatermarkService extends Service
      * @return $this
      * @throws DtaException
      */
-    public function url($str)
+    public function url($str): self
     {
         if (Pregs::isLink($str)) {
             $url = $this->judgeUrl($str);
