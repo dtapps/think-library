@@ -78,9 +78,9 @@ class ObsService extends Service
     /**
      * @param string $object
      * @param string $filePath
-     * @return bool|\Obs\Internal\Common\Model
+     * @return bool
      */
-    public function upload(string $object, string $filePath)
+    public function upload(string $object, string $filePath): bool
     {
         // 创建ObsClient实例
         $obsClient = new ObsClient([
@@ -94,7 +94,7 @@ class ObsService extends Service
             'SourceFile' => $filePath  // localfile为待上传的本地文件路径，需要指定到具体的文件名
         ]);
         if (isset($resp['RequestId'])) {
-            return $resp;
+            return true;
         }
 
         return false;

@@ -93,11 +93,12 @@ class CosService extends Service
         $key = $object;
         $file = fopen($filePath, "rb");
         if ($file) {
-            return $cosClient->putObject([
+            $cosClient->putObject([
                 'Bucket' => $this->bucket,
                 'Key' => $key,
                 'Body' => $file
             ]);
+            return true;
         }
 
         return false;

@@ -79,15 +79,16 @@ class OssService extends Service
     /**
      * @param string $object
      * @param string $filePath
-     * @return string|null
+     * @return bool
      */
-    public function upload(string $object, string $filePath): ?string
+    public function upload(string $object, string $filePath): bool
     {
         try {
             $ossClient = new OssClient($this->accessKeyId, $this->accessKeySecret, $this->endpoint);
-            return $ossClient->uploadFile($this->bucket, $object, $filePath);
+            $ossClient->uploadFile($this->bucket, $object, $filePath);
+            return true;
         } catch (OssException $e) {
-            return $e->getMessage();
+            return false;
         }
     }
 }

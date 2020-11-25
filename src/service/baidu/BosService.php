@@ -79,10 +79,10 @@ class BosService extends Service
     /**
      * @param string $object
      * @param string $filePath
-     * @return mixed
+     * @return bool
      * @throws Exception
      */
-    public function upload(string $object, string $filePath)
+    public function upload(string $object, string $filePath): bool
     {
         // 设置BosClient的Access Key ID、Secret Access Key和ENDPOINT
         $BOS_TEST_CONFIG = array(
@@ -94,6 +94,7 @@ class BosService extends Service
         );
         $client = new BosClient($BOS_TEST_CONFIG);
         // 从文件中直接上传Object
-        return $client->putObjectFromFile($this->bucket, $object, $filePath);
+        $client->putObjectFromFile($this->bucket, $object, $filePath);
+        return true;
     }
 }

@@ -70,10 +70,10 @@ class KodoService extends Service
     /**
      * @param string $object
      * @param string $filePath
-     * @return bool|mixed
+     * @return bool
      * @throws Exception
      */
-    public function upload(string $object, string $filePath)
+    public function upload(string $object, string $filePath): bool
     {
         // 初始化签权对象
         $auth = new Auth($this->accessKey, $this->secretKey);
@@ -83,11 +83,7 @@ class KodoService extends Service
         $uploadMgr = new UploadManager();
         // 调用 UploadManager 的 putFile 方法进行文件的上传。
         [$ret, $err] = $uploadMgr->putFile($token, $object, $filePath);
-        if ($err !== null) {
-            return false;
-        }
-
-        return $ret;
+        return !($err !== null);
 
     }
 }

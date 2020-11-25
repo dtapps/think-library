@@ -5,31 +5,31 @@ date_default_timezone_set('Asia/Shanghai');
 
 //检测API路径
 if (!defined("KS3_API_PATH")) {
-	define("KS3_API_PATH", __DIR__);
+    define("KS3_API_PATH", __DIR__);
 }
 //是否使用VHOST
 if (!defined("KS3_API_VHOST")) {
-	define("KS3_API_VHOST", FALSE);
+    define("KS3_API_VHOST", FALSE);
 }
 //是否开启日志(写入日志文件)
 if (!defined("KS3_API_LOG")) {
-	define("KS3_API_LOG", FALSE);
+    define("KS3_API_LOG", FALSE);
 }
 //是否显示日志(直接输出日志)
 if (!defined("KS3_API_DISPLAY_LOG")) {
-	define("KS3_API_DISPLAY_LOG", FALSE);
+    define("KS3_API_DISPLAY_LOG", FALSE);
 }
 //定义日志目录(默认是该项目log下)
 if (!defined("KS3_API_LOG_PATH")) {
-	define("KS3_API_LOG_PATH", "");
+    define("KS3_API_LOG_PATH", "");
 }
 //是否使用HTTPS
 if (!defined("KS3_API_USE_HTTPS")) {
-	define("KS3_API_USE_HTTPS", FALSE);
+    define("KS3_API_USE_HTTPS", FALSE);
 }
 //是否开启curl debug模式
 if (!defined("KS3_API_DEBUG_MODE")) {
-	define("KS3_API_DEBUG_MODE", FALSE);
+    define("KS3_API_DEBUG_MODE", FALSE);
 }
 define("KS3_API_Author", "lijunwei@kingsoft.com");
 define("KS3_API_Version", "1.2");
@@ -68,7 +68,6 @@ class Ks3Client
     private $accessKey;
     private $secretKey;
     private $endpoint;
-    private $log;
 
     public function __construct($accessKey = NULL, $secretKey = NULL, $endpoint = NULL)
     {
@@ -81,48 +80,47 @@ class Ks3Client
         $this->endpoint = $endpoint;
 
         $this->signers = array();
-        $this->log = new Logger();
     }
 
-	/**
-	 * 方法列表:(具体使用请参考readme.md)
-	 * listBuckets,罗列bucket
-	 * deleteBucket，删除bucket
-	 * deleteBucketCORS，删除bucket跨域配置
-	 * createBucket,新建bucket
-	 * setBucketAcl，设置bucket访问权限
-	 * setBucketCORS,设置bucket跨域配置
-	 * setBucketLogging,设置bucket日志配置
-	 * listObjects,罗列object
-	 * getBucketAcl,获取bucket访问权限
-	 * getBucketCORS,获取bucket跨域配置
-	 * getBucketLocation,获取bucket地点配置
-	 * getBucketLogging,获取bucket日志配置
-	 * bucketExists,判断bucket是否存在
-	 * listMutipartUploads,罗列当前bucket下尚未结束的分块上传
-	 * putObjectByContent,上传文件
-	 * putObjectByFile,上传文件
-	 * setObjectAcl，设置object访问权限
-	 * copyObject,复制object
-	 * getObjectMeta，获取object元数据
-	 * objectExists，判断object是否存在
-	 * deleteObject，删除object
-	 * deleteObjects，删除多个object
-	 * getObject，下载object
-	 * getObjectAcl，获取object访问权限
-	 * initMultipartUpload，初始化分块上传
-	 * uploadPart，上传块
-	 * abortMultipartUpload，终止分块上传
-	 * listParts，罗列已经上传的块
-	 * completeMultipartUpload，完成分块上传
-	 * generatePresignedUrl，生成文件外链
-	 * putAdp,添加异步数据处理任务
-	 * getAdp,查询异步数据处理任务
-	 * @param $method
-	 * @param array $args
-	 * @return ResponseCore|string|string[]|null
-	 * @throws Exception
-	 */
+    /**
+     * 方法列表:(具体使用请参考readme.md)
+     * listBuckets,罗列bucket
+     * deleteBucket，删除bucket
+     * deleteBucketCORS，删除bucket跨域配置
+     * createBucket,新建bucket
+     * setBucketAcl，设置bucket访问权限
+     * setBucketCORS,设置bucket跨域配置
+     * setBucketLogging,设置bucket日志配置
+     * listObjects,罗列object
+     * getBucketAcl,获取bucket访问权限
+     * getBucketCORS,获取bucket跨域配置
+     * getBucketLocation,获取bucket地点配置
+     * getBucketLogging,获取bucket日志配置
+     * bucketExists,判断bucket是否存在
+     * listMutipartUploads,罗列当前bucket下尚未结束的分块上传
+     * putObjectByContent,上传文件
+     * putObjectByFile,上传文件
+     * setObjectAcl，设置object访问权限
+     * copyObject,复制object
+     * getObjectMeta，获取object元数据
+     * objectExists，判断object是否存在
+     * deleteObject，删除object
+     * deleteObjects，删除多个object
+     * getObject，下载object
+     * getObjectAcl，获取object访问权限
+     * initMultipartUpload，初始化分块上传
+     * uploadPart，上传块
+     * abortMultipartUpload，终止分块上传
+     * listParts，罗列已经上传的块
+     * completeMultipartUpload，完成分块上传
+     * generatePresignedUrl，生成文件外链
+     * putAdp,添加异步数据处理任务
+     * getAdp,查询异步数据处理任务
+     * @param $method
+     * @param array $args
+     * @return ResponseCore|string|string[]|null
+     * @throws Exception
+     */
     public function __call($method, $args = array())
     {
         $holder = new MessageHolder();
@@ -137,10 +135,9 @@ class Ks3Client
             $ex = $e;
         }
         $holder->msg .= "------------------Logging End-------------------------\r\n";
-        $this->log->info($holder->msg);
         if ($ex != NULL) {
-			throw $ex;
-		}
+            throw $ex;
+        }
         return $result;
     }
 
@@ -167,8 +164,8 @@ class Ks3Client
         } else {
             $request->bucket = $args["Bucket"];
         }
-		$position = $api["objectPostion"] ?? "Key";
-		if (empty($args[$position])) {
+        $position = $api["objectPostion"] ?? "Key";
+        if (empty($args[$position])) {
             if ($api["needObject"]) {
                 throw new Ks3ClientException($method . " this api need " . $position);
             }
@@ -192,11 +189,10 @@ class Ks3Client
             $request->method = $api["method"];
         }
         if (KS3_API_USE_HTTPS) {
-			$request->scheme = "https://";
-		}
-        else {
-			$request->scheme = "http://";
-		}
+            $request->scheme = "https://";
+        } else {
+            $request->scheme = "http://";
+        }
         $request->endpoint = $this->endpoint;
         //add subresource
         if (!empty($api["subResource"])) {
@@ -231,16 +227,16 @@ class Ks3Client
                             break;
                         }
 
-						$curIndexArg = $curIndexArg[$value1];
-					}
+                        $curIndexArg = $curIndexArg[$value1];
+                    }
                 }
                 if (!empty($curIndexArg) && $add) {
                     $request->addQueryParams($curkey, $curIndexArg);
                     continue;
                 }
                 if ($required) {
-					throw new Ks3ClientException($method . " param " . $value . " is required");
-				}
+                    throw new Ks3ClientException($method . " param " . $value . " is required");
+                }
             }
         }
         if (isset($api["body"])) {
@@ -286,12 +282,12 @@ class Ks3Client
         if ($signer === NULL || !($signer instanceof QueryAuthSigner)) {
             $url = $request->toUrl($this->endpoint);
             if ($location != NULL) {
-				$url = $location;
-			}
+                $url = $location;
+            }
             $httpRequest = new RequestCore($url);
             if (KS3_API_DEBUG_MODE === TRUE) {
-				$httpRequest->debug_mode = TRUE;
-			}
+                $httpRequest->debug_mode = TRUE;
+            }
             $httpRequest->set_method($request->method);
             foreach ($request->headers as $key => $value) {
                 $httpRequest->add_header($key, $value);
@@ -351,14 +347,14 @@ class Ks3Client
             return $data;
         }
 
-		$url = $request->toUrl($this->endpoint);
-		$holder->msg .= $url . "\r\n";
-		return $url;
-	}
+        $url = $request->toUrl($this->endpoint);
+        $holder->msg .= $url . "\r\n";
+        return $url;
+    }
 
     //用于生产表单上传时的签名信息
     public function postObject($bucket, $postFormData = array(), $unknowValueFormFiled = array(), $filename = NULL, $expire = 18000): array
-	{
+    {
         $policy = array();
 
         $expireTime = Utils::iso8601(time() + $expire);
@@ -387,5 +383,3 @@ class Ks3Client
         return $result;
     }
 }
-
-

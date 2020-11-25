@@ -70,14 +70,15 @@ class UssService extends Service
     /**
      * @param string $object
      * @param string $filePath
-     * @return array|bool
+     * @return bool
      * @throws Exception
      */
-    public function upload(string $object, string $filePath)
+    public function upload(string $object, string $filePath): bool
     {
         $serviceConfig = new Config($this->serviceName, $this->operatorName, $this->operatorPassword);
         $client = new Upyun($serviceConfig);
         $file = fopen($filePath, 'r');
-        return  $client->write($object, $file);
+        $client->write($object, $file);
+        return true;
     }
 }

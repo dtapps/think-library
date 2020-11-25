@@ -106,7 +106,8 @@ class Ks3Service extends Service
             ]
         ];
         try {
-            return $client->putObjectByFile($args);
+            $client->putObjectByFile($args);
+            return true;
         } catch (Ks3ServiceException $e) {
             return false;
         }
