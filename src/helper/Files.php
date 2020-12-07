@@ -43,12 +43,7 @@ class Files
         if (empty($name)) {
             throw new DtaException('请检查需要删除文件夹的名称');
         }
-        if (file_exists($name)) {
-            if (unlink($name)) {
-                return true;
-            }
-        }
-        return false;
+        return file_exists($name) && unlink($name);
     }
 
     /**

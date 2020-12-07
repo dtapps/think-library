@@ -29,7 +29,7 @@ use think\Request;
  * Class Controller
  * @package DtApp\ThinkLibrary
  */
-class Controller extends stdClass
+abstract class Controller extends stdClass
 {
     /**
      * 应用容器

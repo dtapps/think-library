@@ -19,6 +19,7 @@
 
 namespace DtApp\ThinkLibrary;
 
+use DtApp\ThinkLibrary\helper\ValidateHelper;
 use stdClass;
 use think\App;
 use think\exception\HttpResponseException;
@@ -29,7 +30,7 @@ use think\Request;
  * Class ApiController
  * @package DtApp\ThinkLibrary
  */
-class ApiController extends stdClass
+abstract class ApiController extends stdClass
 {
     /**
      * 应用容器
@@ -162,23 +163,14 @@ class ApiController extends stdClass
     }
 
     /**
-     * 数据回调处理机制
-     * @param string $name 回调方法名称
-     * @param mixed $one 回调引用参数1
-     * @param mixed $two 回调引用参数2
-     * @return boolean
+     * @param array $rules
+     * @param string $type
+     * @return mixed
      */
-    public function callback($name, &$one = [], &$two = []): bool
+    protected function _vali(array $rules, $type = '')
     {
-        if (is_callable($name)) {
-            return $name($this, $one, $two);
-        }
-        foreach ([$name, "_{$this->app->request->action()}{$name}"] as $method) {
-            if (method_exists($this, $method) && false === $this->$method($one, $two)) {
-                return false;
-            }
-        }
-        return true;
+        return ValidateHelper::instance()
+            ->init($rules, $type);
     }
 
     /**

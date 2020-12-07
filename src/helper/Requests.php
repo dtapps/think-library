@@ -134,14 +134,9 @@ class Requests
             }
         }
         //协议法，因为有可能不准确，放到最后判断
-        if (isset($_SERVER['HTTP_ACCEPT'])) {
-            // 如果只支持wml并且不支持html那一定是移动设备
-            // 如果支持wml和html但是wml在html之前则是移动设备
-            if ((strpos(request()->server('HTTP_ACCEPT'), 'vnd.wap.wml') !== false) && (strpos(request()->server('HTTP_ACCEPT'), 'text/html') === false || (strpos(request()->server('HTTP_ACCEPT'), 'vnd.wap.wml') < strpos(request()->server('HTTP_ACCEPT'), 'text/html')))) {
-                return true;
-            }
-        }
-        return false;
+        // 如果只支持wml并且不支持html那一定是移动设备
+        // 如果支持wml和html但是wml在html之前则是移动设备
+        return isset($_SERVER['HTTP_ACCEPT']) && (strpos(request()->server('HTTP_ACCEPT'), 'vnd.wap.wml') !== false) && (strpos(request()->server('HTTP_ACCEPT'), 'text/html') === false || (strpos(request()->server('HTTP_ACCEPT'), 'vnd.wap.wml') < strpos(request()->server('HTTP_ACCEPT'), 'text/html')));
     }
 
     /**
