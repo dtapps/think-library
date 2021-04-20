@@ -16,31 +16,31 @@
 
 declare (strict_types=1);
 
-namespace DtApp\ThinkLibrary\helper;
+namespace DtApp\ThinkLibrary\extend;
 
 /**
- * 数组管理类
- * @mixin Arrays
- * @package DtApp\ThinkLibrary\helper
+ * 数组扩展
+ * Class ArraysExtend
+ * @package DtApp\ThinkLibrary\extend
  */
-class Arrays
+class ArraysExtend
 {
     /**
      * 数组随机返回一个下标
-     * @param $array
+     * @param array $array
      * @return mixed
      */
-    public function rand(array $array)
+    public static function rand(array $array)
     {
         return array_rand($array);
     }
 
     /**
      * 数组随机返回一个值
-     * @param $array
+     * @param array $array
      * @return mixed
      */
-    public function randValue(array $array)
+    public static function randValue(array $array)
     {
         return $array[array_rand($array)];
     }
@@ -51,7 +51,7 @@ class Arrays
      * @param int $num 数量
      * @return array
      */
-    public function split(array $array, $num = 5): array
+    public static function split(array $array, $num = 5): array
     {
         $arrRet = array();
         if (!isset($array) || empty($array)) {
@@ -79,11 +79,11 @@ class Arrays
      * @param array $array
      * @return array
      */
-    public function unique(array $array): array
+    public static function unique(array $array): array
     {
         $out = array();
         foreach ($array as $key => $value) {
-            if (!in_array($value, $out)) {
+            if (!in_array($value, $out, true)) {
                 $out[$key] = $value;
             }
         }
@@ -99,7 +99,7 @@ class Arrays
      * @param int $sort_type
      * @return array
      */
-    public function sort(array $arrays, string $sort_key, $sort_order = SORT_ASC, $sort_type = SORT_NUMERIC): array
+    public static function sort(array $arrays, string $sort_key, $sort_order = SORT_ASC, $sort_type = SORT_NUMERIC): array
     {
         $key_arrays = array();
         if (is_array($arrays)) {
@@ -122,16 +122,16 @@ class Arrays
      * @param array $arr
      * @return array
      */
-    public function trimArray(array $arr)
+    public static function trimArray(array $arr)
     {
         if (!is_array($arr)) {
             return $arr;
         }
         foreach ($arr as $key => $value) {
             if (is_array($value)) {
-                $arr[$key] = $this->TrimArray($value);
+                $arr[$key] = self::TrimArray($value);
             } else {
-                $arr[$key] = $this->trimAll($value);
+                $arr[$key] = self::trimAll($value);
             }
         }
         return $arr;
@@ -142,7 +142,7 @@ class Arrays
      * @param $str
      * @return string|string[]
      */
-    private function trimAll($str)
+    private static function trimAll($str)
     {
         $oldchar = array(" ", "　", "\t", "\n", "\r");
         $newchar = array("", "", "", "", "");
@@ -154,7 +154,7 @@ class Arrays
      * @param $output
      * @return array
      */
-    public function toArray($output): array
+    public static function toArray($output): array
     {
         if (is_array($output)) {
             return $output;
@@ -167,19 +167,20 @@ class Arrays
 
     /**
      * @param $array
+     * @param $name
      * @return array
      */
-    public function valChunk($array,$name): array
+    public static function valChunk($array, $name): array
     {
         $result = array();
         $ar2 = [];
         foreach ($array as $key => $value) {
             foreach ($array as $k => $val) {
-                if ($value["{$name}"] == $val["{$name}"]) {
+                if ($value[(string)($name)] == $val[(string)($name)]) {
                     $ar2[] = $val;
                 }
             }
-            $result[$value["{$name}"]] = $ar2;
+            $result[$value[(string)($name)]] = $ar2;
             $ar2 = [];
         }
         return $result;

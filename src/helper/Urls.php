@@ -11,9 +11,6 @@
 // +----------------------------------------------------------------------
 // | gitee 仓库地址 ：https://gitee.com/liguangchun/ThinkLibrary
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
-// | gitlab 仓库地址 ：https://gitlab.com/liguangchun/thinklibrary
-// | weixin 仓库地址 ：https://git.weixin.qq.com/liguangchun/ThinkLibrary
-// | huaweicloud 仓库地址 ：https://codehub-cn-south-1.devcloud.huaweicloud.com/composer00001/ThinkLibrary.git
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 

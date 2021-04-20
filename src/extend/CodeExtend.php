@@ -16,83 +16,76 @@
 
 declare (strict_types=1);
 
-namespace DtApp\ThinkLibrary\helper;
-
-use Exception;
+namespace DtApp\ThinkLibrary\extend;
 
 /**
- * 唯一ID管理类
- * @mixin UnIqIds
- * @package DtApp\ThinkLibrary\helper
+ * 随机数码管理扩展
+ * Class CodeExtend
+ * @package DtApp\ThinkLibrary\extend
  */
-class UnIqIds
+class CodeExtend
 {
     /**
      * 获取随机字符串编码
-     * @param integer $size 字符串长度
-     * @param integer $type 字符串类型(1纯数字,2纯字母,3数字字母)
+     * @param integer $size 编码长度
+     * @param integer $type 编码类型(1纯数字,2纯字母,3数字字母)
      * @param string $prefix 编码前缀
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
-    public function random($size = 10, $type = 1, $prefix = ''): string
+    public static function random(int $size = 10, int $type = 1, string $prefix = ''): string
     {
         $numbs = '0123456789';
         $chars = 'abcdefghijklmnopqrstuvwxyz';
-        if ((int)$type === 1) {
+        if ($type === 1) {
             $chars = $numbs;
         }
-        if ((int)$type === 2) {
-            $chars = ($chars);
-        }
-        if ((int)$type === 3) {
+        if ($type === 3) {
             $chars = "{$numbs}{$chars}";
         }
-        $string = $prefix . $chars[random_int(1, strlen($chars) - 1)];
-        if (isset($chars)) {
-            while (strlen($string) < $size) {
-                $string .= $chars[random_int(0, strlen($chars) - 1)];
-            }
+        $code = $prefix . $chars[random_int(1, strlen($chars) - 1)];
+        while (strlen($code) < $size) {
+            $code .= $chars[random_int(0, strlen($chars) - 1)];
         }
-        return $string;
+        return $code;
     }
 
     /**
      * 唯一日期编码
-     * @param integer $size
-     * @param string $prefix
+     * @param integer $size 编码长度
+     * @param string $prefix 编码前缀
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
-    public function date($size = 16, $prefix = ''): string
+    public static function uniqidDate(int $size = 16, string $prefix = ''): string
     {
         if ($size < 14) {
             $size = 14;
         }
-        $string = $prefix . date('Ymd') . (date('H') + date('i')) . date('s');
-        while (strlen($string) < $size) {
-            $string .= random_int(0, 9);
+        $code = $prefix . date('Ymd') . (date('H') + date('i')) . date('s');
+        while (strlen($code) < $size) {
+            $code .= random_int(0, 9);
         }
-        return $string;
+        return $code;
     }
 
     /**
      * 唯一数字编码
-     * @param integer $size
-     * @param string $prefix
+     * @param integer $size 编码长度
+     * @param string $prefix 编码前缀
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
-    public function number($size = 12, $prefix = ''): string
+    public static function uniqidNumber(int $size = 12, string $prefix = ''): string
     {
         $time = time() . '';
         if ($size < 10) {
             $size = 10;
         }
-        $string = $prefix . ($time[0] . $time[1]) . substr($time, 2) . random_int(0, 9);
-        while (strlen($string) < $size) {
-            $string .= random_int(0, 9);
+        $code = $prefix . ((int)$time[0] + (int)$time[1]) . substr($time, 2) . random_int(0, 9);
+        while (strlen($code) < $size) {
+            $code .= random_int(0, 9);
         }
-        return $string;
+        return $code;
     }
 }

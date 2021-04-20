@@ -11,28 +11,26 @@
 // +----------------------------------------------------------------------
 // | gitee 仓库地址 ：https://gitee.com/liguangchun/ThinkLibrary
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
-// | gitlab 仓库地址 ：https://gitlab.com/liguangchun/thinklibrary
-// | weixin 仓库地址 ：https://git.weixin.qq.com/liguangchun/ThinkLibrary
-// | huaweicloud 仓库地址 ：https://codehub-cn-south-1.devcloud.huaweicloud.com/composer00001/ThinkLibrary.git
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
 namespace DtApp\ThinkLibrary;
+
+use think\admin\service\AdminService;
+use think\Request;
+use think\Service;
 
 /**
  * 模块注册服务
  * Class Library
  * @package DtApp\ThinkLibrary
  */
-class Library extends \think\Service
+class Library extends Service
 {
     /**
-     * 注册服务
+     * 定义当前版本
      */
-    public function register()
-    {
-
-    }
+    const VERSION = '6.0.131';
 
     /**
      * 启动服务
@@ -40,5 +38,32 @@ class Library extends \think\Service
     public function boot()
     {
 
+    }
+
+    /**
+     * 初始化服务
+     */
+    public function register()
+    {
+        // 输入默认过滤
+        $this->app->request->filter(['trim']);
+        // 判断访问模式，兼容 CLI 访问控制器
+        if (!$this->app->request->isCli()) {
+            // 注册访问处理中间键
+            $this->app->middleware->add(function (Request $request) {
+                $header = [];
+                if (($origin = $request->header('origin', '*')) !== '*') {
+                    $header['Access-Control-Allow-Origin'] = $origin;
+                    $header['Access-Control-Allow-Methods'] = 'GET,PUT,POST,PATCH,DELETE';
+                    $header['Access-Control-Allow-Headers'] = 'Authorization,Content-Type,If-Match,If-Modified-Since,If-None-Match,If-Unmodified-Since,X-Requested-With,User-Form-Token,User-Token,Token';
+                    $header['Access-Control-Expose-Headers'] = 'User-Form-Token,User-Token,Token';
+                    $header['Access-Control-Allow-Credentials'] = 'true';
+                }
+                // 访问模式及访问权限检查
+                if ($request->isOptions()) {
+                    return response()->code(204)->header($header);
+                }
+            }, 'route');
+        }
     }
 }

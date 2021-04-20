@@ -9,7 +9,6 @@
 [![Total Downloads](https://poser.pugx.org/liguangchun/think-library/downloads)](https://packagist.org/packages/liguangchun/think-library) 
 [![License](https://poser.pugx.org/liguangchun/think-library/license)](https://packagist.org/packages/liguangchun/think-library)
 [![PHP Version](https://img.shields.io/badge/php-%3E%3D7.1-8892BF.svg)](http://www.php.net/)
-[![Code Health](https://hn.devcloud.huaweicloud.com/codecheck/v1/codecheck/task/codehealth.svg?taskId=1567f5ea332546c3b45f4024cf50f10b)](https://hn.devcloud.huaweicloud.com/codecheck/project/c7ff3e2d65674858bd363cb43ee6c35e/codecheck/task/1567f5ea332546c3b45f4024cf50f10b/detail)
 [![Build Status](https://travis-ci.org/GC0202/ThinkLibrary.svg?branch=6.0)](https://travis-ci.org/GC0202/ThinkLibrary)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GC0202/ThinkLibrary/badges/quality-score.png?b=6.0)](https://scrutinizer-ci.com/g/GC0202/ThinkLibrary/?branch=6.0)
 [![Code Coverage](https://scrutinizer-ci.com/g/GC0202/ThinkLibrary/badges/coverage.png?b=6.0)](https://scrutinizer-ci.com/g/GC0202/ThinkLibrary/?branch=6.0)

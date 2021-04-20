@@ -11,9 +11,6 @@
 // +----------------------------------------------------------------------
 // | gitee 仓库地址 ：https://gitee.com/liguangchun/ThinkLibrary
 // | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
-// | gitlab 仓库地址 ：https://gitlab.com/liguangchun/thinklibrary
-// | weixin 仓库地址 ：https://git.weixin.qq.com/liguangchun/ThinkLibrary
-// | huaweicloud 仓库地址 ：https://codehub-cn-south-1.devcloud.huaweicloud.com/composer00001/ThinkLibrary.git
 // | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
 // +----------------------------------------------------------------------
 
@@ -21,11 +18,6 @@ use DtApp\ThinkLibrary\cache\Mysql;
 use DtApp\ThinkLibrary\exception\DtaException;
 use DtApp\ThinkLibrary\service\QqWryService;
 use DtApp\ThinkLibrary\service\SystemService;
-
-/**
- * 定义当前版本
- */
-const VERSION = '6.0.131';
 
 if (!function_exists('get_ip_info')) {
     /**
