@@ -46,7 +46,7 @@ abstract class Service
      * 初始化服务
      * @return $this
      */
-    protected function initialize()
+    protected function initialize(): Service
     {
         return $this;
     }
@@ -56,7 +56,7 @@ abstract class Service
      * @param array $args
      * @return static
      */
-    public static function instance(...$args)
+    public static function instance(...$args): Service
     {
         return Container::getInstance()
             ->make(static::class, $args);

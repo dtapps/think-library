@@ -145,6 +145,7 @@ class UnionService extends Service
         $strParam .= 'sign=' . $sign;
         //访问服务
         $result = file_get_contents("{$this->url}?{$strParam}");
+        var_dump("{$this->url}?{$strParam}");
         $result = json_decode($result, true);
         $this->output = $result;
     }

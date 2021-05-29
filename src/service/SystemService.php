@@ -75,8 +75,8 @@ class SystemService extends Service
         foreach ($arr as $k => $v) {
             $t .= $k . $glue . $v . $glue;
         }
-        $t = substr($t, 0, -1); // 利用字符串截取函数消除最后一个
-        return $t;
+        // 利用字符串截取函数消除最后一个
+        return substr($t, 0, -1);
     }
 
     /**
@@ -124,7 +124,7 @@ class SystemService extends Service
      * Linux系统
      * @return array
      */
-    private function getLinux()
+    private function getLinux(): array
     {
         @exec("ifconfig -a", $this->result);
         return $this->result;
@@ -132,23 +132,21 @@ class SystemService extends Service
 
     /**
      * Windows系统
-     * @return array
      */
-    private function getWindows(): array
+    private function getWindows(): void
     {
         @exec("ipconfig /all", $this->result);
         if ($this->result) {
-            return $this->result;
+            return;
         }
 
         $ipconfig = $_SERVER["WINDIR"] . "\system32\ipconfig.exe";
         if (is_file($ipconfig)) {
             @exec($ipconfig . " /all", $this->result);
-            return $this->result;
+            return;
         }
 
         @exec($_SERVER["WINDIR"] . "\system\ipconfig.exe /all", $this->result);
-        return $this->result;
     }
 
     /**

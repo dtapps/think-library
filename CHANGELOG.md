@@ -1,3 +1,6 @@
+## v6.0.132 / 2021-05-29
+- 更新 We found potential security vulnerabilities in your dependencies.【phpoffice/phpspreadsheet】
+
 ## v6.0.131 / 2020-12-03
 - 增加卡券网服务
 

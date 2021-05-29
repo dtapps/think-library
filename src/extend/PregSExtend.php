@@ -1,29 +1,13 @@
 <?php
 
-// +----------------------------------------------------------------------
-// | ThinkLibrary 6.0 for ThinkPhP 6.0
-// +----------------------------------------------------------------------
-// | 版权所有 2017~2020 [ https://www.dtapp.net ]
-// +----------------------------------------------------------------------
-// | 官方网站: https://gitee.com/liguangchun/ThinkLibrary
-// +----------------------------------------------------------------------
-// | 开源协议 ( https://mit-license.org )
-// +----------------------------------------------------------------------
-// | gitee 仓库地址 ：https://gitee.com/liguangchun/ThinkLibrary
-// | github 仓库地址 ：https://github.com/GC0202/ThinkLibrary
-// | Packagist 地址 ：https://packagist.org/packages/liguangchun/think-library
-// +----------------------------------------------------------------------
-
-declare (strict_types=1);
-
-namespace DtApp\ThinkLibrary\helper;
+namespace DtApp\ThinkLibrary\extend;
 
 /**
  * 验证管理类
- * @mixin Pregs
- * @package DtApp\ThinkLibrary\helper
+ * Class PregSExtend
+ * @package DtApp\ThinkLibrary\extend
  */
-class Pregs
+class PregSExtend
 {
     /**
      * 验证手机号码
@@ -31,7 +15,7 @@ class Pregs
      * @param $mobile
      * @return bool
      */
-    public function isIphone($mobile): bool
+    public static function isIphone($mobile): bool
     {
         if (preg_match('/^[1]([3-9])[0-9]{9}$/', $mobile)) {
             return true;
@@ -45,11 +29,10 @@ class Pregs
      * 联通：130 131 132 145 155 156 166 171 175 176 185 186
      * 电信：133 149 153 173 177 180 181 189 199
      * 虚拟运营商: 170 195
-     * @access public
      * @param $mobile
      * @return bool
      */
-    public function isIphoneAll($mobile): bool
+    public static function isIphoneAll($mobile): bool
     {
         if (preg_match('/^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,5,8-9]))[0-9]{8}$/', $mobile)) {
             return true;
@@ -63,7 +46,7 @@ class Pregs
      * @param $tel
      * @return bool
      */
-    public function isTel($tel): bool
+    public static function isTel($tel): bool
     {
         if (preg_match("/^(\(\d{3,4}\)|\d{3,4}-)?\d{7,8}$/", $tel)) {
             return true;
@@ -77,7 +60,7 @@ class Pregs
      * @param int $id 身份证号码
      * @return bool
      */
-    public function isIdCard($id): bool
+    public static function isIdCard(int $id): bool
     {
         if (preg_match("/^\d{15}|\d{18}$/", $id)) {
             return true;
@@ -91,7 +74,7 @@ class Pregs
      * @param $digit
      * @return bool
      */
-    public function isDigit($digit): bool
+    public static function isDigit($digit): bool
     {
         if (preg_match("/^\d*$/", $digit)) {
             return true;
@@ -105,7 +88,7 @@ class Pregs
      * @param $num
      * @return bool
      */
-    public function isNum($num): bool
+    public static function isNum($num): bool
     {
         if (is_numeric($num)) {
             return true;
@@ -119,7 +102,7 @@ class Pregs
      * @param $str
      * @return bool
      */
-    public function isStr($str): bool
+    public static function isStr($str): bool
     {
         if (preg_match("/^\w+$/", $str)) {
             return true;
@@ -133,7 +116,7 @@ class Pregs
      * @param $str
      * @return bool
      */
-    public function isPassword($str): bool
+    public static function isPassword($str): bool
     {
         if (preg_match("/^[a-zA-Z]\w{5,17}$/", $str)) {
             return true;
@@ -147,7 +130,7 @@ class Pregs
      * @param $str
      * @return bool
      */
-    public function isChinese($str): bool
+    public static function isChinese($str): bool
     {
         if (preg_match("/^[\u4e00-\u9fa5],{0,}$/", $str)) {
             return true;
@@ -161,7 +144,7 @@ class Pregs
      * @param $email
      * @return bool
      */
-    public function isEmail($email): bool
+    public static function isEmail($email): bool
     {
         if (preg_match("/^\w+[-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/", $email)) {
             return true;
@@ -175,7 +158,7 @@ class Pregs
      * @param $url
      * @return bool
      */
-    public function isLink($url): bool
+    public static function isLink($url): bool
     {
         if (preg_match("/http|https:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is", $url)) {
             return true;
@@ -189,7 +172,7 @@ class Pregs
      * @param $qq
      * @return bool
      */
-    public function isQq($qq): bool
+    public static function isQq($qq): bool
     {
         if (preg_match("/^[1-9][0-9]{4,}$/", $qq)) {
             return true;
@@ -203,7 +186,7 @@ class Pregs
      * @param $ip
      * @return bool
      */
-    public function isIp($ip): bool
+    public static function isIp($ip): bool
     {
         if (preg_match("/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $ip)) {
             return true;

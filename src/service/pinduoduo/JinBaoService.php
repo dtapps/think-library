@@ -125,6 +125,7 @@ class JinBaoService extends Service
         $strParam .= 'sign=' . $sign;
         //访问服务
         $url = "{$this->url}?" . $strParam;
+        var_dump($url);
         $result = file_get_contents($url);
         $result = json_decode($result, true);
         $this->output = $result;
