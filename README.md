@@ -4,9 +4,9 @@
 
 📦 ThinkPHP6扩展包
 
-[![Latest Stable Version](https://poser.pugx.org/liguangchun/think-library/v/stable)](https://packagist.org/packages/liguangchun/think-library) 
-[![Latest Unstable Version](https://poser.pugx.org/liguangchun/think-library/v/unstable)](https://packagist.org/packages/liguangchun/think-library) 
-[![Total Downloads](https://poser.pugx.org/liguangchun/think-library/downloads)](https://packagist.org/packages/liguangchun/think-library) 
+[![Latest Stable Version](https://poser.pugx.org/liguangchun/think-library/v/stable)](https://packagist.org/packages/liguangchun/think-library)
+[![Latest Unstable Version](https://poser.pugx.org/liguangchun/think-library/v/unstable)](https://packagist.org/packages/liguangchun/think-library)
+[![Total Downloads](https://poser.pugx.org/liguangchun/think-library/downloads)](https://packagist.org/packages/liguangchun/think-library)
 [![License](https://poser.pugx.org/liguangchun/think-library/license)](https://packagist.org/packages/liguangchun/think-library)
 [![PHP Version](https://img.shields.io/badge/php-%3E%3D7.1-8892BF.svg)](http://www.php.net/)
 [![Build Status](https://travis-ci.org/GC0202/ThinkLibrary.svg?branch=6.0)](https://travis-ci.org/GC0202/ThinkLibrary)
@@ -21,14 +21,17 @@
 
 - 国外仓库地址：[https://github.com/GC0202/ThinkLibrary](https://github.com/GC0202/ThinkLibrary)
 - 国内仓库地址：[https://gitee.com/liguangchun/ThinkLibrary](https://gitee.com/liguangchun/ThinkLibrary)
-- Packagist 地址：[https://packagist.org/packages/liguangchun/think-library](https://packagist.org/packages/liguangchun/think-library)
+- Packagist
+  地址：[https://packagist.org/packages/liguangchun/think-library](https://packagist.org/packages/liguangchun/think-library)
 
 ### 开发版
+
 ```text
 composer require liguangchun/think-library ^6.x-dev -vvv
 ```
 
 ### 稳定版
+
 ```text
 composer require liguangchun/think-library ^6.0.* -vvv
 ```
