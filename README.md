@@ -4,7 +4,6 @@
 
 📦 ThinkPHP6扩展包
 
-[![Code Health](https://hn.devcloud.huaweicloud.com/codecheck/v1/codecheck/task/codehealth.svg?taskId=9046b097b0164105b8a3078be4d2fa95)](https://hn.devcloud.huaweicloud.com/codecheck/project/b7a03c9ea96e40cb93fed6e23a27a7be/codecheck/task/9046b097b0164105b8a3078be4d2fa95/detail)
 [![Latest Stable Version](https://poser.pugx.org/liguangchun/think-library/v/stable)](https://packagist.org/packages/liguangchun/think-library)
 [![Latest Unstable Version](https://poser.pugx.org/liguangchun/think-library/v/unstable)](https://packagist.org/packages/liguangchun/think-library)
 [![Total Downloads](https://poser.pugx.org/liguangchun/think-library/downloads)](https://packagist.org/packages/liguangchun/think-library)
