@@ -1,11 +1,9 @@
 {
-  "name": "liguangchun/think-library",
-  "description": "ThinkPhp扩展包",
+  "name": "dtapps/think-library",
+  "description": "ThinkPhP扩展包",
   "keywords": [
-    "dtapp",
-    "liguangchun",
+    "dtapps",
     "think-library",
-    "thinkLibrary",
     "think",
     "thinkphp",
     "library"
@@ -16,7 +14,7 @@
   "authors": [
     {
       "name": "Chaim",
-      "email": "gc@dtapp.net",
+      "email": "li.gc@icoud.com",
       "homepage": "https://api.dtapp.net"
     }
   ],
@@ -40,7 +38,8 @@
     "qcloud/cos-sdk-v5": "^2.0",
     "qiniu/php-sdk": "^7.2",
     "upyun/sdk": "^3.4",
-    "phpoffice/phpspreadsheet": "1.17.1"
+    "phpoffice/phpspreadsheet": "1.17.1",
+    "alibabacloud/dysmsapi-20170525": "^1.0"
   },
   "require-dev": {
     "symfony/var-dumper": "^4.2"
